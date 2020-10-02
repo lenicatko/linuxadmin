@@ -1,17 +1,12 @@
 title: Linuxová administrace
-subtitle: Brno - jaro 2020
+subtitle: Brno - podzim 2020
 time: 18:00–20:00
 default_time:
   start: '18:00'
   end: '20:00'
-place: Red Hat „Bridge“, Purkyňova 3080/97b, Brno
+place: Mendelova univerzita v Brně + online
 description: Kurz linuxové administrace
 long_description: |
-    <div class="admonition note">
-    Z důvodu <a href="https://www.vlada.cz/cz/media-centrum/aktualne/vyhlaseni-nouzoveho-stavu-180234/">nouzového stavu</a>
-    byl kurz odložen minimálně o měsíc.
-    </div>
-
     Na získání práce v IT je často potřeba něco víc než programování.
     Často to bývají zkušenosti příkazovou řádkou, znalost fungování operačních
     systémů a další věci, které si ukážeme v kurzu se (zjednodušeným) názvem 
@@ -29,59 +24,65 @@ long_description: |
     a 10+ GB místa na disku.
 
     Kurz je zdarma, ale kapacita je omezená. Je potřeba se [registrovat](https://docs.google.com/forms/d/e/1FAIpQLSemBR69LSRrKQZfr4S02WEGU8wasYY-BRzHIoXYjTE55zjIcg/viewform).
+
+    Kvůli opatřením ohledně setkávání lidí budou videa z kurzu nahrávána
+    [na Youtube]. Jestli se to povede, tak i v přímém přenosu.
+
+    [na Youtube]: https://www.youtube.com/playlist?list=PLFt-PM7J_H3HNjtAXCCeQPyRioItF1egJ
 vars:
   user-gender: f
   pyladies: true
   coach-present: true
-plan:
+sessions:
 - title: Instalace
   slug: vm-setup
   serial: 0
-  date: 2020-03-10
+  date: 2020-09-29
   materials:
   - lesson: linuxadmin/installation
   - lesson: linuxadmin/whats-linux
   - lesson: linuxadmin/gnome-basics
-- title: Instalace – opakování
-  slug: vm-setup-ii
-  serial: 0
 - title: Bash I
-  serial: 1
+  date: 2020-10-06
   slug: shell-1
   materials: []
 - title: Bash II
+  date: 2020-10-13
   slug: shell-2
   materials: []
 - title: Bash III
+  date: 2020-10-20
   slug: shell-3
   materials: []
-- title: Deskriptory
+- title: Procesy & deskriptory souborů
+  date: 2020-10-27
   slug: descriptors
   materials: []
 - title: Správa uživatelů
+  date: 2020-11-03
   slug: users
   materials: []
 - title: Opakování
+  date: 2020-11-10
   slug: review
   materials: []
 - title: Hierarchie
+  date: 2020-11-24
   slug: fhs
   materials: []
 - title: Souborové systémy
+  date: 2020-12-01
   slug: mount
   materials: []
 - title: Služby
+  date: 2020-12-08
   slug: service
   materials: []
 - title: Síťové služby
+  date: 2020-12-15
   slug: net-services
   materials: []
 - title: Kontejnery
+  date: 2020-12-22
   slug: containers
-  materials: []
-
-- title: Předpokládaný konec kurzu
-  serial: null
-  slug: end
-  date: 2020-06-30
   materials: []
