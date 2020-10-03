@@ -2,7 +2,7 @@
 
 Grafické prostředí je část systému, která se stará o spouštění grafických
 („okýnkových“) programů, vykreslování okýnek, a podobné úkoly.
-My udeme používat prostředí GNOME.
+My budeme používat prostředí GNOME.
 
 GNOME poznáš podle horní černé lišty, na které je vlevo tlačítko
 *Činosti* (angl. *Activities*), uprostřed datum a čas a vpravo několik ikonek.
