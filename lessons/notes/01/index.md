@@ -1,3 +1,6 @@
+> [warning]
+> Toto jsou *zhuštěné poznámky z prvního běhu*, nikoli materiály k samostudiu.
+
 # Linuxová administrace - 1. sraz
 Kurz není vlastně čistě o bashi, ale víc o administraci linuxu
 Bash bude v prvních dvou hodinách
