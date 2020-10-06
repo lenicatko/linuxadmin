@@ -206,3 +206,15 @@ V dalších lekcích se zaměříme na to, jak to Nela může zautomatizovat.
 Přesněji řečeno, jak pustit program `goostats` na každý z tisíců souboru.
 
 Vzniklý skript pak navíc půjde použít znovu, až Nela nasbírá víc dat.
+
+
+K tomuto příběhu se váže sada souborů.
+Stáhni si [archiv](static/data-shell.zip) do svého adresáře `Dokumenty`.
+A potom ho rozbal. To se dělá následovně:
+
+```console
+$ cd Dokumenty
+$ unzip data-shell.zip
+$ cd
+```
+
