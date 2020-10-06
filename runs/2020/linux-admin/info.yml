@@ -46,7 +46,7 @@ sessions:
   date: 2020-10-06
   slug: shell-1
   materials:
-  - lesson: linuxadmin/bash-intro
+  - lesson: carpentry-unix/bash-intro
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell
   - lesson: carpentry-unix/filedir
