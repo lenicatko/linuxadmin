@@ -49,7 +49,7 @@ sessions:
   - lesson: linuxadmin/bash-intro
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell
-
+  - lesson: carpentry-unix/filedir
   - lesson: notes/01
 - title: Bash II
   date: 2020-10-13
