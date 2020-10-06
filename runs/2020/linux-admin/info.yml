@@ -47,10 +47,11 @@ sessions:
   slug: shell-1
   materials:
   - lesson: carpentry-unix/bash-intro
-  - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell
   - lesson: carpentry-unix/filedir
+  - url: http://swcarpentry.github.io/shell-novice/
+    title: The Carpentries – The Unix Shell (po Pipes and Filters)
   - lesson: notes/01
+    type: link
 - title: Bash II
   date: 2020-10-13
   slug: shell-2
