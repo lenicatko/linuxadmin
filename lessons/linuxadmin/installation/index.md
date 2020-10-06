@@ -6,8 +6,8 @@ To je možné i v případě, že aktuálně používáš jiný operační syst�
 To je velmi výhodné pro různé testování a objevování. Když si virtuální počítač rozbiješ, smažeš ho stejně snadno, jako soubor a máš uklizeno.
 Nebo si můžeš uložit stav a později se k němu vrátit.
 
-Protože v kurzu budeme testovat, objevovat a občas i rozbíjet často,
-vytvoř si virtuální i pokud používáš Linux.
+Protože v kurzu budeme testovat, objevovat a občas i rozbíjet,
+vytvoř si virtuální počítač i pokud používáš Linux.
 
 Hned na začátku tě čeká malá terminologická nepříjemnost:
 **Hostitel** (anglicky **host**) je termín označující operační systém/počítač, v rámci kterého budeš provozovat ten virtuální – tedy to, co máš na poc'itači nainstalováno už teď.
@@ -17,7 +17,7 @@ Slovo **host** má tedy v češtině úplně opačný význam než v angličti
 
 ## Stažení obrazu 
 
-Na opravdový počíttač se dá Linux nainstalovat z DVD nebo USB disku („flashky“).
+Na opravdový počítač se dá Linux nainstalovat z DVD nebo USB disku („flashky“).
 Pro virtuální počítač budeš potřebovat virtuální DVD – soubor, který
 obsahuje stejná data jako disk.
 Říká se mu *obraz disku* nebo *ISO soubor*.
@@ -25,7 +25,7 @@ obsahuje stejná data jako disk.
 Existuje velké množství tzv. distribucí, tj. variant linuxů. Ty se liší typicky
 v dostupném software, grafickém prostředí, způsobu instalace softwarových
 balíčků a spoustě dalších detailů.
-Pro jednotnost si budeme v šechno ukazovat na distribuci Fedora, kterou
+Pro jednotnost si budeme všechno ukazovat na distribuci Fedora, kterou
 si stáhni z [getfedora.org](https://getfedora.org/cs/workstation/download/) –
 stáhnout soubor ISO.
 
@@ -108,7 +108,7 @@ operační systém rovnou z DVD k vyzkoušení - tu ale nyní nevyužijeme).
 
 
 * **Průběh instalace** - tento krok bude trvat nejdéle. V závislosti na
- rychlosti Tvého počítače to může být od minut po malé desítky minut.
+ rychlosti tvého počítače to může být od minut po malé desítky minut.
  Nakonec se vpravo dole objeví tlačítko *Dokončit instalaci*. Tím dojde k 
  uzavření instalačního programu a je třeba provést restart.
  
