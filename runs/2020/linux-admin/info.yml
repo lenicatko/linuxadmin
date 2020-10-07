@@ -52,6 +52,9 @@ sessions:
     title: The Carpentries – The Unix Shell (po Pipes and Filters)
   - lesson: notes/01
     type: link
+  - url: https://hackmd.io/@encukou/ukoly-bash1
+    title: Úkoly
+    type: homework
 - title: Bash II
   date: 2020-10-13
   slug: shell-2
