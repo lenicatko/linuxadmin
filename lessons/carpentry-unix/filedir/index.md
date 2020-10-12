@@ -1,4 +1,4 @@
-## Soubory a adresáře
+# Navigace v souborech a adresářích
 
 Část operačního systému, která se stará o soubory a adresáře,
 je *souborový systém*.
