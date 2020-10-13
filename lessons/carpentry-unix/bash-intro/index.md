@@ -9,7 +9,7 @@ Nejdřív si ale přibližme, co to vlastně je.
 
 ### Jádro a GNU/Linux
 
-Techicky vzato, [Linux](https://www.linuxfoundation.org/projects/linux/)
+Technicky vzato, [Linux](https://www.linuxfoundation.org/projects/linux/)
 je název *jádra* operačního systému.
 Jádro (angl. *kernel*) je ta část, která zařizuje aby ostatní programy mohly
 běžet, a zajišťuje a „moderuje“ přístup ke sdíleným zařízením – procesoru,
@@ -37,7 +37,7 @@ Tedy: zjistí, jaký program chce uživatel spustit, a řekne jádru aby ho spus
 U systémů jako MS Windows nebo macOS je shell „grafický“ a zakomponovaný do
 systému, takže ho jako uživatel nemůžeme „oddělit“ od jádra.
 
-I Linuxových systémy mají grafické shelly: jeden příklad je
+I Linuxové systémy mají grafické shelly: jeden příklad je
 [GNOME Shell](https://wiki.gnome.org/Projects/GnomeShell),
 který se „stará” o to, co je na obrazovce „kolem“ okýnek.
 Má i jiné funkce – např. ukazuje čas nebo tě umí odhlásit — ale jeho hlavní
@@ -50,7 +50,7 @@ Má i jiné funkce – např. ukazuje čas nebo tě umí odhlásit — ale jeho 
 > terminál [`gnome-terminal`](https://wiki.gnome.org/Apps/Terminal),
 > nebo textový editor [`gedit`](https://wiki.gnome.org/Apps/Gedit).
 
-Původní *shelly* ale bly textové: než počítače uměly vykreslovat okýnka,
+Původní *shelly* ale byly textové: než počítače uměly vykreslovat okýnka,
 když ještě komunikovaly přes psací stroj a tiskárnu, byl *shell* program,
 který se zeptal jaký program spustit, spustil ho, a po skončení se zeptal
 znovu.
