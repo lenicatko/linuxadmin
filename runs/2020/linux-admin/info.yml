@@ -48,9 +48,9 @@ sessions:
   materials:
   - lesson: carpentry-unix/bash-intro
   - lesson: carpentry-unix/filedir
-  - lesson: carpentry-unix/create  # (some XXX are left)
+  - lesson: carpentry-unix/create
   - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell (po Pipes and Filters)
+    title: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)
   - lesson: notes/01
     type: link
   - url: https://hackmd.io/@encukou/ukoly-bash1

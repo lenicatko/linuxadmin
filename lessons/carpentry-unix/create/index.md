@@ -257,11 +257,7 @@ $ ls
 kapitola-1/  osnova.txt
 ```
 
-{# XXX
-
-`touch` is left as an exercise
-
-#}
+{# (`touch` is left as an exercise) #}
 
 > [note] Různé způsoby práce se soubory
 > Vytvářet adresáře a asoubory samozřejmě můžeš i z grafického „klikátka“.
@@ -527,7 +523,7 @@ Vytvoří tedy soubory `zaloha/amino-acids.txt` a `zaloha/animals.txt`.
 Co udělá příkaz níže?
 
 ```console
-$ s -F
+$ ls -F
 amino-acids.txt  animals.txt  elements/  morse.txt  pdb/  planets.txt  salmon.txt  sunspot.txt  zaloha/
 $ cp amino-acids.txt animals.txt morse.txt
 ```
@@ -535,10 +531,13 @@ $ cp amino-acids.txt animals.txt morse.txt
 {% filter solution %}
 Zkopíroval by první dva soubory (`amino-acids.txt` a `animals.txt`)
 do adresáře `morse.txt/`.
-
 Jenže `morse.txt` není adresářem, tak příkaz selže.
-Do souboru nelze dát další soubory.
-{# XXX doplnit chybovou hlášku #}
+Do adresáře nelze dát další soubory.
+
+```console
+$ cp amino-acids.txt animals.txt morse.txt
+cp: cíl 'morse.txt' není adresářem
+```
 {% endfilter %}
 
 
@@ -551,22 +550,24 @@ souborům `ethane.pdb`, `propane.pdb` a všem ostatním, které končí na `.pdb
 Ale `p*.pdb` odpovídá jen `pentane.pdb` a `propane.pdb` – těm, které zároveň
 začínají písmenem `p`:
 
-{# XXX
 ```console
 $ cd ~/Dokumenty/data-shell/molecules
-$ ls *.pdb
-
-
-
+$ ls p*.pdb
+cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
+$ ls p*.pdb
+pentane.pdb  propane.pdb
 ```
 
-#}
-
-Další zástupný znak je ortaník, `?`, který odpovídá jen jednomu znaku.
+Další zástupný znak je otazník, `?`, který odpovídá jen jednomu znaku.
 Takže šablona  `?ethane.pdb` odpovídá jen jménu `methane.pdb` – na rozdíl od
 `*ethane.pdb`, cemuž odpovídá jak `methane.pdb`, tak i `ethane.pdb`.
 
-{# XXX example #}
+```console
+$ ls ?ethane.pdb
+methane.pdb
+$ ls *ethane.pdb
+ethane.pdb  methane.pdb
+```
 
 Zástupných znaků můžeš použít víc: `???ane.pdb` odpovídá třem znakům
 následovaným `ane.pdb`, tedy `cubane.pdb ethane.pdb octane.pdb`.
