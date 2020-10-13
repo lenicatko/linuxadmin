@@ -1,3 +1,6 @@
+> [warning]
+> Toto jsou *zhuštěné poznámky z prvního běhu*, nikoli materiály k samostudiu.
+
 # Linuxová administrace - 2. sraz
 - opakovaní
 
