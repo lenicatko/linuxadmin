@@ -69,7 +69,8 @@ sessions:
 - title: Bash III
   date: 2020-10-20
   slug: shell-3
-  materials: []
+  materials:
+  - lesson: linuxadmin/output-files
 - title: Procesy & deskriptory souborů
   date: 2020-10-27
   slug: descriptors
