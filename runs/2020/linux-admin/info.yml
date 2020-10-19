@@ -78,7 +78,7 @@ sessions:
     type: lesson
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell (Loops, Shell scripts, Finding Things)
-  - lesson: notes/02
+  - lesson: pilot/03
     type: link
 - title: Procesy & deskriptory souborů
   date: 2020-10-27
