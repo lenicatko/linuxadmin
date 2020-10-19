@@ -60,9 +60,11 @@ sessions:
   date: 2020-10-13
   slug: shell-2
   materials:
+  - lesson: notes/02
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell (pokračujeme)
-  - lesson: notes/02
+  - title: Zápis z pilotního kurzu
+    lesson: pilot/02
     type: link
 - title: Bash III
   date: 2020-10-20
