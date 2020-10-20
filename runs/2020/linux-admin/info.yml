@@ -66,7 +66,7 @@ sessions:
   - title: Zápis z pilotního kurzu
     lesson: pilot/02
     type: link
-- title: Bash III
+- title: Procesy & deskriptory souborů
   date: 2020-10-20
   slug: shell-3
   materials:
@@ -76,7 +76,7 @@ sessions:
   - lesson: pilot/03
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell
-- title: Procesy & deskriptory souborů
+- title: Bash III
   date: 2020-10-27
   slug: descriptors
   materials: []
