@@ -72,14 +72,10 @@ sessions:
   materials:
   - lesson: linuxadmin/output-files
   - lesson: carpentry-unix/pipefilter
-  - url: http://swcarpentry.github.io/shell-novice/04-pipefilter/index.html#nelles-pipeline-checking-files # XXX: English for now
-    #lesson: carpentry-unix/pipefilter-nelle
-    title: "Nela a medúzy: Kontrola souborů"
-    type: lesson
-  - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell (Loops, Shell scripts, Finding Things)
+  - lesson: linuxadmin/echo
   - lesson: pilot/03
-    type: link
+  - url: http://swcarpentry.github.io/shell-novice/
+    title: The Carpentries – The Unix Shell
 - title: Procesy & deskriptory souborů
   date: 2020-10-27
   slug: descriptors
