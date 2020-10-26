@@ -79,7 +79,23 @@ sessions:
 - title: Bash III
   date: 2020-10-27
   slug: descriptors
-  materials: []
+  materials:
+  - title: cut, history
+    url: null
+  - title: whoami, groups, file
+    url: null
+  - title: Grep a regulární výrazy
+    url: null
+  - title: Spouštění příkazů & proměnné prostředí
+    url: null
+  - title: type; alias, skripty, funkce; bashrc
+    url: null
+  - title: "`$( ... )` a `<( ... )`"
+    url: null
+  - title: diff
+    url: null
+  - lesson: pilot/04
+    type: link
 - title: Správa uživatelů
   date: 2020-11-03
   slug: users
