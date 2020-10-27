@@ -86,12 +86,11 @@ sessions:
     url: null
   - title: Grep a regulární výrazy; návratová hodnota `$?`
     url: null
-  - title: proměnné prostředí; PAGER
-    url: null
   - lesson: linuxadmin/process-execution
   - lesson: linuxadmin/fork-exec
-  - title: type; alias, skripty, funkce; bashrc
+  - title: 'Programy, které pouští jiné programy: watch'
     url: null
+  - lesson: linuxadmin/env-var
   - title: "`$( ... )` a `<( ... )`"
     url: null
   - title: diff
