@@ -291,7 +291,7 @@ A skutečně, když pustíš `/usr/bin/ls ~`, žádné barvičky neuvidíš.
 Ale s `/usr/bin/ls --color=auto ~` ano.
 
 Nové aliasy si můžeš definovat pomocí příkazu `alias`.
-Co třeba vytvořit příkaz `vykricnik`, který funguje jeko `echo` ale na
+Co třeba vytvořit příkaz `pozor`, který funguje jeko `echo` ale na
 začátek řádku dá varovný štítek `POZOR:`?
 
 ```console
