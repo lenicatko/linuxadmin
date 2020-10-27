@@ -128,5 +128,9 @@ V reálu je situace trochu složitější (Bash např. funguje i na systémech 
 `fork` nemají), ale dává-li ti `fork` a `exec` smysl, zjednoduší ti to
 přemýšlení nad tím, co Bash vlastně dělá.
 
-XXX diagram
+
+  {{ figure(
+    img=static('fork-exec.svg'),
+    alt='Diagram spouštění `ps`',
+  ) }}
 

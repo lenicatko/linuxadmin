@@ -63,7 +63,10 @@ Příklady:
 
 Po ukončení Bash vypíše výzvu a čeká na další příkaz.
 
-XXX diagram
+  {{ figure(
+    img=static('ps.svg'),
+    alt='Diagram spouštění `ps`',
+  ) }}
 
 ### `ps | cat`
 
@@ -74,14 +77,20 @@ XXX diagram
 * Čeká, než se `ps` i `cat` ukončí.
   (Programy mezitím spolu komunikují nebo píší na std. výstup.)
 
-XXX diagram
+  {{ figure(
+    img=static('ps-cat.svg'),
+    alt='Diagram spouštění `ps | cat`',
+  ) }}
 
 ### `ps | cat | sort`
 
 Příkazů propojených rourami může být více;
 Bash skládá za sebe stejným spůsobem.
 
-XXX diagram
+  {{ figure(
+    img=static('ps-cat-sort.svg'),
+    alt='Diagram spouštění `ps | cat | sort`',
+  ) }}
 
 ### `echo | ps`
 
@@ -97,7 +106,10 @@ $ echo | ps
   14689 pts/0    00:00:00 ps
 ```
 
-XXX diagram
+  {{ figure(
+    img=static('echo-ps.svg'),
+    alt='Diagram spouštění `echo | ps`',
+  ) }}
 
 
 ## Další kombinace příkazů

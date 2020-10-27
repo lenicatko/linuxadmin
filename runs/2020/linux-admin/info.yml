@@ -93,7 +93,7 @@ sessions:
   - lesson: linuxadmin/env-var
   - title: type; alias, skripty, funkce; bashrc
     lesson: linuxadmin/bin-func-alias
-  - title: "`$( ... )` a `<( ... )`"
+  - title: "`( ... )`, `$( ... )` a `<( ... )`"
     url: null
   - title: diff
     url: null

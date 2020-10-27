@@ -289,7 +289,10 @@ Víš proč se třeba `man` nebo `git diff` chovají a ovládají stejně jako `
 Proto, že samy spustí `less` a pošlou do něho rourou text,
 který chtějí zobrazit.
 
-XXX diagram
+  {{ figure(
+    img=static('man-less.svg'),
+    alt='Diagram spouštění `less` z `man`',
+  ) }}
 
 Podobné programy většinou respektují proměnnou `PAGER`,
 kterou můžeš vybrat program, který se použije místo `less`.

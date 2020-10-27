@@ -55,7 +55,11 @@ Skript se spustí, `echo` vypíše, `mkdir` vytvoří adresář – ale `cd` nez
 
 Vzpomeň si, jak Bash pouští příkazy.
 
-XXX diagram!
+
+  {{ figure(
+    img=static('forking-mcd.svg'),
+    alt='Diagram spouštění jednotlivých podprocesů',
+  ) }}
 
 K tomu je potřeba dodat, že proces *nemůže měnit*
 proměnné prostředí, aktuální adresář nebo otevřené soubory *jiných procesů*.
