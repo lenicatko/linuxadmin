@@ -141,3 +141,28 @@ $ python -c 'print(1 + )' || echo 'Jejda! Chyba!'
 SyntaxError: invalid syntax
 Jejda! Chyba!
 ```
+
+A nakonec, když dáš za příkaz `&` tak Bash nebude čekat na konec programu,
+ale pokračuje hned dál.
+Když program skončí, dá bash před dalším promptem vědět:
+
+```console
+$ sleep 1
+$ sleep 1 &
+[1] 25507
+$
+$ # vteřinu počkej...
+[1]+  Dokončena              sleep 1
+$
+```
+
+Pozor na to, že program „v pozadí“ sdílí s Bashem terminál,
+takže pokud bude něco psát (nebo hůř, číst) se stc. vstupu/výstupů,
+bude se s Bashem „hádat“.
+
+```console
+$ curl https://httpbin.org/get &
+[1] 25537
+$ { ... sem curl vypíše jakási stažená JSON data ...  }
+```
+

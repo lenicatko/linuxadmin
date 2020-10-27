@@ -91,6 +91,8 @@ sessions:
   - title: 'Programy, které pouští jiné programy: watch'
     url: null
   - lesson: linuxadmin/env-var
+  - title: type; alias, skripty, funkce; bashrc
+    lesson: linuxadmin/bin-func-alias
   - title: "`$( ... )` a `<( ... )`"
     url: null
   - title: diff

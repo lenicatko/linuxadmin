@@ -77,7 +77,7 @@ os.close(w)
 # Nahrazení aktuálního procesu programem `cat`.
 # (První argument je jméno programu, které se hledá v $PATH; druhý je celý
 # seznam argumentů, jako sys.argv – tedy i se jménem programu na začátku.)
-# Zkus 'cat' nahradit za `wc'!
+# Zkus 'cat' nahradit za 'wc' nebo dokonce 'less'!
 os.execvp('cat', ['cat'])
 
 print('Tohle se nevypíše.')
