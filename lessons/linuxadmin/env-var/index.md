@@ -44,11 +44,11 @@ cat: neexistujuci: No such file or directory
 ```
 
 > [note]
-> Pokud máš anglický systém, je možné že pouhé nastavení `LANG=cs_CZ.UTF-8`
+> Pokud máš anglický systém, je možné, že pouhé nastavení `LANG=cs_CZ.UTF-8`
 > ti jazyk nepřepne – příslušné překlady musí být na systému nainstalovány,
 > aby se daly použít.
 
-Aktuální prostředí můžeš z Pythonu, kde je přístupné jako slovník `os.environ`:
+Aktuální prostředí můžeš spravovat z Pythonu, kde je přístupné jako slovník `os.environ`:
 
 ```python
 import os
@@ -173,7 +173,7 @@ Zaběhni do nějakého adresáře, kde je mix adresářů a normálních soubor�
 $ cd ~/Dokumenty/data-shell/data
 ```
 
-A zkus si co dělá `ls` ve vvýchozím nastavení:
+A zkus si co dělá `ls` ve výchozím nastavení:
 
 ```console
 $ ls
@@ -241,7 +241,7 @@ $ echo nej$komparativ
 nejlepší
 ```
 
-Občas, když tohle budeš tohle chtít použít, budeš potřebovat Bashi říct
+Občas, když tohle budeš tohle chtít použít, budeš potřebovat Bashi říct,
 co je ještě jméno proměnné.
 Pak můžeš jméno uzavřít do kudrnatých závorek,
 <code>${<var>jméno</var>}</code>:
@@ -285,7 +285,7 @@ $ $zpracuj unicorn.dat
 
 ## Rolovátko
 
-Víš proč se třeba `man` nebo `git diff` chovají a ovládají stejně jako `less`?
+Víš, proč se třeba `man` nebo `git diff` chovají a ovládají stejně jako `less`?
 Proto, že samy spustí `less` a pošlou do něho rourou text,
 který chtějí zobrazit.
 
