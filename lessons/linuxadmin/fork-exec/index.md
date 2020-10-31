@@ -99,7 +99,7 @@ Ta nemá ekvivalent v Bashi, ale v Pythonu ano.
 
 Dva procesy, které pomocí `fork` vzniknou, se liší v jednom detailu:
 návratové hodnotě funkce `fork`.
-Ta je v novém procesu `0` a ve starém je to PIC nového procesu.
+Ta je v novém procesu `0` a ve starém je to PID nového procesu.
 
 Zkus si to v Pythonu:
 
@@ -120,11 +120,11 @@ A jak tedy Bash pouští programy?
 Napřed se „naklonuje“ pomocí `fork`.
 V novém procesu (který z `fork` dostal 0) pak přesměruje vstupy a výstupy,
 ponastavuje proměnné prostředí, pozavírá soubory které v novém programu nejsou
-potřeba, atd. – a když je vše nastavené, pomocí `exec` spustí daný program.
+potřeba atd. – a když je vše nastavené, pomocí `exec` spustí daný program.
 Ve starém procesu (který z `fork` dostal PID) pak čeká, až proces s daným
 PID skončí.
 
-V reálu je situace trochu složitější (Bash např. funguje i na systémech které
+V reálu je situace trochu složitější (Bash např. funguje i na systémech, které
 `fork` nemají), ale dává-li ti `fork` a `exec` smysl, zjednoduší ti to
 přemýšlení nad tím, co Bash vlastně dělá.
 
