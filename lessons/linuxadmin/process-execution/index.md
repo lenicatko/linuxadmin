@@ -1,6 +1,6 @@
 # Spouštění procesů
 
-Pojďme se podívat na to, co přesně Bash dělá když spustí program.
+Pojďme se podívat na to, co přesně Bash dělá, když spustí program.
 
 Příkaz `ps` bez argumentů vypíše jen ty procesy, které „patří“ k aktuálnímu
 terminálu:
@@ -126,7 +126,7 @@ Vysledek je
 ```
 
 Docela užitečné je `&&` (logické A; angl. *AND*): napřed se provede příkaz
-na levé straně, a pouze pokud uspěl (`$?` je 0) se provede ten na pravé.
+na levé straně, a pouze pokud uspěl (`$?` je 0), se provede ten na pravé.
 
 ```console
 $ python -c 'print(1 + )' && echo 'je výsledek'
@@ -136,13 +136,13 @@ $ python -c 'print(1 + )' && echo 'je výsledek'
 SyntaxError: invalid syntax
 ```
 
-Tenhle operátor se hodí např. v případech kdy píšeš program, který připraví
+Tenhle operátor se hodí např. v případech, kdy píšeš program, který připraví
 nějaký soubor. Příkaz `python priprav-soubor.py && head pripraveny-soubor.dat`
 vypíše ukázku výsledku, ale jen když se všechno povedlo.
 Když Python skončí s chybou, `pripraveny-soubor.dat` (existující od minula)
 se nevypíše – na obrazovce zůstane chybová hláška od Pythonu.
 
-Opak je `||` (logické NEBO; angl. *OR*): příkaz na pravé straně se provede
+Opak je `||` (logické NEBO; angl. *OR*): příkaz na pravé straně se provede,
 pokud příkaz nalevo *neuspěl* (`$?` není 0).
 
 ```console
@@ -154,9 +154,9 @@ SyntaxError: invalid syntax
 Jejda! Chyba!
 ```
 
-A nakonec, když dáš za příkaz `&` tak Bash nebude čekat na konec programu,
+A nakonec, když dáš za příkaz `&`, tak Bash nebude čekat na konec programu,
 ale pokračuje hned dál.
-Když program skončí, dá bash před dalším promptem vědět:
+Když program skončí, dá Bash před dalším promptem vědět:
 
 ```console
 $ sleep 1
@@ -169,7 +169,7 @@ $
 ```
 
 Pozor na to, že program „v pozadí“ sdílí s Bashem terminál,
-takže pokud bude něco psát (nebo hůř, číst) se stc. vstupu/výstupů,
+takže pokud bude něco psát (nebo hůř, číst) se std. vstupu/výstupů,
 bude se s Bashem „hádat“.
 
 ```console
