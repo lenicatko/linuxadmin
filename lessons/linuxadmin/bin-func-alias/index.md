@@ -37,13 +37,13 @@ $ ls
 ```
 
 Přepnutí (`cd`) ještě úplně nefunguje.
-Spravíme to potom, se podívejme co tento skript dělá:
+Spravíme to později. Zatím se podívejme, co tento skript dělá:
 
 * `#! /bin/bash` říká systému, že tento skript je napsaný v Bashi; pro jeho
   vykonání se tedy bude spouštět Bash.
 * Za `$1` Bash doplní první argument skriptu – v našem případě jméno adresáře,
   který pomocí příkazu `mcd` chceš vytvořit.
-* Přesměrování `>&2` říká, že std. výstup na std. chybový výstup;
+* Přesměrování `>&2` říká, že std. výstup se má přesměrovat na std. chybový výstup;
   informační hláška z `echo` tedy půjde na chybový výstup.
   Není to součást výstupu programu.
 * `chmod +x mcd` nastavuje právo spouštět soubor `mcd` jako příkaz
@@ -82,8 +82,8 @@ Pojďme se podívat, jaké příkazy vlastně Bash umí spouštět.
 
 ## Normální příkazy
 
-To, co se spustí když zadáš určitý příkaz, ti řekne příkaz `type`.
-Většina základních příkazů jsou programu uložené na disku:
+To, co se spustí, když zadáš určitý příkaz, ti řekne příkaz `type`.
+Většina základních příkazů jsou programy uložené na disku:
 
 ```console
 $ type cat
@@ -113,7 +113,7 @@ $ less /usr/bin/cat
 "/usr/bin/cat" may be a binary file.  See it anyway? y
 ```
 
-Existují ale i výimky, které pro lidské oči jsou:
+Existují ale i výjimky, které pro lidské oči jsou:
 
 ```console
 $ type pip
@@ -150,7 +150,7 @@ $ /usr/bin/echo Ahoj ahoj!
 Ahoj ahoj!
 ```
 
-S přepínačem `-a` ti  `type` vypíše všechna místa kde se daný program dá najít:
+S přepínačem `-a` ti  `type` vypíše všechna místa, kde se daný program dá najít:
 
 ```console
 $ type -a echo
@@ -194,9 +194,7 @@ Jestli používáš Linux pro Python, pravděpodobně tenhle příkaz znáš.
 Skript pro aktivaci virtuálního prostředí, `venv/bin/activate`,
 potřebuje měnit proměnné `PATH` (a tudíž význam příkazů `python` a `pip`)
 a `PS1` (prompt) aktuálního shellu.
-Má tedy stejný problém jako `mcd`, a 
-
-Protože je `source` dlouhé slovo, má i zkratku: tečku.
+Má tedy stejný problém jako `mcd`. A protože je `source` dlouhé slovo, má i zkratku: tečku.
 Ano, tečka je taky Bashový příkaz.
 
 ```console
@@ -366,7 +364,7 @@ $ mcd () {
 
 Tenkhle příkaz funguje – zkus si ho!
 
-Má ale jednu mouchu: když zapomeneš zadat argument, `mkdir -p` selže ale
+Má ale jednu mouchu: když zapomeneš zadat argument, `mkdir -p` selže, ale
 `cd` bez argumentů tě přepne do domovského adresáře.
 Proto je dobré příkaz `cd` provést jenom tehdy, když se povede `mkdir`.
 
@@ -379,7 +377,7 @@ $ mcd () {
 A to je on – vytoužený příkaz na vytvoření adresáře a přepnutí do něj.
 Ufff. Stálo to za to?
 
-Zvlášť když příkaz zmizí hned když vypneš Bash?
+Zvlášť když příkaz zmizí hned, když vypneš Bash?
 
 
 ## bashrc
@@ -410,7 +408,7 @@ Teď bude `mcd` k dispozici vždy!
 Ne všechny zkratky jsou takhle složité.
 Většinou si vystačíš s aliasem nebo spustitelným skriptem v `$PATH`,
 tedy často v adresáři `~/bin`.
-Skripty můžou být psané v Bashi (`#! /usr/bin/bash`), tak v Pythonu
+Skripty můžou být psané v Bashi (`#! /usr/bin/bash`), v Pythonu
 (`#! /usr/bin/python`) nebo jakémkoli jiném jazyce.
 
 Někteří lidé své zkratky sdílejí; autor tohoto textu je má k nahlédnutí
