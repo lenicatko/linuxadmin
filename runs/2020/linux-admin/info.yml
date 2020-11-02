@@ -102,7 +102,8 @@ sessions:
 - title: Správa uživatelů
   date: 2020-11-03
   slug: users
-  materials: []
+  materials:
+  - lesson: notes/users
 - title: Opakování
   date: 2020-11-10
   slug: review
