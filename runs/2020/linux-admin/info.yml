@@ -110,11 +110,15 @@ sessions:
 - title: Hierarchie
   date: 2020-11-24
   slug: fhs
-  materials: []
+  materials:
+  - lesson: pilot/05
+    type: link
 - title: Souborové systémy
   date: 2020-12-01
   slug: mount
-  materials: []
+  materials:
+  - lesson: pilot/06
+    type: link
 - title: Služby
   date: 2020-12-08
   slug: service
