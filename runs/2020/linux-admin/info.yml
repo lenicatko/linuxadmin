@@ -108,6 +108,7 @@ sessions:
   date: 2020-11-10
   slug: review
   materials: []
+  #- lesson: notes/package-management
 - title: Hierarchie
   date: 2020-11-24
   slug: fhs
