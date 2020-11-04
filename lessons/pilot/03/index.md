@@ -267,7 +267,7 @@ Jak vidíš, je to poměrně velká tabulka.
 * **PID** - číslo procesu (náš starý známý)
 * **USER** - uživatel, jehož jménem proces běží
 * **FD** je zkratka pro *file descriptor*, což je číslo otevřeného souboru. Toto číslo nás bude dnes nejvíc zajímat
-   * **cwd** - speciální hodnota pro aktuální adresář (*current working directory*) – tahle hodnota se dá se změnit pomocí `cd`
+   * **cwd** - speciální hodnota pro aktuální adresář (*current working directory*) – tahle hodnota se dá změnit pomocí `cd`
    * **rtd** - kořenový adresář (*root directory*) - mělo by to být `/`
    * **txt** - kód samotného programu (každý program musí být uložený někde na disku. Když ho pustíš jako proces, systém soubor přečte a provede)
    * **mem** - soubory v paměti
@@ -286,7 +286,7 @@ Jak vidíš, je to poměrně velká tabulka.
 
 ## Terminál jako soubor
 
-Soubor, který má Bash otevřený jako `0u`, `1u` a `2u`, je (za normálních okolností) terminál ve kterém Bash běží.
+Soubor, který má Bash otevřený jako `0u`, `1u` a `2u`, je (za normálních okolností) terminál, ve kterém Bash běží.
 Zjisti z výstupu výše, který to je. V našem příkladu je to `/dev/pts/0`, u tebe může být jméno jiné.
 
 Jak už víš, terminál je soubor, do kterého můžeš zapisovat.
@@ -408,7 +408,7 @@ python  6904 user    4w   REG    8,1        0 1314053 /home/user/bash/03/jiny.tx
 Ve sloupci FD vidíš malé `r`, `w`, `u` - pro čtení, zápis a oboje.
 
 
-Python nám v mnohem pomáhá, ale taky vzdaluje od systémové vrstvy. Pythonní objekty nejsou přesně totéž jako způsob, jakým soubory zpracovává operační systém. 
+Python nám v mnohém pomáhá, ale taky vzdaluje od systémové vrstvy. Pythonní objekty nejsou přesně totéž jako způsob, jakým soubory zpracovává operační systém. 
 My se chceme podívat, jak funguje vevnitř operační systém, nikoliv Python.
 Proto si otevři tyto soubory ještě jednou pomocí modulu `os`, který je pro to přímo dělaný.
 
@@ -435,7 +435,7 @@ Každý otevřený soubor je očíslovaný, a podle tohoto čísla můžeš s n�
 
 > [note]
 > Poznámka pro zvídavé: pod složitým `os.O_RDONLY` a `os.O_WRONLY` se
-> skrývají jenom číselné konstanty `0` a `1`. Je tomu tak proto, že v UNIXových operačních systémech se systémové operace (např. `open`) modifikují pomocí číselních konstant, kterým byla pro lepší čitelnost přiřazena jednoduchá, krátká jména.
+> skrývají jenom číselné konstanty `0` a `1`. Je tomu tak proto, že v UNIXových operačních systémech se systémové operace (např. `open`) modifikují pomocí číselných konstant, kterým byla pro lepší čitelnost přiřazena jednoduchá, krátká jména.
 
 > [note]
 > Pokud otevřeš pomocí pythonní funkce

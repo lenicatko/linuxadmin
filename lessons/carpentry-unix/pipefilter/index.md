@@ -36,7 +36,7 @@ To už by se hodilo zeptat počítače spíš než hledat očima.
 
 ## Přesměrování výstupu
 
-První věc, kterou udělaḿe, je *přesměrování výstupu*.
+První věc, kterou uděláme, je *přesměrování výstupu*.
 Pomocí `>` pusť příkaz `wc` tak, aby místo na obrazovku zapisoval do souboru:
 
 ```console
@@ -382,7 +382,7 @@ data/       molecules/        pizza.cfg            solar.pdf
 ```
 
 Příkaz `ls` trochu podvádí: zjistí si, jestli má na std. výstupu terminál,
-a pokud ano, přispůsobí svůj výpis „lidem“.
+a pokud ano, přizpůsobí svůj výpis „lidem“.
 
 {{ figure(
     img=static('ls-cheats.svg'),

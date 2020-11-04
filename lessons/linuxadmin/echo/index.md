@@ -74,7 +74,7 @@ Samotné `echo` nic nepřevádí, pouze vypisuje přesně to, co dostává jako 
 To Bash nahradí `$0` konkrétním řetězcem.
 
 > [note] Rozdíl mezi `cat` a `echo`
-> `cat` vypisuje obsah souboru, jehož jméno dostane jako argument, ktežto
+> `cat` vypisuje obsah souboru, jehož jméno dostane jako argument, kdežto
 > `echo` vypisuje přímo argumenty které dostane – ať už to jsou jména souborů
 > nebo ne:
 > 
@@ -130,7 +130,7 @@ ahoj ahoj
 jak se máš?
 ```
 
-Další způsob jak uložit text do souboru je použít `echo` a jednoduché uvozovky.
+Další způsob, jak uložit text do souboru, je použít `echo` a jednoduché uvozovky.
 Bash ti v rámci uvozovek dokonce umožní napsat víc řádků.
 Na konci je potřeba řetězec uzavřít a přesměrovat do souboru.
 
