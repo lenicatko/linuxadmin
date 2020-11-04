@@ -66,9 +66,9 @@ $ cat delky.txt
 Jak to funguje?
 
 Každý příkaz v Bashi (a obecně každý proces — běžící program na počítači)
-má k dispozici takzvaný *standartní výstup* (angl. *standard output*, *stdout*):
+má k dispozici takzvaný *standardní výstup* (angl. *standard output*, *stdout*):
 místo, kam může vypisovat výsledky.
-Bash předtím, než spustí nějaký program, nastaví tenhle standartní výstup buď
+Bash předtím, než spustí nějaký program, nastaví tenhle standardní výstup buď
 do terminálu nebo do souboru.
 Programy jako `cat`, `wc` nebo `tail` se pak nestarají o to, kde ty výsledky
 skončí.
@@ -211,7 +211,7 @@ co se stalo?
 ^C
 ```
 
-Podobně jako u standatního výstupu existuje *standartní vstup*
+Podobně jako u standatního výstupu existuje *standardní vstup*
 (angl. *standard input*, *stdin*) – místo, odkud program získává textové
 informace.
 Normálně to je „klávesnice“:
@@ -240,7 +240,7 @@ $ cat < delky.txt
     alt='Diagram příkazu `cat`',
 ) }}
 
-Spousta programů standartní vstup nepoužívá:
+Spousta programů standardní vstup nepoužívá:
 * `ls`, `cd` nebo `mv` dostávají všechny potřebné informace jako argumenty,
   nepotřebují vstup z klávesnice;
 * Příkazy s argumentem jako `cat soubor.txt` nebo `wc soubor.txt` čtou
@@ -251,7 +251,7 @@ Spousta programů standartní vstup nepoužívá:
     alt='Diagram příkazu `cat soubor.txt`',
   ) }}
 
-Spousta příkazů bez argumentu ale standartní vstup používá:
+Spousta příkazů bez argumentu ale standardní vstup používá:
 
 ```console
 $ sort -n < delky.txt
@@ -293,8 +293,8 @@ Formálně se mu dá říkat *svislá čára*, často ale uslyšíš pojmenován
 *roura* nebo *pajpa* (z angl. *pipe*, roura), která vychází z funkce tohoto
 znaku v Bashi. Tak moc je ta funkce důležitá.
 
-Když svislítkem oddělíš dva příkazy, standartní výstup prvního z nich
-se přesměruje na standartní vstup toho druhého.
+Když svislítkem oddělíš dva příkazy, standardní výstup prvního z nich
+se přesměruje na standardní vstup toho druhého.
 Dva příkazy tak spojíš dohromady: první připraví mezivýsledek se kterým ten
 druhý pak pracuje dál.
 
@@ -358,7 +358,7 @@ Ale jakmile se Bash a malé nástroje naučíš efektivně používat,
 Modelu pospojovaných nástrojů se také říká *roury a filtry*
 (angl. *pipes and filters*).
 Roury už znáš; filtry jsou nástroje jako `wc` a `sort`, které nějak
-transformují standartní vstup na standartní výstup.
+transformují standardní vstup na standardní výstup.
 Většina Unixových nástrojů funguje právě takhle: pokud jim nepředáš
 argument, čtou ze std. vstupu a výsledky píší na std. výstup.
 

@@ -77,7 +77,7 @@ Zkusíme si "zavolat" k tomu druhému.
 Můžem volat i jménem:
 `$ ping github.com`
 
-PC v Alpine linuxu ale síť není standartně nastavená.
+PC v Alpine linuxu ale síť není standardně nastavená.
 
 Je to jako když si dáte na dům cedulku s adresou, tak to ještě neznamená, že vám tam bude i chodit pošta.
 

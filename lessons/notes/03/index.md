@@ -337,20 +337,20 @@ $ python soubory.py
 … můžete zkusit něco napsat
 
 
-0 je standartní vsup, tzn. to, co do programu leze ($ ps -a | grep), takže grep má stdin to samé, co stdout ps.
-$ grep má standartní vstup z terminálu.
+0 je standardní vsup, tzn. to, co do programu leze ($ ps -a | grep), takže grep má stdin to samé, co stdout ps.
+$ grep má standardní vstup z terminálu.
 
 
-1 je standartní výstup, 
+1 je standardní výstup, 
 
 
-2 standartní chybový výstup, což je taky temrinál, ale tam programy píší chybové hlášky
+2 standardní chybový výstup, což je taky temrinál, ale tam programy píší chybové hlášky
 $ cp a b        # a chybí, takže
 cp: cannot stat a no such file or dir
 $ cp a b > jiny.txt
 cp: cannot stat a no such file or dir
 … jakto? Protože ta hláška je na chybovém výstupu
-> přesměrovává standartní výstup
+> přesměrovává standardní výstup
 chybový výstup se běžně nepřesměrovává
 
 
@@ -374,7 +374,7 @@ $ cat chyby.txt
 Záleží na pořadí > a 2> ? Ne, tady ne, dělá to v pořadí, v jakém to napíšu.
 
 
-Můžu přesměrovat i standartní vstup.
+Můžu přesměrovat i standardní vstup.
 $ python soubor.py < jiny.txt
 [placeholder pro výstup]
 

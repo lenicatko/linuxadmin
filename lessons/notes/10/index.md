@@ -80,7 +80,7 @@ close(3)
 strace - vypíše všechny volání, které program používá
 volání `open` - návratová hodnota je file descriptor
 `read(3, [...])`, `[...]` je obsah paměti, kam se zapíše přečtený obsah
-nakonec se zavolá `close(1)`, kde `1` je standartní výstup
+nakonec se zavolá `close(1)`, kde `1` je standardní výstup
 nakonec se zavolá `close(2)` a `2` je chybový výstup
 
 
@@ -240,7 +240,7 @@ A teďka si zkusíme
 $ podman run -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/:Z httpd
 ```
 
-Někdy je potřeba použít i `:Z`, což nám zpřístupní soubory z domovského adresáře (standartně to totiž je zakázané).
+Někdy je potřeba použít i `:Z`, což nám zpřístupní soubory z domovského adresáře (standardně to totiž je zakázané).
 
 ## Dockerfile
 

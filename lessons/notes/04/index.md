@@ -191,7 +191,7 @@ bash ----+----------------------------------------
 
 
 
-(standartní) vstup do programu **není** to samé, co argument
+(standardní) vstup do programu **není** to samé, co argument
 
 
 ```

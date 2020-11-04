@@ -61,7 +61,7 @@ r, w = os.pipe()
 
 # Přesměrování vstupu.
 # Soubor `r` tedy konec roury ze kterého se dá číst, nastavíme jako
-# standartní vstup (0) tohoto procesu.
+# standardní vstup (0) tohoto procesu.
 os.dup2(r, 0)
 
 # Zápis do roury.
