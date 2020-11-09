@@ -104,23 +104,26 @@ sessions:
   slug: users
   materials:
   - lesson: notes/users
-- title: Opakování
+- title: Hierarchie
   date: 2020-11-10
   slug: review
-  materials: []
-  #- lesson: notes/package-management
-- title: Hierarchie
-  date: 2020-11-24
-  slug: fhs
   materials:
+  - lesson: notes/fs
+  - lesson: notes/links
+  - lesson: notes/fhs
   - lesson: pilot/05
     type: link
 - title: Souborové systémy
-  date: 2020-12-01
-  slug: mount
+  date: 2020-11-24
+  slug: fhs
   materials:
+  - lesson: notes/package-management
   - lesson: pilot/06
     type: link
+- title: Opakování
+  date: 2020-12-01
+  slug: mount
+  materials: []
 - title: Služby
   date: 2020-12-08
   slug: service
