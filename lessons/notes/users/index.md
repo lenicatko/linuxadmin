@@ -297,7 +297,7 @@ $ sudo ls -l
 $ sudo less /etc/shadow
 ```
 
-Jsme ve virtuálním počítači, pojďme he trochu rozbít:
+Jsme ve virtuálním počítači, pojďme ho trochu rozbít:
 
 ```console
 $ nano /usr/bin/zkouska
@@ -328,18 +328,18 @@ $ sudo su root
 ```
 
 Všimni si promptu `#` – občas ho najdeš v tutoriálech;
-znamená že musí *být root*.
+znamená, že musíš *být root*.
 Dnes se častěji používá `sudo` před příkazem – být administrátorem
 je nebezpečné.
 Navíc `sudo` se dá nastavovat – pro každého uživatele říct, jaké příkazy
 je oprávněn přes `sudo` spouštět.
 
-Potřabuješ-li pustit příkazů jako `root`,
+Potřabuješ-li pustit příkaz jako `root`,
 všimni si, že se `sudo` neptá na heslo pokaždé.
 Pro konkrétní terminál si ho vždy nějakou dobu pamatuje, a to i mezi spuštěními.
 (Není v tom žádná velká magie – viz `sudo ls /var/run/sudo/ts`.)
 
-Potřabuješ-li opravdu pustit celý shell jako `root`
+Potřebuješ-li opravdu pustit celý shell jako `root`
 (např. zachraňuješ počítač),
 lepší než `sudo su root` je `sudo -i` (interaktivní):
 
@@ -352,7 +352,7 @@ $ sudo -i
 
 ## Změna hesla
 
-Další věc kterou může dělat jen administrátor je změna hesla.
+Další věc, kterou může dělat jen administrátor, je změna hesla.
 Existuje ale *setuid* `passwd`, který heslo mění!
 
 Zkus si změnit heslo na něco jednoduchého:
@@ -437,7 +437,7 @@ $ groups
 ```
 
 Uživatel a skupiny pro daný proces jsou vždy nastavené *při přihlášení*.
-Aby se změny členství skupinách projevily, musíš se znovu přihlásit:
+Aby se změny členství ve skupinách projevily, musíš se znovu přihlásit:
 
 ```
 $ groups
