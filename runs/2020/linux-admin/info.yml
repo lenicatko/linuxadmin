@@ -118,7 +118,9 @@ sessions:
   slug: fhs
   materials:
   - lesson: notes/package-management
+  - lesson: notes/mount
   - lesson: pilot/06
+    title: Zápis z minula – Mount
     type: link
 - title: Opakování
   date: 2020-12-01

@@ -3,3 +3,8 @@ style: md
 attribution:
     - napsal Petr Viktorin, 2020
 license: cc-by-sa-40
+css: |
+    table {margin-left: 1em;}
+    tr {vertical-align: top;}
+    td,th {padding-right: 0.5em;}
+    tr:hover {background-color: rgba(0, 0, 0, 0.1);}
