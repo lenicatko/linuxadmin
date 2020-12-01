@@ -114,7 +114,7 @@ Je to zároveň dobrý příklad toho, jak konfigurovat podobné systémové slu
 ### Instalace httpd
 Příklady níže předpokládají, že jsi do systému přihlášen{{a}} jako `root`.
 
-Nainstaluj `httpd` pomocí příkazu`dnf install httpd` a potvrď po vyzvání klávesou <kbd>Y</kbd>.
+Nainstaluj `httpd` pomocí příkazu `dnf install httpd` a potvrď po vyzvání klávesou <kbd>Y</kbd>.
 
 Když se podíváš na všechny soubory, které ti nainstaloval tento balíček, uvidíš dlouhý seznam. Zkus:
 

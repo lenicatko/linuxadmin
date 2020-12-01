@@ -122,15 +122,32 @@ sessions:
   - lesson: pilot/06
     title: Zápis z minula – Mount
     type: link
-- title: Opakování
+- title: Služby a HTTPD
   date: 2020-12-01
   slug: mount
-  materials: []
-- title: Služby
+  materials:
+  - title: Služby a démoni
+    url: null
+  - lesson: notes/httpd
+  - title: Barvičky v terminálu
+    url: null
+  - lesson: pilot/08
+    title: Zápis z minula – balíčky a httpd
+    type: link
+- title: Cron & SSH
   date: 2020-12-08
   slug: service
-  materials: []
-- title: Síťové služby
+  materials:
+  - title: Cron & systemd timer
+    url: null
+  - title: Připojení přes SSH
+    url: null
+  - title: Signály
+    url: null
+  - lesson: pilot/07
+    title: Zápis z minula – síťování a SSH
+    type: link
+- title: Automatizovaná konfigurace
   date: 2020-12-15
   slug: net-services
   materials: []
