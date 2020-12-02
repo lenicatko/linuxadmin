@@ -147,6 +147,7 @@ sessions:
   - lesson: pilot/07
     title: Zápis z minula – síťování a SSH
     type: link
+  - lesson: linuxadmin/virtualbox-networking
 - title: Automatizovaná konfigurace
   date: 2020-12-15
   slug: net-services
