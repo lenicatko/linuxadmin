@@ -1,5 +1,7 @@
 # Virtualbox - nastavení sítě
 
+Aby ses mohl{{ a }} "dovolat" (tzv. připojit se na port) mezi virtuálním a hostitelským počítačem s VirtualBoxem, budeš k tomu pravděpodobně potřebovat trochu upravit nastavení sítě. V tomto návodu si ukážeme jak.
+
 1. Spusťte Virtualbox
 1. Ještě s vypnutým virtuálním strojem otevři nastavení. Klikni na název virtuálního počítače (v mém případě se jmenuje `fedora`) → *Nastavení* → *Síť* → *Karta 1*
 
@@ -40,7 +42,7 @@ Ethernet adapter Připojení k místní síti:
 
 Z výpisu zjistíme, že počítač dostal přiřazenou IP adresu `192.168.0.114`. Hledáme teda takovou síťovou kartu, která nám i ve virtuálním počítači přiřadí podobnou adresu (správně řečeno: IP adresu ze stejného rozsahu).
 
-> [note] 
+> [note]
 > Hledámte tedy síťovou kartu, která nám ve virtuálním počítači přiřadí IP adresu, která v tomto případě začíná `192.168.0.<číslo>` (poslední číslo za tečkou rozlišuje jednotlivé počítače na stejné síti a proto se bude lišit).
 
 # Kontrola IP adresy ve virtuálním počítači
@@ -51,10 +53,10 @@ V případě, že adresa začíná jinak, než jakou očekáváš z předchozíh
 
 Aby si toho všiml i virtuální počítač, je třeba "odpojit a znovu připojit síťový kabel", což se dá udělat i přímo z prostředí Fedory.
 
-1. Klikni do pravého horního rohu na skupinu ikon (...).
+1. Klikni do pravého horního rohu na skupinu ikon (nachází se zde mj. symbol pro vypnutí).
 1. Klikni na rozbalovací menu u *Drátové je připojeno*.
 1. Klikni na *Vypnout*. Tím dojde k "odpojení" síťového kabelu.
-1. znovu se doklikej na to samé místo a tentokráte vyber *Aktivovat*, což způsobí znovupřipojení kabelu a tím i k načtení nové IP adresy.
+1. Znovu se doklikej na to samé místo a tentokráte vyber *Aktivovat*, což způsobí znovupřipojení kabelu a tím i k načtení nové IP adresy.
 
 
   {{ figure(
@@ -63,4 +65,35 @@ Aby si toho všiml i virtuální počítač, je třeba "odpojit a znovu připoji
   ) }}
 
 
+# Jak poznám, že to funguje?
 
+Na virtuálním počítači si otevři terminál a do něj zadej:
+
+```console
+$ nc -l -p 5000
+```
+
+
+Na svém **hostitelském počítači** si otevři ideálně Firefox (s jinými prohlížeči to nefunguje tak hezky) na do adresního řádku napiš IP adresu tvého virtuálního počítače (v této ukázce to je `192.168.0.145`) společně s portem `5000`:
+
+```console
+192.168.0.145:5000
+```
+
+Ta stránka se sice bude tvářit, že se nechce načíst, ale i přesto poslal tvůj prohlížeč do virtuálního počítače požadavek na spojení, které uvidíš v otevřeném terminálu. Zobrazilo se ti něco podobného? Výborně!
+
+```console
+$ nc -l -p 5000
+GET / HTTP/1.1
+Host: 192.168.0.145:5000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: cs,sk;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Pragma: no-cache
+Cache-Control: no-cache
+```
+
+Běžící program `nc` vypneš běžným způsobem, tj. pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd> (pokud se neukončí dřív sám).
