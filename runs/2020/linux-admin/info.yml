@@ -138,9 +138,9 @@ sessions:
   date: 2020-12-08
   slug: service
   materials:
-  - title: Cron & systemd timer
-    url: null
   - title: Připojení přes SSH
+    url: null
+  - title: Cron & systemd timer
     url: null
   - title: Signály
     url: null
@@ -151,7 +151,12 @@ sessions:
 - title: Automatizovaná konfigurace
   date: 2020-12-15
   slug: net-services
-  materials: []
+  materials:
+  - title: Ansible
+    url: null
+  - lesson: pilot/09
+    title: Zápis z minula – cron, Ansible, barvičky
+    type: link
 - title: Kontejnery
   date: 2020-12-22
   slug: containers
