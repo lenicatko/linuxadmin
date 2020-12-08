@@ -138,12 +138,8 @@ sessions:
   date: 2020-12-08
   slug: service
   materials:
-  - title: Připojení přes SSH
-    url: null
-  - title: Cron & systemd timer
-    url: null
-  - title: Signály
-    url: null
+  - lesson: notes/ssh
+  - lesson: notes/cron
   - lesson: pilot/07
     title: Zápis z minula – síťování a SSH
     type: link
@@ -152,6 +148,10 @@ sessions:
   date: 2020-12-15
   slug: net-services
   materials:
+  - title: Systemd timer
+    url: null
+  - title: Signály
+    url: null
   - title: Ansible
     url: null
   - lesson: pilot/09
