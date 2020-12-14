@@ -144,7 +144,7 @@ sessions:
     title: Zápis z minula – síťování a SSH
     type: link
   - lesson: linuxadmin/virtualbox-networking
-- title: Automatizovaná konfigurace
+- title: Signály a služby
   date: 2020-12-15
   slug: net-services
   materials:
@@ -152,12 +152,17 @@ sessions:
     url: null
   - title: Signály
     url: null
+- title: Kontejnery a Automatizovaná konfigurace
+  date: 2020-12-22
+  slug: containers
+  materials:
   - title: Ansible
+    url: null
+  - title: Kontejnery
     url: null
   - lesson: pilot/09
     title: Zápis z minula – cron, Ansible, barvičky
     type: link
-- title: Kontejnery
-  date: 2020-12-22
-  slug: containers
-  materials: []
+  - lesson: pilot/10
+    title: Zápis z minula – Syscalls, kontejnery
+    type: link
