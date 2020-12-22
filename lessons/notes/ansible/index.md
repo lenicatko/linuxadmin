@@ -63,6 +63,7 @@ Oproti tomu „vytvoř nový šifrovací klíč pro `ssh`“ idempotentní není
 se vytvoří jiný klíč.
 Idempotentní úkol by byl „zajisti, že je vytvořený šifrovací klíč pro `ssh`“.
 
+> [note]
 > Ansible nezaručuje, že všechny úkoly jsou opravdu idempotentní.
 > Lze tak například úkol „Napiš zprávu, že je vše OK“, který zapíše novou
 > zprávu při každém spuštění.

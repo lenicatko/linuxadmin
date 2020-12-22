@@ -159,8 +159,9 @@ sessions:
   slug: containers
   materials:
   - lesson: notes/ansible
-  - title: Kontejnery
+  - title: Virtuální stroj, jádro, syscalls
     url: null
+  - lesson: notes/containers
   - lesson: pilot/09
     title: Zápis z minula – cron, Ansible, barvičky
     type: link
