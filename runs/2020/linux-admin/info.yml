@@ -152,6 +152,8 @@ sessions:
     url: null
   - title: Signály
     url: null
+  - title: Videa a poznámky
+    url: https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing
 - title: Kontejnery a Automatizovaná konfigurace
   date: 2020-12-22
   slug: containers
