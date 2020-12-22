@@ -158,8 +158,7 @@ sessions:
   date: 2020-12-22
   slug: containers
   materials:
-  - title: Ansible
-    url: null
+  - lesson: notes/ansible
   - title: Kontejnery
     url: null
   - lesson: pilot/09
