@@ -57,7 +57,7 @@ Můj soubor:
 
 Obsah souboru je na disku uložen v osmi „blocích“ (`st_blocks`), což je
 minimum.
-Které přesně bloky to jsou, to je samozřjmě zaznamenáno taky,
+Které přesně bloky to jsou, to je samozřejmě zaznamenáno taky,
 ale `stat` tuhle informaci neukazuje.
 
 > [note] atime
@@ -155,7 +155,7 @@ Oba soubory jsou zcela stejné. Když změníš jeden, změní se i druhý.
 Tomu se říká **hardlink** (*tvrdý odkaz*). A k čemu je to užitečné?
 Tvrdé odkazy se často používají na šetření místem na disku:
 když najdeš dva stejné soubory (které se nebudou měnit),
-můžeš zařídit aby je systém uložil jen jednou.
+můžeš zařídit, aby je systém uložil jen jednou.
 Popravdě se ale dnes *hardlinky* příliš nepoužívají.
 Ale je dobré vědět, že existuji.
 
@@ -275,7 +275,7 @@ V některých (často historických) verzích UNIXu byly některé příkazy v�
 Autoři Fedory si ale myslí, že tohle rozdělení je zbytečné a všechny programy
 by měly být na stejném místě.
 
-Respektive na obou místech, aby staré programy fungoivaly dál, ať už
+Respektive na obou místech, aby staré programy fungovaly dál, ať už
 předpokládají `/bin/` nebo `/usr/bin`.
 
 Jak tenhle problém vyřešit?
@@ -297,7 +297,7 @@ $ ls -l NIC
 lrwxrwxrwx. 1 petr petr  7  9. lis 15.22 NIC -> nic.txt
 ```
 
-Když takový soubor budeš chtít otevřit, systém řekne, že takový soubor neexistuje:
+Když takový soubor budeš chtít otevřít, systém řekne, že takový soubor neexistuje:
 
 ```console
 $ cat NIC
