@@ -36,9 +36,9 @@ Půjdeme na to podle abecedy.
 ## /bin
 
 Jeden z adresářů, který patří do `PATH`.
-Obsahuje naprostou většinu příkazů které můžeš spustit, 
-a které nainstalované jako součást systému.
-Najdeš ti `cat`, `echo` `bash` i `ls`.
+Obsahuje naprostou většinu příkazů, které můžeš spustit, 
+a které jsou nainstalované jako součást systému.
+Najdeš tu `cat`, `echo`, `bash` i `ls`.
 
 Na Fedoře je `/bin` *symlink* na `/usr/bin`.
 Historicky totiž byly příkazy v `/bin` nainstalované na každém počítači zvlášť,
@@ -67,10 +67,10 @@ nemusíš celý systém přeinstalovat – můžeš vybrat jinou.
 ## /dev
 
 Název `/dev` je od *device* - zařízení. 
-Tady jsou soubory, které ovládají či řídí zařízení přípojená k tvému počítači.
+Tady jsou soubory, které ovládají či řídí zařízení připojená k tvému počítači.
 
 Vzpomínáš si, jak jsme říkali,
-že soubor je cokoli z čeho se dá číst nebo kam se dá zapisovat?
+že soubor je cokoli, z čeho se dá číst nebo kam se dá zapisovat?
 `/dev` je plný velice zvláštních souborů, které tohle dovádějí k absurditě.
 
 Třeba v `/dev/input` jsou zařízení pro klávesnici a myš.
@@ -119,20 +119,20 @@ a `/etc/shadow`.
 
 `/etc/hosts` obsahuje seznam jmen počítačů na síti.
 Mělo by to říkat, že 127.0.0.1 je `localhost`, což znamená,
-že pokud se přípojíš „přes internetu“ (např. v prohlížeči) k adrese `localhost`,
+že pokud se přípojíš „přes internet“ (např. v prohlížeči) k adrese `localhost`,
 připojení bude navázáno s adresou 127.0.0.1 (která označuje tvůj počítač).
 Ostatní webové adresy se hledají na internetu – jak, to je zadáno v souboru
 `/etc/resolv.conf`.
 
 
-Soubor `/ets/group` obsahuje seznam všech uživatelských skupin na počítači.
+Soubor `/etc/group` obsahuje seznam všech uživatelských skupin na počítači.
 Místo `usermod` tak můžeš ručně přidat řádek sem – pokud si věříš, že zadáš
 vše správně.
 
 
 Soubor `/etc/fstab` obsahuje nastavení disků – respektive které disky z `/dev`
 jsou na tomto počítači vidět jako souborové systémy.
-Tady se dá se zde nastavit třeba
+Tady se dá nastavit třeba,
 z jakého vzdáleného počítače se má vzít adresář `/home`.
 
 Samotný `/home` je další v abecedě, ale podívejme se nejdřív na `lib*`.
@@ -170,7 +170,7 @@ Programy v Pythonu umí importovat knihovny.
 Podobně fungují *knihovny* (angl. *libraries*) i pro zkompilované programy:
 užitečné funkce jsou uloženy ve zvláštním souboru, který se dá připojit
 (angl. *link*) k různým programům.
-Třeba knihovna `libc.so` poskytuje základní funkce jako oterírání a čtení
+Třeba knihovna `libc.so` poskytuje základní funkce jako otevírání a čtení
 souborů a knihovna `libm.so` matematické funkce jako sinus nebo odmocninu.
 Další knihovny jsou k dispozici jako `lib*.so`, občas s číslem verze na konci
 a občas v podadresáři `/lib64`.
