@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "linuxadmin"
+version = "0"
+description = "Linux administration course for Pythonistas"
+authors = ["Petr Viktorin <encukou@gmail.com>"]
+license = "CC-BY-SA-4.0"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+naucse = "^0.3.1"
+naucse-render = "^1.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
