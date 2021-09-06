@@ -1,49 +1,54 @@
 title: Linuxová administrace
-subtitle: Brno - podzim 2020
+subtitle: "Brno, podzim 2021 – Podpořeno Czechitas"
 time: 18:00–20:00
 default_time:
   start: '18:00'
   end: '20:00'
-place: Mendelova univerzita v Brně + online
+timezone: Europe/Prague
+#place: ...
 description: Kurz linuxové administrace
 long_description: |
     Na získání práce v IT je často potřeba něco víc než programování.
     Často to bývají zkušenosti s příkazovou řádkou, znalost fungování operačních
     systémů a další věci, které si ukážeme v kurzu se (zjednodušeným) názvem 
     "Linuxová administrace".
-    Pro přijetí do kurzu je třeba znát základy programování.
+    Pro přijetí do kurzu je třeba znát základy programování v Pythonu.
     Pokud máš za sebou začátečnický kurz PyLadies, tak jsi ve hře.
 
-    Podobně jako v začátečnickém kurzu Pythonu je tu cílem obecný přehled spíš než detailní znalosti. Kurz ti otevře cestu ke skriptování v Bashi, systémové administraci, automatizované konfiguraci (např. přes Ansible) nebo nasazování kontejnerů.
+    Podobně jako v začátečnickém kurzu Pythonu je tu cílem obecný přehled spíš
+    než detailní znalosti. Kurz ti otevře cestu ke skriptování v Bashi,
+    systémové administraci, automatizované konfiguraci (např. přes Ansible)
+    nebo nasazování kontejnerů.
 
-    Na procvičení doma budou i menší úkoly, tak s nimi počítej do svých časových možností.
+    Na procvičení doma budou i menší úkoly, tak s nimi počítej do svých
+    časových možností.
 
-    Jde o první běh tohoto kurzu. Materiály pro něj teprve vznikají, nebudou tedy bohužel k dispozici předem.
+    Jde o druhý běh tohoto kurzu. Materiály pro něj teprve vznikají,
+    nebudou tedy bohužel k dispozici předem.
 
-    Tento kurz je bez omezení OS, ale je nutné mít notebook s instalačními právy
-    a 10+ GB místa na disku.
+    Tento kurz je bez omezení OS, ale je nutné mít notebook s instalačními
+    právy a 10+ GB místa na disku.
 
-    Kurz je zdarma, ale kapacita je omezená. Je potřeba se [registrovat](https://docs.google.com/forms/d/e/1FAIpQLSemBR69LSRrKQZfr4S02WEGU8wasYY-BRzHIoXYjTE55zjIcg/viewform).
+    Kurz je zdarma, ale kapacita je omezená. Je potřeba se registrovat.
 
-    Kvůli opatřením ohledně setkávání lidí budou videa z kurzu nahrávána
-    [na Youtube]. Jestli se to povede, tak i v přímém přenosu.
+    Kvůli opatřením ohledně setkávání lidí můžou být záznamy z kurzu nahrávány
+    na Youtube. Jestli se to povede, tak i v přímém přenosu.
 
-    [na Youtube]: https://www.youtube.com/playlist?list=PLFt-PM7J_H3HNjtAXCCeQPyRioItF1egJ
 vars:
   user-gender: f
   pyladies: true
   coach-present: true
 sessions:
-- title: Instalace
+- title: Úvod & Instalace
+  date: 2021-10-04
   slug: vm-setup
   serial: 0
-  date: 2020-09-29
   materials:
   - lesson: linuxadmin/installation
   - lesson: linuxadmin/whats-linux
   - lesson: linuxadmin/gnome-basics
 - title: Bash I
-  date: 2020-10-06
+  date: 2021-10-11
   slug: shell-1
   materials:
   - lesson: carpentry-unix/bash-intro
@@ -57,7 +62,7 @@ sessions:
     title: Úkoly
     type: homework
 - title: Bash II
-  date: 2020-10-13
+  date: 2021-10-18
   slug: shell-2
   materials:
   - lesson: notes/02
@@ -67,7 +72,7 @@ sessions:
     lesson: pilot/02
     type: link
 - title: Procesy & deskriptory souborů
-  date: 2020-10-20
+  date: 2021-10-25
   slug: shell-3
   materials:
   - lesson: linuxadmin/output-files
@@ -77,7 +82,7 @@ sessions:
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell
 - title: Bash III
-  date: 2020-10-27
+  date: 2021-11-01
   slug: descriptors
   materials:
   - title: cut, history
@@ -100,12 +105,12 @@ sessions:
   - lesson: pilot/04
     type: link
 - title: Správa uživatelů
-  date: 2020-11-03
+  date: 2021-11-08
   slug: users
   materials:
   - lesson: notes/users
 - title: Hierarchie
-  date: 2020-11-10
+  date: 2021-11-15
   slug: review
   materials:
   - lesson: notes/fs
@@ -114,7 +119,7 @@ sessions:
   - lesson: pilot/05
     type: link
 - title: Souborové systémy
-  date: 2020-11-24
+  date: 2021-11-22
   slug: fhs
   materials:
   - lesson: notes/package-management
@@ -123,7 +128,7 @@ sessions:
     title: Zápis z minula – Mount
     type: link
 - title: Služby a HTTPD
-  date: 2020-12-01
+  date: 2021-11-29
   slug: mount
   materials:
   - title: Služby a démoni
@@ -135,7 +140,7 @@ sessions:
     title: Zápis z minula – balíčky a httpd
     type: link
 - title: Cron & SSH
-  date: 2020-12-08
+  date: 2021-12-06
   slug: service
   materials:
   - lesson: notes/ssh
@@ -145,7 +150,7 @@ sessions:
     type: link
   - lesson: linuxadmin/virtualbox-networking
 - title: Signály a služby
-  date: 2020-12-15
+  date: 2021-12-13
   slug: net-services
   materials:
   - title: Systemd timer
@@ -155,7 +160,7 @@ sessions:
   - title: Videa a poznámky
     url: https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing
 - title: Kontejnery a Automatizovaná konfigurace
-  date: 2020-12-22
+  date: 2021-12-20
   slug: containers
   materials:
   - lesson: notes/ansible
