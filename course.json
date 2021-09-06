@@ -10,7 +10,7 @@
         },
         "description": "Kurz linuxové administrace",
         "edit_info": {
-            "branch": "refs/heads/main",
+            "branch": "main",
             "url": "https://github.com/encukou/linuxadmin"
         },
         "lessons": {
