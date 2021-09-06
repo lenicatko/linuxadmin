@@ -1,0 +1,88 @@
+<h1>Fork a exec</h1>
+<div class="admonition note"><p>Tahle sekce je tu pro ty, kdo chtějí jít víc do hloubky.</p>
+</div><p>Spouštění příkazů funguje pomocí dvou operací: <code>fork</code> a <code>exec</code>.
+Podívejme se na ně v opačném pořadí.</p>
+<h2>Exec</h2>
+<p>Operace <code>exec</code>, pro kterou existuje i příkaz Bashe, <em>nahradí</em> aktuální
+proces jiným.
+Právě prováděný příkaz se přestane provádět a místo toho se začne provádět
+jiný – ovšem se stejnými otevřenými soubory a proměnnými prostředí, jaké
+měl ten původní.</p>
+<p>Zkus si to. V jednom terminálu zjisti číslo procesu Bashe:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$$</span>
+</pre></div><p>A ve druhém si vypiš příslušný proces.
+Místo <code>ps aux | grep &lt;číslo&gt;</code> můžeš použít zkratku:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ps --pid &lt;číslo procesu&gt;
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">    ... pts/0    00:00:00 bash</span>
+</pre></div><p>Potom v původním terminálu zadej:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">exec</span> top
+</pre></div><p>Aktuální proces, ve kterém běží Bash, se „přepíše“ programem <code>top</code>.
+Zkontroluj to ve druhém terminálu:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ps --pid &lt;číslo procesu&gt;
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">    ... pts/0    00:00:00 top</span>
+</pre></div><p>Stejný proces, jiný program!</p>
+<p>Když teď <code>top</code> ukončíš (pomocí <kbd>Q</kbd>), zavře se okýnko s terminálem.
+Proces v terminálu skončil, tak jako kdybys v Bashi napsala <code>exit</code>.</p>
+<p>Pro dlouhé zimní večery přikládám k prostudování tento program v Pythonu:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Vytvoření roury.</span>
+<span class="c1"># Finkce `pipe` vrací dva deskriptory souborů pro dva &quot;konce&quot; roury:</span>
+<span class="c1"># `r` je konec pro čtení, `w` je konec pro zápis.</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pipe</span><span class="p">()</span>
+
+<span class="c1"># Přesměrování vstupu.</span>
+<span class="c1"># Soubor `r` tedy konec roury ze kterého se dá číst, nastavíme jako</span>
+<span class="c1"># standardní vstup (0) tohoto procesu.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Zápis do roury.</span>
+<span class="c1"># Do konce určeného pro zápis, `w`, zapíšeme bajty odpovídající</span>
+<span class="c1"># textu &quot;Ahoj!&quot;.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;Ahoj!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Uzavření konce pro zápis.</span>
+<span class="c1"># Když ze program, který z roury bude číst, dostane po &#39;Ahoj!\n&#39; až sem,</span>
+<span class="c1"># dostane signál konce souboru.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Nahrazení aktuálního procesu programem `cat`.</span>
+<span class="c1"># (První argument je jméno programu, které se hledá v $PATH; druhý je celý</span>
+<span class="c1"># seznam argumentů, jako sys.argv – tedy i se jménem programu na začátku.)</span>
+<span class="c1"># Zkus &#39;cat&#39; nahradit za &#39;wc&#39; nebo dokonce &#39;less&#39;!</span>
+<span class="n">os</span><span class="o">.</span><span class="n">execvp</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tohle se nevypíše.&#39;</span><span class="p">)</span>
+</pre></div><div class="admonition note"><p>Tohle je hodně nízkoúrovňový způsob pouštění programů!
+Kdybys chtěla z Pythonu pouštět programy, použij
+<a href="https://docs.python.org/3/library/subprocess.html#subprocess.run"><code>subprocess.run</code></a>,
+který podobné věci dělá za tebe (a navíc funguje i na Windows,
+kde je všechno jinak).</p>
+</div><h2>Fork</h2>
+<p>Ještě zajímavější operace je <code>fork</code>, která běžící proces <em>rozdělí</em> na
+dvě stejné kopie.
+Ta nemá ekvivalent v Bashi, ale v Pythonu ano.</p>
+<p>Dva procesy, které pomocí <code>fork</code> vzniknou, se liší v jednom detailu:
+návratové hodnotě funkce <code>fork</code>.
+Ta je v novém procesu <code>0</code> a ve starém je to PID nového procesu.</p>
+<p>Zkus si to v Pythonu:</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Toto je proces&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">())</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;V procesu&#39;</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="s1">&#39;je výsledek&#39;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</pre></div><h2>Fork a exec</h2>
+<p>A jak tedy Bash pouští programy?</p>
+<p>Napřed se „naklonuje“ pomocí <code>fork</code>.
+V novém procesu (který z <code>fork</code> dostal 0) pak přesměruje vstupy a výstupy,
+ponastavuje proměnné prostředí, pozavírá soubory které v novém programu nejsou
+potřeba atd. – a když je vše nastavené, pomocí <code>exec</code> spustí daný program.
+Ve starém procesu (který z <code>fork</code> dostal PID) pak čeká, až proces s daným
+PID skončí.</p>
+<p>V reálu je situace trochu složitější (Bash např. funguje i na systémech, které
+<code>fork</code> nemají), ale dává-li ti <code>fork</code> a <code>exec</code> smysl, zjednoduší ti to
+přemýšlení nad tím, co Bash vlastně dělá.</p>
+<p><span class="figure"><a href="naucse:static?filename=fork-exec.svg"><img src="naucse:static?filename=fork-exec.svg" alt="Diagram spouštění `ps`"></a></span></p>

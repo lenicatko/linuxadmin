@@ -1,0 +1,175 @@
+<h1>Automatizace administrace – Ansible</h1>
+<p>Představ si, že jsi systémový administrátor na serverové farmě. 
+Staráš se o 500 počítačů. Každý z nich má nastavený <code>cron</code> nebo timer na zálohy.
+Třetina má nastavený webový server, další třetina je velký cluster databází a poslední třetina dělá maily.
+Tvůj úkol je zajistit, aby se na všech těch serverech záloha dělala dvakrát častěji.</p>
+<p>Co uděláš?
+Připojíš se přes <code>ssh</code> k prvnímu serveru a pozměníš <code>crontab</code> nebo timer.
+Hurá! Jen 499 a můžeš jít domů!</p>
+<p>Jiná varianta je, že si napíšeš v Bashi cyklus, který se připojí ke každému počítači a změní interval crontabu.
+Budeš mít z toho skvělý pocit a práce bude odvedená během chvilky.
+...Jenže pak zjistíš, že u serveru číslo 54 se to jaksi nepovedlo.
+Což znamená, že bys měla zjistit, jestli u ostatních serverů to dopadlo dobře, nebo taky ne.</p>
+<p>Teď si představ, že na tvé farmě právě jeden z tvých serverů shořel.
+Nakoupíš nový počítač a chceš, aby fungoval úplně stejně jako ten předchozí.
+Potřebuješ určitou verzi databáze s určitou konfigurací, a taky tam potřebuješ
+nastavit <code>crontab</code> včetně poslední změny, zvýšení frekvence záloh.</p>
+<p>Změny konfigurace na vícero strojích se dnes už nedělají tak,
+že jdeš k počítači, přímo na něm upravíš konfigurační soubor
+a následně restartuješ příslušnou službu.
+Používají se na to systémy, kde si do souboru napíšeš,
+jak má tvůj systém vypadat a pustíš program,
+který se připojí na těch 500 serverů a každý nastaví podle toho seznamu.
+Kdž pak server shoří, vyměníš ho za jiný a pustíš ten program znova.
+A všechno nastavení máš v Gitu, takže na něm můžeš spolupracovat v týmu.</p>
+<p>Na takové věci se používají systémy na správu konfigurace, jako jsou
+Ansible, Chef, Puppet, SaltStack, nebo Terraform.
+Popíšeš si jaké počítače se mají nastavit a jak, pustíš jeden z těchto
+programů a serverová farma je nastavená.</p>
+<p>Drobná nevýhoda je, že je to další systém, který se musíš naučit konfigurovat.
+Dnes je to ovšem čím dál rozšířenější a systémoví administrátoři s Ansiblem
+nebo podobnými systémy běžně pracují.</p>
+<h2>Deklarativní zápis</h2>
+<p>Jeden z konceptuálních rozdílů mezi klasickou administrací a Ansible je ten,
+že Ansible je <em>deklarativní</em>.
+Místo toho, že bys spouštěla příkazy které něco udělají,
+popíšeš jaký má být výsledný stav nastavovaného systému.
+Úkol Ansible je potom zkontrolovat, že je systém ve správném stavu – a pokud
+není,</p>
+<p>V praxi se tyto přístupy tolik neliší (<code>sudo dnf install httpd</code> taky nedělá
+nic, pokud je <code>httpd</code> už nainstalovaný), ale jde o užitečný úhel pohledu.</p>
+<h2>Idempotence</h2>
+<p>A když už jsme u cizích slov: úkoly pro Ansible by měly být <em>idempotentní</em>,
+když Ansible pustíš dvakrát za sebou, ve druhém běhu se nic nestane.
+Například „zajisti, že je nainstalovaný <code>httpd</code>“ je idempotentní – pokud to
+provedeš několikrát za sebou, výsledek je stejný jako kdybys to provedla
+jen jednou.</p>
+<p>Oproti tomu „vytvoř nový šifrovací klíč pro <code>ssh</code>“ idempotentní není – pokaždé
+se vytvoří jiný klíč.
+Idempotentní úkol by byl „zajisti, že je vytvořený šifrovací klíč pro <code>ssh</code>“.</p>
+<div class="admonition note"><p>Ansible nezaručuje, že všechny úkoly jsou opravdu idempotentní.
+Lze tak například úkol „Napiš zprávu, že je vše OK“, který zapíše novou
+zprávu při každém spuštění.
+Dobře napsané úkoly ale idempotentní jsou.
+(Aspoň v těch důležitých aspektech.)</p>
+</div><h2>Instalujeme program</h2>
+<p>Nejlepší způsob jak se naučit pracovat s Ansiblem je praxe.
+Zkusme si nainstalovat balíček.
+Ten si nakonfigurujeme.</p>
+<p>Nainstaluj Ansible.
+(To je potřeba udělat jen na jednom počítači v celé serverové farmě  – na tom,
+který bude řídit ty ostatní.)</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf install ansible
+</pre></div><p>Pak bude potřeba napsat konfigurační soubory.
+Bude jich víc, tak si pro tuto lekci udělej si nový adresář.</p>
+<p>Pro Ansible se píšou tzv. <em>playbooky</em>, což jsou soubory ve formátu
+<a href="https://en.wikipedia.org/wiki/YAML">YAML</a>.
+Podobně jako Python tenhle formát vyžaduje odsazování a bude si stěžovat,
+pokud ho nedodržíš.
+Pozor tedy na mezery a pomlčky na začátcích řádků.</p>
+<p>Napiš si playbook s názvem <code>setup.yml</code>.</p>
+<p>První věc, kterou nastavíme, jsou informace o počítačích které chceš
+konfigurovat: které to jsou a jak se k nim připojit.
+Protože máš teď k dispozici jen jeden virtuální počítač,
+nastav <code>hosts</code> na <code>localhost</code> a <code>connection</code> na <code>local</code>.</p>
+<div class="highlight"><pre><code># setup.yml
+
+- hosts: localhost
+  connection: local</code></pre></div><p>V praxi se tahle sekce většinou píše do samostatného souboru.</p>
+<p>Abys mohla něco nainstalovat, je třeba býti <code>root</code>em.
+To je potřeba zapsat; později pak řekneme ať k tomu Ansible použije <code>sudo</code>
+a heslo.</p>
+<div class="highlight"><pre><code>   become_user: root</code></pre></div><p>Dále se píše stav, do jakého chceš dostat svůj systém.
+Vytvoř si tedy seznam <code>tasks</code>.
+V YAML se seznamy definují pomlčkou u každého prvku.</p>
+<p>Každá úloha musí mít jméno.
+Nainstalujeme si třeba <code>htop</code>, což je vylepšený <code>top</code>. 
+Pro instalaci musíš být <code>root</code>, což musíš zadat i v úloze:</p>
+<div class="highlight"><pre><code>   tasks:
+   - name: Install htop
+     become: yes</code></pre></div><p>Přichází čas na instrukci, jak balíček nainstalovat.
+Na Fedoře se instaluje pomocí pluginu <code>dnf</code>, kterému řekneš,
+že balíček <code>htop</code> chceš nainstalovat v poslední dostupné verzi:</p>
+<div class="highlight"><pre><code>     dnf:
+        state: latest
+        name:
+        - htop</code></pre></div><p>Celý blok nakonec vypadá takto. Pozor na odsazení:</p>
+<div class="highlight"><pre><code>- hosts: localhost
+  connection: local
+  become_user: root
+  tasks:
+   - name: Install htop
+     become: yes
+     dnf:
+        state: latest
+        name:
+        - htop</code></pre></div><p>Teď to zkus spustit:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ansible-playbook -K setup.yml
+<span class="go">BECOME password: </span>
+<span class="go">[WARNING]: provided hosts list is empty, only localhost is available. Note that</span>
+<span class="go">the implicit localhost does not match &#39;all&#39;</span>
+
+<span class="go">PLAY [localhost] ***************************************************************</span>
+
+<span class="go">TASK [Gathering Facts] *********************************************************</span>
+<span class="go">ok: [localhost]</span>
+
+<span class="go">TASK [Install htop] ************************************************************</span>
+<span class="go">changed: [localhost]</span>
+
+<span class="go">PLAY RECAP *********************************************************************</span>
+<span class="go">localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0</span>
+</pre></div><p>Díky parametru <code>-K</code> se tě Ansible nejdřív zeptá na heslo pro <code>sudo</code>
+a s tím pak spouští celý <em>playbook</em>.</p>
+<p>Když ten samý příkaz pustíš znova, Ansible ohlásí že je vše v pořádku;
+nic se nezměnilo.</p>
+<h2>A co dál?</h2>
+<p>Co všechno se dá dělat s Ansiblem?</p>
+<ul>
+<li>instalovat balíčky (to jsme si právě zkusili)</li>
+<li>kopírovat soubory - např. konfigurační soubor pro <code>cron</code>.</li>
+<li>přidávat uživatele, skupinu uživatelů</li>
+<li>a mnohem víc...</li>
+</ul>
+<p>Existují pro to tzv. <em>pluginy</em>, které dělají přesně tyto věci. 
+Pokud ti nebude stačit nabídka pluginů, můžeš si v Pythonu napsat další.</p>
+<p>Tedy je malá ukázka toho, co je možné; další možnosti najdeš v dokumentaci.
+(Nebo na dalším kurzu?)</p>
+<div class="highlight"><pre><code>- hosts: localhost
+  connection: local
+  become_user: root
+  tasks:
+   - name: Install packages
+     become: yes
+     dnf:
+        state: latest
+        name:
+        - htop
+        - httpd
+   - name: Uninstall packages
+     become: yes
+     dnf:
+        state: removed
+        name:
+        - cowsay
+   - name: Add a user
+     become: yes
+     user:
+        name: testuser1
+   - name: Add a file to serve
+     become: yes
+     copy:
+        dest: /var/www/html/index.html
+        # Znak `|` v YAML uvozuje odsazený blok s víceřádkovým textem
+        content: |
+            Hello world!
+            Welcome to my server!
+   - name: Start &amp; enable httpd
+     become: yes
+     systemd:
+        name: httpd
+        state: started
+        enabled: true</code></pre></div><p>Tento příklad se připojuje pouze k aktuálnímu počítači. 
+Pokud bys to chtěla pouštět i na jiných počítačích,
+je třeba je zapsat do takzvaného <em>inventáře</em> (<em>inventory</em> file - <code>/etc/ansible/hosts</code>).
+Návod a příklady opět najdeš v dokumentaci Ansible.</p>

@@ -1,0 +1,67 @@
+<h1>Virtualbox - nastavení sítě</h1>
+<p>Aby ses mohla "dovolat" (tzv. připojit se na port) mezi virtuálním a hostitelským počítačem s VirtualBoxem, budeš k tomu pravděpodobně potřebovat trochu upravit nastavení sítě. V tomto návodu si ukážeme jak.</p>
+<ol>
+<li>Spusťte Virtualbox</li>
+<li>Ještě s vypnutým virtuálním strojem otevři nastavení. Klikni na název virtuálního počítače (v mém případě se jmenuje <code>fedora</code>) → <em>Nastavení</em> → <em>Síť</em> → <em>Karta 1</em></li>
+</ol>
+<ul>
+<li><strong>Připojena k</strong> změnit na <strong>Síťový most</strong></li>
+<li><p><strong>Název</strong> vyberte síťovou kartu, případně wifi kartu. Budeš-li jich tam mít více, postupně je vyzkoušej. Tu správnou poznáš podle toho, že má ve virtuálním PC budeš mít přiřazenou IP adresu, která bude začínat stejně, jako i tvůj hostitelský počítač (to je ten, na kterém spouštíš Virtualbox).
+Jak ji poznat se dozvíš v následujícím bloku.</p>
+<p><span class="figure"><a href="naucse:static?filename=virtualbox-vm-config.png"><img src="naucse:static?filename=virtualbox-vm-config.png" alt="Screenshot s očíslovaným postupem, kam klikat v nastavení"></a></span></p>
+</li>
+</ul>
+<h2>Ta správná síťová karta</h2>
+<p>Jak ale zjistit, která síťová karta je ta správná? Pokud to neví, otevři si příkazovou řádku Windows (klikni na nabídku <em>Start</em> → napiš <em>cmd</em> a potvrď <kbd>Enter</kbd>. Spusť příkaz <code>ipconfig</code> bez dalších parametrů a měla bys vidět podobný výstup:</p>
+<div class="highlight"><pre><span></span><span class="go">C:\Users\uzivatel&gt;ipconfig</span>
+
+<span class="go">Windows IP Configuration</span>
+
+
+<span class="go">Ethernet adapter Ethernet 4:</span>
+
+<span class="go">   Media State . . . . . . . . . . . : Media disconnected</span>
+<span class="go">   Connection-specific DNS Suffix  . :</span>
+
+<span class="go">Ethernet adapter Ethernet 2:</span>
+
+<span class="go">   Media State . . . . . . . . . . . : Media disconnected</span>
+<span class="go">   Connection-specific DNS Suffix  . :</span>
+
+<span class="go">Ethernet adapter Připojení k místní síti:</span>
+
+<span class="go">   Link-local IPv6 Address . . . . . : fd84::fd7e:9520:3d65:d139%10</span>
+<span class="go">   IPv4 Address. . . . . . . . . . . : 192.168.0.114</span>
+<span class="go">   Subnet Mask . . . . . . . . . . . : 255.255.255.0</span>
+<span class="go">   Default Gateway . . . . . . . . . : 192.168.0.1</span>
+</pre></div><p>Z výpisu zjistíme, že počítač dostal přiřazenou IP adresu <code>192.168.0.114</code>. Hledáme teda takovou síťovou kartu, která nám i ve virtuálním počítači přiřadí podobnou adresu (správně řečeno: IP adresu ze stejného rozsahu).</p>
+<div class="admonition note"><p>Hledámte tedy síťovou kartu, která nám ve virtuálním počítači přiřadí IP adresu, která v tomto případě začíná <code>192.168.0.&lt;číslo&gt;</code> (poslední číslo za tečkou rozlišuje jednotlivé počítače na stejné síti a proto se bude lišit).</p>
+</div><h1>Kontrola IP adresy ve virtuálním počítači</h1>
+<p>Spusť virtuální počítač (pokud ještě nemáš) a v terminálu spusť příkaz <code>ifconfig</code>, ze kterého můžeš vyčíst aktuálně přidělenou IP adresu (na obrázku to je <code>192.168.0.145</code>).</p>
+<p>V případě, že adresa začíná jinak, než jakou očekáváš z předchozího kroku, znovu si otevři nastavení tvého virtuálního počítače a vyzkouše jiný síťový adaptér.</p>
+<p>Aby si toho všiml i virtuální počítač, je třeba "odpojit a znovu připojit síťový kabel", což se dá udělat i přímo z prostředí Fedory.</p>
+<ol>
+<li>Klikni do pravého horního rohu na skupinu ikon (nachází se zde mj. symbol pro vypnutí).</li>
+<li>Klikni na rozbalovací menu u <em>Drátové je připojeno</em>.</li>
+<li>Klikni na <em>Vypnout</em>. Tím dojde k "odpojení" síťového kabelu.</li>
+<li>Znovu se doklikej na to samé místo a tentokráte vyber <em>Aktivovat</em>, což způsobí znovupřipojení kabelu a tím i k načtení nové IP adresy.</li>
+</ol>
+<p><span class="figure"><a href="naucse:static?filename=fedora-network-reconnect.png"><img src="naucse:static?filename=fedora-network-reconnect.png" alt="Screenshot s postupem, jak se ve Fedoře připojit/odpojit k síti"></a></span></p>
+<h1>Jak poznám, že to funguje?</h1>
+<p>Na virtuálním počítači si otevři terminál a do něj zadej:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>nc -l -p <span class="m">5000</span>
+</pre></div><p>Na svém <strong>hostitelském počítači</strong> si otevři ideálně Firefox (s jinými prohlížeči to nefunguje tak hezky) na do adresního řádku napiš IP adresu tvého virtuálního počítače (v této ukázce to je <code>192.168.0.145</code>) společně s portem <code>5000</code>:</p>
+<div class="highlight"><pre><span></span><span class="go">192.168.0.145:5000</span>
+</pre></div><p>Ta stránka se sice bude tvářit, že se nechce načíst, ale i přesto poslal tvůj prohlížeč do virtuálního počítače požadavek na spojení, které uvidíš v otevřeném terminálu. Zobrazilo se ti něco podobného? Výborně!</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>nc -l -p <span class="m">5000</span>
+<span class="go">GET / HTTP/1.1</span>
+<span class="go">Host: 192.168.0.145:5000</span>
+<span class="go">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0</span>
+<span class="go">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span>
+<span class="go">Accept-Language: cs,sk;q=0.8,en-US;q=0.5,en;q=0.3</span>
+<span class="go">Accept-Encoding: gzip, deflate</span>
+<span class="go">Connection: keep-alive</span>
+<span class="go">Upgrade-Insecure-Requests: 1</span>
+<span class="go">Pragma: no-cache</span>
+<span class="go">Cache-Control: no-cache</span>
+</pre></div><p>Běžící program <code>nc</code> vypneš běžným způsobem, tj. pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd> (pokud se neukončí dřív sám).</p>

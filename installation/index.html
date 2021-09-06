@@ -1,0 +1,131 @@
+<h1>Virtuální počítač</h1>
+<p>V tomto kurzu se budeme učit pracovat s operačním systémem Linux.
+To je možné i v případě, že aktuálně používáš jiný operační systém - díky tzv. virtuálnímu počítači. To je program, který se tváří jako opravdový počítač a dá se do něj nainstalovat jiný operační systém.</p>
+<p>To je velmi výhodné pro různé testování a objevování. Když si virtuální počítač rozbiješ, smažeš ho stejně snadno, jako soubor a máš uklizeno.
+Nebo si můžeš uložit stav a později se k němu vrátit.</p>
+<p>Protože v kurzu budeme testovat, objevovat a občas i rozbíjet,
+vytvoř si virtuální počítač i pokud používáš Linux.</p>
+<p>Hned na začátku tě čeká malá terminologická nepříjemnost:
+<strong>Hostitel</strong> (anglicky <strong>host</strong>) je termín označující operační systém/počítač, v rámci kterého budeš provozovat ten virtuální – tedy to, co máš na poc'itači nainstalováno už teď.
+Virtuálnímu systému se česky říká <strong>host</strong> (anglicky <strong>guest</strong>).
+Slovo <strong>host</strong> má tedy v češtině úplně opačný význam než v angličtině.</p>
+<h2>Stažení obrazu</h2>
+<p>Na opravdový počítač se dá Linux nainstalovat z DVD nebo USB disku („flashky“).
+Pro virtuální počítač budeš potřebovat virtuální DVD – soubor, který
+obsahuje stejná data jako disk.
+Říká se mu <em>obraz disku</em> nebo <em>ISO soubor</em>.</p>
+<p>Existuje velké množství tzv. distribucí, tj. variant linuxů. Ty se liší typicky
+v dostupném software, grafickém prostředí, způsobu instalace softwarových
+balíčků a spoustě dalších detailů.
+Pro jednotnost si budeme všechno ukazovat na distribuci Fedora, kterou
+si stáhni z <a href="https://getfedora.org/cs/workstation/download/">getfedora.org</a> –
+stáhnout soubor ISO.</p>
+<p>Je to velký soubor (zhruba 2 GB) se jménem jako <code>Fedora-Workstation-Live-x86_64-31-1.9.iso</code>.</p>
+<h1>Příprava hosta</h1>
+<p>Existuje několik programů, které umí simulovat virtuální počítač.
+Vyber si jeden podle svého hostitelského systému a ho:</p>
+<ul>
+<li>Pokud máš Windows nebo macOS, použij Virtualbox: <a href="naucse:page?lesson=linuxadmin/installation&amp;page=virtualbox">instalace Virtualboxu</a>.</li>
+<li>Pokud máš Linux s GNOME, bude lépe fungovat Gnome Boxes: <a href="naucse:page?lesson=linuxadmin/installation&amp;page=gnome-boxes">instalace Gnome Boxes</a>.</li>
+</ul>
+<p>Nevíš-li, poraď se s někým zkušenějším – nebo zkus jeden z nich.</p>
+<p><a id="install-system"></a></p>
+<h1>Instalace systému</h1>
+<p>Při prvním spuštění je (virtuální) pevný disk zatím prázdný a ve virtuálním
+počítači vsunuta do virtuální DVD mechaniky ISO obraz, který obsahuje
+soubory potřebné k samotné instalaci.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-01.png"><img src="naucse:static?filename=fedora-install-01.png" alt="Instalace #1"></a></span></p>
+<p>V černém okně vyber šipkami na klávesnici (myš zatím nelze použít)
+<strong>Start Fedora-Workstation-Live 31</strong> a potvrď klávesou Enter.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-02.png"><img src="naucse:static?filename=fedora-install-02.png" alt="Instalace #2"></a></span></p>
+<p>Po chvilce se zobrazí už grafické okno, kde myší klepni na <strong>Install to Hard
+Drive</strong>. Tím se spustí samotná instalace. (Druhá volba <em>Try Fedora</em> ti spustí
+operační systém rovnou z DVD k vyzkoušení - tu ale nyní nevyužijeme).</p>
+<h2>Instalační obrazovky</h2>
+<ul>
+<li><p><strong>Výběr jazyka</strong> - V levém panelu vyber <em>Čeština</em>, poté klepni na <em>Pokračovat</em>.
+(Můžeš vybrat i jiný jazyk, ale tyto materiály budou v češtině.)</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-03.png"><img src="naucse:static?filename=fedora-install-03.png" alt="Instalace #3"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Přehled instalace</strong> - Instalátor potřebuje potvrdit kde se bude instalace
+provádět. Klepni na <em>Cíl instalace</em>, která ti nabídne dostupné pevné disky.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-04.png"><img src="naucse:static?filename=fedora-install-04.png" alt="Instalace #4"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Cíl instalace</strong> - U virtuálního počítače je situace jednoduchá, není tu
+potřeba nic měnit.
+vlevo nahoře najdeš tlačítko <em>Hotovo</em>, kterým obrazovku potvrdíš.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-05.png"><img src="naucse:static?filename=fedora-install-05.png" alt="Instalace #5"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Přehled instalace</strong> - Nyní už instalátor ví vše potřebné. Vpravo dole
+klepni na tlačítko <em>Spustit instalaci</em>. Od tohoto okamžiku se začne
+zapisovat na vybraný pevný disk.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-06.png"><img src="naucse:static?filename=fedora-install-06.png" alt="Instalace #6"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Průběh instalace</strong> - tento krok bude trvat nejdéle. V závislosti na
+rychlosti tvého počítače to může být od minut po malé desítky minut.
+Nakonec se vpravo dole objeví tlačítko <em>Dokončit instalaci</em>. Tím dojde k 
+uzavření instalačního programu a je třeba provést restart.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-07.png"><img src="naucse:static?filename=fedora-install-07.png" alt="Instalace #7"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Restart</strong> - K tomu je potřeba kliknout na symbol ⏻ úplně vpravo nahoře,
+poté na další ⏻ a nakonec na tlačítko <em>Restart</em>.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-09.png"><img src="naucse:static?filename=fedora-install-09.png" alt="Instalace #9"></a></span></p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-10.png"><img src="naucse:static?filename=fedora-install-10.png" alt="Instalace #10"></a></span></p>
+</li>
+</ul>
+<h4>Dokončení instalace</h4>
+<p>V této části už je operační systém nainstalovaný,
+ zbývá akorát provést posledních několik nastavení. To se děje formou průvodce
+ kde je tlačítko <em>Další</em> vždy vpravo nahoře.</p>
+<ul>
+<li><p><strong>Soukromí</strong></p>
+<ul>
+<li>Geolokační služby - můžeš klidně vypnout</li>
+<li>Automatické hlášení problémů - radši taky vypni; ať nikdo neví jakou
+neplechu na virtuálním počítači napácháš</li>
+</ul>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-11.png"><img src="naucse:static?filename=fedora-install-11.png" alt="Instalace #11"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Účty online</strong> - tento krok můžeš klidně přeskočit (a třeba provést později)</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-12.png"><img src="naucse:static?filename=fedora-install-12.png" alt="Instalace #12"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>O vás</strong> - Nejdůležitější krok. Tady doplň <em>Celé jméno</em> (diakritika
+nevadí) a především <em>Uživatelské jméno</em> (pouze znaky <code>a-z</code>, <code>_</code>, <code>-</code>, číslice
+). To je nejdůležitější. Tím se budeš přihlašovat do systému. Oba údaje lze
+změnit i později, avšak byť je změna <em>Uživatelského jména</em> v budoucnu
+technicky vzato možná, jde o problematický úkon. Proto je velmi důležité si
+ho dobře rozmyslet hned na začátku. (<em>Celé jméno</em> slouží jen jako popiska
+k uživatelskému jménu.) Pokračuj tlačítkem <em>Další</em>.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-13.png"><img src="naucse:static?filename=fedora-install-13.png" alt="Instalace #13"></a></span></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Nastavení hesla</strong> - je heslo k uživatelskému jménu vyplněném v předchozím
+kroku. Heslo je potřeba zadat do obou polí stejné.</p>
+<p>Navzdory obecným radám o heslech tady doporučuji zadat jednoduché heslo,
+třeba <code>123</code> nebo slovo <code>heslo</code>.
+Jde o <em>virtuální</em> počítač, který není potřeba nějak zvlášť chránit.</p>
+<p>Určitě ale nepoužívej heslo, které používáš i jinde!</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-14.png"><img src="naucse:static?filename=fedora-install-14.png" alt="Instalace #14"></a></span></p>
+<p>Heslo si dobře zapamatuj (nebo, navzdory radám k bezpečným heslům, zapiš).</p>
+</li>
+<li><p><strong>Připraveno k používání</strong> - Výborně, všechno je již nastaveno a můžeš se
+pustit do objevování. Klepni na <em>Začít používat systém Fedora</em>.</p>
+<p><span class="figure"><a href="naucse:static?filename=fedora-install-15.png"><img src="naucse:static?filename=fedora-install-15.png" alt="Instalace #15"></a></span></p>
+</li>
+</ul>
+<p>Virtuální počítač můžeš vypnout přes menu v pravém horním rohu obrazovky.</p>

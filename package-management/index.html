@@ -1,0 +1,155 @@
+<h1>Instalace balíčků</h1>
+<p>Jakým způsobem instaluješ software na linuxovém systému?</p>
+<p>Pravděpodobně máš k dispozici grafický program, kde si můžeš dostupné programy prohlédnout, přečíst jejich popisky, kouknout na obrázky, jak vypadají, a zakliknout tlačítko "Instaluj".
+Grafický instalátor se postará o vše potřebné a zpřístupní ti ikonku nového programu v nabídce aplikací.</p>
+<p>My se ale dnes podíváme hlouběji, na systémy, díky kterým můžeš instalovat balíčky jednotným způsobem.</p>
+<h2>Balíčkovací systémy</h2>
+<p>Linuxové systémy používají tak zvané <em>balíčkovací systémy</em> (angl. <em>package managers</em>).
+Filozofie pod nimi je přímočará - je to vlastně o tom, že stáhneš archiv
+a rozbalíš si ho na disk podobně jak ZIP-ový adresář.
+Balíček může obsahovat příkazy (soubory v <code>/usr/bin</code>), konfiguraci (soubory
+v <code>/etc</code>), knihovny (soubory), manuálové stránky (taky soubory) a tak dále.</p>
+<p>Některé věci, např. vytvoření uživatele, nelze přes soubory; balíčky proto
+můžou obsahovat malé programy – skriptlety – které podobné věci při instalaci
+zajistí.</p>
+<p>Kromě souborů a skriptletů balíček obsahuje <em>metadata</em> jako např.:</p>
+<ul>
+<li>jméno balíčku</li>
+<li>verzi balíčku</li>
+<li>závislosti (ang. <em>dependencies</em>) - co všechno je potřeba, aby mohl balíček fungovat</li>
+</ul>
+<p>Pokud si stáhneš kupříkladu textový editor, bude potřebovat knihovnu na vykreslení okének.
+Tu knihovnu musíš mít nainstalovanou, aby editor fungoval.
+Grafická knihovna pak potřebuje např. standardní knihovnu jazyka C atd.
+Instalace jednoho balíčku tak často znamená, že musíš instalovat mnohem víc
+balíčků - ten “hlavní” a všechny ostatní, na kterých závisí.</p>
+<p>Hodně systémů používá balíčkovací nástroje dva.
+Jeden základní zvládá instalaci, zjištění obsahu a odinstalaci, ale neřeší
+stahování balíčků z internetu.
+Na Fedoře je to <code>rpm</code>.
+Pokud máš nějaký balíček stažený a řekneš <code>rpm</code>, aby ho nainstaloval,
+můžeš dostat odpověď: <em>nenainstaluji ho, protože potřebuje k svému běhu ještě
+5 dalších, které nejsou nainstalované</em>.
+Je na tobě, abys tyto chybějící závislosti vyřešila.
+A protože je to úkol, se kterým se uživatelé systémů nechtějí měřit sami,
+vznikly nástavby, které řeší stahování balíčků a jejich závislostí.
+To umí ve Fedoře DNF.</p>
+<p>Když instaluješ balíček pomocí <code>dnf</code>, zachová se trochu jinak.
+Řekne například: <em>OK, ale potřebuješ ještě dalších 5 balíčků, zde máš seznam,
+stáhnu všechny položky a nainstaluji všechny závislosti</em>.</p>
+<p>Kromě DNF existují i další takové nástavby: <em>Gnome Software</em> je grafická
+aplikace, který instaluje další grafické aplikace.
+(Nenajdeš v něm tedy <code>bash</code> nebo <code>tree</code>.)
+Podobně jako <code>dnf</code> je stahuje a instaluje včetně závislostí.</p>
+<p>Volba balíčkovacío systému je něco, co se hodně liší v různých Linuxových
+distribucích. Například:</p>
+<table>
+<thead><tr>
+<th>Distro</th>
+<th>Základní systém</th>
+<th>Použitelná nástavba</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fedora</td>
+<td>RPM</td>
+<td>DNF</td>
+</tr>
+<tr>
+<td>Debian &amp; Ubuntu</td>
+<td>APT</td>
+<td>apt-get; aptitude</td>
+</tr>
+<tr>
+<td>Arch Linx</td>
+<td>pacman</td>
+<td>pacman</td>
+</tr>
+<tr>
+<td>OpenSUSE</td>
+<td>RPM</td>
+<td>YaST</td>
+</tr>
+</tbody>
+</table>
+<p>Grafický <em>Gnome Software</em> umí pracovat s více systémy – RPM, APT a dalšími.</p>
+<h2>RPM – informace o balíčcích</h2>
+<p>Pomocí <code>rpm -q</code> (z angl. <em>query</em>, dotaz) se zeptáš na informace o balíčku,
+který máš nainstalovaný:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>rpm -q bash
+<span class="go">bash-5.0.7-1.fc30.x86_64</span>
+</pre></div><p><code>rpm -q -l bash</code> - zobrazí všechny soubory, jaké balíček instaluje.
+Vyzkoušej si to, seznam těch souborů je velký.
+Najdeš mezi nimi např. soubory v <code>/etc/skel</code> - adresáři, který se zkopíruje do adresářů všech nově vytvořených uživatelů.
+Nový uživatel dostane hned v domovském adresáři <code>.bashrc</code>, <code>.bash_logout</code>...</p>
+<p><code>rpm -q --requires bash</code> - co <code>bash</code> potřebuje, aby mohl být nainstalován.
+Nejde jen obalíčky, ale i o jiné vlastnosti systému:</p>
+<ul>
+<li>potřebuje příkaz <code>sh</code></li>
+<li>konfiguraci</li>
+<li>souborový systém (balíček <code>filesystem</code>) v nějaké verzi</li>
+<li>knihovnu C (<code>libc</code>)</li>
+<li>určité vlastnosti balíčkovacího systému (<code>rpmlib</code>)</li>
+</ul>
+<p>RPM umí i instalovat (<code>-i</code>) a mazat (<code>-e</code>) balíčky, ale protože neřeší
+závislosti, hodí se to jen v hodně zvláštních situacích, např:</p>
+<ul>
+<li>Spravuješ superbezpečný armádní systém, který není připojený k internetu.</li>
+<li>Z nějakého důvodu chceš závislosti ignorovat. Instalovaný program pak nejspíš
+nebude správně fungovat, ale když jsi <code>root</code>, můžeš vše.</li>
+</ul>
+<h2>DNF – instalace a odinstalace</h2>
+<p><code>sudo dnf install <var>balíček</var></code> - instalace balíčku (včetné stažení a závislostí)
+<code>sudo dnf remove <var>balíček</var></code> - odinstalace balíčku
+<code>sudo dnf update</code> - aktualizace – <code>dnf</code> se podívá na internet,
+ zjistí nejnovější verze všech balíčků, které máš nainstalované a nabídne
+ novější verze.</p>
+<h2>Repozitáře</h2>
+<p>Repozitář je místo na internetu, kde jsou ke stažení balíčky.
+Ruzné repozitáře obsahují různé balíčky.
+Pro jednu linuxovou distribuci si jich můžeš přidat několik.
+Když chceš nainstalovat nový balíček, systém se podívá na všechny repozitáře, které má na svém seznamu, jestli v nich najde hledaný balíček.</p>
+<p>Na Fedoře se repozitáře nacházejí v <code>/etc/yum.repos.d/</code>.</p>
+<p>Linuxové distribuce se liší svým přístupem k softwaru.
+Fedora, kupříkladu, nemá ve svých repozitářích přehrávač videa nebo MP3,
+protože v Americe jsou tyto technologie patentované.</p>
+<p>Evropské právo softwarové patenty neuznává, a tak můžeš s klidným svědomím
+přidat evropský repozitář <code>rpmfusion</code>.
+Tento projekt spravuje dva repozitáře:</p>
+<ul>
+<li>free - balíčky s programy s otevřeným zdrojovým kódem</li>
+<li>nonfree - balíčky s uzávřeným zdrojovým kódem: Skype, Steam etc.</li>
+</ul>
+<div class="admonition note"><p>Software v obou je k dispozici zdarma.
+„Free“ je tu od „freedom“ – volnost software používat, zkoumat a měnit.</p>
+</div><p>Na stránkách <a href="https://rpmfusion.org/">rpmfusion</a> se můžeš doklikat k návodu,
+jak přidat repozitář do svého systému:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-<span class="k">$(</span>rpm -E %fedora<span class="k">)</span>.noarch.rpm
+</pre></div><p>Toto nainstaluje balíček <code>rpmfusion-free-release</code>, který přidá nastavení
+repozitáře do <code>/etc/yum.repos.d/</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>rpm -ql rpmfusion-free-release
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-2020</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-32</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-32-primary</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-33</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-34</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-latest</span>
+<span class="go">/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-rawhide</span>
+<span class="go">/etc/yum.repos.d/rpmfusion-free-updates-testing.repo</span>
+<span class="go">/etc/yum.repos.d/rpmfusion-free-updates.repo</span>
+<span class="go">/etc/yum.repos.d/rpmfusion-free.repo</span>
+</pre></div><p>A pak můžeš nainstalovat přehrávač videa/hudby:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf install mplayer
+<span class="gp">$ </span>mplayer /usr/share/sounds/gnome/default/alerts/bark.ogg
+</pre></div><div class="admonition note"><p>Zvuky ve formátu <code>.ogg</code> jde přehrávat i bez přidání <code>rpmfusion</code>.
+<code>mplayer</code> ale funguje i s <code>.mp3</code> a ostatními.</p>
+</div><h2>Co je nainstalováno?</h2>
+<p>Pomocí <code>dnf</code> můžeš instalovat jak grafické aplikace (na které funguje
+i grafický nástroj <em>Gnome Software</em> tak i programy pro příkazovou řádku
+nebo systémové knihovny.
+Taky se můžeš např. podívat jaký  software máš nainstalovaný
+(což jde i bez <code>sudo</code>):</p>
+<div class="highlight"><pre><code>$ sudo dnf list installed</code></pre></div><p>Taky můžeš systém aktualizovat:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf update
+</pre></div>

@@ -1,0 +1,160 @@
+<h1>7. Linuxová administrace - síť</h1>
+<p>Dnešní sraz předpokládá, že máš aspoň dva linuxové počítače k dispozici. Může to být tvůj operační systém a virtuální stroj, nebo dva virtuální stroje, pokud tvůj operační systém je Windows.</p>
+<p><em>Příklady níže jsou uvedeny pro kombinaci Ubuntu 18.04 (OS) - Fedora 32 (VM).</em></p>
+<h2>Sesíťování</h2>
+<p>Pro připojení na jiný počítač potřebuješ, aby na tom vzdáleném počítači běžel <strong>server</strong>, na který se dá připojit.
+Je to program, který poslouchá na internetu na určitém portu, a v případě, že se s ním někdo spojí, dá k dispozici vzdálenou příkazovou řádku. 
+Na svém počítači potřebuješ mít <strong>klienta</strong>, čili program, který to spojení naváže a zprostředkuje.</p>
+<p>Podíváme se na program, který nám umožní propojení dvou počítačů, a to <a href="https://www.openssh.com/">OpenSSH</a>. 
+Měla bys ho mít nainstalovaný na obou počítačích, které chceš propojit.</p>
+<p>Do terminálů napiš příkaz <code>ssh --help</code>. Pokud na obou počítačích uvidíš výstup jako níže, máš vše připraveno a můžeš jít na další krok.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh --help
+<span class="go">unknown option -- -</span>
+<span class="go">usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]</span>
+<span class="go">           [-D [bind_address:]port] [-E log_file] [-e escape_char]</span>
+<span class="go">           [-F configfile] [-I pkcs11] [-i identity_file]</span>
+<span class="go">           [-J [user@]host[:port]] [-L address] [-l login_name] [-m mac_spec]</span>
+<span class="go">           [-O ctl_cmd] [-o option] [-p port] [-Q query_option] [-R address]</span>
+<span class="go">           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]</span>
+<span class="go">           [user@]hostname [command]</span>
+</pre></div><h3>Instalace OpenSSH - pokud ssh nebylo nalezeno</h3>
+<p>Některé linuxové distribuce jsou velmi minimalistické. 
+Má to spoustu výhod: jsou to maličké systémy, a tak nepotřebují moc místa. 
+Jsou konfigurovatelné, a tedy je můžeš nastavit pro jedno konkrétní použití, aniž bys "táhla" s sebou plnou palbu grafických klikátek, programovacích jazyků, služeb atd. 
+Tyto systémy, jako <a href="https://www.alpinelinux.org/">Alpine Linux</a>, ti zprostředkují terminál, a další potřebné služby si k nim musíš nainstalovat sama.</p>
+<p>Pokud jsi tedy obdržela výstup jako níže, další krok záleží na operačním systému, který máš.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh --help
+<span class="go">ssh not found</span>
+</pre></div><p>Potřebuješ nainstalovat balíček <code>openssh</code>.
+Instalace probíhá např. takto:
+Na Fedoře: <code>sudo dnf install &lt;nazevprogramu&gt;</code>
+Na Debianu/Ubuntu: <code>sudo apt-get install &lt;nazevprogramu&gt;</code>
+Na Alpine: <code>apk add &lt;nazevprogramu&gt;</code></p>
+<p>Pokud používáš jinou linuxovou distribuci, zjisti na internetu, jak se do ní instalují balíčky.</p>
+<p>Program <code>apk</code>/ <code>dnf</code> / <code>apt-get</code> :</p>
+<ul>
+<li>podívá se do repozitáře balíčků</li>
+<li>zjistí, že je hledaný balíček k dispozici </li>
+<li>stáhne archiv s balíčkem a rozbalí ho na disk</li>
+<li>podívá se, na čem všem tento balíček závisí, ty stáhne a nainstaluje taky</li>
+</ul>
+<p>Podívej se, jestli balíček už máš k dispozici:
+<code>$ ssh --help</code></p>
+<p>Pokud vidíš nápovědu, je vše v pořádku.</p>
+<h3>Služby, které běží pořád</h3>
+<p>A co dál, když to je už nainstalované?</p>
+<ol>
+<li>Musíš nastartovat server</li>
+<li>Říct, že se má spouštět při každém spuštění počítače</li>
+</ol>
+<p><code>sshd</code> je tzv. démon (anglicky <em>daemon</em>), což znamená, že je to speciální program, který běží na pozadí a běží pořád.</p>
+<p>Je více způsobů, jak se o takové aplikace starat. 
+Většinou například chceš, aby se takový program nahodil znova, když se z nějakého důvodu vypne. 
+Existují programy, které přesně to pro tebe dělají. Nastartují, ukončují a jinak spravují běžící daemony.
+Dnes na většině systémů je standardem program <code>systemd</code>, který je  správce procesů na tom počítači. 
+Má své příkazy, které je dobré se naučit.
+Můžeš mu říct, "tento webový server by měl vždy běžet, tak ho spusť".
+Jedna z jeho nevýhod je, že je velký a dělá hromadu dalších věcí.</p>
+<p>Na Fedoře spustíš daemon příkazy:</p>
+<div class="highlight"><pre><code>$ systemctl enable sshd   # umožni nastartování sshd pokaždé, když je spuštěn počítač
+$ systemctl start sshd    # nastartuje daemon
+$ systemctl status sshd   # ověří status služby</code></pre></div><p>Tohle se spouští jen na serveru - počítači, ke kterému se chceš připojit. Tvůj počítač slouží jako klient, nepotřebuje tedy mít spuštěný daemon.</p>
+<p>Protože <code>systemd</code> je velký, na Alpine Linuxu není. 
+Příkazy pro Alpine vypadají takto:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>rc-update add sshd
+<span class="gp">$ </span>/etc/init.d/sshd start
+<span class="gp">$ </span>rc-status
+</pre></div><h3>Kde bydlí server?</h3>
+<p>K serveru se budeme chtít připojit a k tomu budeme potřebovat znát jeho adresu. 
+Každý počítač má svou adresu na síti, což je obdoba poštovní adresy.
+Zjisti adresu počítače, na který se budeš chtít připojit (ten s rozjetým <code>sshd</code>).</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ip a
+<span class="go">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
+<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
+<span class="go">    inet 127.0.0.1/8 scope host lo</span>
+<span class="go">       valid_lft forever preferred_lft forever</span>
+<span class="go">    inet6 ::1/128 scope host </span>
+<span class="go">       valid_lft forever preferred_lft forever</span>
+<span class="go">2: wlp4s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000</span>
+<span class="go">    link/ether 34:02:86:19:c7:c9 brd ff:ff:ff:ff:ff:ff</span>
+<span class="go">    inet 192.168.88.51/24 brd 192.168.88.255 scope global dynamic noprefixroute wlp4s0</span>
+<span class="go">       valid_lft 391sec preferred_lft 391sec</span>
+<span class="go">    inet6 fe80::13cb:7e81:84f5:e263/64 scope link noprefixroute </span>
+<span class="go">       valid_lft forever preferred_lft forever</span>
+</pre></div><p>V tomto šíleném výpisu pod <code>wlp4s0</code>, což je Wi-Fi spojení (u tebe se může jmenovat jinak), se nachází kouzelné číslo <code>inet 192.168.88.51</code>. Pokud jsi připojena k internetu kabelem, hledej položku začínající písmenem <code>e</code>, např. <code>enp0s3</code> nebo <code>eth0</code>.</p>
+<p>Už znáš cílovou adresu, tak ji zkus "zavolat" ze svého počítače (klienta). 
+<code>ping</code> je standardní nástroj pro vyzkoušení, jestli síťové spojení mezi dvěma počítači funguje. Je to jako ping-pong. Posílá se malý balík dat a čeká, jestli se vrátí z druhé strany.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ping <span class="m">192</span>.168.88.51
+</pre></div><p>(<kbd>CTRL</kbd>+<kbd>C</kbd>, pokud chceš zastavit)
+Můžeš volat i jménem:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ping github.com
+</pre></div><h4>Když nemáš IP adresu... (Alpine Linux)</h4>
+<p>V Alpine Linuxu ale síť není standardně nastavená.
+Je to jako když si dáš na dům cedulku s adresou, to ještě neznamená, že ti tam bude i chodit pošta.
+K tomu, aby se vědělo, že tuto adresu máš zrovna ty, slouží služba/server DHCP. Ten ti řekne "ty budeš 10.11.12.13".
+Takže budeš potřebovat nastavit síť. 
+Jak se to dělá? 
+Založ si nový soubor <code>/etc/network/interfaces</code>.</p>
+<p>Naučíš se používat editor <code>vi</code>, protože to je textový editor, který je na Alpine nainstalovaný.
+Editor spustíš příkazem:
+<code>$ vi /etc/network/interfaces</code></p>
+<ul>
+<li>editor je přes celou obrazovku, nejsou tam žádná tlačítka, menu a další "rušivé" věci.</li>
+<li>zmáčknutím <code>i</code> se dostaneme do vkládacího režimu.</li>
+</ul>
+<p>Do souboru napiš:</p>
+<div class="highlight"><pre><code>auto eth0
+iface eth0 inet dhcp</code></pre></div><ul>
+<li>vi ukončíš zmáčknutím klávesy <kbd>ESC</kbd> (pro ukončení vkládacího režimu), následně napiš <code>:wq</code> a zmáčkni <kbd>ENTER</kbd>. </li>
+</ul>
+<p>Aby se změny projevily, je třeba znovu nastartovat síť, což provedeš pomocí příkazu</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>/etc/init.d/networking restart
+</pre></div><p>Teď si to můžeš vyzkoušet:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ping github.com
+</pre></div><h2>Linuxová administrace</h2>
+<p>A teď se konečně dostáváme k předmětu kurzu :).</p>
+<p>Linuxová administrace je typicky o tom:</p>
+<ul>
+<li>upravit konfiguraci v textovém souboru</li>
+<li>restartovat službu </li>
+</ul>
+<p>...a máš vystaráno.</p>
+<p>Na hlavním PC zadej <code>ssh &lt;ip-adresa-serveru&gt;</code></p>
+<p>Zeptá se tě to na heslo a snaží se připojit k tomu počítači jako ten samý uživatel, jako na tvém hlavním počítači.
+To asi nebude ono, ten vzdálený počítač má jiné uživatele.</p>
+<p>Potřebuješ uživatele, který bude pro tebe dostupný na tvém vzdáleném počítači (serveru). Pojďme ho vytvořit.
+Na Fedoře:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo useradd hanka
+<span class="gp">$ </span>sudo passwd hanka
+<span class="go">Changing password for user hanka.</span>
+<span class="go">New password:</span>
+<span class="go">Retype new password:</span>
+<span class="go">passwd: all authentication tokens updated successfully.</span>
+</pre></div><p>Teď zkus se ještě jednou připojit k serveru, tentokrát se jménem uživatele jako v příkladu níže:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh hanka@&lt;ip-adresa-serveru&gt;
+<span class="go">hanka@&lt;ip-adresa-serveru&gt; password: </span>
+<span class="gp">[hanka@localhost ~]$
+</span></pre></div><p>Všimni si, že se změnil prompt.
+Právě jsi připojena k vzdálenému počítači a cokoliv do toho terminálu napíšeš, provede se vzdáleně.</p>
+<div class="highlight"><pre><span></span><span class="gp">[hanka@localhost ~]$ </span><span class="nb">echo</span> ~
+<span class="go">/home/hanka</span>
+<span class="gp">[hanka@localhost ~]$ </span><span class="nb">echo</span> ~root
+<span class="go">/root</span>
+</pre></div><p>Je dost důležité vědět, na kterém počítači pracuješ. 
+Je dobré mít jiný prompt, protože pak je hezky vidět, na čem zrovna pracuješ.</p>
+<p><strong><em>Celá tato část není dopracovaná. 
+Mám zde problém s právy, protože uživatel vytvořen <code>useradd</code> nepatří do sudoers a neznám heslo svého roota. Chce to učesat pro jednotný postup.</em></strong></p>
+<p>Prompt vzdáleného počítače můžeš změnit jako superuživatel.</p>
+<div class="highlight"><pre><code># vi /etc/hostname</code></pre></div><p>V souboru pak můžeš přepsat <code>localhost</code> na něco jiného, např. <code>test</code>.</p>
+<p>Soubor ulož a zavři (<code>&lt;Esc&gt;:wq</code>). 
+Jak vypadá prompt?
+Pořád je tam původní <code>localhost</code>. Jak to? 
+Spousta programů typicky funguje tak, že si při spuštění načtou konfiguraci a s tou pak pracují.
+Musíme jim tedy explicitně říct: "teď si načti novou konfiguraci".</p>
+<p><code># hostname -F /etc/hostname</code></p>
+<p>Můžeš taky nastavit hostname na jakýkoli řetězec, který se ti líbí:
+<code># hostname ahoj</code></p>
+<p>Pokud se teď odhlásíš a příhlásiš do vzdáleného počítače pomocí ssh, uvidíš tam nový prompt.</p>
+<div class="highlight"><pre><span></span><span class="gp">[hanka@test ~]$ </span>
+<span class="gp">[hanka@ahoj ~]$
+</span></pre></div><p>Nakonec ultimátní test moci nad vzdáleným počítačem: <code>poweroff</code>.</p>

@@ -1,0 +1,48 @@
+<h1>Cron</h1>
+<p>Najdi si na systému nějaký zvuk a přehraj si ho:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>locate .mp3
+<span class="gp">$ </span>locate .ogg
+<span class="gp">$ </span>mplayer &lt;cesta/k/některému/zvuku&gt;
+</pre></div><p>Pokud nemáš nainstalovaný <code>mplayer</code> z RPMFusion, použij místo toho
+<code>ogg123</code> – ten lze nainstalovat ze systémových repozitářů.</p>
+<h2>Přehráváme zvuky z příkazové řádky</h2>
+<p>Proč se to hodí přehávat z příkazové řádky?</p>
+<p>Protože to můžeme <strong>automatizovat</strong>. Třeba spouštět stále dokola.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">while</span> <span class="p">;</span> <span class="k">do</span> mplayer &lt;cesta/k/tvemu/zvuku&gt;<span class="p">;</span> <span class="k">done</span>
+</pre></div><p>(až to budeš chtít zrušit, zmáčni <code>Ctrl+C</code>).</p>
+<h2>Spouštění zvuku podle času</h2>
+<p>Taky si vyzkoušíme, jak spustit zvuk v zadaný čas.</p>
+<p>O spouštění programů podle času se stará démon <code>cron</code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>man crontab
+</pre></div><p>Tahle manuálová stránka je o příkazu <code>crontab</code>.
+Nedočteme se tu ale, jak vypadá konfigurace.</p>
+<p><code>man</code> má více <em>kapitol</em>.
+V kapitole <code>1</code> jsou popsané příkazy: jak se zadaný příkaz spouští a jaké má parametry.
+V kapitole <code>5</code> jsou popisy konfiguračních souborů.
+Občas se stane, že je ve dvou kalpitolách sekce stejného jména, jako v případě
+<code>crontab(1)</code> a <code>crontab(5)</code>.
+Většinou je to zmíněno v sekci <code>SEE ALSO</code>.</p>
+<p>Sekci o <code>crontab</code> z páté kapitoly zobrazíš pomocí:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>man <span class="m">5</span> crontab
+</pre></div><p>Příkaz <code>crontab</code> je tedy nástroj, kterým můžeš editovat soubor
+<code>/etc/crontab</code> nebo <code>/var/spool/cron/&lt;jméno uživatele&gt;</code>.
+Na rozdíl od normálního editoru po uložení zkontroluje,
+jestli je soubor v pořádku.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>crontab -e
+</pre></div><p>Otevře se nám editor, do kterého napíšeme:</p>
+<div class="highlight"><pre><span></span><span class="go">* * * * * mplayer /desta/k/zvuku</span>
+</pre></div><p>Každá z hvězdiček vyjadřuje jinou část času (hodina, minuta, ...). Abychom si to ale nemuseli pokaždé číst znova, doporučuji si na první řádek dá komentář, co která pozice říká.</p>
+<div class="highlight"><pre><span></span><span class="gp"># </span>min hod den mesic den_v_tydnu prikaz
+</pre></div><p>Když to uložíte a zavřete, tak by se měl nainstalovat.</p>
+<p>A teďka vám to každou minutu přehraje zvuk. Jupí! :)</p>
+<p>Toto nastavení vydrží i po vypnutí počítače. Zkrátka dokud si to zas nevypneš.</p>
+<p>Teďka si zkusíme snížit frekvenci, jak často se nám to bude přehrávat. Třeba každou 50. minutu.</p>
+<div class="highlight"><pre><code>$ crontab -e
+50 * * * * mplayer /cesta/ke/zvuku</code></pre></div><p><code>*</code> znamená každou/každý</p>
+<p>Každý druhý den se napíše takto:</p>
+<div class="highlight"><pre><code>$ crontab -e
+0 0 /2 * * mplayer /cesta/ke/zvuku</code></pre></div><p>Znamená 2. den v měsíci</p>
+<div class="highlight"><pre><code>$ crontab -e
+0 0 2 * * mplayer /cesta/ke/zvuku</code></pre></div><p>[nakopírovat kus z EXAMPLES]</p>
+<p>Cron může posílat emaily. Email je věc starší, než je internet. Původně se emaily posílaly v rámci jednoho počítače</p>
+<p>Příkazem <code>mail</code> si je můžeme zobrazit. Po čase je dobré se podívat, jestli je nám <code>cron</code> neposílá, což by nám po čase mohlo</p>

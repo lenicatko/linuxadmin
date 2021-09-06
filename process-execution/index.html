@@ -1,0 +1,114 @@
+<h1>Spouštění procesů</h1>
+<p>Pojďme se podívat na to, co přesně Bash dělá, když spustí program.</p>
+<p>Příkaz <code>ps</code> bez argumentů vypíše jen ty procesy, které „patří“ k aktuálnímu
+terminálu:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ps
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">   2328 pts/0    00:00:00 bash</span>
+<span class="go">  14509 pts/0    00:00:00 ps</span>
+</pre></div><p>Vidíš, že běží dva programy: jak <code>bash</code> tak <code>ps</code>.</p>
+<p>Co když přesměruješ data z jednoho příkazu do druhého?</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ps <span class="p">|</span> cat
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">   2328 pts/0    00:00:00 bash</span>
+<span class="go">  14661 pts/0    00:00:00 ps</span>
+<span class="go">  14662 pts/0    00:00:00 cat</span>
+</pre></div><div class="highlight"><pre><span></span><span class="gp">$ </span>ps <span class="p">|</span> cat <span class="p">|</span> sort
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">  14679 pts/0    00:00:00 ps</span>
+<span class="go">  14680 pts/0    00:00:00 cat</span>
+<span class="go">  14681 pts/0    00:00:00 sort</span>
+<span class="go">   2328 pts/0    00:00:00 bash</span>
+</pre></div><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="p">|</span> ps
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">   2328 pts/0    00:00:00 bash</span>
+<span class="go">  14689 pts/0    00:00:00 ps</span>
+</pre></div><h2>Nastavení, spuštění a čekání</h2>
+<p>Když Bash spouští program, udělá tři věci:</p>
+<ul>
+<li>Nastaví prostředí – přesměrovaný vstup/výstup, proměnné prostředí apod.;</li>
+<li>program spustí;</li>
+<li>čeká, až se program ukončí.</li>
+</ul>
+<p>Pokud Bash spouští několik programů najednou, udělá obecně každý z těchto
+kroků pro všechny spouštěné programy najednou.</p>
+<p>Příklady:</p>
+<h3><code>ps</code></h3>
+<ul>
+<li>Prostředí je nastavené – std. vstup i výstup jdou na stejné místo jako
+u Bashe.</li>
+<li>Spustí se program <code>ps</code>.</li>
+<li>Čeká se, než se <code>ps</code> ukončí.
+(Program <code>ps</code> mezitím něco vypíše na std. výstup.)</li>
+</ul>
+<p>Po ukončení Bash vypíše výzvu a čeká na další příkaz.</p>
+<p><span class="figure"><a href="naucse:static?filename=ps.svg"><img src="naucse:static?filename=ps.svg" alt="Diagram spouštění `ps`"></a></span></p>
+<h3><code>ps | cat</code></h3>
+<ul>
+<li>Bash vytvoří novou rouru. Std. výstup z <code>ps</code> a std. vstup pro <code>cat</code>
+přesměruje na tuto rouru.
+(Zbylé – std. chyby, vstup pr <code>ps</code> i výstup z <code>cat</code> – nechá jako u Bashe.)</li>
+<li>Spustí programy <code>ps</code> i <code>cat</code>.</li>
+<li><p>Čeká, než se <code>ps</code> i <code>cat</code> ukončí.
+(Programy mezitím spolu komunikují nebo píší na std. výstup.)</p>
+<p><span class="figure"><a href="naucse:static?filename=ps-cat.svg"><img src="naucse:static?filename=ps-cat.svg" alt="Diagram spouštění `ps | cat`"></a></span></p>
+</li>
+</ul>
+<h3><code>ps | cat | sort</code></h3>
+<p>Příkazů propojených rourami může být více;
+Bash skládá za sebe stejným spůsobem.</p>
+<p><span class="figure"><a href="naucse:static?filename=ps-cat-sort.svg"><img src="naucse:static?filename=ps-cat-sort.svg" alt="Diagram spouštění `ps | cat | sort`"></a></span></p>
+<h3><code>echo | ps</code></h3>
+<p>Z pohledu Bashe je <code>echo | ps</code> úplně stejné jako <code>ps | cat</code>.
+Příkaz <code>echo</code> se ale ukončí hned poté co vypíše svůj řádek, což je většinou
+velice rychlé – stihne to dřív než se <code>ps</code> zeptá systému na běžící programy.
+Proto <code>echo</code> většinou není ve výstupu vidět.:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="p">|</span> ps
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">   2328 pts/0    00:00:00 bash</span>
+<span class="go">  14689 pts/0    00:00:00 ps</span>
+</pre></div><p><span class="figure"><a href="naucse:static?filename=echo-ps.svg"><img src="naucse:static?filename=echo-ps.svg" alt="Diagram spouštění `echo | ps`"></a></span></p>
+<h2>Další kombinace příkazů</h2>
+<p>Kromě <code>|</code> se příkazy dají kombinovat několika dalšími operátory.</p>
+<p>Nejjednodušší je středník (<code>;</code>): napřed se provede příkaz na levé straně,
+potom ten na pravé.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;Vysledek je&#39;</span><span class="p">;</span> python -c <span class="s1">&#39;print(1 + 1)&#39;</span>
+<span class="go">Vysledek je</span>
+<span class="go">2</span>
+</pre></div><p>Docela užitečné je <code>&amp;&amp;</code> (logické A; angl. <em>AND</em>): napřed se provede příkaz
+na levé straně, a pouze pokud uspěl (<code>$?</code> je 0), se provede ten na pravé.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>python -c <span class="s1">&#39;print(1 + )&#39;</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;je výsledek&#39;</span>
+<span class="go">  File &quot;&lt;string&gt;&quot;, line 1</span>
+<span class="go">    print(1 + )</span>
+<span class="go">              ^</span>
+<span class="go">SyntaxError: invalid syntax</span>
+</pre></div><p>Tenhle operátor se hodí např. v případech, kdy píšeš program, který připraví
+nějaký soubor. Příkaz <code>python priprav-soubor.py &amp;&amp; head pripraveny-soubor.dat</code>
+vypíše ukázku výsledku, ale jen když se všechno povedlo.
+Když Python skončí s chybou, <code>pripraveny-soubor.dat</code> (existující od minula)
+se nevypíše – na obrazovce zůstane chybová hláška od Pythonu.</p>
+<p>Opak je <code>||</code> (logické NEBO; angl. <em>OR</em>): příkaz na pravé straně se provede,
+pokud příkaz nalevo <em>neuspěl</em> (<code>$?</code> není 0).</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>python -c <span class="s1">&#39;print(1 + )&#39;</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;Jejda! Chyba!&#39;</span>
+<span class="go">  File &quot;&lt;string&gt;&quot;, line 1</span>
+<span class="go">    print(1 + )</span>
+<span class="go">              ^</span>
+<span class="go">SyntaxError: invalid syntax</span>
+<span class="go">Jejda! Chyba!</span>
+</pre></div><p>A nakonec, když dáš za příkaz <code>&amp;</code>, tak Bash nebude čekat na konec programu,
+ale pokračuje hned dál.
+Když program skončí, dá Bash před dalším promptem vědět:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sleep <span class="m">1</span>
+<span class="gp">$ </span>sleep <span class="m">1</span> <span class="p">&amp;</span>
+<span class="go">[1] 25507</span>
+<span class="gp">$
+</span><span class="gp">$ </span><span class="c1"># vteřinu počkej...</span>
+<span class="go">[1]+  Dokončena              sleep 1</span>
+<span class="gp">$
+</span></pre></div><p>Pozor na to, že program „v pozadí“ sdílí s Bashem terminál,
+takže pokud bude něco psát (nebo hůř, číst) se std. vstupu/výstupů,
+bude se s Bashem „hádat“.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>curl https://httpbin.org/get <span class="p">&amp;</span>
+<span class="go">[1] 25537</span>
+<span class="gp">$ </span><span class="o">{</span> ... sem curl vypíše jakási stažená JSON data ...  <span class="o">}</span>
+</pre></div>

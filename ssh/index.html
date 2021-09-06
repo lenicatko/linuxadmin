@@ -1,0 +1,192 @@
+<h1>SSH - vzdálená administrace</h1>
+<p>Dnes se podíváme na to, jak spravovat servery přes síť.</p>
+<p>Po troše nastavování to bude podobné jako většina toho, co jsme zatím dělali.
+Jen bez grafických okýnek – připojíme se čistě přes příkazovou řádku.</p>
+<div class="admonition note"><p>Samozřejmě je možné sdílet obrazovku; nástroje na to existují i na Linuxu.
+Na serverech ale často nebývá grafické prostředí vůbec nainstalováno,
+protože vykreslování celkem zbytečně zabírá výkon.
+A každý software navíc taky zvyšuje šanci, že se na systému vyskytne
+bezpečnostní chyba.</p>
+</div><p>Technicky to není složité: terminál je jen soubor, do kterého se zapisuje to,
+co napíšeš na klávesnici a ze kterého lze číst výstup shellu a spouštěných
+programů.
+Dokonce i vychytávky jako barvičky nebo hrátky s kurzorem (které používá
+editor <code>nano</code> nebo skrolovátko <code>less</code>) se dají posílat jako text.</p>
+<p>Nejsložitější na celé věci je komunikaci <em>zabezpečit</em>.
+Součástí posílaného textu – toho, co napíšeš na klávesnici – je i
+přihlašovací heslo.
+Kdysi, když se administrátorům počítačových sítí dalo věřit (protože stejně
+měli přístup ke všem počítačům ve firemní či univerzitní síti), se informace
+posílaly „jen tak“.
+Dnes, když informace putují internetem přes spoustu zařízení, z nichž každé
+si může posílané informace přečíst, se ale musí šifrovat.
+Díky efektivním nástrojům se šifruje všechno, co se pošle, nikoli jen hesla.</p>
+<div class="admonition note"><p>Nezabezpečené připojení se stále používají ke konfiguraci
+zařízení, které jsou k ovládacímu počítači připojeny přímo,
+ne přes síť/internet.
+Máš-li zkušenosti s MicroPythonem, vzpomeň jak probíhala komunikace
+s „destičkou“.</p>
+</div><p>K zabezpečenému připojení použijeme protokol SSH (<em>secure shell</em>).
+Podobně jako HTTP existuje server – služba SSHD – který je potřeba nastavit
+a spustit.
+K počítači, na kterém běží SSHD, je možné se vzdáleně připojit.</p>
+<p>Na druhé straně budeme potřebovat <em>klienta</em>, program, který se k SSH serveru
+umí připojit.
+Na Linuxu a macOS existuje program <code>ssh</code>, na Windows použijeme grafický
+<code>puTTY</code>, který si nainstaluj ze <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">stránek PuTTY</a>.</p>
+<div class="admonition note"><p>PuTTY je k dispozici i pro ostatní systémy. Na Fedoře je v repozitářích,
+můžeš si ho nainstalovat přes <code>sudo dnf install putty</code>.</p>
+</div><h2>Instalace OpenSSH</h2>
+<p>SSH server není na Fedoře v balíčku <code>sshd</code>.
+Na rozdíl od <code>httpd</code> totiž takových serverů bylo historicky více.
+Dnes se většinou používá OpenSSH, který si nainstaluj následovně:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf install openssh-server
+</pre></div><p>Služba samotná už se ovšem jmenuje <code>sshd</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo systemctl start sshd
+</pre></div><p>Možná budeš potřebovat i otevřít firewall.
+Protokolu <code>ssh</code>, přes který budeme komunikovat, kterému přísluží port 22:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo firewall-cmd --add-service<span class="o">=</span>ssh
+</pre></div><h2>Připojení</h2>
+<p>Teď se můžeš přihlásit!
+Zkus to nejdřív z virtuálního počítače.
+Nebude to zatím správa vzdáleného stroje, ale bude to jednodušší:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh localhost
+<span class="go">The authenticity of host &#39;localhost (::1)&#39; can&#39;t be established.</span>
+<span class="go">ECDSA key fingerprint is SHA256:dzya/6SYp058Apl4++46lt8IMPNTuIAznjUGlrI1ymU.</span>
+<span class="go">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span>
+<span class="go">Warning: Permanently added &#39;localhost&#39; (ECDSA) to the list of known hosts.</span>
+<span class="go">petr@localhost&#39;s password: </span>
+<span class="go">Last login: Mon Dec  7 15:41:10 2020 from 192.168.122.1</span>
+<span class="gp">[petr@localhost ~]$
+</span></pre></div><p>Program <code>ssh</code> tě po připojení upozorní, že k tomuto počítači se ještě nikdy
+nepřipojoval a zeptá se, jestli je to opravdu počítač ke kterému se chceš
+připojit.
+Kdyby ses totiž připojovala přes internet, někdo „mezi“ tvým a cílovým
+počítačem by se mohl docela jednoduše vydávat za server,
+na který se chceš připojit.
+Proto až „o něco půjde“, vždycky si ověř že daný „otisk“ – v mém případě
+<code>SHA256:dzya/6SYp058Apl4++46lt8IMPNTuIAznjUGlrI1ymU</code> – odpovídá počítači,
+ke kterému se připojuješ.
+Za chvíli to uděláme; teď u <code>localhost</code> prostě napiš <code>yes</code>.
+Dále zadej heslo a jsi připojena!</p>
+<p>Klient <code>ssh</code> se standardně připojuje pod tvým uživatelským jménem.
+Kdybys na vzdáleném počítači měla účet pojmenovaný jinak, nebo se chtěla
+odděl uživatelské jméno od jména serveru znakem <code>@</code>.
+Máš-li stále účet <code>test1</code>, zkus to – ale pak se zase odhlaš,
+ať můžeme pokračovat:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh test1@localhost
+<span class="gp">[test1@localhost ~]$ </span><span class="nb">exit</span>
+<span class="gp">$
+</span></pre></div><p>Tentokrát se <code>ssh</code> na bezpečnostní ověření neptá.
+Jakmile ses totiž k tomuto počtači připojila, <code>ssh</code> si adresu <code>localhost</code>
+spojil s daným klíčem.
+Zaznamenal si to do souboru <code>~/.ssh/known_hosts</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>cat ~/.ssh/known_hosts
+<span class="go">localhost ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC9n7rIp76I0uxvicyZyRzUeh2PGElLwLV2Vw/AtrxOQkXWK/yfY/n5WlFiRblrOHf01tiH52C/zy1CiVLgl+bc=</span>
+</pre></div><div class="admonition note"><p>Klíč v souboru je delší a bezpečnější verze „otisku“, na který se tě <code>ssh</code>
+ptal.
+Nebylo by ale praktické nutit člověka, aby porovnával takhle dlouhý klíč.</p>
+</div><p>Kdyby se klíč na serveru změnil, může to znamenat dvě věci:</p>
+<ul>
+<li>Administrátor heslo změnil, třeba kvůli bezpečnosti.</li>
+<li>Nepřipojuješ se k počítači, ke kterému ses připojovala minule – a
+kdyby ses připojila, pravděpodobně bys novému počítači jako první věc
+poslala přihlašovací heslo.</li>
+</ul>
+<p>První variantu si můžeš vyzkoušet příkazem.
+Nebudu ho vysvětlovat do detailů; stačí vědět že vytvoří nový šifrovací klíč
+pro SSHD:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N <span class="s1">&#39;&#39;</span> -t ecdsa
+</pre></div><p>Zkus se pak připojit:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh localhost
+<span class="go">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span class="go">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span>
+<span class="go">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>
+<span class="go">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span>
+<span class="go">...</span>
+<span class="go">Host key verification failed.</span>
+</pre></div><p>Když takovou zprávu uvidíš, ověř si že jde o první variantu výše – pokud od
+administrátora např. nepřišel důvěryhodný mail, tak mu radši třeba zavolej.</p>
+<p>Je-li vše v pořádku, smaž se souboru <code>~/.ssh/known_hosts</code> starý záznam
+a připoj se znovu.</p>
+<h2>Vzdálené připojení – ssh</h2>
+<p>A teď se připoj vzdáleně!
+Máš-li na svém <em>opravdovém</em> počítači Linux nebo macOS, zjisti IP adresu
+virtuálního počítače (např. příkazem <code>ifconfig</code>), na opravdovém počítače
+si otevři příkazovou řádku a zadej <code>ssh <var>jmeno</var>@<var>adresa</var></code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh petr@192.168.122.133
+<span class="go">The authenticity of host &#39;192.168.122.133 (192.168.122.133)&#39; can&#39;t be established.</span>
+<span class="go">ECDSA key fingerprint is SHA256:0LNQwY8++rCDzynAAQx2MNP9OMupnpsps0loay8P3NM.</span>
+<span class="go">Are you sure you want to continue connecting (yes/no/[fingerprint])?</span>
+</pre></div><p>Tentokrát si otisk opravdu ověř.
+Na virtuálním počítači zadej:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub
+<span class="go">256 SHA256:0LNQwY8++rCDzynAAQx2MNP9OMupnpsps0loay8P3NM root@localhost.localdomain (ECDSA)</span>
+</pre></div><p>A zkontroluj, že otisk sedí.
+Pro plnou bezpečnost je potřeba zkontrolovat každé písmenko,
+ne jen začátek nebo konec.</p>
+<p>Je li vše OK, zadej <code>yes</code>, napiš svoje heslo – a máš vzdálený přístup
+k virtuálnímu počítači!</p>
+<h2>Vzdálené připojení – PuTTY</h2>
+<p>Další SSH klient je grafický PuTTY.
+Máš-li ho nainstalovaný, spusť ho a do políčka <em>Host Name (or IP address)</em>
+napiš IP adresu virtuálního počítače.
+<em>Port</em> nech na 22 a <em>Connection Type</em> na SSH.</p>
+<p><span class="figure"><a href="naucse:static?filename=putty-config.png"><img src="naucse:static?filename=putty-config.png" alt="Diagram příkazu `cat`"></a></span></p>
+<p>Pak klikni na <em>Open</em>, zadej své jméno a heslo – a máš vzdálený přístup
+k virtuálnímu počítači!</p>
+<h2>Jméno serveru</h2>
+<p>Podobně se připojit k jakémukoli jinému serveru, kam máš přístup.</p>
+<p>Aby se servery nepletly, je dobré společně se službou SSHD nastavit i jméno
+počítače.
+To se dělá pomocí příkazu <code>hostname</code>, který bez argumentu jméno zobrazí
+a s argumentem ho nastaví:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>hostname
+<span class="go">localhost</span>
+<span class="gp">$ </span>sudo hostname virtualka
+<span class="go">[sudo] heslo pro petr: </span>
+<span class="gp">$ </span>hostname
+<span class="go">virtualka</span>
+</pre></div><p>Programy většinou jméno počítače čtou jen při spuštění.
+Když se teď <em>znovu přihlásíš</em> (přes SSH, nebo otevřeš nový terminál),
+ve výzvě najdeš nově nastavené jméno.</p>
+<p>Ale jako spousta jiného nastavení se tahle změna zruší když počítač vypneš
+a zase zapneš.
+Trvalé nastavení – tedy to, podle kterého se jméno nastavuje při startu
+systému – je v souboru <code>/etc/hostname</code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>cat /etc/hostname
+<span class="go">localhost.localdomain</span>
+<span class="gp">[petr@localhost ~]$ </span><span class="nb">echo</span> virtualka <span class="p">|</span> sudo tee /etc/hostname
+<span class="go">virtualka</span>
+</pre></div><h2>SSH klíč</h2>
+<p>Zatím ses k virtuálnímu počítači přihlašovala heslem.
+To ovšem není nejbezpečnější a nejkomfortnější varianta.</p>
+<p>Lepší je si vytvořit soubor s <em>klíčem</em>.
+Vlastně to jsou soubory dva: <em>veřejný klíč</em>, který můžeš s kýmkoli sdílet,
+a <em>soukromý klíč</em>, který je naopek jen tvůj – funguje jako heslo.</p>
+<p>Svůj <em>veřejný klíč</em> dáš na server, ke kterému se budeš připojovat,
+a nastavíš že mu server bude „věřit“.</p>
+<p>Pokud pracuješ na Windows, vytvoř si klíče na svém virtuálním počítači.
+Jinak to udělej na tom opravdovém.</p>
+<p>Klíče se tvoří příkazem <code>ssh-keygen</code>.
+Ten je normálně ukládá jako <code>/home/petr/.ssh/id_rsa</code>,
+kde je potom očekává <code>ssh</code>.
+Na otázku, kam je chceš uložit, odpověz <kbd>Enter&lt;/kdb&gt; – tím vybereš
+výchozí nastavení.</p>
+<p>Pokud soubor už existuje, znamená to že klíč už máš.
+Nevytvářej si nový; na otázku <code>Overwrite (y/n)?</code> odpověz <code>n</code>.</p>
+<p>Další otázka je na heslo, kterým můžeš svůj soukromý klíč chránit.
+Je tu pro situaci, kdy si nezamkneš počítač a někdo ti soubor s klíčem
+ukradne – pokud uhodne heslo, nebo pokud není nastavené,
+může se pak přihlašovat pod tvým účtem.</p>
+<div class="highlight"><pre><code>$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/petr/.ssh/id_rsa): 
+Created directory '/home/petr/.ssh'.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/petr/.ssh/id_rsa
+Your public key has been saved in /home/petr/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:RihRspvWIrPti3X1x/HAYZ0N5CcqOTp1aaolCw7qZP4 petr@virtualka</code></pre></div><h2>Nastavení SSHD</h2>
+<p>XXX</p>

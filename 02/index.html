@@ -1,0 +1,196 @@
+<div class="admonition warning"><p>Toto jsou <em>zhuštěné poznámky z prvního běhu</em>, nikoli materiály k samostudiu.</p>
+</div><h1>Linuxová administrace - 2. sraz</h1>
+<ul>
+<li>opakovaní</li>
+</ul>
+<div class="highlight"><pre><code>ls *.txt
+ls *[AB].txt
+ls *A.txt *B.txt</code></pre></div><p><code>head -n3 *.dat</code> získá první 3 řádky všech souborů končící na .dat</p>
+<h2>Proměnná</h2>
+<p><code>jmeno=minotaur.dat</code> !nesmí být mezery vedle rovnítka
+<code>echo $jmeno</code> vypíše proměnnou jmeno na stdout</p>
+<p>příklad použití:
+<code>head -n2 $jmeno | tail -n1</code> získáme druhý řádek ze souboru minotaur.dat, který je uložený v proměnné jmeno</p>
+<p>moje_skrolovatko=head
+$moje_skrolovatko unicorn.dat</p>
+<p><code>PAGER=more git log</code> PAGER - proměnná prostředí
+<code>env</code> vypíše všechny proměnné prostředí</p>
+<ul>
+<li>podstatné proměnné SHELL, HOSTNAME, PATH, PWD, VISUAL, DISPLAY</li>
+</ul>
+<p><code>PS1</code> do této proměnné se dá zapsat, čím nám bude začínat každý řádek v bashi, můžeme přepsat např. jen na <code>PS1='$ '</code>
+<code>PS2</code> je pokračovací znak (při víceřádkovém zadávání v shellu)</p>
+<p><code>$?</code> návratová hodnota posledního příkazu</p>
+<ul>
+<li>pokud vypíše '0', pak proběhl příkaz v pořádku</li>
+<li>hodnota jiná než '0', příkaz skončil chybou</li>
+</ul>
+<p><code>$$</code> hodnota procesu</p>
+<p><code>echo ${jmeno}abc</code> výstup: minotaur.databc
+složené závorky je potřeba použít pokud skládáme proměnnou s řetězcem</p>
+<p><code>$@</code> použije všechny argumenty, nejlépe dávat do uvozovek</p>
+<h2>Cykly</h2>
+<h3>For</h3>
+<div class="highlight"><pre><code>for jmeno in a b c
+do
+    echo $jmeno
+done</code></pre></div><p>Cyklus se dá také zapsat na jeden řádek, v tom případě musí být jednotlivé příkazy odděleny středníkem:</p>
+<div class="highlight"><pre><code>for jmeno in a b c; do echo $jmeno; done</code></pre></div><p>V našem případě budeme chtít vypsat druhý řádek ze souborů creatures:</p>
+<div class="highlight"><pre><code>for x in *.dat
+do
+    head -n 2 $x | tail -n 1
+done</code></pre></div><h3>While</h3>
+<div class="highlight"><pre><code>while true; do head /dev/urandom|sha256sum; done</code></pre></div><h2>Historie</h2>
+<p>pomocí PageUp / PageDn můžu listovat v historii
+např. zadám <code>cat</code> a pak procházím všemi zadanými příkazy</p>
+<p>ctrl-R: stisknu ctrl-R, pak zadám část příkazu a zobrazí se mi nejbližší příkaz který vyhovuje podmínce. Pokud chci procházet dále, pak opakovaně použiji ctrl-R.</p>
+<p>history - zobrazení historie</p>
+<p>ctrl-D ukončí zadávání vstupu
+ctrl-L vyčistí obrazovku
+ctrl-W smaže slovo
+ctrl-šipky přesunují mezi slovy
+ctrl-s pozastaví výstup (jakoby terminál zamrznul), ale příkazy se provádí
+ctrl-q zobrazí vše, co bylo stisknuto po ctrl-s
+ctrl-Z pozastaví právě prováděný příkaz a vrátí vás zpět do příkazové řádky, k zastavenému příkazu se lze vrátit pomocí 
+<code>[1]+  Stopped                 python</code></p>
+<p>jobs - jaké jsou pozastavené příkazy
+fg - vrátí se k poslednímu zastavenému příkazu
+bg - spustí se zastavený program na pozadí
+kill %1 - můžu ukončit konkrétní proces (zastavený příkaz číslo 1)</p>
+<p>pokud spustím příkaz s &amp; na konci, spustí se proces přímo na pozadí
+<code>gitk --all &amp;</code></p>
+<h2>Bash skript</h2>
+<p>Do souboru můžu zapisovat bash příkazy, které se postupně provedou.</p>
+<p><code>touch klasifikace</code>
+do souboru zapíšeme:</p>
+<div class="highlight"><pre><code>for x in *.dat
+do
+    head -n 2 $x | tail -n 1
+done</code></pre></div><p>Následně skript spustím. Musím být ve složce, která obsahuje tento soubor.
+<code>bash klasifikace</code></p>
+<p>Na začátek skriptu by se měl zapsat <em>shebang</em>, který říká jakým program se soubor bude spouštět. V našem případě chci spouštět bash:
+<code>#! /bin/bash</code></p>
+<p>ls -l klasifikace zobrazí informaci o souboru, důležitá jsou práva:
+rw-rw-r--</p>
+<ul>
+<li>r - právo pro čtení</li>
+<li>w - právo na zápis</li>
+<li>x - právo na spuštění</li>
+</ul>
+<p>tyto práva se opakují 3x za sebou, pro ...</p>
+<p>přidat právo na spuštění:</p>
+<ul>
+<li><code>chmod +x klasifikace</code></li>
+</ul>
+<p>shebang:</p>
+<p>v souboru:</p>
+<div class="highlight"><pre><code>#! /usr/bin/cat
+
+
+Tady jsou informace</code></pre></div><div class="highlight"><pre><code>$ cat README</code></pre></div><p>při zadání pouze $ klasifikace nebude fungovat, protože cesta ke klasifikaci není v $PATH</p>
+<div class="highlight"><pre><code>$ echo $PATH
+
+/home/user/.local/bin:/home/user/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin</code></pre></div><p>v <code>/home/user/bin</code> můžeme definovat vlastní příkazy
+<code>~/.bashrc</code> soubor ve kterém je možné definovat úpravy v prostředí, např. přidat cesty do Path, upravit PS1, atd.</p>
+<p>klasifikuj:</p>
+<div class="highlight"><pre><code>#! /bin/bash
+
+head -n2 "$1" | tail -n1</code></pre></div><p>uvozovky - argument dávat do uvozovek, protože v případě kdy je převzatém argumentu mezera, vzala by se jinak pouze část
+$0 - nultý argument, tedy název programu
+./klasifikuj minotaur.dat</p>
+<h2>Hledání</h2>
+<h3>grep</h3>
+<p><code>grep not haiku.txt</code> hledá v souboru haiku.txt řetězec not a vypíše každý řádek s tímto řetězcem</p>
+<p>přepínače:</p>
+<ul>
+<li>i - nezáleží na velikosti písmen</li>
+<li>n - vypíše čísla řádků</li>
+<li>w - </li>
+</ul>
+<p>regulární výrazy grep -i .+ haiku.txt
+grep -i '.*' haiku.txt</p>
+<h3>find</h3>
+<p>find . -name '*.txt'
+hledá v tomto adresáři a všech podadresářích .txt soubory</p>
+<h2>Úkol</h2>
+<p>Inspirace Bashe: <a href="https://github.com/encukou/bin">https://github.com/encukou/bin</a></p>
+<p>Naklonuj si tyto repozitáře (přímo v adresáři pro tento kurz; <code>git clone</code> udělá nový podadresář):</p>
+<div class="highlight"><pre><code>$ git clone https://github.com/pyladiescz/pyladies.cz
+$ git clone https://github.com/pyvec/pyvo-data
+
+</code></pre></div><p>Data si prohlédni a zjisti, co se v nich skrývá za informace. Zvlášť doporučuju třeba soubor <code>pyvo-data/series/brno-pyvo/events/2018-10-25-casove.yaml</code>.</p>
+<p>Použij základní shellové příkazy (ne Python) na zodpovězení těchto otázek:</p>
+<ul>
+<li><p>Kolik bylo kurzů/srazů PyLadies?</p>
+</li>
+<li><p>Kolik bylo Pyv v Brně?</p>
+</li>
+<li>Kolik bylo Pyv celkem?</li>
+<li>Z kolika přednášek na Pyvech jsou videa?  <em>(Předpokládej že kazdá přednáška může mít max. 1 video)</em></li>
+<li><p>Z kolika Pyv jsou videa?</p>
+</li>
+<li><p>Vypiš všechna místa konání Pyv (stačí identifikátor jako <code>artbar</code>) a kolikrát tam Pyvo bylo.</p>
+</li>
+<li>Jaké jsou 3 nejčastější křestní jména organizátorů/koučů/atd. PyLadies?</li>
+</ul>
+<p>YAML soubory by se správně měl číst knihovnou na YAML, aby byla zachována struktura. Ty je ale ber jako "čistý text", kde hledané informace jsou na čádcích ve tvaru <code>klíč: hodnota</code> (příp. s nějakýma mezerama a/nebo pomlčkama navíc). Odpovědi tak nemusí být 100% přesné.</p>
+<hr>
+<p>V Pythonu napiš funkci, která bere řetězec a vrátí "obrácený" řetězec: znaky jsou v něm pozpátku a podle následujícího slovníku. Znaky, které ve slovníku nejsou, program vypíše nezměněné.</p>
+<p>(Nápověda k Pythonu je níže.)</p>
+<div class="highlight"><pre><code>{'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ',
+'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u',
+'o': 'o', 'p': 'd', 'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n',
+'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ', 'z': 'z', 'A': '∀', 'B': 'B',
+'C': 'Ɔ', 'D': 'D', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': 'פ', 'H': 'H', 'I': 'I',
+'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ',
+'Q': 'Q', 'R': 'R', 'S': 'S', 'T': '┴', 'U': '∩', 'V': 'Λ', 'W': 'M',
+'X': 'X', 'Y': '⅄', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ',
+'4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', ',': "'",
+'.': '˙', '?': '¿', '!': '¡', '"': '„', "'": ',', '`': ',', '(': ')',
+')': '(', '[': ']', ']': '[', '{': '}', '}': '{', '&lt;': '&gt;', '&gt;': '&lt;',
+'&amp;': '⅋', '_': '‾'}
+
+</code></pre></div><p>Např.:</p>
+<div class="highlight"><pre><code>&gt;&gt;&gt; obrat("Ahoj, brněnské PyLadies!")
+'¡sǝᴉpɐ˥ʎԀ éʞsuěuɹq 'ɾoɥ∀'
+
+</code></pre></div><p>Udělej z toho program pro příkazovou řádku, který bere soubory k obrácení. Když nedostane žádný argument, použije standardní vstup. Argument <code>-</code> taky znamená standardní vstup.</p>
+<div class="highlight"><pre><code>$ echo Ahoj | obrat
+ɾoɥ∀
+$ echo Ahoj | obrat -
+ɾoɥ∀
+
+
+$ echo 'Ahoj,
+&gt; PyLadies!' &gt; pozdrav.txt
+$ obrat pozdrav.txt
+'ɾoɥ∀
+¡sǝᴉpɐ˥ʎԀ
+$ echo haha | echo obrat pozdrav.txt - pozdrav.txt
+'ɾoɥ∀
+¡sǝᴉpɐ˥ʎԀ
+ɐɥɐɥ
+'ɾoɥ∀
+¡sǝᴉpɐ˥ʎԀ
+
+</code></pre></div><p>Zařiď, aby s přepínačem <code>--help</code> program vypsal krátkou nápovědu (a ignoroval ostatní argumenty).
+Je-li použit jiný přepínač (začínající <code>-</code>), program by měl učivateli vynadat (na chybovém výstupu), vrátit chybovou návratovou hodnotu a ignorovat ostatní argumenty.</p>
+<p>Nakonec program změň tak, aby vracel chybovou návratovou hodnotu když některý znak chybí ve slovníku.</p>
+<div class="highlight"><pre><code>$ echo Ahoj | obrat
+ɾoɥ∀
+$ echo $?
+0
+$ echo Čau | obrat
+nɐČ
+$ echo $?
+1
+
+</code></pre></div><p>Naimportuješ-li <code>sys</code> a <code>os</code>, pak:</p>
+<ul>
+<li><code>sys.argv</code> je seznam argumentů (včetně jména programu)</li>
+<li><code>sys.stdin</code> je <em>už otevřený</em> soubor se std. vstupem (netřeba <code>with</code> či <code>close</code>)</li>
+<li>Podobně <code>sys.stdout</code> je soubor se standardním výstupem (tam píše <code>print</code>) a <code>sys.stderr</code> je soubor chybovým výstupem.</li>
+<li><code>os.environ</code> je slovník* s proměnnýma prostředí</li>
+<li><code>exit(1)</code> ukončí program s danou hodnotou</li>
+</ul>
+<p>(* přesněji řečeno, objekt který se chová jako slovník)</p>
