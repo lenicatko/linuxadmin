@@ -10,7 +10,7 @@ python-versions = ">=3.6"
 name = "arca"
 version = "0.3.3"
 description = "A library for running Python functions (callables) from git repositories in various states of isolation with integrating caching."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -30,7 +30,7 @@ vagrant = ["docker (>=3.2.1,<3.3.0)", "python-vagrant", "fabric3"]
 name = "arrow"
 version = "0.14.7"
 description = "Better dates & times for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -68,7 +68,7 @@ webencodings = "*"
 name = "cached-property"
 version = "1.5.2"
 description = "A decorator for caching properties in classes."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -76,7 +76,7 @@ python-versions = "*"
 name = "certifi"
 version = "2021.5.30"
 description = "Python package for providing Mozilla's CA Bundle."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -95,7 +95,7 @@ pycparser = "*"
 name = "charset-normalizer"
 version = "2.0.4"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5.0"
 
@@ -125,7 +125,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "cssutils"
 version = "2.3.0"
 description = "A CSS Cascading Style Sheets library for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -137,7 +137,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 name = "decorator"
 version = "5.0.9"
 description = "Decorators for Humans"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 
@@ -153,7 +153,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "docker"
 version = "3.2.1"
 description = "A Python library for the Docker Engine API."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -171,7 +171,7 @@ tls = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)"]
 name = "docker-pycreds"
 version = "0.4.0"
 description = "Python bindings for the docker credentials store API"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -182,7 +182,7 @@ six = ">=1.4.0"
 name = "dogpile.cache"
 version = "0.9.2"
 description = "A caching front-end based on the Dogpile lock."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -193,7 +193,7 @@ decorator = ">=4.0.0"
 name = "elsa"
 version = "0.1.6"
 description = "Helper module for Frozen-Flask based websites"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -215,7 +215,7 @@ python-versions = ">=2.7"
 name = "flask"
 version = "2.0.1"
 description = "A simple framework for building complex web applications."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -233,7 +233,7 @@ dotenv = ["python-dotenv"]
 name = "frozen-flask"
 version = "0.18"
 description = "Freezes a Flask application into a set of static files."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -244,7 +244,7 @@ Flask = ">=1.1.0"
 name = "ghp-import"
 version = "2.0.1"
 description = "Copy your docs directly to the gh-pages branch."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -258,7 +258,7 @@ dev = ["twine", "markdown", "flake8"]
 name = "gitdb2"
 version = "3.0.3.post1"
 description = "Git Object Database"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.4"
 
@@ -266,10 +266,21 @@ python-versions = ">=3.4"
 smmap2 = ">=2,<3"
 
 [[package]]
+name = "gitpathlib"
+version = "0.2"
+description = "Object-oriented paths in Git repositories"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pygit2 = "*"
+
+[[package]]
 name = "gitpython"
 version = "3.0.9"
 description = "Python Git Library"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.4"
 
@@ -280,7 +291,7 @@ gitdb2 = ">=3,<4"
 name = "ics"
 version = "0.7"
 description = "Python icalendar (rfc5545) parser"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -294,7 +305,7 @@ tatsu = ">4.2"
 name = "idna"
 version = "3.2"
 description = "Internationalized Domain Names in Applications (IDNA)"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 
@@ -310,7 +321,7 @@ python-versions = "*"
 name = "itsdangerous"
 version = "2.0.1"
 description = "Safely pass data to untrusted environments and back."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -393,7 +404,7 @@ pygments = ">=2.4.1,<3"
 name = "lxml"
 version = "4.6.3"
 description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*"
 
@@ -421,9 +432,9 @@ python-versions = "*"
 
 [[package]]
 name = "naucse"
-version = "0.3.1"
+version = "0.4.0"
 description = "Website for course materials"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -432,6 +443,7 @@ arca = {version = "*", extras = ["docker"]}
 cssutils = "*"
 elsa = "*"
 Flask = "*"
+gitpathlib = "*"
 ics = "*"
 Jinja2 = "*"
 jsonschema = "*"
@@ -447,7 +459,7 @@ dev = ["tox", "pytest"]
 
 [[package]]
 name = "naucse-render"
-version = "1.4"
+version = "1.5"
 description = "Converts course material to naucse.python.cz API"
 category = "main"
 optional = false
@@ -577,6 +589,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
+name = "pygit2"
+version = "1.6.1"
+description = "Python bindings for libgit2."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+cffi = ">=1.4.0"
+
+[[package]]
 name = "pygments"
 version = "2.10.0"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -596,7 +619,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 name = "pypiwin32"
 version = "220"
 description = "Python for Window Extensions"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -651,7 +674,7 @@ py = {version = "*", markers = "implementation_name == \"pypy\""}
 name = "requests"
 version = "2.26.0"
 description = "Python HTTP for Humans."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
@@ -677,7 +700,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 name = "smmap2"
 version = "2.0.5"
 description = "A pure Python implementation of a sliding window memory map manager"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -685,7 +708,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "tatsu"
 version = "5.6.1"
 description = "TatSu takes a grammar in a variation of EBNF as input, and outputs a memoizing PEG/Packrat parser in Python."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.8"
 
@@ -726,7 +749,7 @@ test = ["pytest"]
 name = "tzdata"
 version = "2021.1"
 description = "Provider of IANA time zone data"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2"
 
@@ -734,7 +757,7 @@ python-versions = ">=2"
 name = "urllib3"
 version = "1.26.6"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 
@@ -755,7 +778,7 @@ python-versions = "*"
 name = "websocket-client"
 version = "1.2.1"
 description = "WebSocket client for Python with low level API options"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -767,7 +790,7 @@ test = ["websockets"]
 name = "werkzeug"
 version = "2.0.1"
 description = "The comprehensive WSGI web application library."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -777,7 +800,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "507687e7c5500a3ffed45dd547feb629df9693b3a20691869e8b8425aa1f688f"
+content-hash = "077cdd6cdfd08f077592006bf775ce5d84d27f82fe4324e27424c2f50b8671e7"
 
 [metadata.files]
 ansi2html = [
@@ -913,6 +936,10 @@ gitdb2 = [
     {file = "gitdb2-3.0.3.post1-py2.py3-none-any.whl", hash = "sha256:f4c17cc3389772557b624e0208ed7cb854c6d7e95962da81e3a3ccd32f7c4b2e"},
     {file = "gitdb2-3.0.3.post1.tar.gz", hash = "sha256:d6983efcd8284c7ccd4c5851aac5b78a1b63f7f53918a1b386957f4a68c8fad3"},
 ]
+gitpathlib = [
+    {file = "gitpathlib-0.2-py3-none-any.whl", hash = "sha256:5ffae3205e391996ca8acb4bf81bc1cbfe6d0132a301ef573cb87d4b93f13106"},
+    {file = "gitpathlib-0.2.tar.gz", hash = "sha256:f36786d15095d30f6ebd1d4bda1396388d3c372503f0c671334db789a24f6150"},
+]
 gitpython = [
     {file = "GitPython-3.0.9-py3-none-any.whl", hash = "sha256:ecf785b0b23bb6d28f5fff3d67cc4a07cb607e94476495d2a943d2e57d9fd473"},
     {file = "GitPython-3.0.9.tar.gz", hash = "sha256:7e5df21bfef38505115ad92544fb379e6fedb2753f3b709174c4358cecd0cb97"},
@@ -1043,10 +1070,10 @@ mistune = [
     {file = "mistune-0.8.4.tar.gz", hash = "sha256:59a3429db53c50b5c6bcc8a07f8848cb00d7dc8bdb431a4ab41920d201d4756e"},
 ]
 naucse = [
-    {file = "naucse-0.3.1-py3-none-any.whl", hash = "sha256:1ba2039e3402d3034971e7bf703895e583e9e06e42e0ec7d5d6ec8502ca3cf26"},
+    {file = "naucse-0.4.0-py3-none-any.whl", hash = "sha256:051a9e092fa548149bfc257f0054b8f177ae019130dad7db2a5650180af1668c"},
 ]
 naucse-render = [
-    {file = "naucse_render-1.4-py3-none-any.whl", hash = "sha256:bfae56516d3b4ddd03f63aae5dbde53ca9e333e83efab0b4499eb300ce3fd776"},
+    {file = "naucse_render-1.5-py3-none-any.whl", hash = "sha256:62cc3391babb34f5b33aa4bd71f070e6fa491c3de441471a80d49a6d4fda9e72"},
 ]
 nbclient = [
     {file = "nbclient-0.5.4-py3-none-any.whl", hash = "sha256:95a300c6fbe73721736cf13972a46d8d666f78794b832866ed7197a504269e11"},
@@ -1078,6 +1105,29 @@ py = [
 pycparser = [
     {file = "pycparser-2.20-py2.py3-none-any.whl", hash = "sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705"},
     {file = "pycparser-2.20.tar.gz", hash = "sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"},
+]
+pygit2 = [
+    {file = "pygit2-1.6.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:547429774c11f5bc9d20a49aa86e4bd13c90a55140504ef05f55cf424470ee34"},
+    {file = "pygit2-1.6.1-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4e75865d7b6fc161d93b16f10365eaad353cd546e302a98f2de2097ddea1066b"},
+    {file = "pygit2-1.6.1-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:be4a64b6090308ffd1c82e2dd4316cb79483715387b13818156d516134a5b17c"},
+    {file = "pygit2-1.6.1-cp36-cp36m-win32.whl", hash = "sha256:2666a3970b2ea1222a9f0463b466f98c8d564f29ec84cf0a58d9b0d3865dbaaf"},
+    {file = "pygit2-1.6.1-cp36-cp36m-win_amd64.whl", hash = "sha256:b2de12ca2d3b7eb86106223b40b2edc0c61103c71e7962e53092c6ddef71a194"},
+    {file = "pygit2-1.6.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:9c1d96c66fb6e69ec710078a73c19edff420bc1db430caa9e03a825eede3f25c"},
+    {file = "pygit2-1.6.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:454d42550fa6a6cd0e6a6ad9ab3f3262135fd157f57bad245ce156c36ee93370"},
+    {file = "pygit2-1.6.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ce0827b77dd2f8a3465bdc181c4e65f27dd12dbd92635c038e58030cc90c2de0"},
+    {file = "pygit2-1.6.1-cp37-cp37m-win32.whl", hash = "sha256:b0161a141888d450eb821472fdcdadd14a072ddeda841fee9984956d34d3e19d"},
+    {file = "pygit2-1.6.1-cp37-cp37m-win_amd64.whl", hash = "sha256:af2fa259b6f7899227611ab978c600695724e85965836cb607d8b1e70cfea9b3"},
+    {file = "pygit2-1.6.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:0e1e02c28983ddc004c0f54063f3e46fca388225d468e32e16689cfb750e0bd6"},
+    {file = "pygit2-1.6.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e5dadc4844feb76cde5cc9a37656326a361dd8b5c8e8f8674dcd4a5ecf395db3"},
+    {file = "pygit2-1.6.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ef07458e4172a31318663295083b43f957d611145738ff56aa76db593542a6e8"},
+    {file = "pygit2-1.6.1-cp38-cp38-win32.whl", hash = "sha256:7a0c0a1f11fd41f57e8c6c64d903cc7fa4ec95d15592270be3217ed7f78eb023"},
+    {file = "pygit2-1.6.1-cp38-cp38-win_amd64.whl", hash = "sha256:2fd5c1b2d84dc6084f1bda836607afe37e95186a53a5a827a69083415e57fe4f"},
+    {file = "pygit2-1.6.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:b9b88b7e9a5286a71be0b6c307f0523c9606aeedff6b61eb9c440e18817fa641"},
+    {file = "pygit2-1.6.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ac12d32b714c3383ebccffee5eb6aff0b69a2542a40a664fd5ad370afcb28ee7"},
+    {file = "pygit2-1.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fe682ed6afd2ab31127f6a502cf3e002dc1cc8d26c36a5d49dfd180250351eb6"},
+    {file = "pygit2-1.6.1-cp39-cp39-win32.whl", hash = "sha256:dbbf66a23860aa899949068ac9b503b4bc21e6063e8f53870440adbdc909405e"},
+    {file = "pygit2-1.6.1-cp39-cp39-win_amd64.whl", hash = "sha256:f90775afb11f69376e2af21ab56fcfbb52f6bc84117059ddf0355f81e5e36352"},
+    {file = "pygit2-1.6.1.tar.gz", hash = "sha256:c3303776f774d3e0115c1c4f6e1fc35470d15f113a7ae9401a0b90acfa1661ac"},
 ]
 pygments = [
     {file = "Pygments-2.10.0-py3-none-any.whl", hash = "sha256:b8e67fe6af78f492b3c4b3e2970c0624cbf08beb1e493b2c99b9fa1b67a20380"},
