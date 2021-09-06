@@ -8,32 +8,51 @@ Tady budou vznikat otevřené materiály pro kurz linuxové administrace.
 Chceš-li server spustit na svém počítači, např. proto, že se chceš zapojit do
 vývoje, je potřeba ho nejdřív nainstalovat:
 
-* Vytvoř a aktivuj si [virtuální prostředí](https://naucse.python.cz/lessons/beginners/install/).
-* Přepni se do adresáře s kódem projektu.
-* Nainstaluj závislosti:
+### Instalace `poetry`
 
-  * Linux/Mac:
+Nemáš-li `poetry`, nainstaluj si jej. Na to je několik způsobů:
 
-    ```console
-    $ python3 -m pip install pipenv
-    $ pipenv install --dev
-    ```
+* podle [návodu](https://python-poetry.org/docs/)
+* v aktivovaném [virtuálním prostředí](https://naucse.python.cz/lessons/beginners/install/)
+  pomocí `python -m pip install poetry`
+* na Fedoře pomocí balíčkovacího systému: `sudo dnf install poetry`
 
-  * Windows:
+### Instalace závislostí
 
-    ```doscon
-    > py -3 -m pip install pipenv
-    > pipenv install --dev
-    ```
+Přepni se do adresáře s projektem a spusť:
 
-Nainstalovanou aplikaci spustíš následovně:
+```console
+$ poetry install --dev
+```
 
-* Aktivuj si virtuální prostředí, máš-li ho vytvořené.
-* Spusť vývojový server:
-  ```console
-  $ pipenv run serve
-  ```
-* Program vypíše adresu (např. `http://0.0.0.0:8003/`); tu navštiv v prohlížeči.
+### Lokální server
+
+Chceš-li si kurz prohlédnout, přepni se do adresáře s projektem a spusť:
+
+```console
+$ poetry run python -m naucse serve
+```
+
+* Program vypíše adresu (např. `http://0.0.0.0:8003/`).
+  * Buď adresu navštiv v prohlížeči a doklikej se na kurz, nebo
+  * na konec adresy přidej `/course/local/` a navštiv kurz přímo.
+
+### Sestavení pro naucse.python.cz
+
+Sestavení pro naucse.python.cz se dělá automaticky, když pošleš větev `main`
+na GitHub.
+Chceš-li to ale udělat ručně, zadej:
+
+```console
+$ poetry run python -m naucse_render compile _compiled
+```
+
+V adresáři `_compiled` pak najdeš veškeré informace o kurzu v strojově čitelné
+podobě.
+
+### Přidání kurzu
+
+(TODO)
 
 
 ## Licence

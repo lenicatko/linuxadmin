@@ -8,9 +8,13 @@ license = "CC-BY-SA-4.0"
 [tool.poetry.dependencies]
 python = "^3.9"
 naucse-render = "^1.5"
+ghp-import = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 naucse = "^0.4.0"
+
+[tool.poetry.extras]
+ghp-compiled = ["ghp-import"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
