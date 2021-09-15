@@ -55,10 +55,10 @@ V tomto adresáři je několik dalších adresářů: `bin` (kde jsou programy),
 
 Nelin domovský adresář `/home/nela` je v adresáři `/home`, což je poznat
 z toho, že začíná na `/home/`.
-Stejě tak `/home` je v kořenovém adresáři, `/`.
+Stejně tak `/home` je v kořenovém adresáři, `/`.
 
 > [note] Lomítka
-> Pozor na dva výsnamy, které má lomítko: na začátku jména souboru/adresáře
+> Pozor na dva významy, které má lomítko: na začátku jména souboru/adresáře
 > označuje kořenový adresář; uprostřed odděluje jednotlivé adresáře.
 
 Pod `home` je několik adresářů – jeden pro každého uživatele, který má
@@ -124,7 +124,7 @@ pouze podadresáře.
 
 ## Syntax shellového příkazu
 
-Příkaz níže použijeme jako příklad příkaz, který si rozebereme:
+Příkaz níže použijeme jako příklad příkazu, který si rozebereme:
 
 ```console
 $ ls -F /
