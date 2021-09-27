@@ -10,7 +10,7 @@ Protože v kurzu budeme testovat, objevovat a občas i rozbíjet,
 vytvoř si virtuální počítač i pokud používáš Linux.
 
 Hned na začátku tě čeká malá terminologická nepříjemnost:
-**Hostitel** (anglicky **host**) je termín označující operační systém/počítač, v rámci kterého budeš provozovat ten virtuální – tedy to, co máš na poc'itači nainstalováno už teď.
+**Hostitel** (anglicky **host**) je termín označující operační systém/počítač, v rámci kterého budeš provozovat ten virtuální – tedy to, co máš na počítači nainstalováno už teď.
 Virtuálnímu systému se česky říká **host** (anglicky **guest**).
 Slovo **host** má tedy v češtině úplně opačný význam než v angličtině.
 
