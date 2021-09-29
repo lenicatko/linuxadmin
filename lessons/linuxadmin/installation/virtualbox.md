@@ -15,7 +15,7 @@ Klikni na tlačitko „Nový“ a pokračuj podle obrázkového návodu:
   ) }}
 
 2. Velikost paměti nastav na 2048 MB (tedy 2GB).
-   Pokud je u tebe tahle hodnota v „cerveném“ pásmu, použij menší, aby byla
+   Pokud je u tebe tahle hodnota v „červeném“ pásmu, použij menší, aby byla
    v zeleném;
 
   {{ figure(
