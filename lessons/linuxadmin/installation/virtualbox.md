@@ -57,6 +57,15 @@ Klikni na tlačitko „Nový“ a pokračuj podle obrázkového návodu:
   ) }}
 
 
-Tím je virtuální počítač vytvořen!
-Spusť ho zelenou šipečkou „spustit“ a pokračuj
-[instalací systému]({{ subpage_url('index#install-system') }}).
+7. Tím je virtuální počítač vytvořen.
+   Spusť ho zelenou šipečkou „spustit“.
+   VirtualBox se zeptá na *obraz disku* ze kterého bude instalovat.
+   Vyber *obraz disku*, který sis stáhl{{a}} dříve.
+
+  {{ figure(
+    img=static('vbox-insert-dvd.png'),
+    alt='Instalace VirtualBoxu – vložení virtuálního DVD',
+  ) }}
+
+Virtuální počíteč se teď zapne!
+Pokračuj [instalací systému]({{ subpage_url('index#install-system') }}).

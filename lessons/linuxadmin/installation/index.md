@@ -117,20 +117,41 @@ operační systém rovnou z DVD k vyzkoušení - tu ale nyní nevyužijeme).
     alt='Instalace #7',
   ) }}
 
-  
-* **Restart** - K tomu je potřeba kliknout na symbol ⏻ úplně vpravo nahoře,
- poté na další ⏻ a nakonec na tlačítko *Restart*.
-
-  {{ figure(
-    img=static('fedora-install-09.png'),
-    alt='Instalace #9',
-  ) }}
+* **Vypnutí** - K tomu je potřeba kliknout na sadu ikonek úplně vpravo nahoře,
+ poté na symbol ⏻ a nakonec na tlačítko *Shut down*.
 
    {{ figure(
-    img=static('fedora-install-10.png'),
-    alt='Instalace #10',
+    img=static('poweroff.png'),
+    alt='Vypnutí virtuálního stroje',
   ) }}
 
+  {{ figure(
+    img=static('fedora-install-10.png'),
+    alt='Potvrzení vypnutí',
+  ) }}
+
+* **Vysunutí DVD** - Až se vyrtuální počítač vypne, je potřeba vysunout
+  virtuální DVD, aby instalace nezačala znovu.
+  GNOME Boxes to dělá automaticky, ale VirtualBoxu je to potřeba udělat
+  ručně: klikni Settings, Storage, disk "Fedora Worsktation Live" a
+  tlačítko s DVD napravo. Z menu pak vyber "Remove Disk from Virtual Drive".
+
+  {{ figure(
+    img=static('vbox-settings.png'),
+    alt='Settings',
+  ) }}
+
+  {{ figure(
+    img=static('vbox-settings-storage.png'),
+    alt='Nastavení DVD',
+  ) }}
+
+  {{ figure(
+    img=static('vbox-settings-remove-dvd.png'),
+    alt='Odrstanění DVD',
+  ) }}
+
+* **Zapnutí** - Virtuální počítač potom znovu zapni a počkej než naběhne.
 
 #### Dokončení instalace
 
