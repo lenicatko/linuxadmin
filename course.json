@@ -436,6 +436,9 @@
                     "fedora-install-15.png": {
                         "path": "installation/fedora-install-15.png"
                     },
+                    "poweroff.png": {
+                        "path": "installation/poweroff.png"
+                    },
                     "vbox-01.png": {
                         "path": "installation/vbox-01.png"
                     },
@@ -456,6 +459,18 @@
                     },
                     "vbox-08.png": {
                         "path": "installation/vbox-08.png"
+                    },
+                    "vbox-insert-dvd.png": {
+                        "path": "installation/vbox-insert-dvd.png"
+                    },
+                    "vbox-settings-remove-dvd.png": {
+                        "path": "installation/vbox-settings-remove-dvd.png"
+                    },
+                    "vbox-settings-storage.png": {
+                        "path": "installation/vbox-settings-storage.png"
+                    },
+                    "vbox-settings.png": {
+                        "path": "installation/vbox-settings.png"
                     }
                 },
                 "title": "Virtuální počítač"
