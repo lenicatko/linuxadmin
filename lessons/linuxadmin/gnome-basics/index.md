@@ -20,7 +20,7 @@ Kliknutím na *Činnosti* se ukáže přehled:
     alt='Činnosti',
 ) }}
 
-* Vlevo je lišta ikonek, kterými můžeš spouštět různé programy.
+* Dole je lišta ikonek, kterými můžeš spouštět různé programy.
   Poslední ikonka, mřížka z teček, otevírá nabídku všech nainstalovaných
   grafických programů.
 
@@ -31,8 +31,11 @@ Kliknutím na *Činnosti* se ukáže přehled:
 
 * Uprostřed se ukazují aktuálně otevřená okna, pokud nějaká jsou.
 
-* Vpravo je seznam *virtuálních ploch* (angl. *Virtual desktops*), oddělených
-  „prostorů“ pro okýnka, mezi kterými můžeš přepínat.
+* Vpravo je náhled další *virtuálníy plochy* (angl. *Virtual desktops*),
+  odděleného „prostoru“ pro okýnka.
+  Mezi jednotlivými plochami můžeš přepínat.
+  Jakmile otevřeš okna na více plochách, objeví se i jejich seznam,
+  kterým mezi nimi lze rychle přepínat.
   Doporučuju to zkoumat, až budeš mít otevřeno několik okýnek.
   Kdyby ti někdy okýnka „zmizela“, koukni sem, jestli nejsou na jiné ploše.
 
@@ -58,11 +61,11 @@ Zkus si je spustit:
 
 Nakonec klikni do pravého horního rohu.
 Ukáže se menu se systémovým nastavením: hlasitost zvuku, připojení k internetu,
-přepnutí uživatele.
+nastavení, vypnutí/odhlášení.
 (Na opravdovém počítači tu najdeš i např. nastavení jasu obrazovky, Bluetooth,
 atd.)
-Dole jsou tlačítka pro nastavení (které doporučuju časem postupně projít, abys 
-zjistil{{a}} co všechno je možné), zamčení obrazovky a vypnutí počítače.
+Nastavení (doporučuju časem postupně projít, abys zjistil{{a}} co všechno je
+možné).
 
 {{ figure(
     img=static('system-menu.png'),
