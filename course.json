@@ -61,7 +61,7 @@
                                 "content": "<p>Zkopíruje soubory <code>amino-acids.txt</code> a <code>animals.txt</code>, tj. všechny argumenty\nkromě posledního, do adresáře <code>zaloha</code>.\nVytvoří tedy soubory <code>zaloha/amino-acids.txt</code> a <code>zaloha/animals.txt</code>.</p>"
                             },
                             {
-                                "content": "<p>Zkopíroval by první dva soubory (<code>amino-acids.txt</code> a <code>animals.txt</code>)\ndo adresáře <code>morse.txt/</code>.\nJenže <code>morse.txt</code> není adresářem, tak příkaz selže.\nDo adresáře nelze dát další soubory.</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>cp amino-acids.txt animals.txt morse.txt\n<span class=\"go\">cp: cíl &#39;morse.txt&#39; není adresářem</span>\n</pre></div>"
+                                "content": "<p>Zkopíroval by první dva soubory (<code>amino-acids.txt</code> a <code>animals.txt</code>)\ndo adresáře <code>morse.txt/</code>.\nJenže <code>morse.txt</code> není adresářem, takže příkaz selže.\nDo souboru nelze dát další soubory.</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>cp amino-acids.txt animals.txt morse.txt\n<span class=\"go\">cp: cíl &#39;morse.txt&#39; není adresářem</span>\n</pre></div>"
                             }
                         ],
                         "source_file": "lessons/carpentry-unix/create/index.md",
@@ -170,6 +170,36 @@
                     }
                 },
                 "title": "Roury a filtry"
+            },
+            "hw/bash-1": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "přeložil Petr Viktorin, 2020",
+                            "Většina úkolů pochází z kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, © 2016–2018 Software Carpentry Foundation, © 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "bash-1/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/bash-1/index.md",
+                        "title": "Úkoly - Bash I",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/bash-1/info.yml",
+                "static_files": {
+                    "hierarchy.svg": {
+                        "path": "bash-1/hierarchy.svg"
+                    }
+                },
+                "title": "Úkoly - Bash I"
             },
             "linuxadmin/bin-func-alias": {
                 "pages": {
@@ -391,6 +421,9 @@
                     "boxes-03.png": {
                         "path": "installation/boxes-03.png"
                     },
+                    "bridged-network.png": {
+                        "path": "installation/bridged-network.png"
+                    },
                     "fedora-install-01.png": {
                         "path": "installation/fedora-install-01.png"
                     },
@@ -438,6 +471,9 @@
                     },
                     "poweroff.png": {
                         "path": "installation/poweroff.png"
+                    },
+                    "vbcopyb.jpg": {
+                        "path": "installation/vbcopyb.jpg"
                     },
                     "vbox-01.png": {
                         "path": "installation/vbox-01.png"
@@ -1217,17 +1253,12 @@
                     },
                     {
                         "external_url": "http://swcarpentry.github.io/shell-novice/",
-                        "title": "The Carpentries – The Unix Shell (po Working With Files and Directories včetně)",
+                        "title": "Anglický originál: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)",
                         "type": "none-link"
                     },
                     {
-                        "lesson_slug": "notes/01",
-                        "title": "Poznámky – Bash I",
-                        "type": "link"
-                    },
-                    {
-                        "external_url": "https://hackmd.io/@encukou/ukoly-bash1",
-                        "title": "Úkoly",
+                        "lesson_slug": "hw/bash-1",
+                        "title": "Úkoly - Bash I",
                         "type": "homework"
                     }
                 ],
@@ -1250,8 +1281,13 @@
                         "type": "none-link"
                     },
                     {
+                        "lesson_slug": "notes/01",
+                        "title": "Zápis z pilotního kurzu #1",
+                        "type": "link"
+                    },
+                    {
                         "lesson_slug": "pilot/02",
-                        "title": "Zápis z pilotního kurzu",
+                        "title": "Zápis z pilotního kurzu #2",
                         "type": "link"
                     }
                 ],
