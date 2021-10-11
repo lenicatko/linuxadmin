@@ -55,11 +55,8 @@ sessions:
   - lesson: carpentry-unix/filedir
   - lesson: carpentry-unix/create
   - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)
-  - lesson: notes/01
-    type: link
-  - url: https://hackmd.io/@encukou/ukoly-bash1
-    title: Úkoly
+    title: "Anglický originál: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)"
+  - lesson: hw/bash-1
     type: homework
 - title: Bash II
   date: 2021-10-18
@@ -68,7 +65,10 @@ sessions:
   - lesson: notes/02
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell (pokračujeme)
-  - title: Zápis z pilotního kurzu
+  - title: "Zápis z pilotního kurzu #1"
+    lesson: notes/01
+    type: link
+  - title: "Zápis z pilotního kurzu #2"
     lesson: pilot/02
     type: link
 - title: Procesy & deskriptory souborů

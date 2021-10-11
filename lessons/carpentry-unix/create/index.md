@@ -6,7 +6,7 @@ Teď, když umíš zkoumat soubory a adresáře, je můžeš začít vytvářet.
 ## Co už máme?
 
 Nejdřív se vrať do adresáře `data-shell` a pomocí `ls -F` se koukni,
-co tu už je:
+co v něm Nela už má:
 
 ```console
 $ cd ~/Dokumenty/data-shell
@@ -19,38 +19,41 @@ creatures/  data/  molecules/  north-pacific-gyre/  notes.txt  pizza.cfg  solar.
 
 ## Vytvoření adresáře
 
-A teď vytvoř nový adresář zvaný `diplomka`.
+Nela se rozhodla začít psát text své práce.
+
+Vytvoř nový adresář zvaný `clanek`.
 Použij k tomu příkaz `mkdir` (který nic nevypisuje):
 
 ```console
-$ mkdir diplomka
+$ mkdir clanek
 ```
 
 Příkaz `mkdir` (z angl. *make directory*, vytvoř adresář) vytvoří adresář
 daného jména – nebo přesněji řečeno, na dané cestě.
-Protože je `diplomka` relativní cesta (ač dosud neexistovala),
+Protože je `clanek` relativní cesta (ač dosud neexistovala),
 nový adresář se vytvoří v aktuálním adresáři:
 
 ```console
 $ ls -F
-creatures/  data/ diplomka/  molecules/  north-pacific-gyre/  notes.txt  pizza.cfg  solar.pdf  writing/
+creatures/  data/ clanek/  molecules/  north-pacific-gyre/  notes.txt  pizza.cfg  solar.pdf  writing/
 ```
 
 A zatím v něm nic není:
 
 ```console
-$ ls -F diplomka
+$ ls -F clanek
 ```
 
-Kdyby ses pokusil{{a}} několik vnořených adresářů najednou, nebude to fungovat:
+Kdyby ses pokusil{{a}} vytvořit několik vnořených adresářů najednou,
+nebude to fungovat:
 
 ```console
-$ mkdir diplomka/kapitola-1/sekce-1/podsekce-1
-mkdir: adresář „diplomka/kapitola-1/sekce-1/podsekce-1“ nelze vytvořit: Adresář nebo soubor neexistuje
+$ mkdir clanek/kapitola-1/sekce-1/podsekce-1
+mkdir: adresář „clanek/kapitola-1/sekce-1/podsekce-1“ nelze vytvořit: Adresář nebo soubor neexistuje
 ```
 
 Chybová hláška tu je trošku zavádějící: `mkdir` si ve skutečnosti stěžuje
-na to, že neexistuje `diplomka/kapitola-1/sekce-1`, kde by se měl vytvořit
+na to, že neexistuje `clanek/kapitola-1/sekce-1`, kde by se měl vytvořit
 adresář `podsekce-1`.
 
 V tomto případě můžeš buď vytvořit jednotlivé adresáře postupně, nebo použít
@@ -58,33 +61,37 @@ přepínač `-p` (z angl. *parents*), který vytvoří i všechny potřebné na
 („rodičovské“) adresáře:
 
 ```console
-$ mkdir -p diplomka/kapitola-1/sekce-1/podsekce-1
+$ mkdir -p clanek/kapitola-1/sekce-1/podsekce-1
 ```
 
+Příkaz `mkdir` nic nevypsal.
+Nevypsal ani chybovou hlášku, což u většiny příkazů znamená že všechno proběhlo
+v pořádku.
+
 Jak si to ověřit?
-Příkaz `ls` má přepínač `-R`, který vypíše obsah *všech* adresářů, na které
+Příkaz `ls` má přepínač `-R`, který vypíše obsah *všech* adresářů na které
 narazí, a to **R**ekurzivně – když v podadresáři najde další podadresář,
 „zanoří“ se i do něj.
 
 ```console
-ls -FR diplomka
+$ ls -FR clanek
 kapitola-1/
 
-diplomka/kapitola-1:
+clanek/kapitola-1:
 sekce-1/
 
-diplomka/kapitola-1/sekce-1:
+clanek/kapitola-1/sekce-1:
 podsekce-1/
 
-diplomka/kapitola-1/sekce-1/podsekce-1:
+clanek/kapitola-1/sekce-1/podsekce-1:
 ```
 
 Případně použij příkaz `tree`, který adresářovou strukturu vypíše
 „skoro graficky“:
 
 ```console
-$ tree diplomka
-diplomka
+$ tree clanek
+clanek
 └── kapitola-1
     └── sekce-1
         └── posdekce-1
@@ -94,9 +101,10 @@ diplomka
 
 > [note]
 > Tyhle materiály píšu na podzim 2020. Všimnul jsem si že výstup příkazu
-> `tree` není přeložený – na rozdíl od hlášek z `ls` nebo `mkdir`.
-> Zřejmě se ještě nenašel dobrovolník který by ho přeložil do češtiny, nebo
-> dokonce na přidání podpory jakýchkoli neanglických jazyků.
+> `tree` není přeložený – na rozdíl od hlášek z příkazů projektu GNU, jako
+> jsou `ls` nebo `mkdir`.
+> Zřejmě se ještě nenašel dobrovolník který by `tree` přeložil do češtiny, nebo
+> dokonce nikdo ani nepřidal podporu pro neanglické jazyky.
 > Čím méně používané příkazy budeš zkoušet, tím častěji na angličtinu narazíš.
 
 
@@ -110,7 +118,7 @@ co nejjednodušší.
 1. Nepoužívej mezery.
 
    Mezerami se v příkazech oddělují jednotlivá „slova“; jméno souboru
-   s mezerou by Bash interpretoval jako dva různé soubory.
+   s mezerou by Bash interpretoval jako dva různé argumenty.
    Místo mezery použij pomlčku nebo podtržítko, jako u `data-shell/`
    nebo `north-pacific-gyre/`.
 
@@ -120,17 +128,17 @@ co nejjednodušší.
    Kdybys chtěl{{a}} pomocí `ls -FR` vypsat soubor se jménem `-FR`,
    narazil{{a}} bys na problém.
 
-   > [note]
-   > Kdybys takový soubor měla, můžeš ho pojmenovat `./-FR`, což pomlčkou
-   > nezačíná.
-   > Rozklíčuješ, proč to funguje?
+   Kdybys ale soubor jménem `-FR` měl{{a}}, můžeš použít cestu která
+   pomlčkou nezačíná.
+   Třeba `ls ./-FR`.
+   Rozklíčuješ, proč to funguje?
 
 3. Ideálně používej jen anglická písmenka, číslice, `.` (tečku), `-` (pomlčku)
    a `_` (podtržítko).
 
    Bash používá spoustu speciálních znaků, které znamenají něco jiného než
-   „část jména“: už znáš `~` nebo `/`, v této lekci objevíš `*` a `?`,
-   a to zdaleka není vše.
+   „část jména“: už znáš `~` (vlnovku) nebo `/` (lomítko), v této lekci objevíš
+   `*` a `?`, a to zdaleka není vše.
 
 4. Vyhni se diakritice.
 
@@ -139,12 +147,13 @@ co nejjednodušší.
    Když soubor nasdílíš zahraničnímu kolegovi, bude pro něj mnohem
    jednodušší se zorientovat v souborech pojmenovaných „cesky“ (tj. bez
    diakritiky), kterým jen nerozumí, než aby ještě musel hledat jak napsat `č`.
-   (Nehledě na to, že rozlišit `i` od `í` občas není jednoduché.)
+   (Nehledě na to, že rozlišit `i` od `í` s čárkou občas není jednoduché
+   ani pro česky mluvící.)
 
 4. Drž se malých písmen.
 
-   Linux nerozlišuje mezi velkými a malými písmeny, takže `diplomka` a
-   `Diplomka` jsou jména dvou úplně odlišných adresářů.
+   Linux nerozlišuje mezi velkými a malými písmeny, takže `clanek` a
+   `Clanek` jsou jména dvou úplně odlišných adresářů.
    Když ale tyhle adresáře např. nasdílíš na počítač s MS Windows
    (nebo na souborový systém podporující Windows, což je i většina
    *flash* disků), vznikne chaos.
@@ -164,8 +173,8 @@ co nejjednodušší.
 
    Ale ačkoliv počítač přípony ignoruje, pro lidi jsou důležité.
 
-   Mimo oddělení přípony můžeš tečku použít na skrytí souboru (`.gitignore`),
-   kdybys to někdy potřeboval{{a}}.
+   Mimo oddělení přípony můžeš tečku použít na skrytí souboru
+   (např. `.gitignore`), kdybys to někdy potřeboval{{a}}.
 
 Kdybys musel{{a}} pracovat se jmény, které tyhle rady nedodržují,
 máš dvě možnosti:
@@ -176,9 +185,9 @@ máš dvě možnosti:
   Na rozdíl od Pythonu je mezi `'` a `"` rozdíl: ve dvojitých uvozovkách
   mají některé znaky (`$`, <code>`</code> a `!`) stále speciální funkci.
   Je jich ale málo.
-* Před speciální znaky dej zpětné lomítko, `\`. které funguje podobně jako
+* Před speciální znaky dej zpětné lomítko, `\`, které funguje podobně jako
   v Pythonu.
-  Zpětná lomítka se používají při doplňování pomocí <kbd>Tab</kbd>.
+  Zpětná lomítka používá Bash při doplňování pomocí <kbd>Tab</kbd>.
 
 Autor tohoto textu má mezery ve jménech skladeb – autoři hudby většinou
 na příkazovou řádku nemyslí a přejmenovávání je otrava.
@@ -186,16 +195,16 @@ Tak používám příkazy jako:
 
 ```console
 $ mplayer "disc 1/11 - On to Grasstown.mp3"
-$ mplayer "disc\ 1/11\ -\ On\ to\ Grasstown.mp3"
+$ mplayer disc\ 1/11\ -\ On\ to\ Grasstown.mp3
 ```
 
 (Což ti teď nebude fungovat, pokud náhodou nemáš nainstalovaný tenhle
-přehrávač a zakoupenou tuhle hudbu.)
+přehrávač a uloženou tuhle hudbu.)
 
 
 ## Vytváření souborů
 
-Přepni se do adresáře `diplomka` a pak spusť *textový editor* jménem `nano`,
+Přepni se do adresáře `clanek` a pak spusť *textový editor* jménem `nano`,
 kterým vytvoříš soubor `osnova.txt`:
 
 ```console
@@ -275,32 +284,33 @@ Vrať se do adresáře `data-shell`.
 cd ~/Dokumenty/data-shell
 ```
 
-V adresáři `diplomka` je teď soubor `osnova.txt`, ve kterém je spíš plán práce
-než osnova diplomky.
+V adresáři `clanek` je teď soubor `osnova.txt`, ve kterém je spíš plán práce
+než osnova článku.
 Pojď soubor přejmenovat.
 
 *Přejmenování* souboru je to stejné co *přesunutí*: v obou případech se změní
-cesta k souboru, a počítači je celkem jedno jestli se změní adresář nebo
+cesta k souboru. Počítači je celkem jedno jestli se změní adresář nebo
 jen poslední část cesty – jméno.
 Pro obě operace se používá příkaz `mv` (z angl. *move*, přesuň), který
 potřebuje dva argumenty, „odkud“ a „kam“:
 
 ```console
-$ mv diplomka/osnova.txt diplomka/plan.txt
+$ mv clanek/osnova.txt clanek/plan.txt
 ```
 
 První argument říká, který existující soubor se má přesunout; druhý je cesta,
 kde se soubor bude nacházet po přesunutí.
 
 ```console
-$ ls diplomka/
+$ ls clanek/
 kapitola-1/  plan.txt
 ```
 
-Pozor na to, že pokud poslední argument („kam“) je existující soubor,
-`mv` ho *přepíše*.
-Nemáš-li zálohy, není žádná jednoduchá možnost, jak takový přepsaný soubor
-vrátit zpět.
+> [warning]
+> Pozor na to, že pokud poslední argument („kam“) je existující soubor,
+> `mv` ho *přepíše*.
+> Nemáš-li zálohy, není žádná jednoduchá možnost, jak takový přepsaný soubor
+> vrátit zpět.
 
 Jestli se o své soubory bojíš, používej `mv -i` (nebo `mv --interactive`):
 přepínač `-i` zajistí, že `mv` před přepsáním souboru poprosí o potvrzení.
@@ -321,23 +331,28 @@ Adresář `mv` nepřepíše, místo toho soubor uloží dovnitř, pod původním
 Jméno aktuálního adresáře je `.`, to tedy použij jako druhý argument:
 
 ```console
-mv diplomka/plan.txt .
+mv clanek/plan.txt .
 ```
 
 > [note]
-> Příkaz `ls` dělá to samé co `ls .`, `cd` to samé co `cd ~`,
-> ale u `mv` podonou zkratku nemá: argumenty „odkud“ a „kam“ vynechat nesmíš.
+> U některých příkazů můžeš vynechat argument a vyvolat tím nějaké výchozí
+> chování:
+> * Příkaz `ls` dělá to samé co `ls .`
+> * Příkaz `cd` dělá to samé co `cd ~`
+>
+> Příkaz `mv` ale podobnou zkratku nemá: argumenty „odkud“ a „kam“ vynechat
+> nesmíš.
 
-Pomocí `ls` zkontroluj, že soubor z adresáře `diplomka` zmizel, ale objevil
+Pomocí dvou `ls` zkontroluj, že soubor z adresáře `clanek` zmizel, ale objevil
 se v aktuálním adresáři, `data-shell`:
 
 ```console
-$ ls diplomka
+$ ls clanek
 kapitola-1/
 $ ls
 creatures  molecules           solar.pdf  writing
 data       north-pacific-gyre  pizza.cfg
-diplomka   notes.txt           plan.txt
+clanek   notes.txt           plan.txt
 ```
 
 V aktuálním adresáři teď máš spoustu balastu.
@@ -358,17 +373,17 @@ Když mu předáš víc než dva argumenty, všechny kromě posledního označuj
 soubory k přesunutí („odkud”) a poslední adresář, kam se všechny přesunou
 („kam“).
 
-Řekněme že soubor `plan.txt` patří přece jen k diplomce.
+Řekněme že soubor `plan.txt` patří přece jen ke článku.
 A stejně tak tam patří i `notes.txt`.
 Přesuň je na správné místo pomocí:
 
 ```console
-$ mv plan.txt notes.txt diplomka/
-$ ls diplomka/
+$ mv plan.txt notes.txt clanek/
+$ ls clanek/
 notes.txt  plan.txt
 ```
 
-Abys zkontroloval{{a}}, že na původním místě už soubory nejsou,
+Abys zkontroloval{{a}} že na původním místě už soubory nejsou,
 můžeš dát příkazu `ls` více argumentů najednou.
 Vypíšou se všechny – funguje to podobně jako kdybys `ls` použil{{a}} pro
 každý z nich zvlášť:
@@ -390,18 +405,18 @@ Příkaz `cp` funguje velice podobně jako `mv`, jen soubory kopíruje místo
 přesouvání.
 
 Řekněme že soubor `plan.txt` patří ve skutečnosti na obě místa,
-`data-shell/` i `data-shell/diplomka/`.
-Aktuálně je jen v `diplomka/`, ale můžeš ho zkopírovat i do aktuálního adresáře:
+`data-shell/` i `data-shell/clanek/`.
+Aktuálně je jen v `clanek/`, ale můžeš ho zkopírovat i do aktuálního adresáře:
 
 ```console
-$ cp diplomka/plan.txt plan.txt
+$ cp clanek/plan.txt plan.txt
 ```
 
 Výsledek zkontroluj pomocí `ls`:
 
 ```console
-$ ls diplomka/plan.txt plan.txt
-diplomka/plan.txt  plan.txt
+$ ls clanek/plan.txt plan.txt
+clanek/plan.txt  plan.txt
 ```
 
 Pomocí `cp` můžeš kopírovat i celé adresáře, i s celým jejich obsahem,
@@ -410,12 +425,12 @@ Protože se takhle dá rychle zaplnit disk, potřebuješ k tomu přepínač
 `-r` (`--recursive`).
 
 ```console
-$ cp -r diplomka diplomka_archiv
-$ ls diplomka diplomka_archiv
-diplomka:
+$ cp -r clanek clanek_archiv
+$ ls clanek clanek_archiv
+clanek:
 kap1  notes.txt  plan.txt
 
-diplomka_archiv:
+clanek_archiv:
 kap1  notes.txt  plan.txt
 ```
 
@@ -436,29 +451,30 @@ ls: nelze přistoupit k 'plan.txt': Adresář nebo soubor neexistuje
 ```
 
 > [warning] Mazání je nevratné
-> Bash nemá „odpadkový koš“, kam by se „házely“ smazané soubory.
-> (Grafické prohlížeče souborů koš většinou mají – i ty Linuxové.)
+> Grafické prohlížeče souborů – a to i ty Linuxové – většinou mají „odpadkový
+> koš“, kam se „házejí“ smazané soubory, aby se daly zase obnovit.
+> Bash takový koš nemá.
 > Když soubor smažeš, odstraní se ze souborového systému a místo, které
-> zabíral, pak systém přepíše jiným souborem, když je potřeba.
+> zabíral, systém po chvíli přepíše jiným souborem.
 >
 > Existují nástroje, které s trochou štěstí umí smazané soubory obnovit,
-> ale není to záručeno.
+> ale není to zaručeno.
 >
 > Kdybys někdy smazal{{a}} důležitý soubor, co nejdřív vypni počítač,
 > aby systém neměl čas nic přepsat, a vyhledej pomoc.
 > (V extrémním případě počítač „natvrdo“ vypoj ze zásuvky/odstraň baterii,
-> jako kdybys ho polil{{a}} vodou.)
+> stejně jako kdybys ho polil{{a}} vodou.)
 >
 > Používej zálohy, které můžeš obnovit kdyby se něco stalo.
-> Existují na to nástroje, ale dobře poslouží např. Gitový repozitář který
-> pravidelně `push`-uješ na vzdálený server.
+> Existují na to různé nástroje, ale dobře poslouží např. Gitový repozitář
+> který pravidelně `push`-uješ na vzdálený server.
 
 
 Když zkusíš smazat adresář, `rm` se vztekne:
 
 ```console
-$ rm diplomka
-rm: nelze odstranit 'diplomka': je adresářem
+$ rm clanek
+rm: nelze odstranit 'clanek': je adresářem
 ```
 
 Kdybys opravdu chtěl{{a}} smazat celý adresář a všechen jeho obsah,
@@ -468,13 +484,13 @@ souboru poprosí o potvrzení,
 případně s `-v` (`--verbose`), kdy `rm` vypíše co dělá.
 
 ```console
-$ rm -rv diplomka
-adresář 'diplomka/kap1/sekce1/posdekce1' smazán
-adresář 'diplomka/kap1/sekce1' smazán
-adresář 'diplomka/kap1' smazán
-smazáno 'diplomka/notes.txt'
-smazáno 'diplomka/plan.txt'
-adresář 'diplomka' smazán
+$ rm -rv clanek
+adresář 'clanek/kap1/sekce1/posdekce1' smazán
+adresář 'clanek/kap1/sekce1' smazán
+adresář 'clanek/kap1' smazán
+smazáno 'clanek/notes.txt'
+smazáno 'clanek/plan.txt'
+adresář 'clanek' smazán
 ```
 
 Ještě že máš zálohu! Zkus ji obnovit.
@@ -531,8 +547,8 @@ $ cp amino-acids.txt animals.txt morse.txt
 {% filter solution %}
 Zkopíroval by první dva soubory (`amino-acids.txt` a `animals.txt`)
 do adresáře `morse.txt/`.
-Jenže `morse.txt` není adresářem, tak příkaz selže.
-Do adresáře nelze dát další soubory.
+Jenže `morse.txt` není adresářem, takže příkaz selže.
+Do souboru nelze dát další soubory.
 
 ```console
 $ cp amino-acids.txt animals.txt morse.txt
