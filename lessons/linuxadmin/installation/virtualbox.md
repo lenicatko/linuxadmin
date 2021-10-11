@@ -69,3 +69,13 @@ Klikni na tlačitko „Nový“ a pokračuj podle obrázkového návodu:
 
 Virtuální počíteč se teď zapne!
 Pokračuj [instalací systému]({{ subpage_url('index#install-system') }}).
+
+
+{#
+XXX: kopírování (sdílená schránka) mezi opravdovým a virtuálním strojem.
+   -- static/vbcopyb.jpg
+#}
+
+{#
+XXX: Bridged network -- see static/bridged-network.png
+#}

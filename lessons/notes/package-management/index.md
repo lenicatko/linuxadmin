@@ -163,6 +163,12 @@ $ mplayer /usr/share/sounds/gnome/default/alerts/bark.ogg
 > `mplayer` ale funguje i s `.mp3` a ostatními.
 
 
+## Repozitáře
+
+- EPEL
+- PPA
+
+
 ## Co je nainstalováno?
 
 Pomocí `dnf` můžeš instalovat jak grafické aplikace (na které funguje
