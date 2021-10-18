@@ -1,0 +1,78 @@
+<h1>Nela a medúzy: Zpracování souborů</h1>
+<p>Nela teď ví o svých souborech dost na to, aby je zpracovala pomocí programu
+<code>goostats</code> – skriptu, který napsal její vedoucí.
+Tenhle program vypočítá jakousi statistiku ohledně proteinů.
+Potřebuje dva argumenty:</p>
+<ol>
+<li>vstupní soubor (odkut přečte naměřená data),</li>
+<li>výstupní soubor (kam zapíše výsledky).</li>
+</ol>
+<p>Protože se Nela shell zatím učí, vybuduje si příkazy postupně.
+První krok je vybrat správné vstupní soubory – ty co končí na <code>A</code> nebo <code>B</code>,
+ale ne <code>Z</code>.
+Nela píše:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> ~/Dokumenty/data-shell/north-pacific-gyre/2012-07-03
+<span class="go">&gt; for soubor in NENE*A.txt NENE*B.txt</span>
+<span class="go">&gt; do</span>
+<span class="go">&gt;     echo $soubor</span>
+<span class="go">&gt; done</span>
+<span class="go">NENE01729A.txt</span>
+<span class="go">NENE01736A.txt</span>
+<span class="go">NENE01751A.txt</span>
+<span class="go">...</span>
+<span class="go">NENE02040B.txt</span>
+<span class="go">NENE02043B.txt</span>
+</pre></div><p>Dále bude potřeba vymyslet jména souborů do kterých se zapíšou výsledky.
+Řekněme že je pojmenuje tak, že na začátek každého vstupního jména
+přidá <code>vysledky-</code>.
+Napíše si tedy cyklus, který ukáže vstupní i výstupní jméno:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt
+<span class="go">&gt; do</span>
+<span class="go">&gt;     echo $soubor vysledky-$soubor</span>
+<span class="go">&gt; done</span>
+<span class="go">NENE01729A.txt vysledky-NENE01729A.txt</span>
+<span class="go">NENE01729B.txt vysledky-NENE01729B.txt</span>
+<span class="go">NENE01736A.txt vysledky-NENE01736A.txt</span>
+<span class="go">...</span>
+<span class="go">NENE02043A.txt vysledky-NENE02043A.txt</span>
+<span class="go">NENE02043B.txt vysledky-NENE02043B.txt</span>
+</pre></div><p>Nové soubory nezačínají na <code>NENE</code>, takže i když je potom vytvoří,
+cyklus <code>for soubor in NENE*[AB].txt</code> je nebude brát v potaz.</p>
+<p>Zatím tedy sice nespustila program <code>goostats</code>, ale jména souborů už zná.</p>
+<p>Psát skoro ten samý příkaz pořád dokola je ale nudné.
+A navíc tak Nela může snadno udělat chybu.
+Proto zmáčkne <kbd>↑</kbd> a Bash ukáže cyklus na jednom řádku:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt<span class="p">;</span> <span class="k">do</span>     <span class="nb">echo</span> <span class="nv">$soubor</span> vysledky-<span class="nv">$soubor</span><span class="p">;</span> <span class="k">done</span>
+</pre></div><p>Pomocí <kbd>←</kbd> se dostane za <code>echo</code> a připíše příkaz, kterým se spouští
+skript od vedoucího: <code>bash goostats</code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt<span class="p">;</span> <span class="k">do</span>     <span class="nb">echo</span> bash goostats <span class="nv">$soubor</span> vysledky-<span class="nv">$soubor</span><span class="p">;</span> <span class="k">done</span>
+<span class="go">bash goostats NENE01729A.txt vysledky-NENE01729A.txt</span>
+<span class="go">bash goostats NENE01729B.txt vysledky-NENE01729B.txt</span>
+<span class="go">bash goostats NENE01736A.txt vysledky-NENE01736A.txt</span>
+<span class="go">...</span>
+<span class="go">bash goostats NENE02043A.txt vysledky-NENE02043A.txt</span>
+<span class="go">bash goostats NENE02043B.txt vysledky-NENE02043B.txt</span>
+</pre></div><p>To jsou přesně příkazy, které by musela spouštět ručně!
+Znovu tedy vyvolá předchozí řádek a smaže slovo <code>echo</code>.
+Skript se teď opravdu pustí.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt<span class="p">;</span> <span class="k">do</span>     bash goostats <span class="nv">$soubor</span> vysledky-<span class="nv">$soubor</span><span class="p">;</span> <span class="k">done</span>
+</pre></div><p>Program <code>goostats</code> se možná spustil, ale nic se nevypisuje.
+To Nele trochu vadí.
+Rozhodne se cyklus ukončit (<kbd>Ctrl</kbd>+<kbd>C</kbd>) a přidat do cyklu
+další příkaz: <code>echo $soubor</code>.
+Vždycky před spuštěním analýzy se tak vypíše jméno zpracovávaného souboru.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt<span class="p">;</span> <span class="k">do</span>     <span class="nb">echo</span> <span class="nv">$soubor</span><span class="p">;</span> bash goostats <span class="nv">$soubor</span> vysledky-<span class="nv">$soubor</span><span class="p">;</span> <span class="k">done</span>
+<span class="go">NENE01729A.txt</span>
+</pre></div><div class="admonition note"><p>Neboli na více řádků:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span> soubor <span class="k">in</span> NENE*<span class="o">[</span>AB<span class="o">]</span>.txt
+<span class="go">&gt; do</span>
+<span class="go">&gt;     echo $soubor</span>
+<span class="go">&gt;     bash goostats $soubor vysledky-$soubor</span>
+<span class="go">&gt; done</span>
+<span class="go">`</span>
+</pre></div></div><p>Tenhle příkaz už něco vypisuje! Každá analýza trvá asi 5 vteřin.
+Nela má reálně těch souborů 1500 (naše demo je menší), a tak si spočítá
+že to celé bude trvat asi dvě hodiny.
+Než si půjde uvařit kafe a přečíst nový oceánografický článek,
+otevře si ještě novou konzoli a zkontroluje, že v adresáři vznikají
+soubory s výsledky a obsah prvních z nich vypadá rozumně.</p>

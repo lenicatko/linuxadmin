@@ -114,6 +114,32 @@
                 "static_files": {},
                 "title": "Navigace v souborech a adresářích"
             },
+            "carpentry-unix/loop-nelle": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "přeložil Petr Viktorin, 2021",
+                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "loop-nelle/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/carpentry-unix/loop-nelle/index.md",
+                        "title": "Nela a medúzy: Kontrola souborů",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/carpentry-unix/loop-nelle/info.yml",
+                "static_files": {},
+                "title": "Nela a medúzy: Kontrola souborů"
+            },
             "carpentry-unix/pipefilter": {
                 "pages": {
                     "index": {
@@ -171,6 +197,42 @@
                 },
                 "title": "Roury a filtry"
             },
+            "carpentry-unix/pipefilter-nelle": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "přeložila Karolina Surma, 2020",
+                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "pipefilter-nelle/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [
+                            {
+                                "content": "<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>wc -l *.txt\n</pre></div>"
+                            },
+                            {
+                                "content": "<p><code>wc -l *.txt | sort | head</code> - uvidíš, jestli soubory na začátku jsou OK\n<code>wc -l *.txt | sort | tail</code> - uvidíš, jestli soubory na konci jsou OK</p>\n<p>Podívej se na výstup prvního z těch příkazů:</p>\n<div class=\"highlight\"><pre><code>  240 NENE02018B.txt\n  300 NENE01729A.txt\n  300 NENE01729B.txt\n  300 NENE01736A.txt\n  300 NENE01751A.txt\n  300 NENE01751B.txt\n  300 NENE01812A.txt\n  300 NENE01843A.txt\n  300 NENE01843B.txt\n  300 NENE01971Z.txt</code></pre></div>"
+                            },
+                            {
+                                "content": "<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>ls *Z.txt <span class=\"p\">|</span> wc -l\n<span class=\"go\">2</span>\n</pre></div>"
+                            }
+                        ],
+                        "source_file": "lessons/carpentry-unix/pipefilter-nelle/index.md",
+                        "title": "Nela a medúzy: Kontrola souborů",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/carpentry-unix/pipefilter-nelle/info.yml",
+                "static_files": {},
+                "title": "Nela a medúzy: Kontrola souborů"
+            },
             "hw/bash-1": {
                 "pages": {
                     "index": {
@@ -200,6 +262,32 @@
                     }
                 },
                 "title": "Úkoly - Bash I"
+            },
+            "hw/bash-2": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "přeložil Petr Viktorin, 2020",
+                            "Některé úkoly pochází z kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, © 2016–2018 Software Carpentry Foundation, © 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "bash-2/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/bash-2/index.md",
+                        "title": "Úkoly - Bash II",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/bash-2/info.yml",
+                "static_files": {},
+                "title": "Úkoly - Bash II"
             },
             "linuxadmin/bin-func-alias": {
                 "pages": {
@@ -350,6 +438,32 @@
                     }
                 },
                 "title": "Úvod do prostředí GNOME"
+            },
+            "linuxadmin/grep-find": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020",
+                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "grep-find/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/grep-find/index.md",
+                        "title": "Hledání: grep a find",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/grep-find/info.yml",
+                "static_files": {},
+                "title": "Hledání: grep a find"
             },
             "linuxadmin/installation": {
                 "pages": {
@@ -578,6 +692,40 @@
                 },
                 "title": "Spouštění procesů"
             },
+            "linuxadmin/var-loop": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsala Karolina Surma, 2020",
+                            "upravil Petr Viktorin, 2021",
+                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
+                        ],
+                        "content": {
+                            "path": "var-loop/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [
+                            {
+                                "content": "<p>Můžeš na to jít postupně: nejprve vybereš dva první řádky,\npak z těch dvou jeden poslední.</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>head -n2 basilisk.dat <span class=\"p\">|</span> tail -n1\n<span class=\"go\">CLASSIFICATION: basiliscus vulgaris</span>\n</pre></div>"
+                            },
+                            {
+                                "content": "<p>Jak na to? Dobré je si úkol rozdělit na dva kroky: cyklus přes soubory a samotný výpis.</p>\n<p>Nejprve si ve <code>for</code> cyklu vypiš obsah proměnné pomocí <code>echo</code>, aby sis byla jistá, že pracuješ se správnou hodnotou. \nKdyž si zvykneš na výpomoc programu <code>echo</code>, ušetříš si v budoucnu spoustu starostí :)</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span><span class=\"k\">for</span> jmeno <span class=\"k\">in</span> *.dat\n<span class=\"go\">&gt; do</span>\n<span class=\"go\">&gt;     echo $jmeno</span>\n<span class=\"go\">&gt; done</span>\n<span class=\"go\">basilisk.dat</span>\n<span class=\"go\">minotaur.dat</span>\n<span class=\"go\">unicorn.dat</span>\n</pre></div><p>Teď už víš, že rámec cyklu <code>for</code> cyklu je napsán správně.\nA tak můžeš místo <code>echo</code> provést už známý příkaz s <code>head</code> a <code>tail</code>:</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span><span class=\"k\">for</span> jmeno <span class=\"k\">in</span> *.dat\n<span class=\"go\">&gt; do</span>\n<span class=\"go\">&gt;     head -n 2 $jmeno | tail -n 1</span>\n<span class=\"go\">&gt; done</span>\n<span class=\"go\">CLASSIFICATION: basiliscus vulgaris</span>\n<span class=\"go\">CLASSIFICATION: bos hominus</span>\n<span class=\"go\">CLASSIFICATION: equus monoceros</span>\n</pre></div>"
+                            }
+                        ],
+                        "source_file": "lessons/linuxadmin/var-loop/index.md",
+                        "title": "Proměnné a cyklus",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/var-loop/info.yml",
+                "static_files": {},
+                "title": "Proměnné a cyklus"
+            },
             "linuxadmin/virtualbox-networking": {
                 "pages": {
                     "index": {
@@ -634,32 +782,6 @@
                 "source_file": "lessons/linuxadmin/whats-linux/info.yml",
                 "static_files": {},
                 "title": "Co je to ten „Linux“?"
-            },
-            "notes/01": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020",
-                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
-                        ],
-                        "content": {
-                            "path": "01/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/01/index.md",
-                        "title": "Poznámky – Bash I",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/01/info.yml",
-                "static_files": {},
-                "title": "Poznámky – Bash I"
             },
             "notes/02": {
                 "pages": {
@@ -1271,35 +1393,6 @@
                 "date": "2021-10-18",
                 "materials": [
                     {
-                        "lesson_slug": "notes/02",
-                        "title": "Poznámky – Bash II",
-                        "type": "lesson"
-                    },
-                    {
-                        "external_url": "http://swcarpentry.github.io/shell-novice/",
-                        "title": "The Carpentries – The Unix Shell (pokračujeme)",
-                        "type": "none-link"
-                    },
-                    {
-                        "lesson_slug": "notes/01",
-                        "title": "Zápis z pilotního kurzu #1",
-                        "type": "link"
-                    },
-                    {
-                        "lesson_slug": "pilot/02",
-                        "title": "Zápis z pilotního kurzu #2",
-                        "type": "link"
-                    }
-                ],
-                "serial": "2",
-                "slug": "shell-2",
-                "source_file": "course.yml",
-                "title": "Bash II"
-            },
-            {
-                "date": "2021-10-25",
-                "materials": [
-                    {
                         "lesson_slug": "linuxadmin/output-files",
                         "title": "Vypisování souborů",
                         "type": "lesson"
@@ -1315,6 +1408,45 @@
                         "type": "lesson"
                     },
                     {
+                        "lesson_slug": "carpentry-unix/pipefilter-nelle",
+                        "title": "Nela a medúzy: Kontrola souborů",
+                        "type": "link"
+                    },
+                    {
+                        "lesson_slug": "linuxadmin/var-loop",
+                        "title": "Proměnné a cyklus",
+                        "type": "lesson"
+                    },
+                    {
+                        "lesson_slug": "carpentry-unix/loop-nelle",
+                        "title": "Nela a medúzy: Kontrola souborů",
+                        "type": "link"
+                    },
+                    {
+                        "lesson_slug": "linuxadmin/grep-find",
+                        "title": "Hledání: grep a find",
+                        "type": "lesson"
+                    },
+                    {
+                        "external_url": "http://swcarpentry.github.io/shell-novice/",
+                        "title": "Anglický originál: The Carpentries – The Unix Shell (Pipes, Loops, Finding things)",
+                        "type": "none-link"
+                    },
+                    {
+                        "lesson_slug": "hw/bash-2",
+                        "title": "Úkoly - Bash II",
+                        "type": "homework"
+                    }
+                ],
+                "serial": "2",
+                "slug": "shell-2",
+                "source_file": "course.yml",
+                "title": "Bash II"
+            },
+            {
+                "date": "2021-10-25",
+                "materials": [
+                    {
                         "lesson_slug": "pilot/03",
                         "title": "Zápis – Procesy a soubory",
                         "type": "lesson"
@@ -1323,6 +1455,16 @@
                         "external_url": "http://swcarpentry.github.io/shell-novice/",
                         "title": "The Carpentries – The Unix Shell",
                         "type": "none-link"
+                    },
+                    {
+                        "lesson_slug": "pilot/02",
+                        "title": "Zápis – Bash II",
+                        "type": "link"
+                    },
+                    {
+                        "lesson_slug": "notes/02",
+                        "title": "Poznámky – Bash II",
+                        "type": "link"
                     }
                 ],
                 "serial": "3",
@@ -1343,6 +1485,10 @@
                     },
                     {
                         "title": "Grep a regulární výrazy; návratová hodnota `$?`",
+                        "type": "special"
+                    },
+                    {
+                        "title": "While",
                         "type": "special"
                     },
                     {
@@ -1368,6 +1514,11 @@
                         "lesson_slug": "linuxadmin/bin-func-alias",
                         "title": "type; alias, skripty, funkce; bashrc",
                         "type": "lesson"
+                    },
+                    {
+                        "external_url": "http://swcarpentry.github.io/shell-novice/",
+                        "title": "Anglický originál: The Carpentries – The Unix Shell (pokračujeme)",
+                        "type": "none-link"
                     },
                     {
                         "lesson_slug": "pilot/04",

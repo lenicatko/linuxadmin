@@ -53,14 +53,21 @@ daného souboru. Spojí je dohromady, jeden za druhý:</p>
 </pre></div><p>V praxi se <code>cat</code> většinou používá pro vypsání jediného souboru,
 ale jméno stále odkazuje na tohle spojování.
 S kočkama samozřejmě nemá vůbec, ale vůbec nic společného 😺</p>
-<h3>Opakovací kočka</h3>
+<div class="admonition note"><p>Podobnou historii má i příkaz <code>touch</code> (česky “dotknout se”): původně byl
+vytvořen proto, aby se dal jednoduše aktualizovat čas poslední změny souboru.
+To stále dělá: až budeš chtít tuhle informaci u nějakého souboru změnit,
+koukni na <code>man touch</code>.</p>
+<p>To, že <code>touch</code> vytvoří nový soubor (pokud zatím neexistuje) je
+“jen vedlejší efekt” téhle aktualizace. Je ale často užitečnější než
+“opravdový" účel.</p>
+</div><h3>Opakovací kočka</h3>
 <p>Když zadáš jen příkaz <code>cat</code> bez jména souboru, nestane se naoko nic.
 To proto, že <code>cat</code> v tomhle případě vypisuje vstup z klávesnice – a to
-po řádcích, takže dokud něco nenapíšeš a nestiskneš <kbd>Enter</kbd>,
-může to vypadat že „Bash zamrzl“.</p>
-<p>A jakmile napíšeš řádek, <code>cat</code> ho zopakuje.
-To zatím není moc užitečné.
-Jako skoro každý program se <code>cat</code> dá ukončit
+po řádcích. Takže dokud něco nezadáš, může to vypadat že „Bash zamrzl“.</p>
+<p>Ale jakmile napíšeš celý řádek řádek a zmáčkenš <kbd>Enter</kbd>,
+<code>cat</code> ho zopakuje.
+To zatím není moc užitečné, ale za chvíli se to bude hodit.</p>
+<p>Jako skoro každý program se <code>cat</code> dá ukončit
 pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd>.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>cat
 <span class="go">ahoj</span>
@@ -72,7 +79,7 @@ pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd>.</p>
 co napíšeš na klávesnici a nechá tě např. opravovat chyby pomocí
 <kbd>Backspace</kbd>.
 Příkazu předá až kompletní řádek, když stiskneš <kbd>Enter</kbd>.
-(Tohle chování se dá vypnout; programy jako <code>nano</code> se tak můžou starat
+(Tohle chování se dá vypnout; programy jako <code>nano</code> se starají
 o veškerý výstup samy.)
 Druhé opakování přichází od příkazu <code>cat</code>, který vypisuje co od terminálu
 obdrží, když zmáčkneš <kbd>Enter</kbd>.</p>
@@ -122,8 +129,8 @@ které neuměly „rolovat“ v historii.
 Po vypsání kousku textu zobrazil něco jako <em>Press Space for more</em>,
 „stiskni mezerník pro více [textu]“ a čekal na stisk klávesy.</p>
 <p>Jméno <em>Less</em> (méně) si jen hraje se rčením <em>méně je více</em>
-(less is more) – <code>less</code> je vylepšenou verzí <code>more</code>, která se např. umí
-v souboru vracet zpátky.</p>
+(less is more) – <code>less</code> je vylepšenou verzí <code>more</code>, která se umí v souboru
+vracet zpátky (a mnohem víc).</p>
 </div><h2>Počítání řádků</h2>
 <p>Občas nepotřebuješ přímo obsah souboru, ale chceš vědět kolik obsahu v něm je.
 Na to, abys to zjistila, slouží příkaz <code>wc</code>.
@@ -154,11 +161,15 @@ můžeš ji vložit „do“ spuštěného příkazu <code>wc</code>.</p>
 <div class="admonition none"><p>Dnešní editory mají funkci počítání slov zabudovanou.
 Je dokonce i v <code>nano</code> (pod <kbd>Alt</kbd>+<kbd>D</kbd>).
 Ale textová políčka třeba v prohlížeči bývají „hloupější“.</p>
-</div><p>Tentokrát text neukončuj pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd> – tím bys
+</div><p>Tentokrát po napsání textu nemačkej <kbd>Ctrl</kbd>+<kbd>C</kbd> – tím bys
 příkaz <code>wc</code> ukončila, takže by nedostal šanci vypsat výsledek.
-Místo toho použij <kbd>Ctrl</kbd>+<kbd>D</kbd>, což znamená „konec vstupu“.</p>
+Místo toho použij na začátku řádku <kbd>Ctrl</kbd>+<kbd>D</kbd>,
+což znamená „konec vstupu“.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>wc
 <span class="go">haló haló,</span>
 <span class="go">co se stalo?</span>
 <span class="go">      2       5      23</span>
-</pre></div>
+</pre></div><p>Zkratka <kbd>Ctrl</kbd>+<kbd>D</kbd>, konec vstupu, funguje i pro příkazy
+jako <code>cat</code>.
+A dokonce i pro samotný <code>bash</code>: když zmáčkneš tuhle zkratku
+místo příkazu, Bash se ukončí.</p>

@@ -1,4 +1,94 @@
-<h1>Proměnné Bashe a proměnné prostředí</h1>
+<p>XXX: from notes/02:</p>
+<div class="highlight"><pre><code>    ## Proměnné prostředí
+
+    Pomocí příkazu `env` vypíšeš všechny proměnné prostředí, které existují v Bashi. Je jich tam opravdu hodně a určují, jak se chová nejen Bash, ale i programy které spouští.
+    Ukážeme si několik z nich.
+
+    - `SHELL` - říká, jak máš zrovna shell. Bude to nejspíš `/bin/bash`
+    - `HOSTNAME` - jméno počítače
+    - `LC_*něco*` - nastavení formátování různých řetězců
+    - `PWD` - aktuální adresář
+    - `HOME` - domovský adresář
+    - `VISUAL` - editor, který preferuješ
+    - `PS1` - do této proměnné se dá zapsat, čím nám bude začínat každý řádek v Bashi. Můžeš přepsat např. jen na `PS1='$ '` nebo použít zvláštní sekvence jako `\w`, což znamená aktuální adresář.
+    - `PS2` je „pokračovací“ prompt (pro zadávání víceřádkového příkazu)
+
+    Obsah každé proměnné můžeš vypísat pomocí příkazu `echo $&lt;proměnná&gt;`: 
+
+    ```console
+    $ echo $PS1
+    ```
+
+    Existují také speciální proměnné, které jsou pojmenované různými znaky. Třeba:
+    ```console
+    $ echo $?
+    ```
+    vypíše návratovou hodnotu posledního příkazu.
+
+    Příkazy v Unixu vrací hodnoty, podle nichž většinou poznáš, jestli příkaz skončil v pořádku, nebo chybou.
+    - Pokud je v `$0` hodnota `0`, pak proběhl příkaz v pořádku.
+    - Hodnota jiná než `0` značí, příkaz skončil chybou
+
+    Příklad:
+    ```console
+    $ ls unicorn.dat 
+    unicorn.dat
+    $ echo $?
+    0
+
+    $ ls jednorozec.dat
+    ls: cannot access 'jednorozec.dat': No such file or directory
+    $ echo $?
+    2
+    ```
+    Na rozdíl od Pythonu Bash není tak striktní, pokud jde o chyby.
+    Nepovedený příkaz ho nezastaví.
+    Je proto dobré si občas kontrolovat, že příkaz proběhl korektně.
+
+    Proměnná `$$` obsahuje číslo aktuálního shellu. Když otevřeš nový terminál s novým Bashem, uvidíš jiné číslo.
+
+    Podobně jako v Pythonu se jména proměnných v Bashi můžou skládat z písmen, čísel a podtržítek. 
+    Bash umí jednoduše skládat slova dohromady a přidat tak řetězec před nebo za obsah proměnné:
+
+    ```console
+    $ jmeno=minotaur
+    $ echo $jmeno.abc
+    minotaur.abc
+    $ echo my$jmeno
+    myminotaur
+    ``` 
+
+    Kdybys ale chtěla dát proměnnou doprostřed do nějakého většího slova, tímto způsobem to nepůjde.
+    Můžeš ale použít složené závorky:
+
+    ```console
+    $ echo my${jmeno}.abc
+    myminotaur.abc
+    ```
+
+    Obecně je `$jmeno` zkratka pro `${jmeno}`; varianta se závorkami bude fungovat ve více případech.
+
+
+    ## PS2
+
+    Když napíšeš do příkazové řádky víceřádkový příkaz (např. v uvozovkách),
+    výzva se změní.
+    Bude nejspíš vypadat zcela jinak; poslední znak většinou bude `&gt;` místo `$`.
+    Například:
+
+    ```console
+    $ echo "jeden řádek
+    &gt; druhý řádek
+    &gt; třetí řádek"
+    jeden řádek
+    druhý řádek
+    třetí řádek
+    ```
+
+    Tuto variantu výzvy nastavíš proměnnou `PS2`.
+
+
+</code></pre></div><h1>Proměnné Bashe a proměnné prostředí</h1>
 <p>Už víš, že Bash používá <em>proměnné</em>.
 Asi nejčastěji se používají vrámci cyklu <code>for</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> ~/Dokumenty/data-shell/creatures/

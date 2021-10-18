@@ -1,0 +1,67 @@
+<h1>Úkoly – Bash II &amp;c</h1>
+<h2>1. Grepování yamlů</h2>
+<p>Procvič si příkazy jako <code>ls</code>, <code>wc</code>, <code>grep</code> a jak je spojit dohromady.</p>
+<p>Stáhni a rozbal si tyto archivy s informacemi o komunitních akcích: kurzech/srazech PyLadies a srazech Pyvo.</p>
+<div class="highlight"><pre><code>$ wget -O pyladies-cz.zip https://github.com/PyLadiesCZ/pyladies.cz/archive/master.zip
+$ unzip pyladies-cz.zip
+$ wget -O pyvo-data.zip https://github.com/pyvec/pyvo-data/archive/master.zip
+$ unzip pyvo-data.zip
+
+</code></pre></div><p>Data si prohlédni a zjisti, co se v nich skrývá za informace.
+Zvlášť doporučuju prohlédnout soubor <code>pyvo-data-master/series/brno-pyvo/events/2018-10-25-casove.yaml</code>
+který je použit na stránce <a href="https://pyvo.cz/brno-pyvo/2018-10/">pyvo.cz/brno-pyvo/2018-10/</a>,
+a soubor <code>pyladies.cz-master/teams/brno.yml</code>
+který je použit na stránce <a href="https://pyladies.cz/brno/#team">pyladies.cz/brno/#team</a>.</p>
+<p>Použij základní shellové příkazy (ne Python) na zodpovězení otázek níže.
+Hledáš jen orientační hodnoty; nemusí to být na 100% přesné.</p>
+<div class="admonition note"><p>YAML soubory by se správně měly číst knihovnou na YAML, aby byla zachována struktura. Ty je ale ber jako "čistý text", kde hledané informace jsou na řádcích ve tvaru <code>klíč: hodnota</code> (případně s nějakýma mezerama a/nebo pomlčkama navíc).
+Proto odpovědi nemusí být na 100% přesné.</p>
+<p>"Zakomentované" informace (začínající <code>#</code>) můžeš pro jednoduchost počítat
+taky. (I když jich je po COVIDu často víc než těch nezakomentovaných.)</p>
+</div><ol>
+<li>Kolik bylo Pyv v Brně?<ul>
+<li><em>Pro každý sraz existuje soubor.</em></li>
+</ul>
+</li>
+<li>Kolik bylo Pyv celkem?</li>
+<li>Z kolika přednášek na Pyvech jsou videa?  <em>(Předpokládej že každá přednáška může mít max. 1 video)</em><ul>
+<li><em>Videa jsou označena <code>video:</code></em></li>
+</ul>
+</li>
+<li>Kolik bylo kurzů/srazů PyLadies?<ul>
+<li><em>Srazy jsou v adresáři <code>meetups/</code> a každý má jméno, <code>name:</code></em></li>
+</ul>
+</li>
+<li>(Bonusová výzva) Z kolika Pyv jsou videa?</li>
+</ol>
+<h3>Nápověda</h3>
+<p>Šablonami jako <code>adresar/*/podadresar/*</code> můžeš vybrat soubory z více adresářů.</p>
+<p>Příkaz <code>grep</code> má zajímavé přepínače <code>-r</code>, <code>-l</code>/<code>-L</code>, <code>-h</code>/<code>-H</code> a <code>-e</code>.</p>
+<h2>2. Uniq</h2>
+<p>Příkaz <code>uniq</code> odstraní <em>po sobě jdoucí</em> duplikované řádky:</p>
+<div class="highlight"><pre><span></span>$ echo &#39;
+&gt; jedna
+&gt; dva
+&gt; dva
+&gt; tři
+&gt; tři
+&gt; tři
+&gt; jedna
+&gt; &#39; | uniq
+
+jedna
+dva
+tři
+jedna
+</pre></div><p>Často se používá <code>sort | uniq</code>, aby se stejné řádky z celého souboru dostaly k sobě.</p>
+<p>Použij <code>uniq</code> k zodpovězení těchto otázek:</p>
+<ol>
+<li>Vypiš všechna místa konání Pyv (stačí mít v rámci každého řádku identifikátor jako <code>artbar</code>).</li>
+<li>Přidej informaci o tom, kolikrát na kterém místě Pyvo bylo. </li>
+</ol>
+<p>Příkaz <code>uniq</code> má zajímavý přepínač <code>-c</code>.</p>
+<h3>Bonusová výzva</h3>
+<p>Existuje zajímavý příkaz <code>cut</code>, který má zajímavé přepínače <code>-d</code> a <code>-f</code>.</p>
+<ol>
+<li>Jaké jsou 3 nejčastější křestní jména organizátorů/koučů/atd. PyLadies?</li>
+</ol>

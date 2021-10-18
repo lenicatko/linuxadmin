@@ -1,0 +1,91 @@
+<h1>Nela a medúzy: Kontrola souborů</h1>
+<p>Zapni terminál a přepni se do adresáře <code>data-shell/north-pacific-gyre/2012-07-03</code>.</p>
+<p>Pomocí <code>ls</code> se podívej, co v adresáři je:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls
+<span class="go">goodiff         NENE01736A.txt  NENE01843A.txt  NENE01978B.txt  NENE02040Z.txt</span>
+<span class="go">goostats        NENE01751A.txt  NENE01843B.txt  NENE02018B.txt  NENE02043A.txt</span>
+<span class="go">NENE01729A.txt  NENE01751B.txt  NENE01971Z.txt  NENE02040A.txt  NENE02043B.txt</span>
+<span class="go">NENE01729B.txt  NENE01812A.txt  NENE01978A.txt  NENE02040B.txt</span>
+</pre></div><p>Úkol: Kolik mají řádků datové soubory s <code>.txt</code> na konci?</p>
+<div class="solution" id="solution-0">
+    <h3>Řešení</h3>
+    <div class="solution-cover">
+        <a href="naucse:solution?solution=0"><span class="link-text">Ukázat řešení</span></a>
+    </div>
+    <div class="solution-body" aria-hidden="true">
+        <div class="highlight"><pre><span></span><span class="gp">$ </span>wc -l *.txt
+</pre></div>
+    </div>
+</div><p>Všechny by měly mít 300 řádků. Když se ale podíváš na výstup, zjistíš, že tomu tak není.
+Představ si, že máš těchto souborů k ověření několik tisíc a procházení <em>očima</em> nebude možné.
+Jak zjistíš, jestli všechny tyto soubory mají opravdu 300 řádků?</p>
+<div class="solution" id="solution-1">
+    <h3>Řešení</h3>
+    <div class="solution-cover">
+        <a href="naucse:solution?solution=1"><span class="link-text">Ukázat řešení</span></a>
+    </div>
+    <div class="solution-body" aria-hidden="true">
+        <p><code>wc -l *.txt | sort | head</code> - uvidíš, jestli soubory na začátku jsou OK
+<code>wc -l *.txt | sort | tail</code> - uvidíš, jestli soubory na konci jsou OK</p>
+<p>Podívej se na výstup prvního z těch příkazů:</p>
+<div class="highlight"><pre><code>  240 NENE02018B.txt
+  300 NENE01729A.txt
+  300 NENE01729B.txt
+  300 NENE01736A.txt
+  300 NENE01751A.txt
+  300 NENE01751B.txt
+  300 NENE01812A.txt
+  300 NENE01843A.txt
+  300 NENE01843B.txt
+  300 NENE01971Z.txt</code></pre></div>
+    </div>
+</div><p>Soubory končí většinou na písmenko <code>A</code> nebo <code>B,</code> ale je zde jeden končící <code>Z</code>. Spočítej, kolik je souborů končících <code>Z</code>.</p>
+<div class="solution" id="solution-2">
+    <h3>Řešení</h3>
+    <div class="solution-cover">
+        <a href="naucse:solution?solution=2"><span class="link-text">Ukázat řešení</span></a>
+    </div>
+    <div class="solution-body" aria-hidden="true">
+        <div class="highlight"><pre><span></span><span class="gp">$ </span>ls *Z.txt <span class="p">|</span> wc -l
+<span class="go">2</span>
+</pre></div>
+    </div>
+</div><p>Už podle názvů tyhle soubory nevypadají na to, že by je někdo vytvořil ručně.
+Můžeš bezpečně předpokládat, že jsou výstupem nějakého programu na zpracování vzorků.</p>
+<p>Podívej se do několika z nich (např. pomocí příkazu <code>less</code>), abys zjistila jak zhruba vypadají informace v nich obsažené.</p>
+<p>Obsahem je relativní výskyt 300 bílkovin v různých hloubkách oceánu.
+<code>A</code> a <code>B</code> jsou dvě hloubky, na nichž bylo prováděno měření; <code>Z</code> znamená, že se hloubku z nějakého důvodu nepodařilo zjistit.
+Kratší soubor je způsobený restarem počítače během měření.
+Nevíme, zda takový soubor bude použitelný pro další zpracování.</p>
+<h2>Hranaté závorky: Filtrování písmen</h2>
+<p>Už znáš hvězdičku a otazník, díky nimž můžeš vytvořit masky souborů.
+Existují i další „finty“, jak jména souborů filtrovat. Jednu z nich si teď ukážeme.
+Když dáš do hranatých závorek výčet znaků, které chceš hledat, např. <code>[AB]</code>, celý výraz v závorkách se nahradí za jedno písmenko – buďto <code>A</code> nebo <code>B</code>.
+Můžeš tak odfiltrovat soubory, které končí na <code>Z</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls *<span class="o">[</span>AB<span class="o">]</span>.txt
+<span class="go">NENE01729A.txt  NENE01751A.txt  NENE01843A.txt  NENE01978B.txt  NENE02040B.txt</span>
+<span class="go">NENE01729B.txt  NENE01751B.txt  NENE01843B.txt  NENE02018B.txt  NENE02043A.txt</span>
+<span class="go">NENE01736A.txt  NENE01812A.txt  NENE01978A.txt  NENE02040A.txt  NENE02043B.txt</span>
+</pre></div><p>V tomto případě dostaneš stejný výstup, když napíšeš příkaz:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls *A.txt *B.txt
+</pre></div><p>Výstup se ale bude lišit v případě, kdy neexistuje soubor kterému taková maska
+odpovídá.
+Představ si, že chceš vypsat všechny soubory, které mají na konci <code>A</code>, <code>B</code> nebo <code>C</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls *<span class="o">[</span>ABC<span class="o">]</span>.txt
+<span class="go">NENE01729A.txt  NENE01751A.txt  NENE01843A.txt  NENE01978B.txt  NENE02040B.txt</span>
+<span class="go">NENE01729B.txt  NENE01751B.txt  NENE01843B.txt  NENE02018B.txt  NENE02043A.txt</span>
+<span class="go">NENE01736A.txt  NENE01812A.txt  NENE01978A.txt  NENE02040A.txt  NENE02043B.txt</span>
+
+<span class="gp">$ </span>ls *A.txt *B.txt *C.txt
+<span class="go">ls: cannot access &#39;*C.txt&#39;: No such file or directory</span>
+<span class="go"> NENE01729A.txt   NENE01751B.txt   NENE01978A.txt   NENE02040B.txt</span>
+<span class="go"> NENE01729B.txt   NENE01812A.txt   NENE01978B.txt   NENE02043A.txt</span>
+<span class="go"> NENE01736A.txt   NENE01843A.txt   NENE02018B.txt   NENE02043B.txt</span>
+<span class="go"> NENE01751A.txt   NENE01843B.txt   NENE02040A.txt</span>
+</pre></div><p>Bash nechá <code>*C.txt</code> beze změny, protože takový soubor nenajde.
+Program <code>ls</code> si pak postěžuje že soubor <code>*C.txt</code> nezná.</p>
+<p>Zkus si, co v těchto případech dostává příkaz <code>ls</code> od Bashe.
+To můžeš zjistit tak, že místo <code>ls</code> zadáš <code>echo</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> *<span class="o">[</span>ABC<span class="o">]</span>.txt
+<span class="gp">$ </span><span class="nb">echo</span> *A.txt *B.txt *C.txt
+</pre></div>
