@@ -51,15 +51,24 @@ $ echo '<o.o> je robot #1! :)'
 <o.o> je robot #1! :)
 ```
 
-> [note]
-> Na rozdíl od Pythonu je v Bashi rozdíl mezi jednoduchými a dvojitými uvozovkami.
-> Uvnitř dvojitých bude sice Bash zachovávat mezery, `*` a `?`, ale jiné znaky
-> si speciální význam zachovají (příklad je `$`, které uvidíš níže).
-> Uvnitř jednoduchých je speciální znak jen jeden: ukončující `'`.
+> [note] Rozdíl mezi `cat` a `echo`
+> Tyhle dva příkazy si lidi občas pletou.
+>
+> `cat` vypisuje *obsah* souboru, jehož jméno dostane jako argument.
+> Takový soubor musí existovat.
+> Příkaz `echo` vypisuje přímo argumenty které dostane – ať už to jsou jména
+> souborů nebo ne:
+>
+> ```console
+> echo soubor.txt
+> soubor.txt
+> ```
 
-Echo je velice jednoduchý program, který ti umožní mimo jiné zjistit,
-co všechno Bash provede se speciálními znaky,
-než je předá na zpracování dalším programům.
+# Dvojité uvozovky
+
+Na rozdíl od Pythonu je v Bashi rozdíl mezi jednoduchými a dvojitými uvozovkami.
+Uvnitř dvojitých bude sice Bash zachovávat mezery, ale některé znaky
+(jako `$` a <code>`</code>) si speciální význam zachovají.
 
 Zkus si tento příkaz se speciálním znakem `$`:
 
@@ -68,27 +77,38 @@ $ echo $0
 bash
 ```
 
-Místo `$0` je echu předáno jméno aktuálního shellu – `bash`, nebo na některých
+Místo `$0` Bash doplní jméno aktuálního shellu: `bash`, nebo na některých
 systémech `/bin/bash`.
 Samotné `echo` nic nepřevádí, pouze vypisuje přesně to, co dostává jako argument.
 To Bash nahradí `$0` konkrétním řetězcem.
 
-> [note] Rozdíl mezi `cat` a `echo`
-> `cat` vypisuje obsah souboru, jehož jméno dostane jako argument, kdežto
-> `echo` vypisuje přímo argumenty které dostane – ať už to jsou jména souborů
-> nebo ne:
-> 
-> ```console
-> echo soubor.txt
-> soubor.txt
-> ```
+Ve dvojitých uvozovkách Bash nezpracovává hvězdičku, ale `$0` funguje dál:
+
+```console
+$ echo "*"
+*
+$ echo "$0"
+bash
+```
+
+Uvnitř jednoduchých ale je speciální znak jen jeden: ukončující `'`.
+
+```bash
+$ echo '$0'
+$0
+$ echo '*'
+*
+```
+
+Dokud neznáš pravidla o tom, které znaky jsou v `""` speciální,
+používej radši jednoduché uvozovky.
 
 
 ## Echo do souboru
 
 `echo` je další způsob, jak vytvářet soubory.
-Znáš už `touch`, `nano` (případně jakýkoli jiný textový editor);
-teď k nim přidej přesměrování z `echo`:
+Znáš už `touch` a `nano` (případně jakýkoli jiný textový editor);
+teď k nim přidej přesměrování z `echo`:
 
 ```console
 $ echo haló haló > basnicka.txt
@@ -102,11 +122,11 @@ do básničky další řádek, nepůjde to:
 ```console
 $ echo 'co se stalo?' > basnicka.txt
 $ cat basnicka.txt
-co se stalo
+co se stalo?
 ```
 
 Pro přidání textu do souboru můžeš použit další druh přesměrování: `>>`.
-S ním původní obsah v souboru zůstane a nový text bude přidán na konec souboru.
+S ním původní obsah v souboru zůstane a nový text bude přidán na konec:
 
 ```console
 $ echo haló haló > basnicka.txt
@@ -118,23 +138,23 @@ haló haló
 co se stalo?
 ```
 
-Jiný způsob, jak napsat něco do souboru, je přesměrovat výstup z `cat`.
+Jiný způsob jak napsat něco do souboru je přesměrovat výstup z `cat`.
 Text pak napíšeš přímo do příkazové řádky:
 
 ```console
-$ cat > basnicka.txt
+$ cat > basnicka.txt  # (následující řádky napiš ty!)
 ahoj ahoj
 jak se máš?
-$ cat basnicka.txt
+$ cat basnicka.txt    # (následující řádky vypíše cat)
 ahoj ahoj
 jak se máš?
 ```
 
-Další způsob, jak uložit text do souboru, je použít `echo` a jednoduché uvozovky.
+Další způsob jak uložit text do souboru je použít `echo` a jednoduché uvozovky.
 Bash ti v rámci uvozovek dokonce umožní napsat víc řádků.
 Na konci je potřeba řetězec uzavřít a přesměrovat do souboru.
 
-```console
+```
 $ echo 'halo halo
 > co se stalo
 > ...' > basnicka.txt
@@ -144,3 +164,12 @@ co se stalo
 ...
 ```
 
+> [note]
+> Když zadáváš víceřádkový příkaz, změní se výzva (prompt): místo `$`
+> je poslední znak většinou `>`.
+>
+> Znamená to že příkaz ještě není ukončený.
+> Kdyby se ti ho nedařilo zavřít (zde jednoduchou uvozovkou),
+> zmáčkni <kbd>Ctrl</kbd>+<kbd>C</kbd> a začni znovu.
+
+{# XXX cover stuff like >>> somewhere #}

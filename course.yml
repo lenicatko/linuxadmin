@@ -58,38 +58,61 @@ sessions:
     title: "Anglický originál: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)"
   - lesson: hw/bash-1
     type: homework
+
 - title: Bash II
   date: 2021-10-18
   slug: shell-2
   materials:
-  - lesson: notes/02
+  - lesson: linuxadmin/output-files
+  - lesson: carpentry-unix/pipefilter
+  - lesson: linuxadmin/echo
+  - lesson: carpentry-unix/pipefilter-nelle
+    type: link
+  - lesson: linuxadmin/var-loop
+  - lesson: carpentry-unix/loop-nelle
+    type: link
+  - lesson: linuxadmin/grep-find
   - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell (pokračujeme)
-  - title: "Zápis z pilotního kurzu #1"
-    lesson: notes/01
-    type: link
-  - title: "Zápis z pilotního kurzu #2"
-    lesson: pilot/02
-    type: link
+    title: "Anglický originál: The Carpentries – The Unix Shell (Pipes, Loops, Finding things)"
+  - lesson: hw/bash-2
+    type: homework
+
+  # XXX rename loop as homework?
+  #for filename in *.dat
+  #> do
+  #>     cp $filename original-$filename
+  #> done
+
+  # XXX: Nelle’s Pipeline: Processing Files
+  
+
 - title: Procesy & deskriptory souborů
   date: 2021-10-25
   slug: shell-3
   materials:
-  - lesson: linuxadmin/output-files
-  - lesson: carpentry-unix/pipefilter
-  - lesson: linuxadmin/echo
   - lesson: pilot/03
   - url: http://swcarpentry.github.io/shell-novice/
     title: The Carpentries – The Unix Shell
+  - lesson: pilot/02
+    type: link
+    # See pilot/02: Poznámka k neznámým příkazům
+  - lesson: notes/02
+    type: link
+  # XXX https://hackmd.io/@encukou/ukoly-bash2 -- (3.) Vlastní příkaz
+
 - title: Bash III
   date: 2021-11-01
   slug: descriptors
   materials:
   - title: cut, history
     url: null
+    # https://swcarpentry.github.io/shell-novice/05-loop/index.html
+    # Also see: pilot/02; Historie příkazů; Bash skripty; Path
   - title: whoami, groups, file
     url: null
   - title: Grep a regulární výrazy; návratová hodnota `$?`
+    url: null
+  - title: While
     url: null
   - lesson: linuxadmin/process-execution
   - lesson: linuxadmin/fork-exec
@@ -98,12 +121,15 @@ sessions:
   - lesson: linuxadmin/env-var
   - title: type; alias, skripty, funkce; bashrc
     lesson: linuxadmin/bin-func-alias
+  - url: http://swcarpentry.github.io/shell-novice/
+    title: "Anglický originál: The Carpentries – The Unix Shell (pokračujeme)"
   #- title: "`( ... )`, `$( ... )` a `<( ... )`"
   #  url: null
   #- title: diff
   #  url: null
   - lesson: pilot/04
     type: link
+
 - title: Správa uživatelů
   date: 2021-11-08
   slug: users

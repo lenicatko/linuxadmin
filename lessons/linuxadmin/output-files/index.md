@@ -72,16 +72,27 @@ V praxi se `cat` většinou používá pro vypsání jediného souboru,
 ale jméno stále odkazuje na tohle spojování.
 S kočkama samozřejmě nemá vůbec, ale vůbec nic společného 😺
 
+> [note]
+> Podobnou historii má i příkaz `touch` (česky “dotknout se”): původně byl
+> vytvořen proto, aby se dal jednoduše aktualizovat čas poslední změny souboru.
+> To stále dělá: až budeš chtít tuhle informaci u nějakého souboru změnit,
+> koukni na `man touch`.
+>
+> To, že `touch` vytvoří nový soubor (pokud zatím neexistuje) je
+> “jen vedlejší efekt” téhle aktualizace. Je ale často užitečnější než
+> “opravdový" účel.
+
 
 ### Opakovací kočka
 
 Když zadáš jen příkaz `cat` bez jména souboru, nestane se naoko nic.
 To proto, že `cat` v tomhle případě vypisuje vstup z klávesnice – a to
-po řádcích, takže dokud něco nenapíšeš a nestiskneš <kbd>Enter</kbd>,
-může to vypadat že „Bash zamrzl“.
+po řádcích. Takže dokud něco nezadáš, může to vypadat že „Bash zamrzl“.
 
-A jakmile napíšeš řádek, `cat` ho zopakuje.
-To zatím není moc užitečné.
+Ale jakmile napíšeš celý řádek řádek a zmáčkenš <kbd>Enter</kbd>,
+`cat` ho zopakuje.
+To zatím není moc užitečné, ale za chvíli se to bude hodit.
+
 Jako skoro každý program se `cat` dá ukončit
 pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd>.
 
@@ -99,7 +110,7 @@ blablabla
 > co napíšeš na klávesnici a nechá tě např. opravovat chyby pomocí
 > <kbd>Backspace</kbd>.
 > Příkazu předá až kompletní řádek, když stiskneš <kbd>Enter</kbd>.
-> (Tohle chování se dá vypnout; programy jako `nano` se tak můžou starat
+> (Tohle chování se dá vypnout; programy jako `nano` se starají
 > o veškerý výstup samy.)
 > Druhé opakování přichází od příkazu `cat`, který vypisuje co od terminálu
 > obdrží, když zmáčkneš <kbd>Enter</kbd>.
@@ -172,8 +183,8 @@ $ less octane.pdb
 > „stiskni mezerník pro více [textu]“ a čekal na stisk klávesy.
 >
 > Jméno *Less* (méně) si jen hraje se rčením *méně je více*
-> (less is more) – `less` je vylepšenou verzí `more`, která se např. umí
-> v souboru vracet zpátky.
+> (less is more) – `less` je vylepšenou verzí `more`, která se umí v souboru
+> vracet zpátky (a mnohem víc).
 
 
 ## Počítání řádků
@@ -223,9 +234,10 @@ můžeš ji vložit „do“ spuštěného příkazu `wc`.
 > Je dokonce i v `nano` (pod <kbd>Alt</kbd>+<kbd>D</kbd>).
 > Ale textová políčka třeba v prohlížeči bývají „hloupější“.
 
-Tentokrát text neukončuj pomocí <kbd>Ctrl</kbd>+<kbd>C</kbd> – tím bys
+Tentokrát po napsání textu nemačkej <kbd>Ctrl</kbd>+<kbd>C</kbd> – tím bys
 příkaz `wc` ukončil{{a}}, takže by nedostal šanci vypsat výsledek.
-Místo toho použij <kbd>Ctrl</kbd>+<kbd>D</kbd>, což znamená „konec vstupu“.
+Místo toho použij na začátku řádku <kbd>Ctrl</kbd>+<kbd>D</kbd>,
+což znamená „konec vstupu“.
 
 ```console
 $ wc
@@ -233,3 +245,8 @@ haló haló,
 co se stalo?
       2       5      23
 ```
+
+Zkratka <kbd>Ctrl</kbd>+<kbd>D</kbd>, konec vstupu, funguje i pro příkazy
+jako `cat`.
+A dokonce i pro samotný `bash`: když zmáčkneš tuhle zkratku
+místo příkazu, Bash se ukončí.

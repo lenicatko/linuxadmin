@@ -88,8 +88,8 @@ Pomocí `>` říkáš Bashi, aby výstup programu přesměroval do souboru.
 Když soubor daného jména neexistuje, Bash ho vytvoří.
 Pokud existuje, Bash jeho obsah ještě před spuštěním příkazu *smaže*
 a nechá příkaz, ať do něj zapíše něco nového.
-Takže postupuj opatrně: jak už víš že na příkazové řádce se nepoužívá
-odpadkový koš nebo tlačítko Zpět.
+Takže postupuj opatrně: jak už víš, v příkazové řádce není odpadkový koš.
+Ani tlačítko Zpět.
 
 > [warning] Přesměrováním přepíšeš existující soubor
 > A ještě jednou v červeném rámečku: pokud soubor za `>` existuje, smaže se.
@@ -98,21 +98,33 @@ odpadkový koš nebo tlačítko Zpět.
 
 ## Hadí odbočka
 
-Program python má přepínač -c, který umožňuje zadat pythonní příkaz přímo
+Program `python` má přepínač -c, který umožňuje zadat pythonní příkaz přímo
 jako argument příkazové řádky.
 I výstup této operace můžeš přesměrovat do souboru a dál s ním pracovat.
 
+Kód v Pythonu často obsahuje speciální znaky (mezery, závorky, atd.),
+takže je ho často potřeba uzavřít do jednoduchých uvozovek:
+
 ```console
-$ python -c 'print(1 + 1)' > ctyri.txt
+$ python -c 'print(2 + 2)' > ctyri.txt
 $ cat ctyri.txt
-2
+4
 ```
+
+{# Covered later in the "echo section:
+    Nejde tak ale zadat samotná jednoduchá uvozovka.
+    Složitější programy je vždycky lepší psát do souboru.
+    (Pozor na to, že dvojité uvozovky v Bashi fungují trošku jinak než jednoduché:
+    obsah těch jednoduchých Bash přímo předá příkazu; v těch dvojitých předtím
+    některé speciální znaky zpracuje a nahradí něčím jiným.)
+#}
 
 
 ## Řazení
 
 Seznam se s příkazem `sort` (angl. *seřaď*), který seřadí řádky daného souboru.
-Soubor `delky.txt` vypadá takhle:
+
+Soubor `delky.txt` teď vypadá takhle:
 ```console
 $ cat delky.txt
   20 cubane.pdb
@@ -153,6 +165,24 @@ $ sort -n delky.txt
   30 octane.pdb
  107 celkem
 ```
+
+> [note]
+> Bez přepínače `-n` řadí `sort` podle zvoleného jazyka, např. česky nebo
+> anglicky.
+> Jazyk se dá zvolit pomocí nastavení `LC_ALL` před příkazem:
+>
+> ```bash
+> LC_ALL=czech sort soubor.txt    # řadí česky
+> LC_ALL=en_US sort soubor.txt    # řadí anglicky (americká angličtina)
+> LC_ALL=C sort soubor.txt        # řadí byty (tak jako Python – a jazyk C)
+> ```
+>
+> Pozor na velikost písmen a na to, že před a za rovnítkem není mezera.
+> Všechny nainstalované jazyky ti vypíše příkaz `locale -a`.
+>
+> Ale teď zpátky k příběhu – soubor `delky.txt` jsme seřadili podle čísel
+> na začátku.
+
 
 ## Nejmenší molekula
 
@@ -214,7 +244,7 @@ co se stalo?
 Podobně jako u standatního výstupu existuje *standardní vstup*
 (angl. *standard input*, *stdin*) – místo, odkud program získává textové
 informace.
-Normálně to je „klávesnice“:
+Normálně to je terminál, tedy „klávesnice“:
 
 {{ figure(
     img=static('cat.svg'),
@@ -251,7 +281,7 @@ Spousta programů standardní vstup nepoužívá:
     alt='Diagram příkazu `cat soubor.txt`',
   ) }}
 
-Spousta příkazů bez argumentu ale standardní vstup používá:
+Spousta příkazů ale standardní vstup používá když je zavoláš *bez* argumentu:
 
 ```console
 $ sort -n < delky.txt
@@ -274,8 +304,23 @@ $ head -n1 < delky-serazene.txt
    9 methane.pdb
 ```
 
-Všimni si, že příkaz `wc` nevypsal název souboru – chová se tak, jako kdybys
+`wc` bez argumentu se chová tak, jako kdybys
 obsah `delky.txt` napsal{{a}} na klávesnici.
+
+> [note]
+> Všimni si rozdílu mezi příkazy:
+>
+> ```bash
+> $ wc -l delky.txt
+> $ wc -l < delky.txt
+> ```
+>
+> Při použití přesměrování příkaz `wc` nevypíše název souboru.
+> Používá standardní vstup; “neví” že to co čte pochází ze souboru na disku
+> nebo z klávesnice.
+>
+> Soubor mu v tomto případě otevřel Bash.
+> K otevření je jméno souboru potřeba; k dalšímu čtení ale už ne.
 
 K čemu je to dobré?
 Zatím, pravda, k ničemu.
@@ -354,6 +399,7 @@ Nic tě nenutí používat *jen* příkazovou řádku, která je mnohem složit�
 na ovládnutí než „klikátko“ s předpřipravenou nabídkou akcí.
 Ale jakmile se Bash a malé nástroje naučíš efektivně používat,
 {{gnd('sám', 'sama')}} poznáš jak jsou užitečné.
+Ne všechno co potřebuješ je totiž v “klikátcích” předpřipravené.
 
 Modelu pospojovaných nástrojů se také říká *roury a filtry*
 (angl. *pipes and filters*).
@@ -362,12 +408,26 @@ transformují standardní vstup na standardní výstup.
 Většina Unixových nástrojů funguje právě takhle: pokud jim nepředáš
 argument, čtou ze std. vstupu a výsledky píší na std. výstup.
 
+## Stejný vstup a výstup
+
+Není dobrý nápad nastavit výstup na soubor, který v “potrubí” používáš jinde.
+Například:
+
+```console
+$ sort -n delky.txt > delky.txt
+```
+
+Když totiž Bash “potrubí” připravuje, často otevře soubory ještě předtím
+než spustí příkaz.
+A protože při přesměrování *do* souboru se existující soubor vyprázdní,
+bude `sort` v příkazu výše číst z už prázdného souboru.
+
 
 ## Řádky a podvodníci
 
 Protože výchozí std. vstup je klávesnice a výchozí std. výstup je obrazovka,
 rourami většinou „teče“ text, který je více či méně srozumitelný pro lidi.
-Často v něm každá položka bývá na zvláštním řádku.
+Často v něm každá položka bývá na zvláštním řádku.
 Právě na taková data je připravena celá řada nástrojů: od filtrů jako `sort`,
 který řadí řádky, po Pythoní `for radek in soubor:` po `git diff` a jeho
 ekvivalent na webu GitHub.
@@ -381,7 +441,7 @@ creatures/  diplomka_archiv/  north-pacific-gyre/  plan.txt   writing/
 data/       molecules/        pizza.cfg            solar.pdf
 ```
 
-Příkaz `ls` trochu podvádí: zjistí si, jestli má na std. výstupu terminál,
+Příkaz `ls` trochu podvádí: zjistí si jestli má na std. výstupu terminál,
 a pokud ano, přizpůsobí svůj výpis „lidem“.
 
 {{ figure(
@@ -410,16 +470,6 @@ I to je vlastnost, která se špatně zpracovává filtrem, a tak ji `ls` přid�
 jen pokud vypisuje do terminálu.
 
 > [note]
-> Budeš-li někdy psát program který něco vypisuje barevně, nezapomeň
+> Budeš-li někdy psát *vlastní* program který něco vypisuje barevně, nezapomeň
 > dát uživatelům možnost barvy vypnout (viz `--color` v `man ls`).
 > A ideálně nastav výchozí chování podle toho, jestli je std. výstup terminálem.
-
-
-
-
-
-
-
-
-
-
