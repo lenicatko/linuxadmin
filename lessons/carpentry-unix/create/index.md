@@ -568,7 +568,7 @@ začínají písmenem `p`:
 
 ```console
 $ cd ~/Dokumenty/data-shell/molecules
-$ ls p*.pdb
+$ ls *.pdb
 cubane.pdb  ethane.pdb  methane.pdb  octane.pdb  pentane.pdb  propane.pdb
 $ ls p*.pdb
 pentane.pdb  propane.pdb
