@@ -1,0 +1,50 @@
+<h1>Návratová hodnota příkazů</h1>
+<p>Tak jako funkce v Pythonu, i shellové příkazy mají návratovou hodnotu.
+(V angličtine se používá <em>exit code</em> spíš než <em>return value</em>; v češtině budu
+i tady používat termín známý z kurzu Pythonu.)</p>
+<p>Návratová hodnota posledního příkazu je k dispozici ve speciální proměnné <code>$?</code>
+(dolar otazník).
+Je to vždy číslo.</p>
+<div class="admonition note"><p>Technicky vzato je jméno této proměnné jen otazník, ale používá se vždy
+společně s operátorem <code>$</code>. Nejde do ní přiřadit.</p>
+</div><p>Návratová hodnota se většinou používá ke hlášení chyb
+Pokud příkaz proběhl v pořádku, vrátí číslo <code>0</code>.
+Pokud se vyskytne nějaká chyba, vrátí jiné číslo – podle toho,
+jaká chyba vznikla.</p>
+<p>Vyzkoušej si, že po úspěšném příkazu je v <code>$?</code> nula:</p>
+<div class="highlight"><pre><code>$ echo Ahoj
+Ahoj
+$ echo $?      # v `$?` je teď návratová hodnota příkazu `echo Ahoj`
+0
+$ ls
+Dokumenty  Hudba  Obrázky  Plocha  Stažené  Šablony  Veřejné  Videa
+$ echo $?      # v `$?` je teď návratová hodnota příkazu `ls`
+0
+$ echo $?      # v `$?` je teď návratová hodnota příkazu `echo $?`
+0</code></pre></div><p>Například <code>cat</code> vrací hodnotu 1, když se mu nepodaří otevřít soubor;
+<code>bash</code> vrací hodnotu 127 když nenajde zadaný příkaz:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>cat neexistujici-soubor
+<span class="go">cat: neexistujici-soubor: Adresář nebo soubor neexistuje</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>      <span class="c1"># v `$?` je teď návratová hodnota příkazu `cat ...`</span>
+<span class="go">1</span>
+<span class="gp">$ </span>neexistujici-prikaz
+<span class="go">bash: neexistujici-prikaz: command not found...</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>      <span class="c1"># v `$?` je teď kód od Bashe</span>
+<span class="go">127</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>      <span class="c1"># v `$?` je teď návratová hodnota příkazu `echo $?`</span>
+<span class="go">0</span>
+</pre></div><p>Nenulová návratová hodnota ovšem nutně neznamená že příkaz <em>selhal</em>.
+Třeba hledací příkaz <code>grep</code> vrací 1 pokud nic nenajde:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls <span class="p">|</span> grep Plocha
+<span class="go">Plocha</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">0</span>
+<span class="gp">$ </span>ls <span class="p">|</span> grep Programy
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">1</span>
+</pre></div><p>Při “opravdové” chybě použije jinou návratovou hodnotu, např.:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>grep nejaky-text neexistujici-soubor
+<span class="go">grep: neexistujici-soubor: Adresář nebo soubor neexistuje</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">2</span>
+</pre></div>

@@ -1,0 +1,83 @@
+<h1>Úkol: Vlastní příkaz</h1>
+<p>Níže je funkce v Pythonu, která bere řetězec a vrátí "obrácený" řetězec: znaky jsou v něm pozpátku a nahrazené podle slovníku.</p>
+<p>Tvůj úkol je napsat příkaz pro příkazovou řádku, který bude radost použít v Bashi.
+Detaily níže.</p>
+<div class="highlight"><pre><span></span><span class="n">obracena_pismena</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;ɐ&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;ɔ&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="s1">&#39;ǝ&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="s1">&#39;ɟ&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="s1">&#39;ƃ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;h&#39;</span><span class="p">:</span> <span class="s1">&#39;ɥ&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="s1">&#39;ᴉ&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">:</span> <span class="s1">&#39;ɾ&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="s1">&#39;ʞ&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="s1">&#39;ɯ&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;u&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;o&#39;</span><span class="p">:</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span> <span class="s1">&#39;ɹ&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="s1">&#39;ʇ&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">:</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="s1">&#39;ʌ&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="s1">&#39;ʍ&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;ʎ&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;∀&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="s1">&#39;Ɔ&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="s1">&#39;Ǝ&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;Ⅎ&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="s1">&#39;פ&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;J&#39;</span><span class="p">:</span> <span class="s1">&#39;ſ&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="s1">&#39;ʞ&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">:</span> <span class="s1">&#39;˥&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">:</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="s1">&#39;Ԁ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Q&#39;</span><span class="p">:</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="s1">&#39;┴&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">:</span> <span class="s1">&#39;∩&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">:</span> <span class="s1">&#39;Λ&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="s1">&#39;⅄&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;Ɩ&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;ᄅ&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;Ɛ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="s1">&#39;ㄣ&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="s1">&#39;ϛ&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="s1">&#39;ㄥ&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;.&#39;</span><span class="p">:</span> <span class="s1">&#39;˙&#39;</span><span class="p">,</span> <span class="s1">&#39;?&#39;</span><span class="p">:</span> <span class="s1">&#39;¿&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">:</span> <span class="s1">&#39;¡&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span> <span class="s1">&#39;„&#39;</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;`&#39;</span><span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;)&#39;</span><span class="p">:</span> <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">:</span> <span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">:</span> <span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;{&#39;</span><span class="p">:</span> <span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;}&#39;</span><span class="p">:</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;&amp;&#39;</span><span class="p">:</span> <span class="s1">&#39;⅋&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span> <span class="s1">&#39;‾&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">obrat</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">obracena_pismena</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div><p>Příklad použití v Pythonu:</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obrat</span><span class="p">(</span><span class="s2">&quot;Ahoj, PyLadies!&quot;</span><span class="p">)</span>
+<span class="go">&quot;¡sǝᴉpɐ˥ʎԀ &#39;ɾoɥ∀&quot;</span>
+</pre></div><p>Program pro příkazovou řádku by měl být spustitelný (zařiď pomocí <code>chmod</code>).
+Po zkopírování do správného adresáře by měl jít spustit pomocí příkazu <code>obrat</code>.</p>
+<p>Když nedostane žádný argument, obrátí standardní vstup:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> Ahoj <span class="p">|</span> obrat
+<span class="go">ɾoɥ∀</span>
+</pre></div><p>Jednotlivé řádky by měl program zpracovávat samostatně:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;Ahoj,&#39;</span> &gt; pozdrav.txt
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">&#39;PyLadies&#39;</span> &gt;&gt; pozdrav.txt
+<span class="gp">$ </span>cat pozdrav.txt
+<span class="go">Ahoj,</span>
+<span class="go">PyLadies</span>
+<span class="gp">$ </span>cat pozdrav.txt <span class="p">|</span> obrat
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+</pre></div><p>Pokud <code>obrat</code> dostane argumenty, zpracuje dané soubory:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>obrat pozdrav.txt
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+<span class="gp">$ </span>obrat pozdrav.txt pozdrav.txt
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+</pre></div><p>Argument <code>-</code> znamená standardní vstup.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> Ahoj <span class="p">|</span> obrat -
+<span class="go">ɾoɥ∀</span>
+<span class="gp">$ </span><span class="nb">echo</span> haha <span class="p">|</span> obrat pozdrav.txt - pozdrav.txt
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+<span class="go">ɐɥɐɥ</span>
+<span class="go">&#39;ɾoɥ∀</span>
+<span class="go">¡sǝᴉpɐ˥ʎԀ</span>
+</pre></div><p>Pokud dostane přepínač <code>--help</code>, vypíše krátkou nápovědu a ignoruje ostatní argumenty.</p>
+<p>Je-li použit jiný přepínač (začínající <code>-</code>) a ne <code>--help</code>, program uživateli vynadá (na chybovém výstupu), vrátí chybovou návratovou hodnotu (<code>exit(1)</code>) a ignoruje ostatní argumenty.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>obrat -x
+<span class="go">Přepínač -x neexistuje, viz --help</span>
+<span class="gp">$ </span>obrat --cislovani-radku &gt; vystup.txt
+<span class="go">Přepínač --cislovani-radku neexistuje, viz --help</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">1</span>
+</pre></div><p>Nakonec program změň tak, aby když některý znak chybí ve slovníku, vracel chybovou návratovou hodnotu <code>2</code>. Pořád ale zpracuje celý vstup.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> Ahoj <span class="p">|</span> obrat
+<span class="go">ɾoɥ∀</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">0</span>
+<span class="gp">$ </span><span class="nb">echo</span> Čau <span class="p">|</span> obrat
+<span class="go">nɐČ</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$?</span>
+<span class="go">2</span>
+</pre></div><h3>Nápověda k Pythonu</h3>
+<p>Naimportuješ-li <code>sys</code> a <code>os</code>, pak:</p>
+<ul>
+<li><code>sys.argv</code> je seznam argumentů (včetně jména programu)</li>
+<li><code>sys.stdin</code> je <em>už otevřený</em> soubor se std. vstupem (netřeba <code>with</code> či <code>close</code>)</li>
+<li>Podobně <code>sys.stdout</code> je soubor se standardním výstupem (tam píše <code>print</code>) a <code>sys.stderr</code> je soubor chybovým výstupem.</li>
+<li><code>os.environ</code> je slovník* s proměnnýma prostředí</li>
+<li><code>exit(1)</code> ukončí program s danou hodnotou</li>
+</ul>
+<p>(* přesněji řečeno, objekt který se chová jako slovník)</p>

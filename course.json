@@ -289,6 +289,56 @@
                 "static_files": {},
                 "title": "Úkoly - Bash II"
             },
+            "hw/own-cmd": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "own-cmd/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/own-cmd/index.md",
+                        "title": "Úkol",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/own-cmd/info.yml",
+                "static_files": {},
+                "title": "Úkol"
+            },
+            "linuxadmin/bash-exit-code": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2021"
+                        ],
+                        "content": {
+                            "path": "bash-exit-code/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/bash-exit-code/index.md",
+                        "title": "Návratová hodnota příkazů",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/bash-exit-code/info.yml",
+                "static_files": {},
+                "title": "Návratová hodnota příkazů"
+            },
             "linuxadmin/bin-func-alias": {
                 "pages": {
                     "index": {
@@ -372,6 +422,35 @@
                 },
                 "title": "Proměnné Bashe a proměnné prostředí"
             },
+            "linuxadmin/fd": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma, Martin Pavlásek a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "fd/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [
+                            {
+                                "content": "<p>Všechno se to vypíše do terminálu, ve kterém program spouštíš.</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>python soubory.py \n<span class=\"go\">7102</span>\n<span class=\"go\">3 4</span>\n<span class=\"go\">b&#39;# soubory.&#39;</span>\n<span class=\"go\">Tohle jde do souboru 1</span>\n<span class=\"go\">Tohle jde do souboru 2</span>\n</pre></div>"
+                            }
+                        ],
+                        "source_file": "lessons/linuxadmin/fd/index.md",
+                        "title": "Soubory a deskriptory",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/fd/info.yml",
+                "static_files": {},
+                "title": "Soubory a deskriptory"
+            },
             "linuxadmin/fork-exec": {
                 "pages": {
                     "index": {
@@ -400,6 +479,31 @@
                     }
                 },
                 "title": "Fork a exec"
+            },
+            "linuxadmin/fork-teaser": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma, Martin Pavlásek a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "fork-teaser/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/fork-teaser/index.md",
+                        "title": "Funkce které ovládají proces",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/fork-teaser/info.yml",
+                "static_files": {},
+                "title": "Funkce které ovládají proces"
             },
             "linuxadmin/gnome-basics": {
                 "pages": {
@@ -650,6 +754,35 @@
                 "source_file": "lessons/linuxadmin/output-files/info.yml",
                 "static_files": {},
                 "title": "Vypisování souborů"
+            },
+            "linuxadmin/process": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "process/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [
+                            {
+                                "content": "<p>Ve druhém terminálu spusť:</p>\n<div class=\"highlight\"><pre><code>$ ps -A | grep top\n   3186 pts/0    00:00:06 top</code></pre></div><p>První sloupec je PID.</p>\n<p>Když použiješ rozšířený výpis, objeví se ti i <code>grep top</code>;\nsprávný proces můžeš vybrat očima. PID je teď ve druhém sloupci:</p>\n<div class=\"highlight\"><pre><code>$ ps -Af | grep top\nhanka       3186    2494  0 13:31 pts/0    00:00:06 top\nhanka       4291    3767  0 14:23 pts/1    00:00:00 grep --color=auto top</code></pre></div>"
+                            }
+                        ],
+                        "source_file": "lessons/linuxadmin/process/index.md",
+                        "title": "Procesy",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/process/info.yml",
+                "static_files": {},
+                "title": "Procesy"
             },
             "linuxadmin/process-execution": {
                 "pages": {
@@ -1128,31 +1261,6 @@
                 "static_files": {},
                 "title": "Zápis – Bash II"
             },
-            "pilot/03": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "03/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/03/index.md",
-                        "title": "Zápis – Procesy a soubory",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/03/info.yml",
-                "static_files": {},
-                "title": "Zápis – Procesy a soubory"
-            },
             "pilot/04": {
                 "pages": {
                     "index": {
@@ -1447,24 +1555,24 @@
                 "date": "2021-10-25",
                 "materials": [
                     {
-                        "lesson_slug": "pilot/03",
-                        "title": "Zápis – Procesy a soubory",
+                        "lesson_slug": "linuxadmin/bash-exit-code",
+                        "title": "Návratová hodnota příkazů",
                         "type": "lesson"
                     },
                     {
-                        "external_url": "http://swcarpentry.github.io/shell-novice/",
-                        "title": "The Carpentries – The Unix Shell",
-                        "type": "none-link"
+                        "lesson_slug": "linuxadmin/process",
+                        "title": "Procesy",
+                        "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/02",
-                        "title": "Zápis – Bash II",
-                        "type": "link"
+                        "lesson_slug": "linuxadmin/fd",
+                        "title": "Soubory a deskriptory",
+                        "type": "lesson"
                     },
                     {
-                        "lesson_slug": "notes/02",
-                        "title": "Poznámky – Bash II",
-                        "type": "link"
+                        "lesson_slug": "linuxadmin/fork-teaser",
+                        "title": "Bonus: Funkce, které ovládají proces",
+                        "type": "lesson"
                     }
                 ],
                 "serial": "3",
@@ -1481,10 +1589,6 @@
                     },
                     {
                         "title": "whoami, groups, file",
-                        "type": "special"
-                    },
-                    {
-                        "title": "Grep a regulární výrazy; návratová hodnota `$?`",
                         "type": "special"
                     },
                     {
@@ -1521,9 +1625,29 @@
                         "type": "none-link"
                     },
                     {
+                        "external_url": "http://swcarpentry.github.io/shell-novice/",
+                        "title": "The Carpentries – The Unix Shell",
+                        "type": "none-link"
+                    },
+                    {
+                        "lesson_slug": "pilot/02",
+                        "title": "Zápis – Bash II",
+                        "type": "link"
+                    },
+                    {
+                        "lesson_slug": "notes/02",
+                        "title": "Poznámky – Bash II",
+                        "type": "link"
+                    },
+                    {
                         "lesson_slug": "pilot/04",
                         "title": "Zápis – 4",
                         "type": "link"
+                    },
+                    {
+                        "lesson_slug": "hw/own-cmd",
+                        "title": "Úkol",
+                        "type": "homework"
                     }
                 ],
                 "serial": "4",

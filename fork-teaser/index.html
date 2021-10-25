@@ -1,0 +1,102 @@
+<h1>Funkce, které ovládají proces</h1>
+<p>Vytvoř si nový pythonní soubor v textovém editoru: <code>procesy.py</code>.
+V něm si vyzkoušíme několik funkcí, které ovládají aktuálně běžící proces.</p>
+<h2>Ukončení: exit</h2>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+</pre></div><p>Normální funkce jako <code>len</code> a <code>print</code> se po zavolání vrátí;
+když jsou hotové, program pokračuje dál.
+Dokonce i <code>time.sleep(10000000)</code> se časem vrátí, jen to dlouho trvá.</p>
+<p>Existují ale i funkce které se nevrací: třeba ty které vyvolají výjimku.
+Program který na výjimku není připravený skončí.</p>
+<p>Funkce <code>sys.exit()</code> vyhodí výjimku, která – když ji nezpracuješ – ukončí
+program s danou návratovou hodnotou.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tohle se vypíše&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tohle už ne&#39;</span><span class="p">)</span>
+</pre></div><h3>Tvrdší přístup</h3>
+<p>Speciální funkce <code>os._exit()</code> jde ještě dál: okamžitě ukončí proces.
+Python nedostane možnost zpracovat výjimky, zavřít otevřené soubory,
+ukončit síťové spojení a podobně.
+Prostě se ukončí, hned, bez výjimek a bez diskuse.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tohle se nevypíše&#39;</span><span class="p">)</span>
+</pre></div><p>Program po zavolání <code>os._exit()</code> nepokračuje dál; tahle funkce se nevrací.
+Argument funkce <code>_exit</code> je opět návratová hodnota procesu.</p>
+<h2>Mutace: exec</h2>
+<p>Další funkce po které program nepokračuje dál je <em>exec</em>,
+která aktuálně prováděný program nahradí jiným.</p>
+<p>Existuje v několika variantách (podle toho, jak se hledá nový program);
+nejjednodušší je asi:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">execvp</span><span class="p">(</span><span class="s1">&#39;echo&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;echo&#39;</span><span class="p">,</span> <span class="s1">&#39;123&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tohle se nevypíše&#39;</span><span class="p">)</span>
+</pre></div><p>Proces ve kterém program běží začne místo Pythonu provádět příkaz <code>echo 123</code>.
+Jako u <code>os._exit</code> Python nedostane možnost zpracovat výjimky nebo jinak
+„uklidit“.
+Prostě se pustí od začátku jiný program se stejným číslem (PID).</p>
+<h2>Klonování: fork</h2>
+<p>Když máme funkce, které se nevrátí, a taky funkce, které se vrátí jednou,
+můžou existovat funkce, které se vrátí víckrát? Zkus:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ahoj!&quot;</span><span class="p">)</span>
+</pre></div><p>Hláška se vypíše dvakrát.</p>
+<p>Funkce <code>fork</code> totiž umí <em>naklonovat</em> aktuální proces.
+Proces se rozdvojí a každá kopie pokračuje, jako by se funkce <code>fork</code> právě vrátila.</p>
+<p>Tyto dva procesy se liší jen v jedné jediné věci - tím, co vrátí <code>os.fork()</code>.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="n">hodnota</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fork vrací:&quot;</span><span class="p">,</span> <span class="n">hodnota</span><span class="p">)</span>
+</pre></div><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(venv)</span><span class="gp">$ </span>python procesy.py
+<span class="go">Fork vrací: 1827</span>
+<span class="go">Fork vrací: 0</span>
+</pre></div><p>V jednom procesu je návratová hodnota <code>0</code>, ve druhém je to vyšší číslo.</p>
+<p>Jeden proces, tzv. „rodič“, totiž dostal PID druhého procesu,
+„potomka", aby ho mohl ovládat.
+Druhý proces dostal 0, aby poznal že je „potomek".</p>
+<p>Většinou se <code>fork()</code> volá v podmínce <code>if</code>u, aby každý proces dělal
+něco jiného:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;já jsem dítě&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;já jsem rodič&quot;</span><span class="p">)</span>
+</pre></div><p>Spousta programů před forkem často vytvoří rouru, což je speciální soubor
+který má dva „konce“: jeden pro čtení a druhý pro zápis.</p>
+<p>Existuje na to funkce <code>os.pipe()</code>.
+Ta rouru vytvoří a vrátí dvojicí deskriptorů (čísel souborů):
+první pro čtení a druhý pro zápis.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">r</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pipe</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;já jsem dítě&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;Ahoj!&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;já jsem rodič&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">pozdrav</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pozdrav</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div><p>Co dělá tento kód?
+„Potomek“ vypíše že je dítě a zavře konec roury pro čtení. 
+Pak napíše pozdrav "Ahoj" do konce pro zápis.
+Nakonec zavře i tento konec.</p>
+<p>„Rodič“ vypíše že je rodič, zavře rouru pro zápis
+a přečte prvních 10 bajtů z konce pro čtení, a zavře i ten.</p>
+<p>Takto si můžou procesy „povídat“ – jeden z nich vytvoří rouru, kterou
+„zdědí“ jeho „potomek“.</p>
+<h2>A k čemu to je?</h2>
+<p>To si řekneme příště.</p>
