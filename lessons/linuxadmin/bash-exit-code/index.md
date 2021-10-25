@@ -33,7 +33,7 @@ $ echo $?      # v `$?` je teď návratová hodnota příkazu `echo $?`
 ```
 
 Například `cat` vrací hodnotu 1, když se mu nepodaří otevřít soubor;
-`bash` vrací hodnotu 127 když nenajde zadaní příkaz:
+`bash` vrací hodnotu 127 když nenajde zadaný příkaz:
 
 ```console
 $ cat neexistujici-soubor
