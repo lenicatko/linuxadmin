@@ -277,7 +277,7 @@ Jak vidíš, je to poměrně velká tabulka.
      * `1w` - otevřeno pro zápis (W)
 * **TYPE**
     * **DIR** - adresář
-    * **CHR** - normální soubor
+    * **REG** - normální soubor
 * **DEVICE** - číslo zařízení (disku), na kterém soubor je
 * **SIZE/OFF** - velikost
 * **NODE** - číslo souboru (unikátní v rámci *DEVICE*)
