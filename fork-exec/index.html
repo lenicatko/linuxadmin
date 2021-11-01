@@ -5,9 +5,9 @@ Podívejme se na ně v opačném pořadí.</p>
 <h2>Exec</h2>
 <p>Operace <code>exec</code>, pro kterou existuje i příkaz Bashe, <em>nahradí</em> aktuální
 proces jiným.
-Právě prováděný příkaz se přestane provádět a místo toho se začne provádět
-jiný – ovšem se stejnými otevřenými soubory a proměnnými prostředí, jaké
-měl ten původní.</p>
+Právě prováděný proces (Bash) se přestane provádět a místo toho se začne
+provádět jiný – ovšem se stejnými otevřenými soubory a proměnnými prostředí,
+jaké měl ten původní.</p>
 <p>Zkus si to. V jednom terminálu zjisti číslo procesu Bashe:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$$</span>
 </pre></div><p>A ve druhém si vypiš příslušný proces.
@@ -82,7 +82,7 @@ ponastavuje proměnné prostředí, pozavírá soubory které v novém programu
 potřeba atd. – a když je vše nastavené, pomocí <code>exec</code> spustí daný program.
 Ve starém procesu (který z <code>fork</code> dostal PID) pak čeká, až proces s daným
 PID skončí.</p>
-<p>V reálu je situace trochu složitější (Bash např. funguje i na systémech, které
+<p>V reálu je situace trochu složitější (Bash např. funguje i na systémech které
 <code>fork</code> nemají), ale dává-li ti <code>fork</code> a <code>exec</code> smysl, zjednoduší ti to
-přemýšlení nad tím, co Bash vlastně dělá.</p>
+přemýšlení nad tím co Bash vlastně dělá.</p>
 <p><span class="figure"><a href="naucse:static?filename=fork-exec.svg"><img src="naucse:static?filename=fork-exec.svg" alt="Diagram spouštění `ps`"></a></span></p>

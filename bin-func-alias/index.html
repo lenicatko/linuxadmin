@@ -9,7 +9,7 @@ Co takhle si to zautomatizovat – vytvořit příkaz
 <div class="admonition note"><p>Dvakát vypisovat jméno adresáře bych nemusel: zkratka
 <kbd>Alt</kbd>+<kbd>.</kbd> doplní poslední slovo minulého příkazu.
 (Jestli ti to nefunguje, zkus ten druhý <kbd>Alt</kbd>.)
-Ale stejně, na tohle chci mít zkratku na tři písmenka!</p>
+Ale stejně na tohle chci mít krátkou zkratku!</p>
 </div><p>Vytvoř si následující skript a ulož si ho jako <code>mcd</code> (bez přípony):</p>
 <div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
 
@@ -40,8 +40,9 @@ daného adresáře Bash hledá program v <code>$PATH</code>, kde tento příkaz
 <p><span class="figure"><a href="naucse:static?filename=forking-mcd.svg"><img src="naucse:static?filename=forking-mcd.svg" alt="Diagram spouštění jednotlivých podprocesů"></a></span></p>
 <p>K tomu je potřeba dodat, že proces <em>nemůže měnit</em>
 proměnné prostředí, aktuální adresář nebo otevřené soubory <em>jiných procesů</em>.</p>
-<p>Když Bash proces <em>spouští</em>, může mu prostředí nastavit – ale jakmile proces
-běží, nemůže měnit svůj „mateřský“ proces.</p>
+<p>Když Bash proces <em>spouští</em>, může mu prostředí nastavit.
+(Dělá to řed <code>exec</code>, takže mění <em>svoje</em> prostředí.)
+Ale jakmile proces běží, nemůže měnit svůj „mateřský“ proces.</p>
 <p>Příkaz <code>cd</code> ve skriptu tudíž změní aktuální adresář – ale jen v Bashi, který
 obsluhuje náš skript.
 Aktuální adresář původního Bash zůstane nezměněný.</p>
@@ -59,8 +60,12 @@ Většina základních příkazů jsou programy uložené na disku:</p>
 <span class="go">man je /usr/bin/man</span>
 <span class="gp">$ </span><span class="nb">type</span> mkdir
 <span class="go">mkdir je /usr/bin/mkdir</span>
-</pre></div><p>Někdy můžeš dostat informaci o tom, že je soubor „zahashován“ – to pro nás
-znamená to samé co příklady výše.</p>
+</pre></div><div class="admonition note"><p>Někdy se můžeš setkat s příkazem <code>which</code>, který dělá víceméně to samé,
+ale není k dispozici na tolika systémech. Je lepší se naučit používat <code>type</code>.</p>
+</div><p>Někdy můžeš dostat informaci o tom, že je soubor „zahashován“ – to pro nás
+znamená to samé co příklady výše.
+(Znamená to že Bash tenhle příkaz už jednou našel v <code>$PATH</code> a nemusí ho
+hledat znovu, takže ho může spouštět trošku rychleji.)</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>echo<span class="p">|</span>cat
 
 <span class="gp">$ </span><span class="nb">type</span> cat
@@ -74,12 +79,11 @@ znamená to samé co příklady výše.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> pip
 <span class="go">pip je /usr/bin/pip</span>
 <span class="gp">$ </span>less /usr/bin/pip
-<span class="go">`</span>
 </pre></div><h2>Zabudované příkazy</h2>
 <p>Kromě toho existují i zabudované příkazy shellu.
 To nejsou programy, pro které Bash vytváří nový proces.
 Proto můžou měnit stav Bashe – proměnné prostředí, aktuální adresář nebo
-(teoreticky) otevřené soubory – nebo ho např. ukončit:</p>
+(teoreticky) otevřené soubory, Nebo ho třeba ukončit:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> <span class="nb">export</span>
 <span class="go">export je součást shellu</span>
 <span class="gp">$ </span><span class="nb">type</span> <span class="nb">cd</span>
@@ -95,7 +99,8 @@ který se dá zavolat:</p>
 <span class="go">/usr/bin/echo</span>
 <span class="gp">$ </span>/usr/bin/echo Ahoj ahoj!
 <span class="go">Ahoj ahoj!</span>
-</pre></div><p>S přepínačem <code>-a</code> ti  <code>type</code> vypíše všechna místa, kde se daný program dá najít:</p>
+</pre></div><p>S přepínačem <code>-a</code> ti  <code>type</code> vypíše všechna místa, kde se daný program dá
+najít; používá se ale jen to první:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> -a <span class="nb">echo</span>
 <span class="go">echo je součást shellu</span>
 <span class="go">echo je /usr/bin/echo</span>
@@ -103,15 +108,15 @@ který se dá zavolat:</p>
 <code>echo --help</code> s <code>/usr/bin/echo --help</code>.
 Tohle není moc skvělá vlastnost.</p>
 </div><p>Takže teď už znáš trik, kterým <code>cd</code> dokáže měnit adresář Bashe,
-který ho spustil!
-Má protekci, potvůrka.
-Jak to ale zařídíme pro příkaz <code>mcd</code>?</p>
+který ho spustil.
+Má protekci, potvůrka!</p>
+<p>Jak to ale zařídíme pro příkaz <code>mcd</code>?</p>
 <h3>Source</h3>
 <p>Další zabudovaný příkaz je <code>source</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> <span class="nb">source</span>
 <span class="go">source je součást shellu</span>
-</pre></div><p>Source otevře daný sour a spustí ho <em>v aktuálním Bashovém procesu</em>,
-tak jako bys jeho obsah napsala na klávesnici.
+</pre></div><p>Source otevře daný soubor a příkazy v něm spustí <em>v aktuálním Bashovém procesu</em>,
+tak jako bys je napsala na klávesnici.
 Neboli – přesně to co hledáme pro <code>mcd</code>!</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> ./mcd <span class="nb">test</span>
 <span class="go">Vytvářím test</span>
@@ -120,26 +125,27 @@ Neboli – přesně to co hledáme pro <code>mcd</code>!</p>
 <span class="gp">$ </span><span class="nb">cd</span> ..
 </pre></div><p>Jestli používáš Linux pro Python, pravděpodobně tenhle příkaz znáš.
 Skript pro aktivaci virtuálního prostředí, <code>venv/bin/activate</code>,
-potřebuje měnit proměnné <code>PATH</code> (a tudíž význam příkazů <code>python</code> a <code>pip</code>)
-a <code>PS1</code> (prompt) aktuálního shellu.
-Má tedy stejný problém jako <code>mcd</code>. A protože je <code>source</code> dlouhé slovo, má i zkratku: tečku.
+potřebuje měnit proměnné <code>PS1</code> (a tudíž text výzvy) a <code>PATH</code>
+(a tudíž význam příkazů <code>python</code> a <code>pip</code>) – a to v aktuálním shellu.
+Má tedy stejný problém jako <code>mcd</code>.</p>
+<p>A protože je <code>source</code> dlouhé slovo, má i zkratku: tečku.
 Ano, tečka je taky Bashový příkaz.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>. ./mcd dalsi-test
 <span class="go">Vytvářím dalsi-test</span>
 <span class="gp">$ </span><span class="nb">pwd</span>
 <span class="go">.../dalsi-test</span>
 <span class="gp">$ </span><span class="nb">cd</span> ..
-</pre></div><p>(Tečka, mezera, tečka, lomítko, <code>m</code>, <code>c</code>, <code>d</code>.
-V materiálech pro Python používám delší <code>source</code> protože … je vidět.)</p>
-<p>Problém <code>source</code> i tečky je ale ten, že je vždycky musíš napsat.
+</pre></div><div class="admonition note"><p>Ten příkaz je: tečka, mezera, tečka, lomítko, <code>m</code>, <code>c</code>, <code>d</code>.</p>
+<p>V materiálech pro Python používám delší <code>source</code> protože … je vidět.</p>
+</div><p>Problém <code>source</code> i tečky je ale ten, že je vždycky musíš napsat.
 I kdyby byl skript <code>mcd</code> ve správném adresáři, musel by se pouštět
 pomocí <code>. mcd <var>novy-adresar</vat></code>.
-A to nechceš, to je pořád moc dlouhé. Pojďme hledat dál.</p>
+A to nechci, to je pořád moc dlouhé. Pojďme hledat dál.</p>
 <h2>Klíčová slova</h2>
 <p>Kromě programů v souborech a zabudovaných příkazů existují ještě další tři
 druhy příkazů.
-Jeden jsou klíčová slova, která mají jinou syntax než příkazy – potřebují
-strukurovanější zápis než jen argumenty a přepínače:</p>
+Jeden jsou klíčová slova, která mají jinou syntax než příkazy: potřebují
+strukurovanější zápis, ne jen argumenty a přepínače:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> <span class="k">for</span>
 <span class="go">for je klíčové slovo shellu</span>
 <span class="gp">$ </span><span class="nb">type</span> <span class="k">while</span>
@@ -150,7 +156,7 @@ strukurovanější zápis než jen argumenty a přepínače:</p>
 <span class="go">if je klíčové slovo shellu</span>
 </pre></div><h2>Aliasy</h2>
 <p>Zajímavější jsou <em>aliasy</em>, zkratky.
-Jeden alias, který má Fedora ve výchozím nastavení, je <code>ll</code>:</p>
+Jeden alias který má Fedora ve výchozím nastavení, je <code>ll</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">type</span> ll
 <span class="go">ls je alias na „ls -l --color=auto“</span>
 </pre></div><p>Kdykoli zavoláš příkaz <code>ll <var>argumenty</vat></code>, spustí
@@ -226,7 +232,7 @@ příkazy – v kudrnatých závorkách:</p>
 </pre></div><p>Na rozdíl od funkcí v Pythonu jsou závorky <code>()</code> v definici vždycky prázdné.
 Každá funkce bere neomezený počet argumentů, které Bash uloží do proměnných
 <code>$1</code>, <code>$2</code>, <code>$3</code>, atd.
-Jejich počet je v proměnné <code>$#</code>; všechny dohromady jsou v <code>$*</code>.</p>
+Jejich počet je v proměnné <code>$#</code>; všechny dohromady jsou v <code>$@</code>.</p>
 <p>Jak tedy nadefinovat příkaz <code>mcd</code>?</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>mcd <span class="o">()</span> <span class="o">{</span>
 <span class="go">&gt;     mkdir -p $1</span>
@@ -241,13 +247,14 @@ Proto je dobré příkaz <code>cd</code> provést jenom tehdy, když se povede <
 <span class="go">&gt; }</span>
 </pre></div><p>A to je on – vytoužený příkaz na vytvoření adresáře a přepnutí do něj.
 Ufff. Stálo to za to?</p>
-<p>Zvlášť když příkaz zmizí hned, když vypneš Bash?</p>
+<p>Zvlášť když příkaz zmizí hned když vypneš Bash?</p>
 <h2>bashrc</h2>
 <p>Je to tak, téhle ságy ještě není konec.</p>
 <p>Programy v souborech jsou uložené celkem bezpečně, ale aliasy i shellové funkce
-platí jenom pro shell, ve kterém jsou nadefinovány.</p>
-<p>Dá se to samozřjmě obejít tak, že funkci vždy nadefinuješ znovu.</p>
-<p>Můžeš si dokonce vytvořit skript, do kterého definice dáš a vždy ho na začátku
+platí jenom pro shell ve kterém jsou nadefinovány.
+Po vypnutí shellu zmizí.</p>
+<p>Dá se to samozřejmě obejít tak, že funkci vždy nadefinuješ znovu.
+Můžeš si dokonce vytvořit skript, do kterého definice dáš a vždy ho na začátku
 práce s Bashem pustíš (pomocí <code>source</code>, aby se funkce nadefinovaly ve tvém
 procesu).</p>
 <p>Ale nejlepší je dát do souboru <code>~/.bashrc</code> (tedy skrytého souboru <code>.bashrc</code>
@@ -268,7 +275,11 @@ Samozřejmě bez záruky.</p>
 <h2>A další?</h2>
 <p>A co další náležitosti shellových příkazů?
 Manuálová stránka?
-Přepínače – aspoň <code>--help</code>?
-Kontrola, že náš nový příkaz nepřepsal nějaký už existující (ehm…)?</p>
+Přepínače – aspoň <code>--help</code>?</p>
 <p>To už je nad rámec tohoto kurzu.
-Přeci jen se chceme naučit Linuxové systémy ovládat, ne vytvářet :)</p>
+Přeci jen se teď chceme naučit Linuxové systémy ovládat, ne vytvářet :)</p>
+<p>Mimochodem, příkaz <code>mcd</code> už existoval – a dělal něco úplně jiného!
+Příkaz <code>type -a mcd</code> ti ukáže i <code>/usr/bin/mcd</code>, ale co hůř: <code>man mcd</code>
+ukáže nápovědu úplně jiného příkazu.
+Pokud chceš vytvářet funkční systémy, je dobré tohle zkontrolovat ještě dřív
+než začneš vytvářet vlastní příkaz.</p>

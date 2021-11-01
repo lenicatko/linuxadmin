@@ -314,6 +314,31 @@
                 "static_files": {},
                 "title": "Úkol"
             },
+            "linuxadmin/and-or-background": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "and-or-background/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/and-or-background/index.md",
+                        "title": "Další kombinace příkazů",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/and-or-background/info.yml",
+                "static_files": {},
+                "title": "Další kombinace příkazů"
+            },
             "linuxadmin/bash-exit-code": {
                 "pages": {
                     "index": {
@@ -338,6 +363,31 @@
                 "source_file": "lessons/linuxadmin/bash-exit-code/info.yml",
                 "static_files": {},
                 "title": "Návratová hodnota příkazů"
+            },
+            "linuxadmin/bash-shortcuts": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "bash-shortcuts/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/bash-shortcuts/index.md",
+                        "title": "Zkratky",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/bash-shortcuts/info.yml",
+                "static_files": {},
+                "title": "Zkratky"
             },
             "linuxadmin/bin-func-alias": {
                 "pages": {
@@ -415,11 +465,7 @@
                     }
                 },
                 "source_file": "lessons/linuxadmin/env-var/info.yml",
-                "static_files": {
-                    "man-less.svg": {
-                        "path": "env-var/man-less.svg"
-                    }
-                },
+                "static_files": {},
                 "title": "Proměnné Bashe a proměnné prostředí"
             },
             "linuxadmin/fd": {
@@ -813,6 +859,9 @@
                     "main.svg": {
                         "path": "process-execution/main.svg"
                     },
+                    "man-less.svg": {
+                        "path": "process-execution/man-less.svg"
+                    },
                     "ps-cat-sort.svg": {
                         "path": "process-execution/ps-cat-sort.svg"
                     },
@@ -824,6 +873,31 @@
                     }
                 },
                 "title": "Spouštění procesů"
+            },
+            "linuxadmin/script": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "script/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/script/index.md",
+                        "title": "Spustitelné skripty",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/script/info.yml",
+                "static_files": {},
+                "title": "Spustitelné skripty"
             },
             "linuxadmin/var-loop": {
                 "pages": {
@@ -915,32 +989,6 @@
                 "source_file": "lessons/linuxadmin/whats-linux/info.yml",
                 "static_files": {},
                 "title": "Co je to ten „Linux“?"
-            },
-            "notes/02": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020",
-                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
-                        ],
-                        "content": {
-                            "path": "02/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/02/index.md",
-                        "title": "Poznámky – Bash II",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/02/info.yml",
-                "static_files": {},
-                "title": "Poznámky – Bash II"
             },
             "notes/ansible": {
                 "pages": {
@@ -1221,70 +1269,6 @@
                 "source_file": "lessons/notes/users/info.yml",
                 "static_files": {},
                 "title": "Poznámky – Správa uživatelů"
-            },
-            "pilot/02": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020",
-                            "založeno na kurzu <a href=\"http://swcarpentry.github.io/shell-novice/\"><em>The Unix Shell</em></a>, 2016–2018 Software Carpentry Foundation, 2018–2020 The Carpentries"
-                        ],
-                        "content": {
-                            "path": "02/index.1.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [
-                            {
-                                "content": "<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>wc -l *.txt\n</pre></div>"
-                            },
-                            {
-                                "content": "<p><code>wc -l *.txt | sort | head</code> - uvidíš, jestli soubory na začátku jsou OK\n<code>wc -l *.txt | sort | tail</code> - uvidíš, jestli soubory na konci jsou OK</p>\n<p>Podívej se na výstup prvního z těch příkazů:</p>\n<div class=\"highlight\"><pre><code>  240 NENE02018B.txt\n  300 NENE01729A.txt\n  300 NENE01729B.txt\n  300 NENE01736A.txt\n  300 NENE01751A.txt\n  300 NENE01751B.txt\n  300 NENE01812A.txt\n  300 NENE01843A.txt\n  300 NENE01843B.txt\n  300 NENE01971Z.txt</code></pre></div>"
-                            },
-                            {
-                                "content": "<p>Můžeš na to jít postupně: nejprve přečteš dva první řádky, pak z těch dvou jeden poslední.</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span>head -n2 basilisk.dat <span class=\"p\">|</span> tail -n1\n<span class=\"go\">CLASSIFICATION: basiliscus vulgaris</span>\n</pre></div>"
-                            },
-                            {
-                                "content": "<p>Jak na to? Dobré je si úkol rozdělit na dva kroky: cyklus přes soubory a samotný výpis.</p>\n<p>Nejprve si ve <code>for</code> cyklu vypiš obsah proměnné pomocí <code>echo</code>, aby sis byla jistá, že pracuješ se správnou hodnotou. \nKdyž si zvykneš na výpomoc programu <code>echo</code>, ušetříš si v budoucnu spoustu starostí :)</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span><span class=\"k\">for</span> jmeno <span class=\"k\">in</span> *.dat\n<span class=\"go\">&gt; do</span>\n<span class=\"go\">&gt;     echo $jmeno</span>\n<span class=\"go\">&gt; done</span>\n<span class=\"go\">basilisk.dat</span>\n<span class=\"go\">minotaur.dat</span>\n<span class=\"go\">unicorn.dat</span>\n</pre></div><p>Teď už víš, že rámec cyklu <code>for</code> cyklu je napsán správně.\nA tak můžeš místo <code>echo</code> provést už známý příkaz s <code>head</code> a <code>tail</code>:</p>\n<div class=\"highlight\"><pre><span></span><span class=\"gp\">$ </span><span class=\"k\">for</span> jmeno <span class=\"k\">in</span> *.dat\n<span class=\"go\">&gt; do</span>\n<span class=\"go\">&gt;     head -n 2 $jmeno | tail -n 1</span>\n<span class=\"go\">&gt; done</span>\n<span class=\"go\">CLASSIFICATION: basiliscus vulgaris</span>\n<span class=\"go\">CLASSIFICATION: bos hominus</span>\n<span class=\"go\">CLASSIFICATION: equus monoceros</span>\n</pre></div>"
-                            }
-                        ],
-                        "source_file": "lessons/pilot/02/index.md",
-                        "title": "Zápis – Bash II",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/02/info.yml",
-                "static_files": {},
-                "title": "Zápis – Bash II"
-            },
-            "pilot/04": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "04/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/04/index.md",
-                        "title": "Zápis – 4",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/04/info.yml",
-                "static_files": {},
-                "title": "Zápis – 4"
             },
             "pilot/05": {
                 "pages": {
@@ -1584,16 +1568,14 @@
                 "date": "2021-11-01",
                 "materials": [
                     {
-                        "title": "cut, history",
-                        "type": "special"
+                        "lesson_slug": "linuxadmin/env-var",
+                        "title": "Proměnné Bashe a proměnné prostředí",
+                        "type": "lesson"
                     },
                     {
-                        "title": "whoami, groups, file",
-                        "type": "special"
-                    },
-                    {
-                        "title": "While",
-                        "type": "special"
+                        "lesson_slug": "linuxadmin/script",
+                        "title": "Spustitelné skripty",
+                        "type": "lesson"
                     },
                     {
                         "lesson_slug": "linuxadmin/process-execution",
@@ -1602,47 +1584,23 @@
                     },
                     {
                         "lesson_slug": "linuxadmin/fork-exec",
-                        "title": "Fork a exec",
+                        "title": "Bonus: Fork a exec",
                         "type": "lesson"
                     },
                     {
-                        "title": "Programy, které pouští jiné programy: watch",
-                        "type": "special"
-                    },
-                    {
-                        "lesson_slug": "linuxadmin/env-var",
-                        "title": "Proměnné Bashe a proměnné prostředí",
+                        "lesson_slug": "linuxadmin/and-or-background",
+                        "title": "Další kombinace příkazů",
                         "type": "lesson"
                     },
                     {
                         "lesson_slug": "linuxadmin/bin-func-alias",
-                        "title": "type; alias, skripty, funkce; bashrc",
+                        "title": "Programy, funkce a aliasy",
                         "type": "lesson"
                     },
                     {
-                        "external_url": "http://swcarpentry.github.io/shell-novice/",
-                        "title": "Anglický originál: The Carpentries – The Unix Shell (pokračujeme)",
-                        "type": "none-link"
-                    },
-                    {
-                        "external_url": "http://swcarpentry.github.io/shell-novice/",
-                        "title": "The Carpentries – The Unix Shell",
-                        "type": "none-link"
-                    },
-                    {
-                        "lesson_slug": "pilot/02",
-                        "title": "Zápis – Bash II",
-                        "type": "link"
-                    },
-                    {
-                        "lesson_slug": "notes/02",
-                        "title": "Poznámky – Bash II",
-                        "type": "link"
-                    },
-                    {
-                        "lesson_slug": "pilot/04",
-                        "title": "Zápis – 4",
-                        "type": "link"
+                        "lesson_slug": "linuxadmin/bash-shortcuts",
+                        "title": "Zkratky",
+                        "type": "lesson"
                     },
                     {
                         "lesson_slug": "hw/own-cmd",

@@ -1,0 +1,179 @@
+<h1>Spustitelné skripty</h1>
+<p>Pamatuješ si ještě, jak jsme v cyklu klasifikovali různá stvoření?</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> Dokumenty/data-shell/creatures/
+<span class="gp">$ </span><span class="k">for</span> x <span class="k">in</span> *.dat
+<span class="go">&gt; do</span>
+<span class="go">&gt;     head -n 2 $x | tail -n 1</span>
+<span class="go">&gt; done</span>
+<span class="go">CLASSIFICATION: basiliscus vulgaris</span>
+<span class="go">CLASSIFICATION: bos hominus</span>
+<span class="go">CLASSIFICATION: equus monoceros</span>
+</pre></div><p>Psát takhle dlouhé příkazy v Bashi není moc pohodlné.
+Pojďme si tento „program“ uložit do souboru.</p>
+<div class="admonition note"><p class="admonition-title">Skript vs. program</p>
+<p>Programům v Bashi se často říká „skripty“ (angl. <em>script</em>: předpis, scénář).
+Není to o jazyku – skript můžeš napsat i v Pythonu.
+Skripty jsou jednoduché, jednoúčelové programy, které tolik neřeší
+např. ošetřování chyb nebo komunikaci s uživatelem.
+Často volají existující nástroje a „spojují“ je dohromady.</p>
+<p>Není ale žádná pevná hranice mezi „skriptem“ a „programem“.</p>
+</div><h2>Spustitelné skripty</h2>
+<p>Zkus si založit v editoru soubor <code>klasifikace</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>nano klasifikace
+</pre></div><div class="admonition note"><p class="admonition-title">Bez přípony</p>
+<p>Programy v Linuxu typicky nemají příponu: nemáme <code>cat.exe</code> ale jen <code>cat</code>.</p>
+<p>Bashové skripty se dají nastavit i tak, aby byly spustitelné přímo jako
+příkazy, a proto ani <code>klasifikace</code> příponu nemá.</p>
+<p>(Když je přípona pro shellový skript potřeba, používá se většinou <code>.sh</code>.)</p>
+</div><p>Do souboru zapiš cyklus, tak jako bys ho psala v Bashi:</p>
+<div class="highlight"><pre><span></span><span class="go">for x in *.dat</span>
+<span class="go">do</span>
+<span class="go">    head -n 2 $x | tail -n 1</span>
+<span class="go">done</span>
+</pre></div><p>Následně můžeš skript spustit. Musíš být ve složce, která obsahuje tento soubor. 
+Stejně jako u Pythonu spustíš skript pomocí názvu programu, který ho má přečíst (tedy <code>bash</code>), a názvu souboru, který se má spustit.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>bash klasifikace 
+<span class="go">CLASSIFICATION: basiliscus vulgaris</span>
+<span class="go">CLASSIFICATION: bos hominus</span>
+<span class="go">CLASSIFICATION: equus monoceros</span>
+</pre></div><h2>Ze skriptu příkaz</h2>
+<p>Teď uděláme ze skriptu příkaz.
+To znamená že zařídíme, aby nebylo potřeba program volat z tohoto adresáře
+a s <code>bash</code> na začátku.
+Zkus si, že to teď nefunguje:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>klasifikace
+<span class="go">bash: klasifikace: command not found</span>
+</pre></div><p>So s tím?
+Na začátek příkazu patří takzvaný <em>shebang</em>, který říká jakým programem
+se soubor bude spouštět.
+V našem případě chceme skript spouštět pomocí Bashe.
+Na první řádek souboru klasifikace proto připiš dva speciální znaky <code>#!</code> a jméno souboru, ve kterém je uložený program Bash:</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+</pre></div><div class="admonition note"><p>Shebang je instrukce pro systém, že <code>klasifikace</code> se bude spouštět Bashem.
+Pro Bash samotný je to komentář – začíná <code>#</code>.</p>
+</div><p>Další věc, kterou musíš udělat, je nastavení <em>práv</em> souboru (angl. <em>permissions</em>).
+To jsou příznaky, které zobrazuje <code>ls -l</code> v levém sloupci:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ls -l klasifikace
+<span class="go">-rw-r--r-- 1 user users 58 Oct 15 19:12 klasifikace</span>
+</pre></div><p>Existují tři základní druhy oprávnění, pro které se zobrazí buď písmenko (pokud je oprávnění povoleno) nebo pomlčka (pokud je odepřeno):</p>
+<ul>
+<li>r - právo pro čtení souboru (<strong>r</strong>ead)</li>
+<li>w - právo na zápis souboru (<strong>w</strong>rite)</li>
+<li>x - právo na spuštění souboru (e<strong>x</strong>ecute)</li>
+</ul>
+<p>Tyto práva se opakují 3x za sebou, jednou pro vlastníka souboru (zde <code>-rw</code>, vlastník <code>user</code> tedy může soubor <code>klasifikace</code> číst a psát), podruhé pro skupinu (<em>group</em>, zde <code>-r-</code>, skupina <code>users</code> tedy může jen číst), a potřetí pro všechny ostatní uživatele (zde opět můžou jen číst).</p>
+<p>Příkaz musíš přidat právo na spuštění, což zajistí příkaz <code>chmod +x</code>. (Přesné chování <code>chmod</code> si vysvětlíme později.)</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>chmod +x klasifikace
+<span class="gp">$ </span>ls -l klasifikace 
+<span class="go">-rwxr-xr-x 1 user user 58 Oct 15 19:12 klasifikace</span>
+</pre></div><p>Po přidání <em>shebangu</em> a nastavení práv stačí zadát jméno souboru, a on se spustí v Bashi!
+Jen je ho zatím potřeba zadat s plnou cestou, tedy s <code>./</code> na začátku:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./klasifikace 
+<span class="go">CLASSIFICATION: basiliscus vulgaris</span>
+<span class="go">CLASSIFICATION: bos hominus</span>
+<span class="go">CLASSIFICATION: equus monoceros</span>
+</pre></div><h3>Argumenty</h3>
+<p>Náš skript <code>klasifikace</code> zpracovává vždy všechny soubory <code>.dat</code> v daném adresáři. 
+Co kdybys chtěla použít tento skript trochu jinak: aby ukázal data jen z daného souboru? 
+Vytvořme program <code>klasifikuj</code> tak, aby fungovalo třeba:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./klasifikuj minotaur.dat
+</pre></div><p>Vytvoř soubor <code>klasifikuj</code>, dej do něj tento obsah a přidej právo na spuštění:</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+head -n2 <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="p">|</span> tail -n1
+</pre></div><p><code>"$1"</code> je speciální proměnná označující první argument příkazové řádky, tedy u <code>./klasifikuj minotaur.dat</code> ono <code>minotaur.dat</code>.</p>
+<p>Proč je v uvozovkách? 
+Protože kdybys zadala jako první argument text s mezerami, uložily by se jako víc argumentů. 
+Když je sekvence takto v uvozovkách, celý první argument se použije správně.
+Platí obecné pravidlo: pokud používáš v Bashi argument ve kterém může být mezera,
+napiš ho pro jistotu do uvozovek.</p>
+<p>Kdybys chtěla použít další argumenty, použij <code>"$2"</code>, <code>"$3"</code> atd.
+A <code>$0</code>, nultý argument, je jméno skriptu který se spouští.</p>
+<p>Existuje ještě <code>$@</code>, což znamená všechny argumenty. 
+Uprav původní skript <code>klasifikace</code> tak, aby necyklil po <code>*.dat</code>, ale <code>"$@"</code>.
+Teď ho můžeš spouštět jak pro jeden soubor tak i pro seznam souborů.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>cat klasifikace 
+<span class="go">for jmeno in &quot;$@&quot;</span>
+<span class="go">do</span>
+<span class="go">    head -n2 $jmeno | tail -n1</span>
+<span class="go">done</span>
+<span class="gp">$ </span>./klasifikace unicorn.dat
+<span class="go">CLASSIFICATION: equus monoceros</span>
+<span class="gp">$ </span>./klasifikace *.dat
+<span class="go">CLASSIFICATION: basiliscus vulgaris</span>
+<span class="go">CLASSIFICATION: bos hominus</span>
+<span class="go">CLASSIFICATION: equus monoceros</span>
+</pre></div><div class="admonition note"><p>Zajímavé na "$@" je to, že i když je v uvozovkách, více „slov“.</p>
+</div><h3>Spustitelné skripty - nejen pro Bash</h3>
+<p>Shebang můžeš nastavovat nejen pro Bashové skripty. 
+Ukážeme si to na příkladě Pythonu. 
+Vytvoř soubor <code>nahoda</code>, který bude obsahovat tento kód:</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /usr/bin/python3</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div><p>Souboru přidej právo na spuštění a můžeš ho spouštět stejně jako <em>klasfikaci</em> z příkladu výše. 
+<em>Shebang</em> zajistí, že se program spustí Pythonem – tak jako kdybys napsala
+<code>python3 <var>jméno_souboru</var></code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>chmod +x nahoda
+<span class="gp">$ </span>./nahoda
+<span class="go">34</span>
+<span class="gp">$ </span>./nahoda
+<span class="go">73</span>
+</pre></div><p>Ukázka výše funguje pro všechny programy, jen musíš vědět, kde přesně na disku
+jsou (často v <code>/usr/bin/</code> nebo <code>/bin/</code>; do detailů půjdeme později).</p>
+<p>Ukažme si to ještě s <code>cat</code>.
+Do souboru <code>README</code> napiš:</p>
+<div class="highlight"><pre><code>#! /usr/bin/cat
+
+Tady jsou informace.</code></pre></div><p>Přidej práva na spouštění a spusť ho:</p>
+<div class="highlight"><pre><span></span>$ chmod +x README
+$ ./README
+#! /usr/bin/cat
+
+Tady jsou informace.
+</pre></div><p>Je to stejné, jako kdybys spustila <code>cat ./README</code>!</p>
+<h3>Generický shebang</h3>
+<p>Občas budeš psát skripty, které nejen na tvém počítači, ale i jinde.
+Třeba na systémech na kterých Bash chybí – třeba z bezpečnostních důvodů, nebo
+se šetří místem na disku.
+Bude tam ale nainstalovaný jiný shell.</p>
+<p>Standard POSIX, kterým se víceméně řídí všechny „Unixové“ systémy
+(Linux, BSD, Unix, Solaris, macOS, atd.), specifikuje shell jménem <code>sh</code>.
+Do shebangu tedy napíšeš <code>#! /bin/sh</code>.</p>
+<p>Z tohoto shellu Bash vychází; to co funguje v <code>sh</code> funguje v naprosté většině
+případů i v Bashi.
+Naopak to ale neplatí: Bash má „vychytávky“ navíc.
+Skript pro <code>sh</code> je občas potřeba zjednodušit.</p>
+<p>Často také uvidíš skripty, ve kterých za <code>#!</code> není mezera ale rovnou lomítko.
+To na chování nic nemění, jen se ušetří jeden znak.
+Nejčastější shebang pro shellový skript tedy vypadá takto:</p>
+<div class="highlight"><pre><span></span>#!/bin/sh
+</pre></div><h3>PATH</h3>
+<p>Možná si teď kladeš otázku, jak se zbavit <code>./</code> na začátku příkazu
+U příkazů jako <code>cat</code> stačí zadat jen jméno, ale když zadáš pouze:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>klasifikace *.dat
+<span class="go">klasifikace: command not found</span>
+</pre></div><p>Bash si postěžuje, že takový příkaz nezná.
+Když totiž Bash nedostane přesné umístění souboru s příkazem (což <code>./klasifikace</code> je),
+tak se totiž dívá jen do určitých adresářů.
+Které to jsou to určuje proměnná <code>PATH</code>.
+Vypiš si její obsah:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span>
+<span class="go">/home/user/.local/bin:/home/user/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin</span>
+</pre></div><p>Uvidíš spoustu adresářů oddělených dvojtečkou.
+Měla bys v mimo jiné vidět <code>/usr/bin</code>, kde jsou systémové příkazy jako <code>cat</code> a <code>echo</code>.
+A taky je tam <code>/home/<var>tvoje_jmeno</var>/bin</code>, kam můžeš dávat vlastní příkazy.</p>
+<p>Jak už víš, domovský adresář se v Bashi zkracuje jako <code>~</code>, takže místo <code>/home/<var>tvoje_jmeno</var>/bin</code>
+můžeš v příkazech psát <code>~/bin</code>.</p>
+<p>Jak tedy „nainstalovat“ vlastní příkaz?
+Pokud adresář <code>~/bin/</code> neexistuje, vytvoř ho.
+A pak do něj zkopíruj soubor <code>klasifikace</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir ~/bin
+<span class="gp">$ </span>cp klasifikace ~/bin/
+</pre></div><p>Pak můžeš skript spouštět jako příkaz, bez <code>./</code> na začátku:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>klasifikace *.dat
+<span class="go">CLASSIFICATION: basiliscus vulgaris</span>
+<span class="go">CLASSIFICATION: bos hominus</span>
+<span class="go">CLASSIFICATION: equus monoceros</span>
+</pre></div><p>Mimochodem, v domovském adresáři je skrytý skript <code>~/.bashrc</code>, který se spustí vždy, když pustíš Bash. 
+Je to soubor, ve kterém je možné upravit si prostředí, např. přidat cesty do <code>PATH</code>, upravit <code>PS1</code>, nadefinovat si vlastní funkce a spoustu dalších.</p>

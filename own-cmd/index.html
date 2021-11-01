@@ -45,7 +45,7 @@ Po zkopírování do správného adresáře by měl jít spustit pomocí příka
 <span class="go">¡sǝᴉpɐ˥ʎԀ</span>
 <span class="go">&#39;ɾoɥ∀</span>
 <span class="go">¡sǝᴉpɐ˥ʎԀ</span>
-</pre></div><p>Argument <code>-</code> znamená standardní vstup.</p>
+</pre></div><p>Argument <code>-</code> znamená standardní vstup (tedy ne soubor jménem <code>-</code>).</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> Ahoj <span class="p">|</span> obrat -
 <span class="go">ɾoɥ∀</span>
 <span class="gp">$ </span><span class="nb">echo</span> haha <span class="p">|</span> obrat pozdrav.txt - pozdrav.txt
@@ -54,7 +54,7 @@ Po zkopírování do správného adresáře by měl jít spustit pomocí příka
 <span class="go">ɐɥɐɥ</span>
 <span class="go">&#39;ɾoɥ∀</span>
 <span class="go">¡sǝᴉpɐ˥ʎԀ</span>
-</pre></div><p>Pokud dostane přepínač <code>--help</code>, vypíše krátkou nápovědu a ignoruje ostatní argumenty.</p>
+</pre></div><p>Pokud program dostane přepínač <code>--help</code>, vypíše krátkou nápovědu a ignoruje ostatní argumenty.</p>
 <p>Je-li použit jiný přepínač (začínající <code>-</code>) a ne <code>--help</code>, program uživateli vynadá (na chybovém výstupu), vrátí chybovou návratovou hodnotu (<code>exit(1)</code>) a ignoruje ostatní argumenty.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>obrat -x
 <span class="go">Přepínač -x neexistuje, viz --help</span>
@@ -81,3 +81,12 @@ Po zkopírování do správného adresáře by měl jít spustit pomocí příka
 <li><code>exit(1)</code> ukončí program s danou hodnotou</li>
 </ul>
 <p>(* přesněji řečeno, objekt který se chová jako slovník)</p>
+<div class="admonition note"><p>Na zpracování argumentů existují knihovny jako <code>argparse</code> (součást Pythonu),
+nebo <code>click</code> (kterou je potřeba doinstalovat, ale je jednodušší na použití a
+má spoustu vychytávek navíc).
+Ažbudeš psát „opravdový“ program pro příkazovou řádku, nastuduj si jak
+se používají.</p>
+<p>Přímo na seznam <code>sys.argv</code> se dívají jen ty nejjednodušší skripty,
+programátoři kteří se chtějí naučit jak to funguje (ty!), a taky autoři
+knihoven jako <code>click</code>.</p>
+</div>

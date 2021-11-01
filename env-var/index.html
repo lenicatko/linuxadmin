@@ -1,94 +1,4 @@
-<p>XXX: from notes/02:</p>
-<div class="highlight"><pre><code>    ## Proměnné prostředí
-
-    Pomocí příkazu `env` vypíšeš všechny proměnné prostředí, které existují v Bashi. Je jich tam opravdu hodně a určují, jak se chová nejen Bash, ale i programy které spouští.
-    Ukážeme si několik z nich.
-
-    - `SHELL` - říká, jak máš zrovna shell. Bude to nejspíš `/bin/bash`
-    - `HOSTNAME` - jméno počítače
-    - `LC_*něco*` - nastavení formátování různých řetězců
-    - `PWD` - aktuální adresář
-    - `HOME` - domovský adresář
-    - `VISUAL` - editor, který preferuješ
-    - `PS1` - do této proměnné se dá zapsat, čím nám bude začínat každý řádek v Bashi. Můžeš přepsat např. jen na `PS1='$ '` nebo použít zvláštní sekvence jako `\w`, což znamená aktuální adresář.
-    - `PS2` je „pokračovací“ prompt (pro zadávání víceřádkového příkazu)
-
-    Obsah každé proměnné můžeš vypísat pomocí příkazu `echo $&lt;proměnná&gt;`: 
-
-    ```console
-    $ echo $PS1
-    ```
-
-    Existují také speciální proměnné, které jsou pojmenované různými znaky. Třeba:
-    ```console
-    $ echo $?
-    ```
-    vypíše návratovou hodnotu posledního příkazu.
-
-    Příkazy v Unixu vrací hodnoty, podle nichž většinou poznáš, jestli příkaz skončil v pořádku, nebo chybou.
-    - Pokud je v `$0` hodnota `0`, pak proběhl příkaz v pořádku.
-    - Hodnota jiná než `0` značí, příkaz skončil chybou
-
-    Příklad:
-    ```console
-    $ ls unicorn.dat 
-    unicorn.dat
-    $ echo $?
-    0
-
-    $ ls jednorozec.dat
-    ls: cannot access 'jednorozec.dat': No such file or directory
-    $ echo $?
-    2
-    ```
-    Na rozdíl od Pythonu Bash není tak striktní, pokud jde o chyby.
-    Nepovedený příkaz ho nezastaví.
-    Je proto dobré si občas kontrolovat, že příkaz proběhl korektně.
-
-    Proměnná `$$` obsahuje číslo aktuálního shellu. Když otevřeš nový terminál s novým Bashem, uvidíš jiné číslo.
-
-    Podobně jako v Pythonu se jména proměnných v Bashi můžou skládat z písmen, čísel a podtržítek. 
-    Bash umí jednoduše skládat slova dohromady a přidat tak řetězec před nebo za obsah proměnné:
-
-    ```console
-    $ jmeno=minotaur
-    $ echo $jmeno.abc
-    minotaur.abc
-    $ echo my$jmeno
-    myminotaur
-    ``` 
-
-    Kdybys ale chtěla dát proměnnou doprostřed do nějakého většího slova, tímto způsobem to nepůjde.
-    Můžeš ale použít složené závorky:
-
-    ```console
-    $ echo my${jmeno}.abc
-    myminotaur.abc
-    ```
-
-    Obecně je `$jmeno` zkratka pro `${jmeno}`; varianta se závorkami bude fungovat ve více případech.
-
-
-    ## PS2
-
-    Když napíšeš do příkazové řádky víceřádkový příkaz (např. v uvozovkách),
-    výzva se změní.
-    Bude nejspíš vypadat zcela jinak; poslední znak většinou bude `&gt;` místo `$`.
-    Například:
-
-    ```console
-    $ echo "jeden řádek
-    &gt; druhý řádek
-    &gt; třetí řádek"
-    jeden řádek
-    druhý řádek
-    třetí řádek
-    ```
-
-    Tuto variantu výzvy nastavíš proměnnou `PS2`.
-
-
-</code></pre></div><h1>Proměnné Bashe a proměnné prostředí</h1>
+<h1>Proměnné Bashe a proměnné prostředí</h1>
 <p>Už víš, že Bash používá <em>proměnné</em>.
 Asi nejčastěji se používají vrámci cyklu <code>for</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> ~/Dokumenty/data-shell/creatures/
@@ -100,18 +10,16 @@ Asi nejčastěji se používají vrámci cyklu <code>for</code>:</p>
 <span class="go">CLASSIFICATION: bos hominus</span>
 <span class="go">CLASSIFICATION: equus monoceros</span>
 </pre></div><p>Spousta proměnných v Bashi je součást takzvaného <em>prostředí</em>,
-které používá jak samotný Bash, tak i programy, které spouští.</p>
+které používá jak samotný Bash, tak i programy které spouští.</p>
 <p>Jedna z takových proměnných je <code>LANG</code> – aktuální jazyk.
-U mě je nastaven na češtinu, takže Bash i programy v něm spuštěné
-vypisují hlášky v češtině:</p>
+U mě je nastaven na češtinu, takže programy vypisují hlášky v češtině
+(pokud jsou překlady k dispozici):</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$LANG</span>
 <span class="go">cs_CZ.UTF-8</span>
-<span class="gp">$ </span>exbho
-<span class="go">bash: exbho: Příkaz nebyl nenalezen...</span>
 <span class="gp">$ </span>cat neexistujuci
 <span class="go">cat: neexistujuci: Adresář nebo soubor neexistuje</span>
 </pre></div><p>Můžu ho ale nastavit i na angličtinu.
-Proměnnou můžeš nastavit pomocí příkazu
+Jak už víš, proměnnou můžeš nastavit pomocí příkazu
 <code><var>jméno</var>=<var>hodnota</var></code>,
 kde před a za rovnítkem <em>nesmí být mezera</em>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
@@ -122,12 +30,7 @@ kde před a za rovnítkem <em>nesmí být mezera</em>:</p>
 </pre></div><div class="admonition note"><p>Pokud máš anglický systém, je možné, že pouhé nastavení <code>LANG=cs_CZ.UTF-8</code>
 ti jazyk nepřepne – příslušné překlady musí být na systému nainstalovány,
 aby se daly použít.</p>
-</div><p>Aktuální prostředí můžeš spravovat z Pythonu, kde je přístupné jako slovník <code>os.environ</code>:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div><p>To samé dělá příkaz <code>env</code>:</p>
+</div><p>Všechny proměnné prostředí ti vypíše příkaz <code>env</code> (bez argumentů):</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>env <span class="p">|</span> head
 <span class="go">SHELL=/bin/bash</span>
 <span class="go">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1742,unix/unix:/tmp/.ICE-unix/1742</span>
@@ -141,22 +44,31 @@ aby se daly použít.</p>
 <span class="go">DESKTOP_SESSION=gnome-xorg</span>
 </pre></div><div class="highlight"><pre><span></span><span class="gp">$ </span>env <span class="p">|</span> grep ^LANG<span class="o">=</span>
 <span class="go">LANG=cs_CZ.UTF-8</span>
-</pre></div><div class="admonition note"><p>Příkaz <code>env</code> toho dělá víc; Pythonní program simuluje
-jen <code>env</code> bez argumentů a přepínačů.</p>
-</div><h2>Exportování</h2>
+</pre></div><p>Tyto proměnné má k dispozici jakýkoli program spuštěný z Bashe.
+Třeba z Pythonu je přístupné jako slovník <code>os.environ</code>:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div><h2>Exportování</h2>
 <p>Proměnné Bashe se ale do prostředí nedostávají automaticky.</p>
-<p>Tento příkaz nastaví proměnnou <code>jmeno</code>.
-Pak můžeš pomocí <code>env</code> zjistit hodnotu proměnné <em>prostředí</em>,
-která se posílá programům jako <code>env</code>;
-<code>echo $jmeno</code> pak vypíše proměnnou Bashe,
-který ji doplňuje v argumentech:</p>
+<p>Následující příkaz nastaví proměnnou <code>jmeno</code>.
+Pak pomocí <code>env</code> zjistí hodnotu proměnné <em>prostředí</em>,
+která se posílá programům (jako <code>env</code> a <code>python</code>) – tam <code>jmeno</code> není.
+Příkaz <code>echo $jmeno</code> ale obsah proměnné vypíše.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">jmeno</span><span class="o">=</span>minotaur.dat
 <span class="gp">$ </span>env <span class="p">|</span> grep jmeno
 <span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$jmeno</span>
 <span class="go">minotaur.dat</span>
-</pre></div><p>Ačkoli je v Bashi jméno nastavené, programu <code>env</code> se neposlalo.</p>
+</pre></div><p>Ačkoli je v Bashi <code>jmeno</code> nastavené a doplňuje se při použití dolaru,
+programu <code>env</code> se neposlalo.
+Když ale to samé vyzkoušíš s <code>LANG</code>, zjistíš že tahle proměnná se progrramu
+<code>env</code> poslala.</p>
+<p>Proč?</p>
 <p>Proměnné v Bashi mají určité <em>příznaky</em> (angl. <em>attributes</em>/<em>properties</em>).
-Nejdůležitější z nich je příznak <em>export</em>, který nastavíš příkazem <code>export</code>.</p>
+Nejdůležitější z nich je příznak <em>export</em>, který říká, jestli je proměnná
+součástí prostředí, nebo jestli jde jen o „lokální“ proměnnoiu Bashe.
+Nastavíš ho příkazem <code>export</code>.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span> jmeno
 <span class="gp">$ </span>env <span class="p">|</span> grep jmeno
 <span class="go">jmeno=minotaur.dat</span>
@@ -164,7 +76,7 @@ Nejdůležitější z nich je příznak <em>export</em>, který nastavíš př�
 <span class="go">minotaur.dat</span>
 </pre></div><p>Teď Bash předá proměnnou <code>jmeno</code> příkazům, které z něj spustíš.</p>
 <p>Příkaz <code>export</code> nekopíruje hodnotu proměnné do prostředí, ale říká Bashi,
-že má tuto proměnnou předat vždy, když se spouští nový příkaz.
+že má tuto proměnnou předat každému novému příkazu.
 Když tedy proměnnou nastavíš na něco jiného,
 změna se projeví v dalším příkazu i bez dalšího <code>export</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">jmeno</span><span class="o">=</span>unicorn.dat
@@ -193,7 +105,7 @@ můžou být jen velká písmenka:</p>
 <span class="go">AHOJ</span>
 </pre></div><p>Více příznaků najdeš v nápovědě příkazu <code>export</code>.</p>
 </div><h2>Barvičky pro <code>ls</code></h2>
-<p>Jedna z proměnných, které máš (na Fedoře) v Bashi automaticky exportované,
+<p>Jedna z proměnných které máš (na Fedoře) v Bashi automaticky exportované
 se jmenuje <code>LC_COLORS</code>.
 Využívá ji příkaz <code>ls</code> k nastavení barevnosti.</p>
 <p>Zaběhni do nějakého adresáře, kde je mix adresářů a normálních souborů:</p>
@@ -202,11 +114,12 @@ Využívá ji příkaz <code>ls</code> k nastavení barevnosti.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span>ls
 <span class="go">ahoj.txt         animal-counts  archiv    morse.txt  planets.txt  sunspot.txt</span>
 <span class="go">amino-acids.txt  animals.txt    elements  pdb        salmon.txt</span>
-</pre></div><p>Potom nastav proměnnou <code>LS_COLORS</code> na prázdný řetězec a zkus <code>ls</code> znovu.
+</pre></div><p>Potom nastav proměnnou <code>LS_COLORS</code> na středník a zkus <code>ls</code> znovu.
+(Středník je pro Bash speciální, je ho třeba dát do uvozovek.)
 Příkaz <code>ls</code> si teď vybere jiný způsob obarvení:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">LS_COLORS</span><span class="o">=</span>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">LS_COLORS</span><span class="o">=</span><span class="s1">&#39;;&#39;</span>
 <span class="gp">$ </span>ls
-</pre></div><p>Když znáš formát (do čehož teď nebudeme zabíhat),
+</pre></div><p>Když znáš formát zadávání barev (do čehož teď nebudeme zabíhat),
 můžeš si barvičky nastavit podle sebe:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">LS_COLORS</span><span class="o">=</span><span class="s1">&#39;di=38;1;31&#39;</span>
 <span class="gp">$ </span>ls
@@ -231,6 +144,14 @@ ovlivňují chování programů, např.</p>
 naimportovaných modulů, nebo</li>
 <li><code>PAGER</code> a <code>EDITOR</code> – viz níže.</li>
 </ul>
+<p>A některé proměnné Bash nejen používá, ale i nastavuje:</p>
+<ul>
+<li><code>HOSTNAME</code>: jméno počítače</li>
+<li><code>LC_*něco*</code>: nastavení formátování různých řetězců</li>
+<li><code>PWD</code>: aktuální adresář</li>
+<li><code>HOME</code>: domovský adresář</li>
+</ul>
+<p>Některé z nich nastavuje speciálním způsobem, takže</p>
 <h2>Jméno v závorkách</h2>
 <p>Bash nahrazuje všechny výskyty <code>$<var>jméno</var></code> obsahem dané
 proměnné.
@@ -240,46 +161,66 @@ Dělá to nejen v samostatných argumentech, ale i v jejich částech:</p>
 <span class="go">nejlepší</span>
 </pre></div><p>Občas, když tohle budeš tohle chtít použít, budeš potřebovat Bashi říct,
 co je ještě jméno proměnné.
-Pak můžeš jméno uzavřít do kudrnatých závorek,
+Pak můžeš jméno uzavřít do „kudrnatých“ závorek,
 <code>${<var>jméno</var>}</code>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">majitel</span><span class="o">=</span>Petr
-<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$majitelovo</span>   <span class="c1"># proměnná jménem &quot;majitelovo&quot; neexistuje</span>
-<span class="gp">$ </span><span class="nb">echo</span> <span class="si">${</span><span class="nv">majitel</span><span class="si">}</span>ovo
-<span class="go">Petrovo</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$majitelovo</span> jablko   <span class="c1"># proměnná jménem &quot;majitelovo&quot; neexistuje</span>
+<span class="go">jablko</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="si">${</span><span class="nv">majitel</span><span class="si">}</span>ovo jablko
+<span class="go">Petrovo jablko</span>
 </pre></div><p>Fuguje to vždy; <code>$<var>jméno</var></code> bez závorek je jen zkratka.</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="si">${</span><span class="nv">LANG</span><span class="si">}</span>
 <span class="go">cs_CZ.UTF-8</span>
-</pre></div><p>Proměnné Bash nahrazuje i ve jménech programů, takže můžeš napsat:</p>
+</pre></div><h2>Proměnná jména programů</h2>
+<p>Proměnné Bash nahrazuje i ve jménech programů, takže můžeš napsat:</p>
 <div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">zpracuj</span><span class="o">=</span>head
-<span class="gp">$ </span><span class="nv">$zpracuj</span> unicorn.dat
-<span class="go">COMMON NAME: unicorn</span>
-<span class="go">CLASSIFICATION: equus monoceros</span>
-<span class="go">UPDATED: 1738-11-24</span>
-<span class="go">AGCCGGGTCG</span>
-<span class="go">CTTTACCTTA</span>
-<span class="go">AAGCCGAGGG</span>
-<span class="go">GGGTGGTACG</span>
-<span class="go">CCGAACATAA</span>
-<span class="go">ACGCTTTAAC</span>
-<span class="go">GTCCCTCCAG</span>
+<span class="gp">$ </span><span class="nv">$zpracuj</span> sunspot.txt
+<span class="go">* Sunspot data collected by Robin McQuinn from *)</span>
+<span class="go">* http://sidc.oma.be/html/sunspot.html         *)</span>
+
+<span class="go">* Month: 1749 01 *) 58</span>
+<span class="go">* Month: 1749 02 *) 63</span>
+<span class="go">* Month: 1749 03 *) 70</span>
+<span class="go">* Month: 1749 04 *) 56</span>
+<span class="go">* Month: 1749 05 *) 85</span>
+<span class="go">* Month: 1749 06 *) 84</span>
+<span class="go">* Month: 1749 07 *) 95</span>
 <span class="gp">$ </span><span class="nv">zpracuj</span><span class="o">=</span><span class="s1">&#39;wc -l&#39;</span>
-<span class="gp">$ </span><span class="nv">$zpracuj</span> unicorn.dat
-<span class="go">163 unicorn.dat</span>
+<span class="gp">$ </span><span class="nv">$zpracuj</span> sunspot.txt 
+<span class="go">3080 sunspot.txt</span>
 <span class="gp">$ </span><span class="nv">zpracuj</span><span class="o">=</span>less
-<span class="gp">$ </span><span class="nv">$zpracuj</span> unicorn.dat
-</pre></div><h2>Rolovátko</h2>
-<p>Víš, proč se třeba <code>man</code> nebo <code>git diff</code> chovají a ovládají stejně jako <code>less</code>?
-Proto, že samy spustí <code>less</code> a pošlou do něho rourou text,
-který chtějí zobrazit.</p>
-<p><span class="figure"><a href="naucse:static?filename=man-less.svg"><img src="naucse:static?filename=man-less.svg" alt="Diagram spouštění `less` z `man`"></a></span></p>
-<p>Podobné programy většinou respektují proměnnou <code>PAGER</code>,
-kterou můžeš vybrat program, který se použije místo <code>less</code>.
-Zkus si <code>more</code>, starší verzi <code>less</code> která umí <kbd>Enter</kbd>,
-<kbd>Mezerník</kbd> a <kbd>q</kbd>, ale neumí se vracet (<kbd>↑</kbd>):</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PAGER</span><span class="o">=</span>more man bash
-</pre></div><p>Nebo rolování vypni úplně pomocí <code>cat</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PAGER</span><span class="o">=</span>cat man bash
-</pre></div><p>Nebo jakýkoli jiný filtr – nikdo ti nezakazuje zadávat nesmysly:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">PAGER</span><span class="o">=</span>wc man bash
-<span class="gp">$ </span><span class="nv">PAGER</span><span class="o">=</span>tac man bash
-</pre></div>
+<span class="gp">$ </span><span class="nv">$zpracuj</span> sunspot.txt
+</pre></div><p>Tohle se reálně používá.</p>
+<p>V proměnné <code>EDITOR</code> spousta programů hledá editor, který spustí když
+chtějí aby uživatel změnil nějaký soubor – například když se Git ptá na
+popis změn.
+Ve Fedoře je nastaven na <code>/usr/bin/nano</code>, ale v <code>~/.bashrc</code> si můžeš nastavit
+jiný.
+(Pozor ale na to, že nastavení jako <code>git config</code> nebo proměnná <code>GIT_EDITOR</code>
+tuhle hodnotu „přebíjí“.)</p>
+<p>V proměnné <code>PAGER</code> zase můžeš nastavit „skrolovátko“.
+Opět – spousta programů se tím pak bude řídit.
+Tahle proměnná není „od výroby“ nastavená; když je prázdná tak programy
+typicky použijí <code>less</code>.</p>
+<h2>Výzva</h2>
+<p>Některé proměnné prostředí využívá samotný Bash.
+Jedna z nejzákladnějších je <code>PS1</code>, která ovládá výzvu
+(angl. <em>prompt</em>; <code>PS</code> je zkratka <em>prompt string</em>).
+Bývá nastavena na docela složitou hodnotu:</p>
+<div class="highlight"><pre><span></span><span class="gp">[\u@\h \W]\$
+</span></pre></div><p>Bash v ní nahrazuje sekvence se zpětnými lomítky.
+(Co které znamená, to můžeš případně dohledat v dokumentaci.)</p>
+<p>Když chceš výzvu zkrátit, nastav <code>PS1</code> na něco kratšího.
+Doporučuju výzvu ukončit dolarem (aby bylo jasné že to je výzva) a
+mezerou (která musí být v uvozovkách, aby ji Bash bral jako součást hodnoty).</p>
+<div class="highlight"><pre><span></span><span class="gp">[user@fedora data]$ </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;$ &#39;</span>
+<span class="gp">$
+</span></pre></div><p>Když napíšeš do příkazové řádky víceřádkový příkaz (např. v uvozovkách),
+výzva se změní. Poslední znak většinou bude <code>&gt;</code> místo <code>$</code>.
+Například:</p>
+<div class="highlight"><pre><code>$ echo "jeden řádek
+&gt; druhý řádek
+&gt; třetí řádek"
+jeden řádek
+druhý řádek
+třetí řádek</code></pre></div><p>Tuto variantu výzvy nastavíš pomocí proměnné <code>PS2</code>.</p>
