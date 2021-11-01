@@ -127,16 +127,17 @@ import os
 
 r, w = os.pipe()
 
+pid = os.fork()
 if pid == 0:
-    print("já jsem dítě")
+    print("já jsem dítě, moje PID je", os.getpid())
     os.close(r)
     os.write(w, b'Ahoj!')
     os.close(w)
 else:
-    print("já jsem rodič")
+    print("já jsem rodič, dítě je", pid)
     os.close(w)
     pozdrav = os.read(r, 5)
-    print(pozdrav)
+    print('dítě říká:', pozdrav)
     os.close(r)
 ```
 

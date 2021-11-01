@@ -15,6 +15,7 @@ $ ps
 Vidíš, že běží dva programy: jak `bash` tak `ps`.
 
 Co když přesměruješ data z jednoho příkazu do druhého?
+Ve výstupu `ps` uvidíš všechny spuštěné procesy:
 
 ```console
 $ ps | cat
@@ -40,6 +41,9 @@ $ echo | ps
   14689 pts/0    00:00:00 ps
 ```
 
+Všimni si, že v posledním příkladu chybí `echo`.
+Proč? I k tomu se dnes dostaneme.
+
 
 ## Nastavení, spuštění a čekání
 
@@ -49,7 +53,9 @@ Když Bash spouští program, udělá tři věci:
 * čeká, až se program ukončí.
 
 Pokud Bash spouští několik programů najednou, udělá obecně každý z těchto
-kroků pro všechny spouštěné programy najednou.
+kroků pro všechny spouštěné programy najednou:
+napřed všem programům nastaví prostředí, potom teprve všechny spustí,
+a pak na všechny počká.
 
 Příklady:
 
@@ -72,7 +78,7 @@ Po ukončení Bash vypíše výzvu a čeká na další příkaz.
 
 * Bash vytvoří novou rouru. Std. výstup z `ps` a std. vstup pro `cat`
   přesměruje na tuto rouru.
-  (Zbylé – std. chyby, vstup pr `ps` i výstup z `cat` – nechá jako u Bashe.)
+  (Zbylé – std. chyby, vstup pro `ps` i výstup z `cat` – nechá jako u Bashe.)
 * Spustí programy `ps` i `cat`.
 * Čeká, než se `ps` i `cat` ukončí.
   (Programy mezitím spolu komunikují nebo píší na std. výstup.)
@@ -94,9 +100,10 @@ Bash skládá za sebe stejným spůsobem.
 
 ### `echo | ps`
 
-Z pohledu Bashe je `echo | ps` úplně stejné jako `ps | cat`.
+Z pohledu spouštění je `echo | ps` úplně stejné jako `ps | cat`.
 Příkaz `echo` se ale ukončí hned poté co vypíše svůj řádek, což je většinou
-velice rychlé – stihne to dřív než se `ps` zeptá systému na běžící programy.
+velice rychlé – zvládne to ještě dřív než se `ps` stihne zeptat systému na
+běžící programy.
 Proto `echo` většinou není ve výstupu vidět.:
 
 ```console
@@ -112,69 +119,35 @@ $ echo | ps
   ) }}
 
 
-## Další kombinace příkazů
+## Rolovátko
 
-Kromě `|` se příkazy dají kombinovat několika dalšími operátory.
+Víš, proč se třeba `man` nebo `git diff` chovají a ovládají stejně jako `less`?
+Proto, že samy spustí `less` a pošlou do něho rourou text,
+který chtějí zobrazit.
 
-Nejjednodušší je středník (`;`): napřed se provede příkaz na levé straně,
-potom ten na pravé.
+  {{ figure(
+    img=static('man-less.svg'),
+    alt='Diagram spouštění `less` z `man`',
+  ) }}
 
-```console
-$ echo 'Vysledek je'; python -c 'print(1 + 1)'
-Vysledek je
-2
-```
-
-Docela užitečné je `&&` (logické A; angl. *AND*): napřed se provede příkaz
-na levé straně, a pouze pokud uspěl (`$?` je 0), se provede ten na pravé.
-
-```console
-$ python -c 'print(1 + )' && echo 'je výsledek'
-  File "<string>", line 1
-    print(1 + )
-              ^
-SyntaxError: invalid syntax
-```
-
-Tenhle operátor se hodí např. v případech, kdy píšeš program, který připraví
-nějaký soubor. Příkaz `python priprav-soubor.py && head pripraveny-soubor.dat`
-vypíše ukázku výsledku, ale jen když se všechno povedlo.
-Když Python skončí s chybou, `pripraveny-soubor.dat` (existující od minula)
-se nevypíše – na obrazovce zůstane chybová hláška od Pythonu.
-
-Opak je `||` (logické NEBO; angl. *OR*): příkaz na pravé straně se provede,
-pokud příkaz nalevo *neuspěl* (`$?` není 0).
+Podobné programy většinou respektují proměnnou `PAGER`,
+kterou můžeš vybrat program, který se použije místo `less`.
+Zkus si `more`, starší verzi `less` která umí <kbd>Enter</kbd>,
+<kbd>Mezerník</kbd> a <kbd>q</kbd>, ale neumí se vracet (<kbd>↑</kbd>):
 
 ```console
-$ python -c 'print(1 + )' || echo 'Jejda! Chyba!'
-  File "<string>", line 1
-    print(1 + )
-              ^
-SyntaxError: invalid syntax
-Jejda! Chyba!
+$ PAGER=more man bash
 ```
 
-A nakonec, když dáš za příkaz `&`, tak Bash nebude čekat na konec programu,
-ale pokračuje hned dál.
-Když program skončí, dá Bash před dalším promptem vědět:
+Nebo rolování vypni úplně pomocí `cat`:
 
 ```console
-$ sleep 1
-$ sleep 1 &
-[1] 25507
-$
-$ # vteřinu počkej...
-[1]+  Dokončena              sleep 1
-$
+$ PAGER=cat man bash
 ```
-
-Pozor na to, že program „v pozadí“ sdílí s Bashem terminál,
-takže pokud bude něco psát (nebo hůř, číst) se std. vstupu/výstupů,
-bude se s Bashem „hádat“.
+Nebo jakýkoli jiný filtr – nikdo ti nezakazuje zadávat nesmysly:
 
 ```console
-$ curl https://httpbin.org/get &
-[1] 25537
-$ { ... sem curl vypíše jakási stažená JSON data ...  }
+$ PAGER=wc   man bash
+$ PAGER=tac  man bash
+$ PAGER=rev  man bash
 ```
-

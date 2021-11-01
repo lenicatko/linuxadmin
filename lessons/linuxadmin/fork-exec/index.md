@@ -10,9 +10,9 @@ Podívejme se na ně v opačném pořadí.
 
 Operace `exec`, pro kterou existuje i příkaz Bashe, *nahradí* aktuální
 proces jiným.
-Právě prováděný příkaz se přestane provádět a místo toho se začne provádět
-jiný – ovšem se stejnými otevřenými soubory a proměnnými prostředí, jaké
-měl ten původní.
+Právě prováděný proces (Bash) se přestane provádět a místo toho se začne
+provádět jiný – ovšem se stejnými otevřenými soubory a proměnnými prostředí,
+jaké měl ten původní.
 
 Zkus si to. V jednom terminálu zjisti číslo procesu Bashe:
 
@@ -124,9 +124,9 @@ potřeba atd. – a když je vše nastavené, pomocí `exec` spustí daný progr
 Ve starém procesu (který z `fork` dostal PID) pak čeká, až proces s daným
 PID skončí.
 
-V reálu je situace trochu složitější (Bash např. funguje i na systémech, které
+V reálu je situace trochu složitější (Bash např. funguje i na systémech které
 `fork` nemají), ale dává-li ti `fork` a `exec` smysl, zjednoduší ti to
-přemýšlení nad tím, co Bash vlastně dělá.
+přemýšlení nad tím co Bash vlastně dělá.
 
 
   {{ figure(

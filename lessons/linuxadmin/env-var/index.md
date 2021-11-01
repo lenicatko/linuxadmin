@@ -1,94 +1,3 @@
-XXX: from notes/02:
-
-        ## Proměnné prostředí
-
-        Pomocí příkazu `env` vypíšeš všechny proměnné prostředí, které existují v Bashi. Je jich tam opravdu hodně a určují, jak se chová nejen Bash, ale i programy které spouští.
-        Ukážeme si několik z nich.
-
-        - `SHELL` - říká, jak máš zrovna shell. Bude to nejspíš `/bin/bash`
-        - `HOSTNAME` - jméno počítače
-        - `LC_*něco*` - nastavení formátování různých řetězců
-        - `PWD` - aktuální adresář
-        - `HOME` - domovský adresář
-        - `VISUAL` - editor, který preferuješ
-        - `PS1` - do této proměnné se dá zapsat, čím nám bude začínat každý řádek v Bashi. Můžeš přepsat např. jen na `PS1='$ '` nebo použít zvláštní sekvence jako `\w`, což znamená aktuální adresář.
-        - `PS2` je „pokračovací“ prompt (pro zadávání víceřádkového příkazu)
-
-        Obsah každé proměnné můžeš vypísat pomocí příkazu `echo $<proměnná>`: 
-
-        ```console
-        $ echo $PS1
-        ```
-
-        Existují také speciální proměnné, které jsou pojmenované různými znaky. Třeba:
-        ```console
-        $ echo $?
-        ```
-        vypíše návratovou hodnotu posledního příkazu.
-
-        Příkazy v Unixu vrací hodnoty, podle nichž většinou poznáš, jestli příkaz skončil v pořádku, nebo chybou.
-        - Pokud je v `$0` hodnota `0`, pak proběhl příkaz v pořádku.
-        - Hodnota jiná než `0` značí, příkaz skončil chybou
-
-        Příklad:
-        ```console
-        $ ls unicorn.dat 
-        unicorn.dat
-        $ echo $?
-        0
-
-        $ ls jednorozec.dat
-        ls: cannot access 'jednorozec.dat': No such file or directory
-        $ echo $?
-        2
-        ```
-        Na rozdíl od Pythonu Bash není tak striktní, pokud jde o chyby.
-        Nepovedený příkaz ho nezastaví.
-        Je proto dobré si občas kontrolovat, že příkaz proběhl korektně.
-
-        Proměnná `$$` obsahuje číslo aktuálního shellu. Když otevřeš nový terminál s novým Bashem, uvidíš jiné číslo.
-
-        Podobně jako v Pythonu se jména proměnných v Bashi můžou skládat z písmen, čísel a podtržítek. 
-        Bash umí jednoduše skládat slova dohromady a přidat tak řetězec před nebo za obsah proměnné:
-
-        ```console
-        $ jmeno=minotaur
-        $ echo $jmeno.abc
-        minotaur.abc
-        $ echo my$jmeno
-        myminotaur
-        ``` 
-
-        Kdybys ale chtěl{{a}} dát proměnnou doprostřed do nějakého většího slova, tímto způsobem to nepůjde.
-        Můžeš ale použít složené závorky:
-
-        ```console
-        $ echo my${jmeno}.abc
-        myminotaur.abc
-        ```
-
-        Obecně je `$jmeno` zkratka pro `${jmeno}`; varianta se závorkami bude fungovat ve více případech.
-
-
-        ## PS2
-
-        Když napíšeš do příkazové řádky víceřádkový příkaz (např. v uvozovkách),
-        výzva se změní.
-        Bude nejspíš vypadat zcela jinak; poslední znak většinou bude `>` místo `$`.
-        Například:
-
-        ```console
-        $ echo "jeden řádek
-        > druhý řádek
-        > třetí řádek"
-        jeden řádek
-        druhý řádek
-        třetí řádek
-        ```
-
-        Tuto variantu výzvy nastavíš proměnnou `PS2`.
-
-
 # Proměnné Bashe a proměnné prostředí
 
 Už víš, že Bash používá *proměnné*.
@@ -106,23 +15,21 @@ CLASSIFICATION: equus monoceros
 ```
 
 Spousta proměnných v Bashi je součást takzvaného *prostředí*,
-které používá jak samotný Bash, tak i programy, které spouští.
+které používá jak samotný Bash, tak i programy které spouští.
 
 Jedna z takových proměnných je `LANG` – aktuální jazyk.
-U mě je nastaven na češtinu, takže Bash i programy v něm spuštěné
-vypisují hlášky v češtině:
+U mě je nastaven na češtinu, takže programy vypisují hlášky v češtině
+(pokud jsou překlady k dispozici):
 
 ```console
 $ echo $LANG
 cs_CZ.UTF-8
-$ exbho
-bash: exbho: Příkaz nebyl nenalezen...
 $ cat neexistujuci
 cat: neexistujuci: Adresář nebo soubor neexistuje
 ```
 
 Můžu ho ale nastavit i na angličtinu.
-Proměnnou můžeš nastavit pomocí příkazu
+Jak už víš, proměnnou můžeš nastavit pomocí příkazu
 <code><var>jméno</var>=<var>hodnota</var></code>,
 kde před a za rovnítkem *nesmí být mezera*:
 
@@ -139,16 +46,7 @@ cat: neexistujuci: No such file or directory
 > ti jazyk nepřepne – příslušné překlady musí být na systému nainstalovány,
 > aby se daly použít.
 
-Aktuální prostředí můžeš spravovat z Pythonu, kde je přístupné jako slovník `os.environ`:
-
-```python
-import os
-
-for key, value in os.environ.items():
-    print(f'{key}={value}')
-```
-
-To samé dělá příkaz `env`:
+Všechny proměnné prostředí ti vypíše příkaz `env` (bez argumentů):
 
 ```console
 $ env | head
@@ -169,20 +67,25 @@ $ env | grep ^LANG=
 LANG=cs_CZ.UTF-8
 ```
 
-> [note]
-> Příkaz `env` toho dělá víc; Pythonní program simuluje
-> jen `env` bez argumentů a přepínačů.
+Tyto proměnné má k dispozici jakýkoli program spuštěný z Bashe.
+Třeba z Pythonu je přístupné jako slovník `os.environ`:
+
+```python
+import os
+
+for key, value in os.environ.items():
+    print(f'{key}={value}')
+```
 
 
 ## Exportování
 
 Proměnné Bashe se ale do prostředí nedostávají automaticky.
 
-Tento příkaz nastaví proměnnou `jmeno`.
-Pak můžeš pomocí `env` zjistit hodnotu proměnné *prostředí*,
-která se posílá programům jako `env`;
-`echo $jmeno` pak vypíše proměnnou Bashe,
-který ji doplňuje v argumentech:
+Následující příkaz nastaví proměnnou `jmeno`.
+Pak pomocí `env` zjistí hodnotu proměnné *prostředí*,
+která se posílá programům (jako `env` a `python`) – tam `jmeno` není.
+Příkaz `echo $jmeno` ale obsah proměnné vypíše.
 
 ```console
 $ jmeno=minotaur.dat
@@ -191,10 +94,17 @@ $ echo $jmeno
 minotaur.dat
 ```
 
-Ačkoli je v Bashi jméno nastavené, programu `env` se neposlalo.
+Ačkoli je v Bashi `jmeno` nastavené a doplňuje se při použití dolaru,
+programu `env` se neposlalo.
+Když ale to samé vyzkoušíš s `LANG`, zjistíš že tahle proměnná se progrramu
+`env` poslala.
+
+Proč?
 
 Proměnné v Bashi mají určité *příznaky* (angl. *attributes*/*properties*).
-Nejdůležitější z nich je příznak *export*, který nastavíš příkazem `export`.
+Nejdůležitější z nich je příznak *export*, který říká, jestli je proměnná
+součástí prostředí, nebo jestli jde jen o „lokální“ proměnnoiu Bashe.
+Nastavíš ho příkazem `export`.
 
 ```console
 $ export jmeno
@@ -207,7 +117,7 @@ minotaur.dat
 Teď Bash předá proměnnou `jmeno` příkazům, které z něj spustíš.
 
 Příkaz `export` nekopíruje hodnotu proměnné do prostředí, ale říká Bashi,
-že má tuto proměnnou předat vždy, když se spouští nový příkaz.
+že má tuto proměnnou předat každému novému příkazu.
 Když tedy proměnnou nastavíš na něco jiného,
 změna se projeví v dalším příkazu i bez dalšího `export`:
 
@@ -254,7 +164,7 @@ basilisk.dat
 
 ## Barvičky pro `ls`
 
-Jedna z proměnných, které máš (na Fedoře) v Bashi automaticky exportované,
+Jedna z proměnných které máš (na Fedoře) v Bashi automaticky exportované
 se jmenuje `LC_COLORS`.
 Využívá ji příkaz `ls` k nastavení barevnosti.
 
@@ -272,15 +182,16 @@ ahoj.txt         animal-counts  archiv    morse.txt  planets.txt  sunspot.txt
 amino-acids.txt  animals.txt    elements  pdb        salmon.txt
 ```
 
-Potom nastav proměnnou `LS_COLORS` na prázdný řetězec a zkus `ls` znovu.
+Potom nastav proměnnou `LS_COLORS` na středník a zkus `ls` znovu.
+(Středník je pro Bash speciální, je ho třeba dát do uvozovek.)
 Příkaz `ls` si teď vybere jiný způsob obarvení:
 
 ```console
-$ LS_COLORS=
+$ LS_COLORS=';'
 $ ls
 ```
 
-Když znáš formát (do čehož teď nebudeme zabíhat),
+Když znáš formát zadávání barev (do čehož teď nebudeme zabíhat),
 můžeš si barvičky nastavit podle sebe:
 
 ```console
@@ -319,6 +230,15 @@ ovlivňují chování programů, např.
   naimportovaných modulů, nebo
 * `PAGER` a `EDITOR` – viz níže.
 
+A některé proměnné Bash nejen používá, ale i nastavuje:
+
+* `HOSTNAME`: jméno počítače
+* `LC_*něco*`: nastavení formátování různých řetězců
+* `PWD`: aktuální adresář
+* `HOME`: domovský adresář
+
+Některé z nich nastavuje speciálním způsobem, takže 
+
 
 ## Jméno v závorkách
 
@@ -334,14 +254,15 @@ nejlepší
 
 Občas, když tohle budeš tohle chtít použít, budeš potřebovat Bashi říct,
 co je ještě jméno proměnné.
-Pak můžeš jméno uzavřít do kudrnatých závorek,
+Pak můžeš jméno uzavřít do „kudrnatých“ závorek,
 <code>${<var>jméno</var>}</code>:
 
 ```console
 $ majitel=Petr
-$ echo $majitelovo   # proměnná jménem "majitelovo" neexistuje
-$ echo ${majitel}ovo
-Petrovo
+$ echo $majitelovo jablko   # proměnná jménem "majitelovo" neexistuje
+jablko
+$ echo ${majitel}ovo jablko
+Petrovo jablko
 ```
 
 Fuguje to vždy; <code>$<var>jméno</var></code> bez závorek je jen zkratka.
@@ -351,57 +272,83 @@ $ echo ${LANG}
 cs_CZ.UTF-8
 ```
 
+
+## Proměnná jména programů
+
 Proměnné Bash nahrazuje i ve jménech programů, takže můžeš napsat:
 
 ```console
 $ zpracuj=head
-$ $zpracuj unicorn.dat
-COMMON NAME: unicorn
-CLASSIFICATION: equus monoceros
-UPDATED: 1738-11-24
-AGCCGGGTCG
-CTTTACCTTA
-AAGCCGAGGG
-GGGTGGTACG
-CCGAACATAA
-ACGCTTTAAC
-GTCCCTCCAG
+$ $zpracuj sunspot.txt
+* Sunspot data collected by Robin McQuinn from *)
+* http://sidc.oma.be/html/sunspot.html         *)
+
+* Month: 1749 01 *) 58
+* Month: 1749 02 *) 63
+* Month: 1749 03 *) 70
+* Month: 1749 04 *) 56
+* Month: 1749 05 *) 85
+* Month: 1749 06 *) 84
+* Month: 1749 07 *) 95
 $ zpracuj='wc -l'
-$ $zpracuj unicorn.dat
-163 unicorn.dat
+$ $zpracuj sunspot.txt 
+3080 sunspot.txt
 $ zpracuj=less
-$ $zpracuj unicorn.dat
+$ $zpracuj sunspot.txt 
 ```
 
+Tohle se reálně používá.
 
-## Rolovátko
+V proměnné `EDITOR` spousta programů hledá editor, který spustí když
+chtějí aby uživatel změnil nějaký soubor – například když se Git ptá na
+popis změn.
+Ve Fedoře je nastaven na `/usr/bin/nano`, ale v `~/.bashrc` si můžeš nastavit
+jiný.
+(Pozor ale na to, že nastavení jako `git config` nebo proměnná `GIT_EDITOR`
+tuhle hodnotu „přebíjí“.)
 
-Víš, proč se třeba `man` nebo `git diff` chovají a ovládají stejně jako `less`?
-Proto, že samy spustí `less` a pošlou do něho rourou text,
-který chtějí zobrazit.
+V proměnné `PAGER` zase můžeš nastavit „skrolovátko“.
+Opět – spousta programů se tím pak bude řídit.
+Tahle proměnná není „od výroby“ nastavená; když je prázdná tak programy
+typicky použijí `less`.
 
-  {{ figure(
-    img=static('man-less.svg'),
-    alt='Diagram spouštění `less` z `man`',
-  ) }}
 
-Podobné programy většinou respektují proměnnou `PAGER`,
-kterou můžeš vybrat program, který se použije místo `less`.
-Zkus si `more`, starší verzi `less` která umí <kbd>Enter</kbd>,
-<kbd>Mezerník</kbd> a <kbd>q</kbd>, ale neumí se vracet (<kbd>↑</kbd>):
+## Výzva
+
+Některé proměnné prostředí využívá samotný Bash.
+Jedna z nejzákladnějších je `PS1`, která ovládá výzvu
+(angl. *prompt*; `PS` je zkratka *prompt string*).
+Bývá nastavena na docela složitou hodnotu:
 
 ```console
-$ PAGER=more man bash
+[\u@\h \W]\$
 ```
 
-Nebo rolování vypni úplně pomocí `cat`:
+Bash v ní nahrazuje sekvence se zpětnými lomítky.
+(Co které znamená, to můžeš případně dohledat v dokumentaci.)
+
+Když chceš výzvu zkrátit, nastav `PS1` na něco kratšího.
+Doporučuju výzvu ukončit dolarem (aby bylo jasné že to je výzva) a
+mezerou (která musí být v uvozovkách, aby ji Bash bral jako součást hodnoty).
 
 ```console
-$ PAGER=cat man bash
+[user@fedora data]$ PS1='$ '
+$ 
 ```
-Nebo jakýkoli jiný filtr – nikdo ti nezakazuje zadávat nesmysly:
 
-```console
-$ PAGER=wc man bash
-$ PAGER=tac man bash
+
+Když napíšeš do příkazové řádky víceřádkový příkaz (např. v uvozovkách),
+výzva se změní. Poslední znak většinou bude `>` místo `$`.
+Například:
+
+```plain
+$ echo "jeden řádek
+> druhý řádek
+> třetí řádek"
+jeden řádek
+druhý řádek
+třetí řádek
 ```
+
+Tuto variantu výzvy nastavíš pomocí proměnné `PS2`.
+

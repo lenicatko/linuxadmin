@@ -100,39 +100,22 @@ sessions:
   date: 2021-11-01
   slug: descriptors
   materials:
-  # - Grafické aplikace
-  - title: cut, history
-    url: null
-    # https://swcarpentry.github.io/shell-novice/05-loop/index.html
-    # Also see: pilot/02; Historie příkazů; Bash skripty; Path
-  - title: whoami, groups, file
-    url: null
-  #- title: Grep a regulární výrazy; návratová hodnota `$?`
-  #  url: null
-  - title: While
-    url: null
+  - lesson: linuxadmin/env-var
+  - lesson: linuxadmin/script
   - lesson: linuxadmin/process-execution
   - lesson: linuxadmin/fork-exec        # XXX: pilot/03, end
-  - title: 'Programy, které pouští jiné programy: watch'
-    url: null
-  - lesson: linuxadmin/env-var
-  - title: type; alias, skripty, funkce; bashrc
-    lesson: linuxadmin/bin-func-alias
-  - url: http://swcarpentry.github.io/shell-novice/
-    title: "Anglický originál: The Carpentries – The Unix Shell (pokračujeme)"
-  #- title: "`( ... )`, `$( ... )` a `<( ... )`"
+    title: "Bonus: Fork a exec"
+  - lesson: linuxadmin/and-or-background
+  - lesson: linuxadmin/bin-func-alias
+  - lesson: linuxadmin/bash-shortcuts
+  # - Grafické aplikace
+  # whoami, groups, file ?
+  # cut ?
+  # While ?
+  # 'Programy, které pouští jiné programy: watch'
+  # "`( ... )`, `$( ... )` a `<( ... )`"  --  see pilot/04
+  # diff
   #  url: null
-  #- title: diff
-  #  url: null
-  - url: http://swcarpentry.github.io/shell-novice/
-    title: The Carpentries – The Unix Shell
-  - lesson: pilot/02
-    type: link
-    # See pilot/02: Poznámka k neznámým příkazům
-  - lesson: notes/02
-    type: link
-  - lesson: pilot/04
-    type: link
   - lesson: hw/own-cmd
     type: homework
 

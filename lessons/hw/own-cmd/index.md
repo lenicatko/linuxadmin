@@ -68,7 +68,7 @@ $ obrat pozdrav.txt pozdrav.txt
 ¡sǝᴉpɐ˥ʎԀ
 ```
 
-Argument `-` znamená standardní vstup.
+Argument `-` znamená standardní vstup (tedy ne soubor jménem `-`).
 
 ```console
 $ echo Ahoj | obrat -
@@ -81,7 +81,7 @@ $ echo haha | obrat pozdrav.txt - pozdrav.txt
 ¡sǝᴉpɐ˥ʎԀ
 ```
 
-Pokud dostane přepínač `--help`, vypíše krátkou nápovědu a ignoruje ostatní argumenty.
+Pokud program dostane přepínač `--help`, vypíše krátkou nápovědu a ignoruje ostatní argumenty.
 
 Je-li použit jiný přepínač (začínající `-`) a ne `--help`, program uživateli vynadá (na chybovém výstupu), vrátí chybovou návratovou hodnotu (`exit(1)`) a ignoruje ostatní argumenty.
 
@@ -118,3 +118,14 @@ Naimportuješ-li `sys` a `os`, pak:
 * `exit(1)` ukončí program s danou hodnotou
 
 (* přesněji řečeno, objekt který se chová jako slovník)
+
+> [note]
+> Na zpracování argumentů existují knihovny jako `argparse` (součást Pythonu),
+> nebo `click` (kterou je potřeba doinstalovat, ale je jednodušší na použití a
+> má spoustu vychytávek navíc).
+> Ažbudeš psát „opravdový“ program pro příkazovou řádku, nastuduj si jak
+> se používají.
+>
+> Přímo na seznam `sys.argv` se dívají jen ty nejjednodušší skripty,
+> programátoři kteří se chtějí naučit jak to funguje (ty!), a taky autoři
+> knihoven jako `click`.

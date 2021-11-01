@@ -16,7 +16,7 @@ Co takhle si to zautomatizovat – vytvořit příkaz
 > Dvakát vypisovat jméno adresáře bych nemusel: zkratka
 > <kbd>Alt</kbd>+<kbd>.</kbd> doplní poslední slovo minulého příkazu.
 > (Jestli ti to nefunguje, zkus ten druhý <kbd>Alt</kbd>.)
-> Ale stejně, na tohle chci mít zkratku na tři písmenka!
+> Ale stejně na tohle chci mít krátkou zkratku!
 
 Vytvoř si následující skript a ulož si ho jako `mcd` (bez přípony):
 
@@ -64,8 +64,9 @@ Vzpomeň si, jak Bash pouští příkazy.
 K tomu je potřeba dodat, že proces *nemůže měnit*
 proměnné prostředí, aktuální adresář nebo otevřené soubory *jiných procesů*.
 
-Když Bash proces *spouští*, může mu prostředí nastavit – ale jakmile proces
-běží, nemůže měnit svůj „mateřský“ proces.
+Když Bash proces *spouští*, může mu prostředí nastavit.
+(Dělá to řed `exec`, takže mění *svoje* prostředí.)
+Ale jakmile proces běží, nemůže měnit svůj „mateřský“ proces.
 
 Příkaz `cd` ve skriptu tudíž změní aktuální adresář – ale jen v Bashi, který
 obsluhuje náš skript.
@@ -94,8 +95,14 @@ $ type mkdir
 mkdir je /usr/bin/mkdir
 ```
 
+> [note]
+> Někdy se můžeš setkat s příkazem `which`, který dělá víceméně to samé,
+> ale není k dispozici na tolika systémech. Je lepší se naučit používat `type`.
+
 Někdy můžeš dostat informaci o tom, že je soubor „zahashován“ – to pro nás
 znamená to samé co příklady výše.
+(Znamená to že Bash tenhle příkaz už jednou našel v `$PATH` a nemusí ho
+hledat znovu, takže ho může spouštět trošku rychleji.)
 
 ```console
 $ echo|cat
@@ -119,14 +126,14 @@ Existují ale i výjimky, které pro lidské oči jsou:
 $ type pip
 pip je /usr/bin/pip
 $ less /usr/bin/pip
-````
+```
 
 ## Zabudované příkazy
 
 Kromě toho existují i zabudované příkazy shellu.
 To nejsou programy, pro které Bash vytváří nový proces.
 Proto můžou měnit stav Bashe – proměnné prostředí, aktuální adresář nebo
-(teoreticky) otevřené soubory – nebo ho např. ukončit:
+(teoreticky) otevřené soubory, Nebo ho třeba ukončit:
 
 ```console
 $ type export
@@ -150,7 +157,8 @@ $ /usr/bin/echo Ahoj ahoj!
 Ahoj ahoj!
 ```
 
-S přepínačem `-a` ti  `type` vypíše všechna místa, kde se daný program dá najít:
+S přepínačem `-a` ti  `type` vypíše všechna místa, kde se daný program dá
+najít; používá se ale jen to první:
 
 ```console
 $ type -a echo
@@ -164,8 +172,9 @@ echo je /usr/bin/echo
 > Tohle není moc skvělá vlastnost.
 
 Takže teď už znáš trik, kterým `cd` dokáže měnit adresář Bashe,
-který ho spustil!
-Má protekci, potvůrka.
+který ho spustil.
+Má protekci, potvůrka!
+
 Jak to ale zařídíme pro příkaz `mcd`?
 
 
@@ -178,8 +187,8 @@ $ type source
 source je součást shellu
 ```
 
-Source otevře daný sour a spustí ho *v aktuálním Bashovém procesu*,
-tak jako bys jeho obsah napsal{{a}} na klávesnici.
+Source otevře daný soubor a příkazy v něm spustí *v aktuálním Bashovém procesu*,
+tak jako bys je napsal{{a}} na klávesnici.
 Neboli – přesně to co hledáme pro `mcd`!
 
 ```console
@@ -192,9 +201,11 @@ $ cd ..
 
 Jestli používáš Linux pro Python, pravděpodobně tenhle příkaz znáš.
 Skript pro aktivaci virtuálního prostředí, `venv/bin/activate`,
-potřebuje měnit proměnné `PATH` (a tudíž význam příkazů `python` a `pip`)
-a `PS1` (prompt) aktuálního shellu.
-Má tedy stejný problém jako `mcd`. A protože je `source` dlouhé slovo, má i zkratku: tečku.
+potřebuje měnit proměnné `PS1` (a tudíž text výzvy) a `PATH`
+(a tudíž význam příkazů `python` a `pip`) – a to v aktuálním shellu.
+Má tedy stejný problém jako `mcd`.
+
+A protože je `source` dlouhé slovo, má i zkratku: tečku.
 Ano, tečka je taky Bashový příkaz.
 
 ```console
@@ -205,13 +216,15 @@ $ pwd
 $ cd ..
 ```
 
-(Tečka, mezera, tečka, lomítko, `m`, `c`, `d`.
-V materiálech pro Python používám delší `source` protože … je vidět.)
+> [note]
+> Ten příkaz je: tečka, mezera, tečka, lomítko, `m`, `c`, `d`.
+>
+> V materiálech pro Python používám delší `source` protože … je vidět.
 
 Problém `source` i tečky je ale ten, že je vždycky musíš napsat.
 I kdyby byl skript `mcd` ve správném adresáři, musel by se pouštět
 pomocí <code>. mcd <var>novy-adresar</vat></code>.
-A to nechceš, to je pořád moc dlouhé. Pojďme hledat dál.
+A to nechci, to je pořád moc dlouhé. Pojďme hledat dál.
 
 
 
@@ -219,8 +232,8 @@ A to nechceš, to je pořád moc dlouhé. Pojďme hledat dál.
 
 Kromě programů v souborech a zabudovaných příkazů existují ještě další tři
 druhy příkazů.
-Jeden jsou klíčová slova, která mají jinou syntax než příkazy – potřebují
-strukurovanější zápis než jen argumenty a přepínače:
+Jeden jsou klíčová slova, která mají jinou syntax než příkazy: potřebují
+strukurovanější zápis, ne jen argumenty a přepínače:
 
 ```console
 $ type for
@@ -237,7 +250,7 @@ if je klíčové slovo shellu
 ## Aliasy
 
 Zajímavější jsou *aliasy*, zkratky.
-Jeden alias, který má Fedora ve výchozím nastavení, je `ll`:
+Jeden alias který má Fedora ve výchozím nastavení, je `ll`:
 
 ```console
 $ type ll
@@ -351,7 +364,7 @@ světe
 Na rozdíl od funkcí v Pythonu jsou závorky `()` v definici vždycky prázdné.
 Každá funkce bere neomezený počet argumentů, které Bash uloží do proměnných
 `$1`, `$2`, `$3`, atd.
-Jejich počet je v proměnné `$#`; všechny dohromady jsou v `$*`.
+Jejich počet je v proměnné `$#`; všechny dohromady jsou v `$@`.
 
 Jak tedy nadefinovat příkaz `mcd`?
 
@@ -377,7 +390,7 @@ $ mcd () {
 A to je on – vytoužený příkaz na vytvoření adresáře a přepnutí do něj.
 Ufff. Stálo to za to?
 
-Zvlášť když příkaz zmizí hned, když vypneš Bash?
+Zvlášť když příkaz zmizí hned když vypneš Bash?
 
 
 ## bashrc
@@ -385,10 +398,10 @@ Zvlášť když příkaz zmizí hned, když vypneš Bash?
 Je to tak, téhle ságy ještě není konec.
 
 Programy v souborech jsou uložené celkem bezpečně, ale aliasy i shellové funkce
-platí jenom pro shell, ve kterém jsou nadefinovány.
+platí jenom pro shell ve kterém jsou nadefinovány.
+Po vypnutí shellu zmizí.
 
-Dá se to samozřjmě obejít tak, že funkci vždy nadefinuješ znovu.
-
+Dá se to samozřejmě obejít tak, že funkci vždy nadefinuješ znovu.
 Můžeš si dokonce vytvořit skript, do kterého definice dáš a vždy ho na začátku
 práce s Bashem pustíš (pomocí `source`, aby se funkce nadefinovaly ve tvém
 procesu).
@@ -421,9 +434,12 @@ Samozřejmě bez záruky.
 A co další náležitosti shellových příkazů?
 Manuálová stránka?
 Přepínače – aspoň `--help`?
-Kontrola, že náš nový příkaz nepřepsal nějaký už existující (ehm…)?
 
 To už je nad rámec tohoto kurzu.
-Přeci jen se chceme naučit Linuxové systémy ovládat, ne vytvářet :)
+Přeci jen se teď chceme naučit Linuxové systémy ovládat, ne vytvářet :)
 
-
+Mimochodem, příkaz `mcd` už existoval – a dělal něco úplně jiného!
+Příkaz `type -a mcd` ti ukáže i `/usr/bin/mcd`, ale co hůř: `man mcd`
+ukáže nápovědu úplně jiného příkazu.
+Pokud chceš vytvářet funkční systémy, je dobré tohle zkontrolovat ještě dřív
+než začneš vytvářet vlastní příkaz.
