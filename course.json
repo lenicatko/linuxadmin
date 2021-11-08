@@ -314,6 +314,31 @@
                 "static_files": {},
                 "title": "Úkol"
             },
+            "hw/sudo": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "sudo/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/sudo/index.md",
+                        "title": "Úkol",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/sudo/info.yml",
+                "static_files": {},
+                "title": "Úkol"
+            },
             "linuxadmin/and-or-background": {
                 "pages": {
                     "index": {
@@ -899,6 +924,31 @@
                 "static_files": {},
                 "title": "Spustitelné skripty"
             },
+            "linuxadmin/users": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2020-2012"
+                        ],
+                        "content": {
+                            "path": "users/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/users/index.md",
+                        "title": "Uživatelé a práva",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/users/info.yml",
+                "static_files": {},
+                "title": "Uživatelé a práva"
+            },
             "linuxadmin/var-loop": {
                 "pages": {
                     "index": {
@@ -1244,31 +1294,6 @@
                     }
                 },
                 "title": "SSH"
-            },
-            "notes/users": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsal Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "users/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/users/index.md",
-                        "title": "Poznámky – Správa uživatelů",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/users/info.yml",
-                "static_files": {},
-                "title": "Poznámky – Správa uživatelů"
             },
             "pilot/05": {
                 "pages": {
@@ -1617,27 +1642,13 @@
                 "date": "2021-11-08",
                 "materials": [
                     {
-                        "lesson_slug": "notes/users",
-                        "title": "Poznámky – Správa uživatelů",
-                        "type": "lesson"
-                    }
-                ],
-                "serial": "5",
-                "slug": "users",
-                "source_file": "course.yml",
-                "title": "Správa uživatelů"
-            },
-            {
-                "date": "2021-11-15",
-                "materials": [
-                    {
-                        "lesson_slug": "notes/fs",
-                        "title": "Souborové systémy – úvod",
+                        "lesson_slug": "linuxadmin/users",
+                        "title": "Uživatelé a práva",
                         "type": "lesson"
                     },
                     {
                         "lesson_slug": "notes/links",
-                        "title": "Odkazy",
+                        "title": "Odkazy (projdeme jen Symbolické odkazy a dál)",
                         "type": "lesson"
                     },
                     {
@@ -1646,22 +1657,26 @@
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/05",
-                        "title": "Zápis – Odkazy & hierarchie",
-                        "type": "link"
+                        "lesson_slug": "hw/sudo",
+                        "title": "Úkol",
+                        "type": "homework"
                     }
                 ],
-                "serial": "6",
-                "slug": "review",
+                "serial": "5",
+                "slug": "users",
                 "source_file": "course.yml",
-                "title": "Hierarchie"
+                "title": "Správa uživatelů"
             },
             {
                 "date": "2021-11-22",
                 "materials": [
                     {
-                        "lesson_slug": "notes/package-management",
-                        "title": "Poznámky – Instalace balíčků",
+                        "lesson_slug": "notes/fs",
+                        "title": "Souborové systémy – úvod",
+                        "type": "lesson"
+                    },
+                    {
+                        "title": "Odkazy – viz materiály z minula",
                         "type": "lesson"
                     },
                     {
@@ -1675,10 +1690,29 @@
                         "type": "link"
                     }
                 ],
-                "serial": "7",
+                "serial": "6",
                 "slug": "fhs",
                 "source_file": "course.yml",
                 "title": "Souborové systémy"
+            },
+            {
+                "date": "2021-11-15",
+                "materials": [
+                    {
+                        "lesson_slug": "notes/package-management",
+                        "title": "Poznámky – Instalace balíčků",
+                        "type": "lesson"
+                    },
+                    {
+                        "lesson_slug": "pilot/05",
+                        "title": "Zápis – Odkazy & hierarchie",
+                        "type": "link"
+                    }
+                ],
+                "serial": "7",
+                "slug": "review",
+                "source_file": "course.yml",
+                "title": "TBD"
             },
             {
                 "date": "2021-11-29",

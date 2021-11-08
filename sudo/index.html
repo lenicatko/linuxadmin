@@ -1,0 +1,34 @@
+<h1>Úkoly – sudo</h1>
+<h2>Jak se pouští sudo</h2>
+<p>Nakresli diagram toho, jak se pouští procesy pro příkaz <code>sudo ps</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo ps
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">2501386 pts/9    00:00:00 sudo</span>
+<span class="go">2501388 pts/9    00:00:00 ps</span>
+</pre></div><h2>Sudo zapomíná</h2>
+<p><em>(<code>sudo</code> ti dává oprávnění, ale i zodpovědnost. Nauč se před každým použitím <code>sudo</code> přečíst spouštěný příkaz a zamyslet se, jestli ho opravdu chceš spustit. Ale opět, neboj se experimentovat – na virtuálním počítači není co zkazit.)</em></p>
+<p>Co by měl dělat tento příkaz?</p>
+<div class="highlight"><pre><span></span><span class="go">ll /var/db/sudo/lectured/</span>
+</pre></div><p>Příkaz ale pod běžným uživatelským účtem nefunguje; potřebuješ <code>sudo ll /var/db/sudo/lectured/</code>. To ale taky nefunguje. Proč? Jak to spravit?</p>
+<ul>
+<li>Jaké soubory jsou v <code>/var/db/sudo/lectured/</code>? Komu patří? Jak jsou velké?</li>
+<li>Jaké soubory jsou v <code>/var/run/sudo/ts</code>? Komu patří? Jak jsou velké? Kdo k nim má jaká práva?</li>
+<li>Jak by vypadal příkaz, který smaže „tvůj“ soubor v <code>/var/run/sudo/ts</code>?</li>
+</ul>
+<p>Když spustíš příkaz <code>sudo</code>, zeptá se tě na heslo. Když ho spustíš podruhé (ve stejném terminálu), už se neptá – pamatuje si, že jsi heslo před chvilkou zadala.</p>
+<p>Vyzkoušej si ale, že tohle nefunguje s příkazem pro smazání „tvého“ souboru v <code>/var/run/sudo/ts</code>. Když ho pustíš několikrát za sebou, <code>sudo</code> se vždycky znovu zeptá na heslo.</p>
+<ul>
+<li>Proč?</li>
+<li><p>Zadej tyhle příkazy:</p>
+<ul>
+<li>Smaž „svůj“ soubor z <code>/var/db/sudo/lectured/</code>.</li>
+<li>Smaž „svůj“ soubor z <code>/var/run/sudo/ts</code>.</li>
+<li>Spusť <code>sudo echo</code>.</li>
+</ul>
+<p>A odpověz:</p>
+<ul>
+<li>Co je u <code>sudo echo</code> jinak?</li>
+<li>K čemu slouží soubory ve <code>/var/db/sudo/lectured/</code>?</li>
+</ul>
+</li>
+</ul>
