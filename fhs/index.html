@@ -32,7 +32,7 @@ Je potřeba ty soubory rozdělovat podle toho jak se k nim v těchto případech
 <p>Jeden z adresářů, který patří do <code>PATH</code>.
 Obsahuje naprostou většinu příkazů které můžeš spustit, 
 a které nainstalované jako součást systému.
-Najdeš ti <code>cat</code>, <code>echo</code> <code>bash</code> i <code>ls</code>.</p>
+Najdeš zde <code>cat</code>, <code>echo</code> <code>bash</code> i <code>ls</code>.</p>
 <p>Na Fedoře je <code>/bin</code> <em>symlink</em> na <code>/usr/bin</code>.
 Historicky totiž byly příkazy v <code>/bin</code> nainstalované na každém počítači zvlášť,
 zatímco <code>/usr</code> sis mohla zpřístupnit i přes síť z jiného počítače.
@@ -90,11 +90,11 @@ Může ji měnit jen superuživatel, ale stačí k tomu obyčejný textový edi
 a <code>/etc/shadow</code>.</p>
 <p><code>/etc/hosts</code> obsahuje seznam jmen počítačů na síti.
 Mělo by to říkat, že 127.0.0.1 je <code>localhost</code>, což znamená,
-že pokud se přípojíš „přes internetu“ (např. v prohlížeči) k adrese <code>localhost</code>,
+že pokud se přípojíš „přes internet“ (např. v prohlížeči) k adrese <code>localhost</code>,
 připojení bude navázáno s adresou 127.0.0.1 (která označuje tvůj počítač).
 Ostatní webové adresy se hledají na internetu – jak, to je zadáno v souboru
 <code>/etc/resolv.conf</code>.</p>
-<p>Soubor <code>/ets/group</code> obsahuje seznam všech uživatelských skupin na počítači.
+<p>Soubor <code>/etc/group</code> obsahuje seznam všech uživatelských skupin na počítači.
 Místo <code>usermod</code> tak můžeš ručně přidat řádek sem – pokud si věříš, že zadáš
 vše správně.</p>
 <p>Soubor <code>/etc/fstab</code> obsahuje nastavení disků – respektive které disky z <code>/dev</code>
@@ -255,9 +255,9 @@ informace najdeš v <code>/lib</code>.</p>
 flashky.
 Disk je tak k dispozici tomu, kdo byl přihlášený když se flashka objevila.</p>
 <p>Ve virtuálním počítači je možné virtuálně vložit CD (jeho obsah v souboru .ISO);
-když to uděláš, obsh se objeví v <code>/run/media/*</code>.</p>
+když to uděláš, obsah se objeví v <code>/run/media/*</code>.</p>
 <h2>/sbin</h2>
-<p>Tady jsou tu programy pro superuživatele, které by neměl spouštět běžný
+<p>Tady jsou programy pro superuživatele, které by neměl spouštět běžný
 uživatel – nástroje na opravy disků, analýzu chyb, nastavení síťování
 a spousta jiných.</p>
 <p>Mezi <code>/bin</code> (<code>/usr/bin</code>) a <code>/sbin</code> (<code>/usr/sbin</code>) není v praxi moc velký rozdíl.
@@ -270,7 +270,7 @@ Nejspíš tam teď nic nemáš.</p>
 <p>Informace o systému.
 Když je potřeba dát k dispozici nějaké informace o systému, nebo zařídit,
 aby se dal ovládat, je zde na to soubor.
-Dájí se tu nastavit např. detaily správy paměti nebo (na opravdovém počítači)
+Dají se tu nastavit např. detaily správy paměti nebo (na opravdovém počítači)
 třeba rychlost větráčků.</p>
 <p>Je podobný jako <code>/dev</code>: soubory v <code>/dev</code> se tvoří na základě
 informací v <code>/sys</code>.</p>
