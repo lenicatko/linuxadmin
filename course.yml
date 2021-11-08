@@ -123,24 +123,37 @@ sessions:
   date: 2021-11-08
   slug: users
   materials:
-  - lesson: notes/users
-- title: Hierarchie
-  date: 2021-11-15
-  slug: review
-  materials:
-  - lesson: notes/fs
-  - lesson: notes/links
-  - lesson: notes/fhs
-  - lesson: pilot/05
-    type: link
+  - lesson: linuxadmin/users     # XXX final sections not rewritten for 2021
+
+  # XXX $ locate battery.png ;  eog /usr/share/icons/gnome/256x256/devices/battery.png
+  # XXX $ locate bark.ogg ; ogg123 /usr/share/sounds/gnome/default/alerts/bark.ogg
+
+  - lesson: notes/links  # XXX not reviewed for 2021
+    title: "Odkazy (projdeme jen Symbolické odkazy a dál)"
+  - lesson: notes/fhs    # XXX not reviewed for 2021
+
+  # XXX: df
+
+  - lesson: hw/sudo
+    type: homework
+
 - title: Souborové systémy
   date: 2021-11-22
   slug: fhs
   materials:
-  - lesson: notes/package-management
+  - lesson: notes/fs     # XXX not reviewed for 2021
+  - title: "Odkazy – viz materiály z minula"  # XXX not reviewed for 2021
+    type: lesson
   - lesson: notes/mount
   - lesson: pilot/06
     title: Zápis z minula – Mount
+    type: link
+- title: TBD
+  date: 2021-11-15
+  slug: review
+  materials:
+  - lesson: notes/package-management
+  - lesson: pilot/05
     type: link
 - title: Služby a HTTPD
   date: 2021-11-29
