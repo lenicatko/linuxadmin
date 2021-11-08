@@ -38,7 +38,7 @@ Půjdeme na to podle abecedy.
 Jeden z adresářů, který patří do `PATH`.
 Obsahuje naprostou většinu příkazů které můžeš spustit, 
 a které nainstalované jako součást systému.
-Najdeš ti `cat`, `echo` `bash` i `ls`.
+Najdeš zde `cat`, `echo` `bash` i `ls`.
 
 Na Fedoře je `/bin` *symlink* na `/usr/bin`.
 Historicky totiž byly příkazy v `/bin` nainstalované na každém počítači zvlášť,
@@ -119,13 +119,13 @@ a `/etc/shadow`.
 
 `/etc/hosts` obsahuje seznam jmen počítačů na síti.
 Mělo by to říkat, že 127.0.0.1 je `localhost`, což znamená,
-že pokud se přípojíš „přes internetu“ (např. v prohlížeči) k adrese `localhost`,
+že pokud se přípojíš „přes internet“ (např. v prohlížeči) k adrese `localhost`,
 připojení bude navázáno s adresou 127.0.0.1 (která označuje tvůj počítač).
 Ostatní webové adresy se hledají na internetu – jak, to je zadáno v souboru
 `/etc/resolv.conf`.
 
 
-Soubor `/ets/group` obsahuje seznam všech uživatelských skupin na počítači.
+Soubor `/etc/group` obsahuje seznam všech uživatelských skupin na počítači.
 Místo `usermod` tak můžeš ručně přidat řádek sem – pokud si věříš, že zadáš
 vše správně.
 
@@ -343,11 +343,11 @@ flashky.
 Disk je tak k dispozici tomu, kdo byl přihlášený když se flashka objevila.
 
 Ve virtuálním počítači je možné virtuálně vložit CD (jeho obsah v souboru .ISO);
-když to uděláš, obsh se objeví v <code>/run/media/*</code>.
+když to uděláš, obsah se objeví v <code>/run/media/*</code>.
 
 ## /sbin
 
-Tady jsou tu programy pro superuživatele, které by neměl spouštět běžný
+Tady jsou programy pro superuživatele, které by neměl spouštět běžný
 uživatel – nástroje na opravy disků, analýzu chyb, nastavení síťování
 a spousta jiných.
 
@@ -364,7 +364,7 @@ Nejspíš tam teď nic nemáš.
 Informace o systému.
 Když je potřeba dát k dispozici nějaké informace o systému, nebo zařídit,
 aby se dal ovládat, je zde na to soubor.
-Dájí se tu nastavit např. detaily správy paměti nebo (na opravdovém počítači)
+Dají se tu nastavit např. detaily správy paměti nebo (na opravdovém počítači)
 třeba rychlost větráčků.
 
 Je podobný jako `/dev`: soubory v `/dev` se tvoří na základě
