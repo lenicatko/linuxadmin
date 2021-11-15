@@ -1,0 +1,20 @@
+<h1>Úkoly - Odkazy</h1>
+<h2>Bezedný adresář</h2>
+<p>Vytvoř si nový, prázdný adresář, přejdi do něj a zadej:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir bezedny
+<span class="gp">$ </span>ln -s . bezedny/bezedny
+<span class="gp">$ </span>ls -l bezedny/
+</pre></div><p>Zkus si:</p>
+<p><code>$ ls -l bezedny/<kbd>tab</kbd><kbd>tab</kbd><kbd>tab</kbd></code></p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>tree bezedny
+<span class="gp">$ </span>tree -l bezedny
+</pre></div><p>Co se právě stalo?</p>
+<div class="admonition note"><p>Na tohle je dobré dávat pozor, až budeš psát program,
+který prochází adresářové struktury.
+Vždy si ověř, že neprocházíš donekonečna jeden adresář.</p>
+</div><h2>Viz zde</h2>
+<p>A co se stane tady?</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>ln -s tu tu
+<span class="gp">$ </span>ls -l tu
+<span class="gp">$ </span>cat tu
+</pre></div>

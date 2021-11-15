@@ -289,6 +289,31 @@
                 "static_files": {},
                 "title": "Úkoly - Bash II"
             },
+            "hw/link": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "link/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/link/index.md",
+                        "title": "Úkol",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/link/info.yml",
+                "static_files": {},
+                "title": "Úkol"
+            },
             "hw/own-cmd": {
                 "pages": {
                     "index": {
@@ -576,6 +601,31 @@
                 "static_files": {},
                 "title": "Funkce které ovládají proces"
             },
+            "linuxadmin/fs": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "fs/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/fs/index.md",
+                        "title": "Souborové systémy – úvod",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/fs/info.yml",
+                "static_files": {},
+                "title": "Souborové systémy – úvod"
+            },
             "linuxadmin/gnome-basics": {
                 "pages": {
                     "index": {
@@ -799,6 +849,56 @@
                     }
                 },
                 "title": "Virtuální počítač"
+            },
+            "linuxadmin/links": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020"
+                        ],
+                        "content": {
+                            "path": "links/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/links/index.md",
+                        "title": "Inode a odkazy",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/links/info.yml",
+                "static_files": {},
+                "title": "Inode a odkazy"
+            },
+            "linuxadmin/mount": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "mount/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/mount/index.md",
+                        "title": "Mount",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/mount/info.yml",
+                "static_files": {},
+                "title": "Mount"
             },
             "linuxadmin/output-files": {
                 "pages": {
@@ -1140,31 +1240,6 @@
                 "static_files": {},
                 "title": "Adresářová struktura"
             },
-            "notes/fs": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Petr Viktorin a Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "fs/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/fs/index.md",
-                        "title": "Souborové systémy – úvod",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/fs/info.yml",
-                "static_files": {},
-                "title": "Souborové systémy – úvod"
-            },
             "notes/httpd": {
                 "pages": {
                     "index": {
@@ -1189,56 +1264,6 @@
                 "source_file": "lessons/notes/httpd/info.yml",
                 "static_files": {},
                 "title": "Poznámky – HTTPD"
-            },
-            "notes/links": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Petr Viktorin a Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "links/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/links/index.md",
-                        "title": "Odkazy",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/links/info.yml",
-                "static_files": {},
-                "title": "Odkazy"
-            },
-            "notes/mount": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Petr Viktorin a Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "mount/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/mount/index.md",
-                        "title": "Poznámky – Mount",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/mount/info.yml",
-                "static_files": {},
-                "title": "Poznámky – Mount"
             },
             "notes/package-management": {
                 "pages": {
@@ -1319,31 +1344,6 @@
                 "source_file": "lessons/pilot/05/info.yml",
                 "static_files": {},
                 "title": "Zápis – Odkazy & hierarchie"
-            },
-            "pilot/06": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "06/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/06/index.md",
-                        "title": "Zápis – Mount",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/06/info.yml",
-                "static_files": {},
-                "title": "Zápis – Mount"
             },
             "pilot/07": {
                 "pages": {
@@ -1647,11 +1647,6 @@
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "notes/links",
-                        "title": "Odkazy (projdeme jen Symbolické odkazy a dál)",
-                        "type": "lesson"
-                    },
-                    {
                         "lesson_slug": "notes/fhs",
                         "title": "Adresářová struktura",
                         "type": "lesson"
@@ -1671,23 +1666,24 @@
                 "date": "2021-11-22",
                 "materials": [
                     {
-                        "lesson_slug": "notes/fs",
+                        "lesson_slug": "linuxadmin/fs",
                         "title": "Souborové systémy – úvod",
                         "type": "lesson"
                     },
                     {
-                        "title": "Odkazy – viz materiály z minula",
+                        "lesson_slug": "linuxadmin/links",
+                        "title": "Inode a odkazy",
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "notes/mount",
-                        "title": "Poznámky – Mount",
+                        "lesson_slug": "linuxadmin/mount",
+                        "title": "Mount",
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/06",
-                        "title": "Zápis z minula – Mount",
-                        "type": "link"
+                        "lesson_slug": "hw/link",
+                        "title": "Úkol",
+                        "type": "homework"
                     }
                 ],
                 "serial": "6",
