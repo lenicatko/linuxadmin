@@ -335,32 +335,6 @@ lrwxrwxrwx. 1 root root 7 28. led  2020 /bin -> usr/bin
 Adresář `/bin` je symbolický odkaz. Prakticky se chová stejně jako `/usr/bin`.
 
 
-### Zacyklení
-
-Symbolickým odkazem lze zařídit, že adresář „obsahuje“ sám sebe:
-
-```console
-$ ln -s . tady
-```
-
-Výsledek se chová trochu zvláštně:
-
-```console
-$ ls -l .
-lrwxrwxrwx 1 petr petr         10 zář 28 12:46 tady -> .
-$ ls -l tady
-lrwxrwxrwx 1 petr petr         10 zář 28 12:46 tady -> .
-$ ls -l tady/tady
-lrwxrwxrwx 1 petr petr         10 zář 28 12:46 tady -> .
-$ ls -l tady/tady/tady/tady/tady/tady/tady/tady/tady/tady
-lrwxrwxrwx 1 petr petr         10 zář 28 12:46 tady -> .
-```
-
-Na tohle je dobré dávat pozor, až budeš psát program,
-který prochází adresářové struktury.
-Vždy si ověř, že neprocházíš donekonečna jeden adresář.
-
-
 ### Odkaz nikam
 
 Dá se udělat i odkaz někam, kde nic není.

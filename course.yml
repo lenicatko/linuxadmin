@@ -134,6 +134,7 @@ sessions:
 
   - lesson: hw/sudo
     type: homework
+    # XXX: fhs -- add "Sudo si pamatuje" & "Kam s ním?" from https://hackmd.io/dBFhw0V8Rh-qPN0J-LUJrw
 
 - title: Souborové systémy
   date: 2021-11-22
@@ -146,6 +147,9 @@ sessions:
   # XXX: introduce "file" command?
   # XXX: introduce "realpath" command?
   # XXX: python-fuse
+
+  - lesson: hw/link
+    type: homework
 
 - title: TBD
   date: 2021-11-15
