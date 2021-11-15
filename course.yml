@@ -128,8 +128,6 @@ sessions:
   # XXX $ locate battery.png ;  eog /usr/share/icons/gnome/256x256/devices/battery.png
   # XXX $ locate bark.ogg ; ogg123 /usr/share/sounds/gnome/default/alerts/bark.ogg
 
-  - lesson: notes/links  # XXX not reviewed for 2021
-    title: "Odkazy (projdeme jen Symbolické odkazy a dál)"
   - lesson: notes/fhs    # XXX not reviewed for 2021
 
   # XXX: df
@@ -141,13 +139,14 @@ sessions:
   date: 2021-11-22
   slug: fhs
   materials:
-  - lesson: notes/fs     # XXX not reviewed for 2021
-  - title: "Odkazy – viz materiály z minula"  # XXX not reviewed for 2021
-    type: lesson
-  - lesson: notes/mount
-  - lesson: pilot/06
-    title: Zápis z minula – Mount
-    type: link
+  - lesson: linuxadmin/fs
+  - lesson: linuxadmin/links  # XXX not reviewed for 2021
+  - lesson: linuxadmin/mount
+
+  # XXX: introduce "file" command?
+  # XXX: introduce "realpath" command?
+  # XXX: python-fuse
+
 - title: TBD
   date: 2021-11-15
   slug: review
