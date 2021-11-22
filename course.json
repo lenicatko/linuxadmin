@@ -289,6 +289,56 @@
                 "static_files": {},
                 "title": "Úkoly - Bash II"
             },
+            "hw/bash-functions": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2021"
+                        ],
+                        "content": {
+                            "path": "bash-functions/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/bash-functions/index.md",
+                        "title": "Úkol - Spouštění procesů v Bashi",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/bash-functions/info.yml",
+                "static_files": {},
+                "title": "Úkol - Spouštění procesů v Bashi"
+            },
+            "hw/dnf-exercises": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2021"
+                        ],
+                        "content": {
+                            "path": "dnf-exercises/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/dnf-exercises/index.md",
+                        "title": "Úkol - Balíčky",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/dnf-exercises/info.yml",
+                "static_files": {},
+                "title": "Úkol - Balíčky"
+            },
             "hw/link": {
                 "pages": {
                     "index": {
@@ -926,6 +976,32 @@
                 "static_files": {},
                 "title": "Vypisování souborů"
             },
+            "linuxadmin/package-management": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Petr Viktorin a Karolina Surma, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "package-management/index.html"
+                        },
+                        "css": "table {margin-left: 1em;}\ntr {vertical-align: top;}\ntd,th {padding-right: 0.5em;}\ntr:hover {background-color: rgba(0, 0, 0, 0.1);}\n",
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/package-management/index.md",
+                        "title": "Instalace balíčků",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/package-management/info.yml",
+                "static_files": {},
+                "title": "Instalace balíčků"
+            },
             "linuxadmin/process": {
                 "pages": {
                     "index": {
@@ -1165,6 +1241,31 @@
                 "static_files": {},
                 "title": "Automatizace administrace – Ansible"
             },
+            "notes/bash-subshell": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "bash-subshell/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/notes/bash-subshell/index.md",
+                        "title": "Poznámky – Subshell",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/notes/bash-subshell/info.yml",
+                "static_files": {},
+                "title": "Poznámky – Subshell"
+            },
             "notes/containers": {
                 "pages": {
                     "index": {
@@ -1265,32 +1366,6 @@
                 "static_files": {},
                 "title": "Poznámky – HTTPD"
             },
-            "notes/package-management": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsal Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "package-management/index.html"
-                        },
-                        "css": "table {margin-left: 1em;}\ntr {vertical-align: top;}\ntd,th {padding-right: 0.5em;}\ntr:hover {background-color: rgba(0, 0, 0, 0.1);}\n",
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/package-management/index.md",
-                        "title": "Poznámky – Instalace balíčků",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/package-management/info.yml",
-                "static_files": {},
-                "title": "Poznámky – Instalace balíčků"
-            },
             "notes/ssh": {
                 "pages": {
                     "index": {
@@ -1319,31 +1394,6 @@
                     }
                 },
                 "title": "SSH"
-            },
-            "pilot/05": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "05/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/05/index.md",
-                        "title": "Zápis – Odkazy & hierarchie",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/05/info.yml",
-                "static_files": {},
-                "title": "Zápis – Odkazy & hierarchie"
             },
             "pilot/07": {
                 "pages": {
@@ -1663,7 +1713,7 @@
                 "title": "Správa uživatelů"
             },
             {
-                "date": "2021-11-22",
+                "date": "2021-11-15",
                 "materials": [
                     {
                         "lesson_slug": "linuxadmin/fs",
@@ -1692,23 +1742,37 @@
                 "title": "Souborové systémy"
             },
             {
-                "date": "2021-11-15",
+                "date": "2021-11-22",
                 "materials": [
                     {
-                        "lesson_slug": "notes/package-management",
-                        "title": "Poznámky – Instalace balíčků",
+                        "title": "locate, updatedb, eog, feh – viz video",
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/05",
-                        "title": "Zápis – Odkazy & hierarchie",
+                        "lesson_slug": "linuxadmin/package-management",
+                        "title": "Instalace balíčků",
+                        "type": "lesson"
+                    },
+                    {
+                        "lesson_slug": "notes/bash-subshell",
+                        "title": "Poznámky – Subshell",
                         "type": "link"
+                    },
+                    {
+                        "lesson_slug": "hw/dnf-exercises",
+                        "title": "Úkol - Balíčky",
+                        "type": "homework"
+                    },
+                    {
+                        "lesson_slug": "hw/bash-functions",
+                        "title": "Úkol - Spouštění procesů v Bashi",
+                        "type": "homework"
                     }
                 ],
                 "serial": "7",
                 "slug": "review",
                 "source_file": "course.yml",
-                "title": "TBD"
+                "title": "Instalace balíčků"
             },
             {
                 "date": "2021-11-29",
@@ -1721,10 +1785,6 @@
                         "lesson_slug": "notes/httpd",
                         "title": "Poznámky – HTTPD",
                         "type": "lesson"
-                    },
-                    {
-                        "title": "Barvičky v terminálu",
-                        "type": "special"
                     },
                     {
                         "lesson_slug": "pilot/08",

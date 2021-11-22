@@ -1,0 +1,46 @@
+<h1>Úkoly - Balíčky</h1>
+<h2>Balíček s příkazem <code>python</code></h2>
+<p>Balíček který obsahuje příkaz <code>python3</code> se jmenuje <code>python3</code>.
+Máš nainstalovanou jednu jeho verzi; v repozitářích jich může být
+k dispozici víc:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>rpm -q --whatprovides /usr/bin/python3
+<span class="go">python3-3.9.7-1.fc34.x86_64</span>
+<span class="gp">$ </span>dnf repoquery /usr/bin/python3
+<span class="go">python3-0:3.9.2-1.fc34.i686</span>
+<span class="go">python3-0:3.9.2-1.fc34.x86_64</span>
+<span class="go">python3-0:3.9.7-1.fc34.i686</span>
+<span class="go">python3-0:3.9.7-1.fc34.x86_64</span>
+</pre></div><p>Jak se jmenuje balíček, který obsahuje příkaz <code>python</code>, bez <code>3</code> na konci?</p>
+<h2>Odinstalování příkazu <code>dnf</code></h2>
+<p>Co se stane, když zkusíš odinstalovat balíček <code>dnf</code>?</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf remove dnf
+<span class="go">[sudo] heslo pro petr: </span>
+<span class="go">Chyba: </span>
+<span class="go"> Problém: Operace by vedla k odstranění následujících chráněných balíčků: dnf</span>
+</pre></div><p>Zkusíš vysvětlit, co tahle chyba znamená?</p>
+<p>(Nápověda: kdyby tohle šlo, jak bys tuto operaci vrátila zpět?)</p>
+<p>Balíček <code>python3</code> taky nejde odinstalovat; proč?</p>
+<h2>Odinstalování příkazu <code>python</code></h2>
+<p>Příkaz <code>python</code> dělá to samé co příkaz <code>python3</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>python --version
+<span class="go">Python 3.9.7</span>
+<span class="gp">$ </span>ls -l /usr/bin/python
+<span class="go">lrwxrwxrwx. 1 root root 9 31. srp 15.36 /usr/bin/python -&gt; ./python3</span>
+<span class="gp">$ </span>ls -l /usr/bin/python3
+<span class="go">lrwxrwxrwx. 1 root root 9 31. srp 15.05 /usr/bin/python3 -&gt; python3.9</span>
+</pre></div><p>Můžeš odinstalovat balíček s příkazem <code>python</code> (bez 3 na konci)?
+Bude pak zbytek systému fungovat?</p>
+<h2>Doinstalování novějšího Pythonu</h2>
+<p>V Pythonu 3.9 se operátor <code>|</code> nedá použít na typy:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>python3
+<span class="go">&gt;&gt;&gt; str | int</span>
+<span class="go">Traceback (most recent call last):</span>
+<span class="go">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="go">TypeError: unsupported operand type(s) for |: &#39;type&#39; and &#39;type&#39;</span>
+</pre></div><p>Nainstaluj si Python verze 3.10, kde to jde:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>python3.10
+<span class="go">&gt;&gt;&gt; str | int</span>
+<span class="go">str | int</span>
+</pre></div><h2>Instalace <code>httpd</code></h2>
+<p>Příště ho budeme potřebovat balíčky <code>httpd</code> a <code>systemd</code>.
+Zajisti, abys je měla nainstalované.</p>

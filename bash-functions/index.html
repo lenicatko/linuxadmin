@@ -1,0 +1,35 @@
+<h1>Úkoly - Spouštění procesů v Bashi</h1>
+<p><em>Neboj se experimentovat. Správným řešením těchto úkolů si systém nerozbiješ a kdyby bylo hodně špatně, virtuální počítač si můžeš vždycky připravit nový.</em></p>
+<h3>Bashová funkce na pozadí</h3>
+<p>Na lekci jsme si říkali, že jedna z výhod funkcí v Bashi je to, že se vykoná v procesu Bashe, který ho spouští. To ale není pravda úplně vždycky.
+Zkus vysvětlit rozdíl mezi těmito příkazy:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>pust-ps <span class="o">()</span> <span class="o">{</span> ps<span class="p">;</span> <span class="o">}</span> <span class="p">;</span> pust-ps
+<span class="go">    PID TTY          TIME CMD</span>
+<span class="go">2496176 pts/8    00:00:00 bash</span>
+<span class="go">2496266 pts/8    00:00:00 ps</span>
+</pre></div><div class="highlight"><pre><span></span><span class="gp">$ </span>pust-ps <span class="o">()</span> <span class="o">{</span> ps<span class="p">;</span> <span class="o">}</span> <span class="p">;</span> pust-ps <span class="p">&amp;</span>
+<span class="go">[1] 2496277</span>
+<span class="go">...$     PID TTY          TIME CMD</span>
+<span class="go">2496176 pts/8    00:00:00 bash</span>
+<span class="go">2496277 pts/8    00:00:00 bash</span>
+<span class="go">2496278 pts/8    00:00:00 ps</span>
+</pre></div><p>Nakresli pro oba příkazy diagramy toho, jak se jednotlivé procesy navzájem spouštějí.
+(Ukázky diaramů jsou i v <a href="https://naucse.python.cz/2020/linux-admin/linuxadmin/process-execution/">materiálech</a>. Stačí je samozřejmě jen načrtnout tužkou.)</p>
+<h3>Výbušná změť symbolů</h3>
+<p>(Tohle zadání navazuje na předchozí úkol. A je asi dost složité; klidně přeskoč.)</p>
+<p>Existuje jeden známý příkaz, který <em>nespouštěj</em>. Tvým úkolem bude zjistit, co dělá.
+To můžeš zkusit udělat třemi způsoby:</p>
+<ul>
+<li>Najdeš to na internetu, čímž se ochudíš o to, že na řešení přijdeš sama :)</li>
+<li>Příkaz spustíš. To nedělej: příkaz je známý tím, že umí „shodit“ celý systém. Některé novější systémy se proti tomu umí více či méně bránit, ale stejně – nepokoušej štěstí.
+(Na druhou stranu – nestane se nic horšího než budeš muset vypnout virtuální počítač.)</li>
+<li>Projdeš si poznámky o tom, co v Bashi dělají různé symboly, a příkaz dešifruješ.</li>
+</ul>
+<p>Příkaz je <code>:(){ :|:&amp; };:</code> – s tím že znak<code>:</code> není v Bashi speciální, funguje stejně jako třeba písmeno <code>f</code>. Nakresli diagram toho, jak se po spuštění tohoto příkazu spouštějí procesy.</p>
+<h4>Nápověda/doplnění</h4>
+<p>Velice podobný program v Pythonu, který <em>taky nespouštěj</em>, je:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Nespouštět – počítač zamrzne!</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+</pre></div>
