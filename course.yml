@@ -137,7 +137,7 @@ sessions:
     # XXX: fhs -- add "Sudo si pamatuje" & "Kam s ním?" from https://hackmd.io/dBFhw0V8Rh-qPN0J-LUJrw
 
 - title: Souborové systémy
-  date: 2021-11-22
+  date: 2021-11-15
   slug: fhs
   materials:
   - lesson: linuxadmin/fs
@@ -150,14 +150,26 @@ sessions:
 
   - lesson: hw/link
     type: homework
+    # XXX: "Nepovinná meditace" - https://hackmd.io/@encukou/ukoly-sit
 
-- title: TBD
-  date: 2021-11-15
+- title: Instalace balíčků
+  date: 2021-11-22
   slug: review
   materials:
-  - lesson: notes/package-management
-  - lesson: pilot/05
+  - title: locate, updatedb, eog, feh – viz video
+    url: null
+    type: lesson
+  - lesson: linuxadmin/package-management
+  - lesson: notes/bash-subshell
     type: link
+
+  # XXX: Barvičky v terminálu
+
+  - lesson: hw/dnf-exercises
+    type: homework
+  - lesson: hw/bash-functions
+    type: homework
+
 - title: Služby a HTTPD
   date: 2021-11-29
   slug: mount
@@ -165,11 +177,11 @@ sessions:
   - title: Služby a démoni
     url: null
   - lesson: notes/httpd
-  - title: Barvičky v terminálu
-    url: null
   - lesson: pilot/08
     title: Zápis z minula – balíčky a httpd
     type: link
+  # XXX: Úkol: https://hackmd.io/@encukou/ukol-httpd
+
 - title: Cron & SSH
   date: 2021-12-06
   slug: service
