@@ -128,7 +128,7 @@
                         "slug": "index",
                         "solutions": [],
                         "source_file": "lessons/carpentry-unix/loop-nelle/index.md",
-                        "title": "Nela a medúzy: Kontrola souborů",
+                        "title": "Nela a medúzy: Zpracování souborů",
                         "vars": {
                             "coach-present": true,
                             "pyladies": true,
@@ -138,7 +138,7 @@
                 },
                 "source_file": "lessons/carpentry-unix/loop-nelle/info.yml",
                 "static_files": {},
-                "title": "Nela a medúzy: Kontrola souborů"
+                "title": "Nela a medúzy: Zpracování souborů"
             },
             "carpentry-unix/pipefilter": {
                 "pages": {
@@ -338,6 +338,31 @@
                 "source_file": "lessons/hw/dnf-exercises/info.yml",
                 "static_files": {},
                 "title": "Úkol - Balíčky"
+            },
+            "hw/httpd": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "httpd/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/hw/httpd/index.md",
+                        "title": "Úkol",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/hw/httpd/info.yml",
+                "static_files": {},
+                "title": "Úkol"
             },
             "hw/link": {
                 "pages": {
@@ -740,6 +765,31 @@
                 "static_files": {},
                 "title": "Hledání: grep a find"
             },
+            "linuxadmin/httpd-service": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020-2021"
+                        ],
+                        "content": {
+                            "path": "httpd-service/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/httpd-service/index.md",
+                        "title": "Webový server",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/httpd-service/info.yml",
+                "static_files": {},
+                "title": "Webový server"
+            },
             "linuxadmin/installation": {
                 "pages": {
                     "gnome-boxes": {
@@ -1100,6 +1150,31 @@
                 "static_files": {},
                 "title": "Spustitelné skripty"
             },
+            "linuxadmin/set-firewall": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsala Karolina Surma, 2020"
+                        ],
+                        "content": {
+                            "path": "set-firewall/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/set-firewall/index.md",
+                        "title": "Nastavení firewallu",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/set-firewall/info.yml",
+                "static_files": {},
+                "title": "Nastavení firewallu"
+            },
             "linuxadmin/users": {
                 "pages": {
                     "index": {
@@ -1341,31 +1416,6 @@
                 "static_files": {},
                 "title": "Adresářová struktura"
             },
-            "notes/httpd": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Karolina Surma a Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "httpd/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/httpd/index.md",
-                        "title": "Poznámky – HTTPD",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/httpd/info.yml",
-                "static_files": {},
-                "title": "Poznámky – HTTPD"
-            },
             "notes/ssh": {
                 "pages": {
                     "index": {
@@ -1419,31 +1469,6 @@
                 "source_file": "lessons/pilot/07/info.yml",
                 "static_files": {},
                 "title": "Zápis – Síť"
-            },
-            "pilot/08": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "08/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/08/index.md",
-                        "title": "Zápis – Balíčkovací systémy a httpd",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/08/info.yml",
-                "static_files": {},
-                "title": "Zápis – Balíčkovací systémy a httpd"
             },
             "pilot/09": {
                 "pages": {
@@ -1586,7 +1611,7 @@
                     },
                     {
                         "lesson_slug": "carpentry-unix/loop-nelle",
-                        "title": "Nela a medúzy: Kontrola souborů",
+                        "title": "Nela a medúzy: Zpracování souborů",
                         "type": "link"
                     },
                     {
@@ -1778,24 +1803,29 @@
                 "date": "2021-11-29",
                 "materials": [
                     {
-                        "title": "Služby a démoni",
+                        "title": "Síťová komunikace",
                         "type": "special"
                     },
                     {
-                        "lesson_slug": "notes/httpd",
-                        "title": "Poznámky – HTTPD",
+                        "lesson_slug": "linuxadmin/set-firewall",
+                        "title": "Nastavení firewallu",
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/08",
-                        "title": "Zápis z minula – balíčky a httpd",
-                        "type": "link"
+                        "lesson_slug": "linuxadmin/httpd-service",
+                        "title": "Webový server",
+                        "type": "lesson"
+                    },
+                    {
+                        "lesson_slug": "hw/httpd",
+                        "title": "Úkol",
+                        "type": "lesson"
                     }
                 ],
                 "serial": "8",
                 "slug": "mount",
                 "source_file": "course.yml",
-                "title": "Služby a HTTPD"
+                "title": "Služby a webový server"
             },
             {
                 "date": "2021-12-06",
@@ -1804,6 +1834,10 @@
                         "lesson_slug": "notes/ssh",
                         "title": "SSH",
                         "type": "lesson"
+                    },
+                    {
+                        "title": "Systemd timer",
+                        "type": "special"
                     },
                     {
                         "lesson_slug": "notes/cron",
@@ -1824,14 +1858,15 @@
                 "serial": "9",
                 "slug": "service",
                 "source_file": "course.yml",
-                "title": "Cron & SSH"
+                "title": "SSH a časovač"
             },
             {
                 "date": "2021-12-13",
                 "materials": [
                     {
-                        "title": "Systemd timer",
-                        "type": "special"
+                        "lesson_slug": "notes/ansible",
+                        "title": "Automatizace administrace – Ansible",
+                        "type": "lesson"
                     },
                     {
                         "title": "Signály",
@@ -1839,23 +1874,18 @@
                     },
                     {
                         "external_url": "https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing",
-                        "title": "Videa a poznámky",
+                        "title": "Videa a poznámky – signály",
                         "type": "none-link"
                     }
                 ],
                 "serial": "10",
                 "slug": "net-services",
                 "source_file": "course.yml",
-                "title": "Signály a služby"
+                "title": "Signály a Automatizovaná konfigurace"
             },
             {
                 "date": "2021-12-20",
                 "materials": [
-                    {
-                        "lesson_slug": "notes/ansible",
-                        "title": "Automatizace administrace – Ansible",
-                        "type": "lesson"
-                    },
                     {
                         "title": "Virtuální stroj, jádro, syscalls",
                         "type": "special"
@@ -1879,7 +1909,7 @@
                 "serial": "11",
                 "slug": "containers",
                 "source_file": "course.yml",
-                "title": "Kontejnery a Automatizovaná konfigurace"
+                "title": "Kontejnery"
             }
         ],
         "source_file": "course.yml",
