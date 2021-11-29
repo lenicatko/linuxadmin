@@ -170,43 +170,41 @@ sessions:
   - lesson: hw/bash-functions
     type: homework
 
-- title: Služby a HTTPD
+- title: Služby a webový server
   date: 2021-11-29
   slug: mount
   materials:
-  - title: Služby a démoni
+  - title: Síťová komunikace
     url: null
-  - lesson: notes/httpd
-  - lesson: pilot/08
-    title: Zápis z minula – balíčky a httpd
-    type: link
-  # XXX: Úkol: https://hackmd.io/@encukou/ukol-httpd
+  - lesson: linuxadmin/set-firewall
+  - lesson: linuxadmin/httpd-service
+  - lesson: hw/httpd
 
-- title: Cron & SSH
+- title: SSH a časovač
   date: 2021-12-06
   slug: service
   materials:
   - lesson: notes/ssh
+  - title: Systemd timer
+    url: null
   - lesson: notes/cron
   - lesson: pilot/07
     title: Zápis z minula – síťování a SSH
     type: link
   - lesson: linuxadmin/virtualbox-networking
-- title: Signály a služby
+- title: Signály a Automatizovaná konfigurace
   date: 2021-12-13
   slug: net-services
   materials:
-  - title: Systemd timer
-    url: null
+  - lesson: notes/ansible
   - title: Signály
     url: null
-  - title: Videa a poznámky
+  - title: Videa a poznámky – signály
     url: https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing
-- title: Kontejnery a Automatizovaná konfigurace
+- title: Kontejnery
   date: 2021-12-20
   slug: containers
   materials:
-  - lesson: notes/ansible
   - title: Virtuální stroj, jádro, syscalls
     url: null
   - lesson: notes/containers
