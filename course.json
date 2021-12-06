@@ -1175,6 +1175,41 @@
                 "static_files": {},
                 "title": "Nastavení firewallu"
             },
+            "linuxadmin/ssh": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin a Karolina Surma, 2020"
+                        ],
+                        "content": {
+                            "path": "ssh/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/ssh/index.md",
+                        "title": "SSH",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/ssh/info.yml",
+                "static_files": {
+                    "github-ssh-clone.png": {
+                        "path": "ssh/github-ssh-clone.png"
+                    },
+                    "github-ssh-key.png": {
+                        "path": "ssh/github-ssh-key.png"
+                    },
+                    "putty-config.png": {
+                        "path": "ssh/putty-config.png"
+                    }
+                },
+                "title": "SSH"
+            },
             "linuxadmin/users": {
                 "pages": {
                     "index": {
@@ -1366,31 +1401,6 @@
                 "static_files": {},
                 "title": "Kontejnery"
             },
-            "notes/cron": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma a Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "cron/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/cron/index.md",
-                        "title": "Cron",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/cron/info.yml",
-                "static_files": {},
-                "title": "Cron"
-            },
             "notes/fhs": {
                 "pages": {
                     "index": {
@@ -1416,20 +1426,21 @@
                 "static_files": {},
                 "title": "Adresářová struktura"
             },
-            "notes/ssh": {
+            "notes/systemd-timer": {
                 "pages": {
                     "index": {
                         "attribution": [
-                            "napsal Petr Viktorin a Karolina Surma, 2020"
+                            "<a href=\"https://www.youtube.com/watch?v=tF0LNPCzXE4\">video</a> připravil Erik Škultéty, 2020",
+                            "napsal Petr Viktorin, 2021"
                         ],
                         "content": {
-                            "path": "ssh/index.html"
+                            "path": "systemd-timer/index.html"
                         },
                         "license": "cc-by-sa-40",
                         "slug": "index",
                         "solutions": [],
-                        "source_file": "lessons/notes/ssh/index.md",
-                        "title": "SSH",
+                        "source_file": "lessons/notes/systemd-timer/index.md",
+                        "title": "Poznámky – systemd jednotky",
                         "vars": {
                             "coach-present": true,
                             "pyladies": true,
@@ -1437,38 +1448,9 @@
                         }
                     }
                 },
-                "source_file": "lessons/notes/ssh/info.yml",
-                "static_files": {
-                    "putty-config.png": {
-                        "path": "ssh/putty-config.png"
-                    }
-                },
-                "title": "SSH"
-            },
-            "pilot/07": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "07/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/07/index.md",
-                        "title": "Zápis – Síť",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/07/info.yml",
+                "source_file": "lessons/notes/systemd-timer/info.yml",
                 "static_files": {},
-                "title": "Zápis – Síť"
+                "title": "Poznámky – systemd jednotky"
             },
             "pilot/09": {
                 "pages": {
@@ -1831,34 +1813,25 @@
                 "date": "2021-12-06",
                 "materials": [
                     {
-                        "lesson_slug": "notes/ssh",
+                        "lesson_slug": "linuxadmin/ssh",
                         "title": "SSH",
                         "type": "lesson"
                     },
                     {
-                        "title": "Systemd timer",
-                        "type": "special"
-                    },
-                    {
-                        "lesson_slug": "notes/cron",
-                        "title": "Cron",
+                        "lesson_slug": "notes/systemd-timer",
+                        "title": "Poznámky – systemd jednotky",
                         "type": "lesson"
-                    },
-                    {
-                        "lesson_slug": "pilot/07",
-                        "title": "Zápis z minula – síťování a SSH",
-                        "type": "link"
                     },
                     {
                         "lesson_slug": "linuxadmin/virtualbox-networking",
                         "title": "Virtualbox, nastavení sítě",
-                        "type": "lesson"
+                        "type": "link"
                     }
                 ],
                 "serial": "9",
                 "slug": "service",
                 "source_file": "course.yml",
-                "title": "SSH a časovač"
+                "title": "SSH a systemd jednotky"
             },
             {
                 "date": "2021-12-13",
