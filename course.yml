@@ -180,18 +180,15 @@ sessions:
   - lesson: linuxadmin/httpd-service
   - lesson: hw/httpd
 
-- title: SSH a časovač
+- title: SSH a systemd jednotky
   date: 2021-12-06
   slug: service
   materials:
-  - lesson: notes/ssh
-  - title: Systemd timer
-    url: null
-  - lesson: notes/cron
-  - lesson: pilot/07
-    title: Zápis z minula – síťování a SSH
-    type: link
+  - lesson: linuxadmin/ssh
+  - lesson: notes/systemd-timer
   - lesson: linuxadmin/virtualbox-networking
+    type: link
+
 - title: Signály a Automatizovaná konfigurace
   date: 2021-12-13
   slug: net-services
