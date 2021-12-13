@@ -52,7 +52,7 @@ sessions:
   slug: shell-1
   materials:
   - lesson: carpentry-unix/bash-intro
-  - lesson: carpentry-unix/filedir
+  - lesson: carpentry-unix/filedir   # XXX: man sections
   - lesson: carpentry-unix/create
   - url: http://swcarpentry.github.io/shell-novice/
     title: "Anglický originál: The Carpentries – The Unix Shell (po Working With Files and Directories včetně)"
@@ -194,10 +194,10 @@ sessions:
   slug: net-services
   materials:
   - lesson: linuxadmin/ansible
-  - title: Signály
-    url: null
-  - title: Videa a poznámky – signály
+  - lesson: notes/signals
+  - title: Videa a poznámky z minula – signály a systemctl
     url: https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing
+    type: link
 
 - title: Kontejnery
   date: 2021-12-20
