@@ -464,6 +464,31 @@
                 "static_files": {},
                 "title": "Další kombinace příkazů"
             },
+            "linuxadmin/ansible": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "ansible/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/ansible/index.md",
+                        "title": "Automatizace administrace – lehký úvod k Ansible",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/ansible/info.yml",
+                "static_files": {},
+                "title": "Automatizace administrace – lehký úvod k Ansible"
+            },
             "linuxadmin/bash-exit-code": {
                 "pages": {
                     "index": {
@@ -1326,31 +1351,6 @@
                 "static_files": {},
                 "title": "Co je to ten „Linux“?"
             },
-            "notes/ansible": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Karolina Surma a Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "ansible/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/ansible/index.md",
-                        "title": "Automatizace administrace – Ansible",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/ansible/info.yml",
-                "static_files": {},
-                "title": "Automatizace administrace – Ansible"
-            },
             "notes/bash-subshell": {
                 "pages": {
                     "index": {
@@ -1425,6 +1425,31 @@
                 "source_file": "lessons/notes/fhs/info.yml",
                 "static_files": {},
                 "title": "Adresářová struktura"
+            },
+            "notes/signals": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsal Petr Viktorin, 2021"
+                        ],
+                        "content": {
+                            "path": "signals/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/notes/signals/index.md",
+                        "title": "Signály",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/notes/signals/info.yml",
+                "static_files": {},
+                "title": "Signály"
             },
             "notes/systemd-timer": {
                 "pages": {
@@ -1837,18 +1862,19 @@
                 "date": "2021-12-13",
                 "materials": [
                     {
-                        "lesson_slug": "notes/ansible",
-                        "title": "Automatizace administrace – Ansible",
+                        "lesson_slug": "linuxadmin/ansible",
+                        "title": "Automatizace administrace – lehký úvod k Ansible",
                         "type": "lesson"
                     },
                     {
+                        "lesson_slug": "notes/signals",
                         "title": "Signály",
-                        "type": "special"
+                        "type": "lesson"
                     },
                     {
                         "external_url": "https://drive.google.com/file/d/1wNnnR8IOk6XgnbYF0ZQzYoGeQ-c9DqP7/view?usp=sharing",
-                        "title": "Videa a poznámky – signály",
-                        "type": "none-link"
+                        "title": "Videa a poznámky z minula – signály a systemctl",
+                        "type": "link"
                     }
                 ],
                 "serial": "10",
