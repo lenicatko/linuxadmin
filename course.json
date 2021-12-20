@@ -568,6 +568,31 @@
                 },
                 "title": "Programy, funkce a aliasy"
             },
+            "linuxadmin/containers": {
+                "pages": {
+                    "index": {
+                        "attribution": [
+                            "napsali Karolina Surma a Petr Viktorin, 2020"
+                        ],
+                        "content": {
+                            "path": "containers/index.html"
+                        },
+                        "license": "cc-by-sa-40",
+                        "slug": "index",
+                        "solutions": [],
+                        "source_file": "lessons/linuxadmin/containers/index.md",
+                        "title": "Kontejnery",
+                        "vars": {
+                            "coach-present": true,
+                            "pyladies": true,
+                            "user-gender": "f"
+                        }
+                    }
+                },
+                "source_file": "lessons/linuxadmin/containers/info.yml",
+                "static_files": {},
+                "title": "Kontejnery"
+            },
             "linuxadmin/echo": {
                 "pages": {
                     "index": {
@@ -1376,31 +1401,6 @@
                 "static_files": {},
                 "title": "Poznámky – Subshell"
             },
-            "notes/containers": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsali Karolina Surma a Petr Viktorin, 2020"
-                        ],
-                        "content": {
-                            "path": "containers/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/notes/containers/index.md",
-                        "title": "Kontejnery",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/notes/containers/info.yml",
-                "static_files": {},
-                "title": "Kontejnery"
-            },
             "notes/fhs": {
                 "pages": {
                     "index": {
@@ -1477,20 +1477,20 @@
                 "static_files": {},
                 "title": "Poznámky – systemd jednotky"
             },
-            "pilot/09": {
+            "notes/terminal-color": {
                 "pages": {
                     "index": {
                         "attribution": [
                             "napsala Karolina Surma, 2020"
                         ],
                         "content": {
-                            "path": "09/index.html"
+                            "path": "terminal-color/index.html"
                         },
                         "license": "cc-by-sa-40",
                         "slug": "index",
                         "solutions": [],
-                        "source_file": "lessons/pilot/09/index.md",
-                        "title": "Zápis – cron, Ansible, barvičky",
+                        "source_file": "lessons/notes/terminal-color/index.md",
+                        "title": "Barvičky v terminálu",
                         "vars": {
                             "coach-present": true,
                             "pyladies": true,
@@ -1498,34 +1498,9 @@
                         }
                     }
                 },
-                "source_file": "lessons/pilot/09/info.yml",
+                "source_file": "lessons/notes/terminal-color/info.yml",
                 "static_files": {},
-                "title": "Zápis – cron, Ansible, barvičky"
-            },
-            "pilot/10": {
-                "pages": {
-                    "index": {
-                        "attribution": [
-                            "napsala Karolina Surma, 2020"
-                        ],
-                        "content": {
-                            "path": "10/index.html"
-                        },
-                        "license": "cc-by-sa-40",
-                        "slug": "index",
-                        "solutions": [],
-                        "source_file": "lessons/pilot/10/index.md",
-                        "title": "Zápis – Syscalls, kontejnery",
-                        "vars": {
-                            "coach-present": true,
-                            "pyladies": true,
-                            "user-gender": "f"
-                        }
-                    }
-                },
-                "source_file": "lessons/pilot/10/info.yml",
-                "static_files": {},
-                "title": "Zápis – Syscalls, kontejnery"
+                "title": "Barvičky v terminálu"
             }
         },
         "long_description": "<p>Na získání práce v IT je často potřeba něco víc než programování.\nČasto to bývají zkušenosti s příkazovou řádkou, znalost fungování operačních\nsystémů a další věci, které si ukážeme v kurzu se (zjednodušeným) názvem \n\"Linuxová administrace\".\nPro přijetí do kurzu je třeba znát základy programování v Pythonu.\nPokud máš za sebou začátečnický kurz PyLadies, tak jsi ve hře.</p>\n<p>Podobně jako v začátečnickém kurzu Pythonu je tu cílem obecný přehled spíš\nnež detailní znalosti. Kurz ti otevře cestu ke skriptování v Bashi,\nsystémové administraci, automatizované konfiguraci (např. přes Ansible)\nnebo nasazování kontejnerů.</p>\n<p>Na procvičení doma budou i menší úkoly, tak s nimi počítej do svých\nčasových možností.</p>\n<p>Jde o druhý běh tohoto kurzu. Materiály pro něj teprve vznikají,\nnebudou tedy bohužel k dispozici předem.</p>\n<p>Tento kurz je bez omezení OS, ale je nutné mít notebook s instalačními\nprávy a 10+ GB místa na disku.</p>\n<p>Kurz je zdarma, ale kapacita je omezená. Je potřeba se registrovat.</p>\n<p>Kvůli opatřením ohledně setkávání lidí můžou být záznamy z kurzu nahrávány\nna Youtube. Jestli se to povede, tak i v přímém přenosu.</p>",
@@ -1886,23 +1861,14 @@
                 "date": "2021-12-20",
                 "materials": [
                     {
-                        "title": "Virtuální stroj, jádro, syscalls",
-                        "type": "special"
-                    },
-                    {
-                        "lesson_slug": "notes/containers",
-                        "title": "Kontejnery",
+                        "lesson_slug": "notes/terminal-color",
+                        "title": "Barevný Vánoční bonus",
                         "type": "lesson"
                     },
                     {
-                        "lesson_slug": "pilot/09",
-                        "title": "Zápis z minula – cron, Ansible, barvičky",
-                        "type": "link"
-                    },
-                    {
-                        "lesson_slug": "pilot/10",
-                        "title": "Zápis z minula – Syscalls, kontejnery",
-                        "type": "link"
+                        "lesson_slug": "linuxadmin/containers",
+                        "title": "Kontejnery",
+                        "type": "lesson"
                     }
                 ],
                 "serial": "11",
