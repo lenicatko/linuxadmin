@@ -114,6 +114,7 @@ sessions:
   # While ?
   # 'Programy, které pouští jiné programy: watch'
   # "`( ... )`, `$( ... )` a `<( ... )`"  --  see pilot/04
+  # Heredoc  --  see pilot/10
   # diff
   #  url: null
   - lesson: hw/own-cmd
@@ -203,12 +204,7 @@ sessions:
   date: 2021-12-20
   slug: containers
   materials:
-  - title: Virtuální stroj, jádro, syscalls
-    url: null
-  - lesson: notes/containers
-  - lesson: pilot/09
-    title: Zápis z minula – cron, Ansible, barvičky
-    type: link
-  - lesson: pilot/10
-    title: Zápis z minula – Syscalls, kontejnery
-    type: link
+  - lesson: notes/terminal-color
+    title: Barevný Vánoční bonus
+  - lesson: linuxadmin/containers
+  # XXX: Syscalls: pilot/10
